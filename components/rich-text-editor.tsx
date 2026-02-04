@@ -71,6 +71,7 @@ export function RichTextEditor({
   const [linkUrl, setLinkUrl] = useState("");
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const isInsertingImage = useRef(false);
 
   const editor = useEditor({
     extensions: [
@@ -107,7 +108,10 @@ export function RichTextEditor({
     editable: !disabled,
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      // Don't trigger onChange during image insertion
+      if (!isInsertingImage.current) {
+        onChange(editor.getHTML());
+      }
     },
     editorProps: {
       attributes: {
@@ -267,13 +271,22 @@ export function RichTextEditor({
         // Call the custom image upload handler
         const imageUrl = await onImageUpload(file);
 
+        // Set flag to prevent onChange during image insertion
+        isInsertingImage.current = true;
+
         // Insert the image into the editor
         editor.chain().focus().setImage({ src: imageUrl }).run();
+
+        // Reset flag after a brief delay to ensure the update has processed
+        setTimeout(() => {
+          isInsertingImage.current = false;
+        }, 100);
 
         toast.success("Image uploaded!", { id: uploadToast });
       } catch (error) {
         console.error("Image upload failed:", error);
         toast.error("Failed to upload image", { id: uploadToast });
+        isInsertingImage.current = false;
       } finally {
         setIsUploadingImage(false);
       }
