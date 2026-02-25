@@ -21,8 +21,8 @@ import { cn } from "@/lib/utils";
 
 // Staff navigation items
 const navigation = [
-    { name: "Dashboard", href: "/dashboard" },
-    { name: "Attendance", href: "/attendance" },
+  { name: "Dashboard", href: "/dashboard" },
+  { name: "EOD Reports", href: "/eod" },
 ];
 
 export function StaffTopbar() {
@@ -45,7 +45,7 @@ export function StaffTopbar() {
                         </div>
                     </Link>
 
-                    <span className="text-lg font-medium text-foreground">Staff Portal</span>
+                    <span className="text-lg font-medium text-foreground">VA Portal</span>
                 </div>
 
                 {/* Right: Actions */}

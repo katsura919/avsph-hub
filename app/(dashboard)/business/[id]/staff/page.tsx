@@ -6,6 +6,7 @@ import { Users, Plus, Loader2 } from "lucide-react";
 import { useStaffByBusiness } from "@/hooks/useStaff";
 import { useBusinessById } from "@/hooks/useBusiness";
 import { Button } from "@/components/ui/button";
+import { CreateStaffDialog } from "@/components/create-staff-dialog";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import type { StaffQueryParams } from "@/types/staff.types";
@@ -13,6 +14,9 @@ import type { StaffQueryParams } from "@/types/staff.types";
 export default function StaffPage() {
   const params = useParams();
   const businessId = params.id as string;
+
+  // Dialog state
+  const [createOpen, setCreateOpen] = useState(false);
 
   // Filter state
   const [search, setSearch] = useState("");
@@ -107,7 +111,7 @@ export default function StaffPage() {
               <span>total staff</span>
             </div>
           )}
-          <Button className="gap-2">
+          <Button className="gap-2" onClick={() => setCreateOpen(true)}>
             <Plus className="h-4 w-4" />
             Add Staff
           </Button>
@@ -127,6 +131,13 @@ export default function StaffPage() {
         statusFilter={status}
         employmentTypeFilter={employmentType}
         isLoading={isStaffLoading}
+      />
+
+      {/* Create Staff Dialog */}
+      <CreateStaffDialog
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        businessId={businessId}
       />
     </div>
   );
