@@ -48,6 +48,11 @@ export function BusinessNavMain({ businessId }: BusinessNavMainProps) {
       icon: Users,
     },
     {
+      title: "EOD Reports",
+      href: `/business/${businessId}/eod`,
+      icon: FileText,
+    },
+    {
       title: "Settings",
       href: `/business/${businessId}/settings`,
       icon: Settings,

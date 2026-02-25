@@ -575,7 +575,7 @@ export function RichTextEditor({
           )}
 
           {/* Image Upload */}
-          {onImageUpload && blogId && (
+          {onImageUpload && (
             <>
               <Separator orientation="vertical" className="mx-1 h-6" />
               <ToolbarButton
