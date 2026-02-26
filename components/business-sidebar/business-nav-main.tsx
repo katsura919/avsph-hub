@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   FileText,
   Users,
+  Briefcase,
   Settings,
   type LucideIcon,
 } from "lucide-react";
@@ -46,6 +47,11 @@ export function BusinessNavMain({ businessId }: BusinessNavMainProps) {
       title: "Staff",
       href: `/business/${businessId}/staff`,
       icon: Users,
+    },
+    {
+      title: "Job Posts",
+      href: `/business/${businessId}/job-posts`,
+      icon: Briefcase,
     },
     {
       title: "EOD Reports",
