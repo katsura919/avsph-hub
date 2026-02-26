@@ -5,8 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
     DragDropProvider,
+    useDroppable,
 } from "@dnd-kit/react";
-import { useSortable } from "@dnd-kit/react/sortable";
+import { useSortable, isSortable } from "@dnd-kit/react/sortable";
 import {
     Loader2,
     ArrowLeft,
@@ -28,12 +29,12 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 // import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-    SheetDescription,
-} from "@/components/ui/sheet";
+    Drawer,
+    DrawerContent,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerDescription,
+} from "@/components/ui/drawer";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -61,10 +62,12 @@ interface ApplicantCardProps {
 }
 
 function ApplicantCard({ applicant, stageId, index, onClick }: ApplicantCardProps) {
-    const { ref } = useSortable({
+    const { ref, isDragSource } = useSortable({
         id: applicant._id,
         index,
+        type: "applicant",
         group: stageId,
+        accept: ["applicant"],
         data: { applicant, stageId },
     });
 
@@ -72,7 +75,7 @@ function ApplicantCard({ applicant, stageId, index, onClick }: ApplicantCardProp
         <div
             ref={ref}
             onClick={onClick}
-            className="rounded-lg border bg-card p-3 cursor-pointer hover:shadow-sm hover:border-foreground/20 transition-all active:scale-[0.98] touch-none select-none"
+            className={`rounded-lg border bg-card p-3 cursor-pointer hover:shadow-sm hover:border-foreground/20 transition-all active:scale-[0.98] touch-none select-none ${isDragSource ? "opacity-50 shadow-lg" : ""}`}
         >
             <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
@@ -127,9 +130,17 @@ const stageTypeStyles: Record<string, string> = {
 };
 
 function KanbanColumn({ stage, applicants, onCardClick }: KanbanColumnProps) {
+    const { ref: columnRef, isDropTarget } = useDroppable({
+        id: `column-${stage.id}`,
+        accept: ["applicant"],
+        data: { stageId: stage.id },
+    });
+
     return (
         <div
-            className={`flex flex-col rounded-lg border bg-muted/30 min-w-[280px] w-[280px] shrink-0 border-t-2 ${stageTypeStyles[stage.type] || "border-t-border"}`}
+            ref={columnRef}
+            className={`flex flex-col rounded-lg border bg-muted/30 min-w-[280px] w-[280px] shrink-0 border-t-2 transition-colors ${stageTypeStyles[stage.type] || "border-t-border"
+                } ${isDropTarget ? "ring-2 ring-primary/40 bg-primary/5" : ""}`}
         >
             {/* Column Header */}
             <div className="flex items-center justify-between p-3 pb-2">
@@ -154,7 +165,7 @@ function KanbanColumn({ stage, applicants, onCardClick }: KanbanColumnProps) {
                 ))}
                 {applicants.length === 0 && (
                     <div className="flex items-center justify-center h-20 rounded-lg border border-dashed text-xs text-muted-foreground">
-                        No applicants
+                        {isDropTarget ? "Drop here" : "No applicants"}
                     </div>
                 )}
             </div>
@@ -212,23 +223,40 @@ export default function JobPostDetailPage() {
             const { source, target } = event.operation;
 
             if (!source || !target) return;
+            if (event.canceled) return;
 
             const applicantId = source.id as string;
-            const newStageId = target.id as string;
 
-            // Find the applicant's current stage
+            // Find the applicant
             const currentApplicant = applicants?.find((a) => a._id === applicantId);
-            if (!currentApplicant || currentApplicant.stage === newStageId) return;
+            if (!currentApplicant) return;
 
-            // The target could be a card or a column. If it's a column, stageId = target.id
-            // If it's a card, we need to get the column it belongs to
-            const targetStageId = target.data?.stageId || newStageId;
+            let targetStageId: string | undefined;
 
-            // Check if the target is actually a stage column
-            const validStage = jobPost?.stages.find(
-                (s) => s.id === targetStageId || s.id === newStageId,
-            );
+            // If the source is a sortable, check if its group changed
+            if (isSortable(source)) {
+                const newGroup = source.sortable.group as string | undefined;
+                if (newGroup && newGroup !== currentApplicant.stage) {
+                    targetStageId = newGroup;
+                }
+            }
 
+            // If the target is a column droppable (id starts with 'column-')
+            if (!targetStageId) {
+                const targetId = String(target.id);
+                if (targetId.startsWith("column-")) {
+                    targetStageId = targetId.replace("column-", "");
+                } else if (target.data?.stageId) {
+                    // Target is another applicant card, get its stageId
+                    targetStageId = target.data.stageId;
+                }
+            }
+
+            // Skip if same stage
+            if (!targetStageId || targetStageId === currentApplicant.stage) return;
+
+            // Validate stage exists
+            const validStage = jobPost?.stages.find((s) => s.id === targetStageId);
             if (validStage) {
                 updateStage({ id: applicantId, stage: validStage.id });
             }
@@ -351,203 +379,205 @@ export default function JobPostDetailPage() {
                 </DragDropProvider>
             </div>
 
-            {/* Applicant Detail Sheet */}
-            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-                <SheetContent className="sm:max-w-[420px] overflow-y-auto">
-                    {selectedApplicant && (
-                        <>
-                            <SheetHeader>
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <SheetTitle>
-                                            {selectedApplicant.firstName}{" "}
-                                            {selectedApplicant.lastName}
-                                        </SheetTitle>
-                                        <SheetDescription>
-                                            {selectedApplicant.position}
-                                        </SheetDescription>
+            {/* Applicant Detail Drawer */}
+            <Drawer open={sheetOpen} onOpenChange={setSheetOpen} direction="right">
+                <DrawerContent className="h-full max-h-screen">
+                    <div className="overflow-y-auto h-full">
+                        {selectedApplicant && (
+                            <>
+                                <DrawerHeader>
+                                    <div className="flex items-start justify-between">
+                                        <div>
+                                            <DrawerTitle>
+                                                {selectedApplicant.firstName}{" "}
+                                                {selectedApplicant.lastName}
+                                            </DrawerTitle>
+                                            <DrawerDescription>
+                                                {selectedApplicant.position}
+                                            </DrawerDescription>
+                                        </div>
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                    <MoreHorizontal className="h-4 w-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuItem
+                                                    className="text-destructive"
+                                                    onClick={() => {
+                                                        deleteApplicant({
+                                                            id: selectedApplicant._id,
+                                                            jobId: selectedApplicant.jobId,
+                                                        });
+                                                        setSheetOpen(false);
+                                                    }}
+                                                >
+                                                    <Trash2 className="mr-2 h-4 w-4" />
+                                                    Delete Applicant
+                                                </DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
                                     </div>
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                                                <MoreHorizontal className="h-4 w-4" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end">
-                                            <DropdownMenuItem
-                                                className="text-destructive"
+                                </DrawerHeader>
+
+                                <div className="space-y-4 mt-6  px-5">
+                                    {/* Status */}
+                                    {selectedApplicant.isStaffConverted && (
+                                        <div className="rounded-lg bg-green-500/10 border border-green-200 p-3 text-sm text-green-700">
+                                            <UserCheck className="inline mr-2 h-4 w-4" />
+                                            Converted to staff member
+                                        </div>
+                                    )}
+
+                                    {/* Contact Info */}
+                                    <div className="space-y-2">
+                                        <h4 className="text-sm font-medium">Contact</h4>
+                                        <div className="space-y-1.5">
+                                            <div className="flex items-center gap-2 text-sm">
+                                                <Mail className="h-3.5 w-3.5 text-muted-foreground" />
+                                                <a
+                                                    href={`mailto:${selectedApplicant.email}`}
+                                                    className="text-primary hover:underline"
+                                                >
+                                                    {selectedApplicant.email}
+                                                </a>
+                                            </div>
+                                            {selectedApplicant.phone && (
+                                                <div className="flex items-center gap-2 text-sm">
+                                                    <Phone className="h-3.5 w-3.5 text-muted-foreground" />
+                                                    {selectedApplicant.phone}
+                                                </div>
+                                            )}
+                                            <div className="flex items-center gap-2 text-sm">
+                                                <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
+                                                Applied{" "}
+                                                {new Date(
+                                                    selectedApplicant.appliedAt,
+                                                ).toLocaleDateString("en-US", {
+                                                    month: "long",
+                                                    day: "numeric",
+                                                    year: "numeric",
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <Separator />
+
+                                    {/* Resume */}
+                                    {selectedApplicant.resume && (
+                                        <>
+                                            <div className="space-y-2">
+                                                <h4 className="text-sm font-medium">Resume</h4>
+                                                <a
+                                                    href={selectedApplicant.resume}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+                                                >
+                                                    <FileText className="h-3.5 w-3.5" />
+                                                    View Resume
+                                                    <ExternalLink className="h-3 w-3" />
+                                                </a>
+                                            </div>
+                                            <Separator />
+                                        </>
+                                    )}
+
+                                    {/* Cover Letter */}
+                                    {selectedApplicant.coverLetter && (
+                                        <>
+                                            <div className="space-y-2">
+                                                <h4 className="text-sm font-medium">Cover Letter</h4>
+                                                <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+                                                    {selectedApplicant.coverLetter}
+                                                </p>
+                                            </div>
+                                            <Separator />
+                                        </>
+                                    )}
+
+                                    {/* Admin Notes */}
+                                    <div className="space-y-2">
+                                        <div className="flex items-center gap-2">
+                                            <StickyNote className="h-3.5 w-3.5 text-muted-foreground" />
+                                            <h4 className="text-sm font-medium">Admin Notes</h4>
+                                        </div>
+                                        <Textarea
+                                            placeholder="Add private notes about this applicant..."
+                                            value={adminNotes}
+                                            onChange={(e) => setAdminNotes(e.target.value)}
+                                            rows={3}
+                                            className="text-sm"
+                                        />
+                                        <Button
+                                            size="sm"
+                                            variant="outline"
+                                            onClick={saveNotes}
+                                            disabled={
+                                                adminNotes === (selectedApplicant.adminNotes || "")
+                                            }
+                                        >
+                                            Save Notes
+                                        </Button>
+                                    </div>
+
+                                    <Separator />
+
+                                    {/* Stage Move */}
+                                    <div className="space-y-2">
+                                        <h4 className="text-sm font-medium">Move to Stage</h4>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {sortedStages.map((stage) => (
+                                                <Button
+                                                    key={stage.id}
+                                                    size="sm"
+                                                    variant={
+                                                        selectedApplicant.stage === stage.id
+                                                            ? "default"
+                                                            : "outline"
+                                                    }
+                                                    className="text-xs"
+                                                    onClick={() => {
+                                                        if (selectedApplicant.stage !== stage.id) {
+                                                            updateStage({
+                                                                id: selectedApplicant._id,
+                                                                stage: stage.id,
+                                                            });
+                                                            setSheetOpen(false);
+                                                        }
+                                                    }}
+                                                >
+                                                    {stage.name}
+                                                </Button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Hire Button */}
+                                    {!selectedApplicant.isStaffConverted && (
+                                        <>
+                                            <Separator />
+                                            <Button
+                                                className="w-full"
                                                 onClick={() => {
-                                                    deleteApplicant({
-                                                        id: selectedApplicant._id,
-                                                        jobId: selectedApplicant.jobId,
-                                                    });
+                                                    setHireApplicant(selectedApplicant);
+                                                    setHireOpen(true);
                                                     setSheetOpen(false);
                                                 }}
                                             >
-                                                <Trash2 className="mr-2 h-4 w-4" />
-                                                Delete Applicant
-                                            </DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </div>
-                            </SheetHeader>
-
-                            <div className="space-y-4 mt-6">
-                                {/* Status */}
-                                {selectedApplicant.isStaffConverted && (
-                                    <div className="rounded-lg bg-green-500/10 border border-green-200 p-3 text-sm text-green-700">
-                                        <UserCheck className="inline mr-2 h-4 w-4" />
-                                        Converted to staff member
-                                    </div>
-                                )}
-
-                                {/* Contact Info */}
-                                <div className="space-y-2">
-                                    <h4 className="text-sm font-medium">Contact</h4>
-                                    <div className="space-y-1.5">
-                                        <div className="flex items-center gap-2 text-sm">
-                                            <Mail className="h-3.5 w-3.5 text-muted-foreground" />
-                                            <a
-                                                href={`mailto:${selectedApplicant.email}`}
-                                                className="text-primary hover:underline"
-                                            >
-                                                {selectedApplicant.email}
-                                            </a>
-                                        </div>
-                                        {selectedApplicant.phone && (
-                                            <div className="flex items-center gap-2 text-sm">
-                                                <Phone className="h-3.5 w-3.5 text-muted-foreground" />
-                                                {selectedApplicant.phone}
-                                            </div>
-                                        )}
-                                        <div className="flex items-center gap-2 text-sm">
-                                            <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
-                                            Applied{" "}
-                                            {new Date(
-                                                selectedApplicant.appliedAt,
-                                            ).toLocaleDateString("en-US", {
-                                                month: "long",
-                                                day: "numeric",
-                                                year: "numeric",
-                                            })}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <Separator />
-
-                                {/* Resume */}
-                                {selectedApplicant.resume && (
-                                    <>
-                                        <div className="space-y-2">
-                                            <h4 className="text-sm font-medium">Resume</h4>
-                                            <a
-                                                href={selectedApplicant.resume}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
-                                            >
-                                                <FileText className="h-3.5 w-3.5" />
-                                                View Resume
-                                                <ExternalLink className="h-3 w-3" />
-                                            </a>
-                                        </div>
-                                        <Separator />
-                                    </>
-                                )}
-
-                                {/* Cover Letter */}
-                                {selectedApplicant.coverLetter && (
-                                    <>
-                                        <div className="space-y-2">
-                                            <h4 className="text-sm font-medium">Cover Letter</h4>
-                                            <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-                                                {selectedApplicant.coverLetter}
-                                            </p>
-                                        </div>
-                                        <Separator />
-                                    </>
-                                )}
-
-                                {/* Admin Notes */}
-                                <div className="space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <StickyNote className="h-3.5 w-3.5 text-muted-foreground" />
-                                        <h4 className="text-sm font-medium">Admin Notes</h4>
-                                    </div>
-                                    <Textarea
-                                        placeholder="Add private notes about this applicant..."
-                                        value={adminNotes}
-                                        onChange={(e) => setAdminNotes(e.target.value)}
-                                        rows={3}
-                                        className="text-sm"
-                                    />
-                                    <Button
-                                        size="sm"
-                                        variant="outline"
-                                        onClick={saveNotes}
-                                        disabled={
-                                            adminNotes === (selectedApplicant.adminNotes || "")
-                                        }
-                                    >
-                                        Save Notes
-                                    </Button>
-                                </div>
-
-                                <Separator />
-
-                                {/* Stage Move */}
-                                <div className="space-y-2">
-                                    <h4 className="text-sm font-medium">Move to Stage</h4>
-                                    <div className="flex flex-wrap gap-1.5">
-                                        {sortedStages.map((stage) => (
-                                            <Button
-                                                key={stage.id}
-                                                size="sm"
-                                                variant={
-                                                    selectedApplicant.stage === stage.id
-                                                        ? "default"
-                                                        : "outline"
-                                                }
-                                                className="text-xs"
-                                                onClick={() => {
-                                                    if (selectedApplicant.stage !== stage.id) {
-                                                        updateStage({
-                                                            id: selectedApplicant._id,
-                                                            stage: stage.id,
-                                                        });
-                                                        setSheetOpen(false);
-                                                    }
-                                                }}
-                                            >
-                                                {stage.name}
+                                                <UserCheck className="mr-2 h-4 w-4" />
+                                                Hire & Create Staff
                                             </Button>
-                                        ))}
-                                    </div>
+                                        </>
+                                    )}
                                 </div>
-
-                                {/* Hire Button */}
-                                {!selectedApplicant.isStaffConverted && (
-                                    <>
-                                        <Separator />
-                                        <Button
-                                            className="w-full"
-                                            onClick={() => {
-                                                setHireApplicant(selectedApplicant);
-                                                setHireOpen(true);
-                                                setSheetOpen(false);
-                                            }}
-                                        >
-                                            <UserCheck className="mr-2 h-4 w-4" />
-                                            Hire & Create Staff
-                                        </Button>
-                                    </>
-                                )}
-                            </div>
-                        </>
-                    )}
-                </SheetContent>
-            </Sheet>
+                            </>
+                        )}
+                    </div>
+                </DrawerContent>
+            </Drawer>
 
             {/* Hire Dialog */}
             <HireDialog
