@@ -2,7 +2,14 @@
 
 import { useState, useCallback, useMemo } from "react";
 import { useParams } from "next/navigation";
-import { FileText, Loader2 } from "lucide-react";
+import {
+  FileText,
+  Loader2,
+  Clock,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
+import { type DateRange } from "react-day-picker";
 import {
   useEodByBusiness,
   useReviewEod,
@@ -13,6 +20,20 @@ import { getColumns } from "./columns";
 import { DataTable } from "./data-table";
 import type { EodQuery, EodReport } from "@/types/eod.types";
 import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ViewEodDialog } from "@/components/admin/eod/view-eod-modal";
+
+
 
 export default function EodPage() {
   const params = useParams();
@@ -23,7 +44,12 @@ export default function EodPage() {
   const [status, setStatus] = useState<string>("all");
   const [approval, setApproval] = useState<string>("all");
   const [page, setPage] = useState(1);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
   const limit = 20;
+
+  // View modal state
+  const [viewReport, setViewReport] = useState<EodReport | null>(null);
+  const [viewOpen, setViewOpen] = useState(false);
 
   // Build query params
   const queryParams: EodQuery = {
@@ -32,6 +58,12 @@ export default function EodPage() {
     ...(search && { search }),
     ...(status !== "all" && { status: status as EodQuery["status"] }),
     ...(approval !== "all" && { isApproved: approval }),
+    ...(dateRange?.from && {
+      startDate: dateRange.from.toISOString().split("T")[0],
+    }),
+    ...(dateRange?.to && {
+      endDate: dateRange.to.toISOString().split("T")[0],
+    }),
   };
 
   // Fetch data
@@ -88,7 +120,13 @@ export default function EodPage() {
   );
 
   const handleView = useCallback((report: EodReport) => {
-    toast.info("View details coming soon");
+    setViewReport(report);
+    setViewOpen(true);
+  }, []);
+
+  const handleDateRangeChange = useCallback((range: DateRange | undefined) => {
+    setDateRange(range);
+    setPage(1);
   }, []);
 
   const handleEdit = useCallback((report: EodReport) => {
@@ -179,6 +217,21 @@ export default function EodPage() {
         statusFilter={status}
         approvalFilter={approval}
         isLoading={isEodLoading}
+        dateRange={dateRange}
+        onDateRangeChange={handleDateRangeChange}
+        onRowClick={handleView}
+      />
+
+      {/* View EOD Dialog */}
+      <ViewEodDialog
+        report={viewReport}
+        open={viewOpen}
+        onOpenChange={(open) => {
+          setViewOpen(open);
+          if (!open) setViewReport(null);
+        }}
+        onApprove={handleApprove}
+        onRevise={handleRevise}
       />
     </div>
   );

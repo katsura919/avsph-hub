@@ -86,6 +86,7 @@ export function getColumns(
         <Checkbox
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}
+          onClick={(e) => e.stopPropagation()}
           aria-label="Select row"
           className="translate-y-[2px]"
         />
@@ -236,6 +237,7 @@ export function getColumns(
               <Button
                 variant="ghost"
                 className="h-8 w-8 p-0 data-[state=open]:bg-muted"
+                onClick={(e) => e.stopPropagation()}
               >
                 <span className="sr-only">Open menu</span>
                 <MoreHorizontal className="h-4 w-4" />

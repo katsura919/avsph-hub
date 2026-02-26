@@ -23,9 +23,11 @@ import {
   FileText,
   Loader2,
 } from "lucide-react";
+import { type DateRange } from "react-day-picker";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -63,6 +65,9 @@ interface DataTableProps<TData, TValue> {
   statusFilter?: string;
   approvalFilter?: string;
   isLoading?: boolean;
+  dateRange?: DateRange;
+  onDateRangeChange?: (range: DateRange | undefined) => void;
+  onRowClick?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -77,6 +82,9 @@ export function DataTable<TData, TValue>({
   statusFilter = "all",
   approvalFilter = "all",
   isLoading = false,
+  dateRange,
+  onDateRangeChange,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -116,22 +124,27 @@ export function DataTable<TData, TValue>({
   });
 
   const hasFilters =
-    localSearch || statusFilter !== "all" || approvalFilter !== "all";
+    localSearch ||
+    statusFilter !== "all" ||
+    approvalFilter !== "all" ||
+    !!dateRange?.from ||
+    !!dateRange?.to;
 
   const clearFilters = () => {
     setLocalSearch("");
     onSearch?.("");
     onStatusFilter?.("all");
     onApprovalFilter?.("all");
+    onDateRangeChange?.(undefined);
   };
 
   return (
     <div className="space-y-4">
       {/* Toolbar */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-1 items-center gap-2">
+        <div className="flex flex-1 flex-wrap items-center gap-2">
           {/* Search */}
-          <div className="relative w-full sm:w-[300px]">
+          <div className="relative w-full sm:w-[260px]">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search by name or email..."
@@ -166,6 +179,13 @@ export function DataTable<TData, TValue>({
             </SelectContent>
           </Select>
 
+          {/* Date Range Filter */}
+          <DatePickerWithRange
+            value={dateRange}
+            onChange={onDateRangeChange}
+            placeholder="Date Range"
+          />
+
           {/* Clear Filters */}
           {hasFilters && (
             <Button
@@ -173,7 +193,7 @@ export function DataTable<TData, TValue>({
               onClick={clearFilters}
               className="h-9 px-2 lg:px-3"
             >
-              Reset
+              Clear
               <X className="ml-2 h-4 w-4" />
             </Button>
           )}
@@ -257,7 +277,8 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="group"
+                  className="group cursor-pointer"
+                  onClick={() => onRowClick?.(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className="py-3">
