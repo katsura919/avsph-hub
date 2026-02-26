@@ -53,6 +53,11 @@ export function BusinessNavMain({ businessId }: BusinessNavMainProps) {
       icon: FileText,
     },
     {
+      title: "Invoices",
+      href: `/business/${businessId}/invoice`,
+      icon: FileText,
+    },
+    {
       title: "Settings",
       href: `/business/${businessId}/settings`,
       icon: Settings,
