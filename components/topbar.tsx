@@ -24,10 +24,7 @@ import { Input } from "@/components/ui/input";
 // Base navigation items for all admins
 const baseNavigation = [
   { name: "Overview", href: "/overview" },
-  { name: "Businesses", href: "/business" },
   { name: "Staff", href: "/staff" },
-  { name: "Activity", href: "/activity" },
-  { name: "Domains", href: "/domains" },
 ];
 
 // Super-admin only navigation items
@@ -61,9 +58,9 @@ export function Topbar() {
               </span>
             </Link>
 
-            <Slash className="h-4 w-4 text-muted-foreground/20 rotate-[15deg] hidden sm:block" />
+            <div className="h-4 w-[1px] bg-border hidden sm:block" />
 
-            <div className="flex items-center gap-2 hidden sm:flex">
+            <div className="items-center gap-2 hidden sm:flex">
               <div className="flex items-center gap-2 px-2 py-1 rounded-sm hover:bg-muted/50 transition-colors cursor-pointer">
                 <Avatar className="h-5 w-5">
                   <AvatarFallback className="text-[10px] bg-indigo-500 text-white">
@@ -71,17 +68,12 @@ export function Topbar() {
                   </AvatarFallback>
                 </Avatar>
                 <span className="text-sm font-medium">{getFullName()}</span>
-                {isSuperAdmin() && (
-                  <Badge variant="secondary" className="h-4 px-1 text-[10px] bg-muted border-border text-muted-foreground">
-                    PRO
-                  </Badge>
-                )}
               </div>
             </div>
           </div>
 
           {/* Center: Search (Optional, Vercel-like) */}
-          <div className="hidden md:flex flex-1 max-w-md mx-6">
+          {/* <div className="hidden md:flex flex-1 max-w-md mx-6">
             <div className="relative w-full">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
@@ -95,22 +87,17 @@ export function Topbar() {
                 </kbd>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Right: Actions */}
           <div className="flex items-center gap-2 sm:gap-4">
-            <Button variant="ghost" size="sm" className="hidden lg:flex text-muted-foreground hover:text-foreground text-xs gap-1">
-              Feedback
-            </Button>
-            <Button variant="ghost" size="sm" className="hidden lg:flex text-muted-foreground hover:text-foreground text-xs gap-1">
-              Changelog
-            </Button>
-
-            <div className="h-4 w-[1px] bg-border hidden sm:block" />
-
             <ModeToggle />
 
-            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 text-muted-foreground hover:text-foreground relative"
+            >
               <Bell className="h-4 w-4" />
               {/* Notification indicator */}
               <span className="absolute top-2 right-2.5 h-1.5 w-1.5 rounded-full bg-red-500 border border-background" />
@@ -118,7 +105,11 @@ export function Topbar() {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full h-8 w-8 ml-1">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full h-8 w-8 ml-1"
+                >
                   <Avatar className="h-8 w-8 border border-border/50">
                     <AvatarFallback className="text-xs">
                       {getInitials()}
@@ -138,7 +129,10 @@ export function Topbar() {
                   Settings
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logout} className="text-destructive focus:text-destructive">
+                <DropdownMenuItem
+                  onClick={logout}
+                  className="text-destructive focus:text-destructive"
+                >
                   <LogOut className="mr-2 h-4 w-4" />
                   Log out
                 </DropdownMenuItem>
@@ -164,7 +158,7 @@ export function Topbar() {
                     "relative px-3 py-2.5 text-sm transition-all duration-200 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     isActive
                       ? "text-foreground font-medium"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/30",
                   )}
                 >
                   {item.name}

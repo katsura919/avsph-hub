@@ -1,6 +1,6 @@
 "use client";
 
-import { BadgeCheck, ChevronsUpDown, LogOut, Shield, Home } from "lucide-react";
+import { BadgeCheckIcon, ChevronsUpDown, LogOut, Shield, Home, BadgeCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -33,6 +33,9 @@ export function BusinessNavUser() {
     router.push("/overview");
   };
 
+const handleGoToSettings = () => {
+    router.push("/settings");
+  }
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -98,7 +101,9 @@ export function BusinessNavUser() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem className="cursor-pointer">
+              <DropdownMenuItem 
+                onClick={handleGoToSettings}
+                className="cursor-pointer">
                 <BadgeCheck />
                 Account
               </DropdownMenuItem>

@@ -2,18 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Grid3X3,
-  List,
-  Plus,
-  Search,
-  Building2,
-  ShieldAlert,
-} from "lucide-react";
+import { Plus, Search, Building2, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BusinessCard } from "@/components/business-card";
-import { BusinessListItem } from "@/components/business-list-item";
 import { useBusinesses } from "@/hooks/useBusiness";
 import { useAdminStore } from "@/store/admin.store";
 import { Separator } from "@/components/ui/separator";
@@ -21,7 +13,6 @@ import { Separator } from "@/components/ui/separator";
 export default function OverviewPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [layout, setLayout] = useState<"grid" | "list">("grid");
 
   const { data: businesses = [], isLoading } = useBusinesses();
   const { isSuperAdmin } = useAdminStore();
@@ -47,16 +38,21 @@ export default function OverviewPage() {
       {/* Header Section */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Overview</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+            Overview
+          </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Manage and monitor your business projects.
+            Manage and monitor your businesses.
           </p>
         </div>
 
         {canCreateBusiness && (
-          <Button onClick={handleCreateBusiness} className="shrink-0 gap-2 shadow-sm">
+          <Button
+            onClick={handleCreateBusiness}
+            className="shrink-0 gap-2 shadow-sm"
+          >
             <Plus className="h-4 w-4" />
-            New Project
+            New Business
           </Button>
         )}
       </div>
@@ -70,7 +66,9 @@ export default function OverviewPage() {
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-100/50 dark:bg-amber-900/20 mb-6">
               <ShieldAlert className="h-8 w-8 text-amber-600 dark:text-amber-500" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground">No Business Access</h3>
+            <h3 className="text-xl font-semibold text-foreground">
+              No Business Access
+            </h3>
             <p className="mb-6 mt-2 text-muted-foreground leading-relaxed">
               You haven't been assigned to any businesses yet. Please contact
               your Super Admin to request access.
@@ -90,34 +88,11 @@ export default function OverviewPage() {
             <div className="relative w-full sm:max-w-sm">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Search projects..."
+                placeholder="Search businesses..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9 bg-background/50 focus:bg-background transition-all"
               />
-            </div>
-
-            <div className="flex items-center gap-2 self-end sm:self-auto">
-              <div className="flex items-center gap-1 p-1 bg-muted/40 rounded-lg border border-border/50">
-                <Button
-                  variant={layout === "grid" ? "secondary" : "ghost"}
-                  size="sm"
-                  className="h-7 w-7 p-0 shadow-none data-[state=active]:bg-background"
-                  onClick={() => setLayout("grid")}
-                >
-                  <Grid3X3 className="h-4 w-4" />
-                  <span className="sr-only">Grid view</span>
-                </Button>
-                <Button
-                  variant={layout === "list" ? "secondary" : "ghost"}
-                  size="sm"
-                  className="h-7 w-7 p-0 shadow-none"
-                  onClick={() => setLayout("list")}
-                >
-                  <List className="h-4 w-4" />
-                  <span className="sr-only">List view</span>
-                </Button>
-              </div>
             </div>
           </div>
 
@@ -125,7 +100,10 @@ export default function OverviewPage() {
           {isLoading ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="h-[200px] rounded-xl border bg-card/50 px-6 py-6 space-y-4 animate-pulse">
+                <div
+                  key={i}
+                  className="h-[200px] rounded-xl border bg-card/50 px-6 py-6 space-y-4 animate-pulse"
+                >
                   <div className="h-10 w-10 rounded-full bg-muted" />
                   <div className="space-y-2">
                     <div className="h-4 w-3/4 bg-muted rounded" />
@@ -135,19 +113,11 @@ export default function OverviewPage() {
               ))}
             </div>
           ) : filteredBusinesses.length > 0 ? (
-            layout === "grid" ? (
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 animate-in fade-in-50 duration-500">
-                {filteredBusinesses.map((business) => (
-                  <BusinessCard key={business._id} business={business} />
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col gap-3 animate-in fade-in-50 duration-500">
-                {filteredBusinesses.map((business) => (
-                  <BusinessListItem key={business._id} business={business} />
-                ))}
-              </div>
-            )
+            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 animate-in fade-in-50 duration-500">
+              {filteredBusinesses.map((business) => (
+                <BusinessCard key={business._id} business={business} />
+              ))}
+            </div>
           ) : (
             /* Empty State */
             <div className="flex min-h-[400px] flex-col items-center justify-center rounded-xl border border-dashed bg-muted/20 p-8 text-center animate-in fade-in-50">
