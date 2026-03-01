@@ -4,11 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
-  FileText,
   Users,
   Briefcase,
   Wallet,
   Settings,
+  Receipt,
+  ClipboardList,
+  Newspaper,
   type LucideIcon,
 } from "lucide-react";
 
@@ -26,6 +28,11 @@ interface NavItem {
   icon: LucideIcon;
 }
 
+interface NavGroup {
+  label: string;
+  items: NavItem[];
+}
+
 interface BusinessNavMainProps {
   businessId: string;
 }
@@ -33,46 +40,61 @@ interface BusinessNavMainProps {
 export function BusinessNavMain({ businessId }: BusinessNavMainProps) {
   const pathname = usePathname();
 
-  const navItems: NavItem[] = [
+  const navGroups: NavGroup[] = [
     {
-      title: "Overview",
-      href: `/business/${businessId}`,
-      icon: LayoutDashboard,
+      label: "Platform",
+      items: [
+        {
+          title: "Overview",
+          href: `/business/${businessId}`,
+          icon: LayoutDashboard,
+        },
+        {
+          title: "End of Day Reports",
+          href: `/business/${businessId}/eod`,
+          icon: ClipboardList,
+        },
+      ],
     },
     {
-      title: "Blog",
-      href: `/business/${businessId}/blog`,
-      icon: FileText,
+      label: "Human Resources",
+      items: [
+        {
+          title: "Staff Members",
+          href: `/business/${businessId}/staff`,
+          icon: Users,
+        },
+        {
+          title: "Recruitment",
+          href: `/business/${businessId}/job-posts`,
+          icon: Briefcase,
+        },
+        {
+          title: "Compensation",
+          href: `/business/${businessId}/compensation-profiles`,
+          icon: Wallet,
+        },
+      ],
     },
     {
-      title: "Staff",
-      href: `/business/${businessId}/staff`,
-      icon: Users,
-    },
-    {
-      title: "Job Posts",
-      href: `/business/${businessId}/job-posts`,
-      icon: Briefcase,
-    },
-    {
-      title: "EOD Reports",
-      href: `/business/${businessId}/eod`,
-      icon: FileText,
-    },
-    {
-      title: "Invoices",
-      href: `/business/${businessId}/invoice`,
-      icon: FileText,
-    },
-    {
-      title: "Compensation",
-      href: `/business/${businessId}/compensation-profiles`,
-      icon: Wallet,
-    },
-    {
-      title: "Settings",
-      href: `/business/${businessId}/settings`,
-      icon: Settings,
+      label: "Administration",
+      items: [
+        {
+          title: "Billing & Invoices",
+          href: `/business/${businessId}/invoice`,
+          icon: Receipt,
+        },
+        {
+          title: "Content & Blog",
+          href: `/business/${businessId}/blog`,
+          icon: Newspaper,
+        },
+        {
+          title: "Business Settings",
+          href: `/business/${businessId}/settings`,
+          icon: Settings,
+        },
+      ],
     },
   ];
 
@@ -84,24 +106,28 @@ export function BusinessNavMain({ businessId }: BusinessNavMainProps) {
   };
 
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Navigation</SidebarGroupLabel>
-      <SidebarMenu>
-        {navItems.map((item) => (
-          <SidebarMenuItem key={item.href}>
-            <SidebarMenuButton
-              asChild
-              isActive={isActive(item.href)}
-              tooltip={item.title}
-            >
-              <Link href={item.href}>
-                <item.icon />
-                <span>{item.title}</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        ))}
-      </SidebarMenu>
-    </SidebarGroup>
+    <>
+      {navGroups.map((group) => (
+        <SidebarGroup key={group.label}>
+          <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+          <SidebarMenu>
+            {group.items.map((item) => (
+              <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive(item.href)}
+                  tooltip={item.title}
+                >
+                  <Link href={item.href}>
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+      ))}
+    </>
   );
 }

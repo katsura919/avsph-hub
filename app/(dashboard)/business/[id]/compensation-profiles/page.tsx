@@ -23,6 +23,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useBusinessById } from "@/hooks/useBusiness";
 import { useCompensationProfiles } from "@/hooks/useCompensationProfile";
 import {
@@ -144,174 +153,215 @@ export default function CompensationProfilesPage() {
         </Button>
       </div>
 
-      {/* Exchange Rate Management Card — only if non-PHP currencies exist */}
-      {usedCurrencies.length > 0 && (
-        <Card>
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <ArrowRightLeft className="h-4 w-4 text-muted-foreground" />
-              <CardTitle className="text-base">Exchange Rates to PHP</CardTitle>
-            </div>
-            <CardDescription>
-              Set the current conversion rate for each currency used in your
-              compensation profiles. These rates are shared across all
-              businesses.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {isRatesLoading ? (
-              <div className="flex items-center justify-center py-6">
-                <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {usedCurrencies.map((currency) => {
-                  const currentRate = rateMap.get(currency);
-                  const inputValue =
-                    rateForm[currency] ??
-                    (currentRate != null ? String(currentRate) : "");
-                  const hasChanged = rateForm[currency] !== undefined;
+      <Tabs defaultValue="profiles" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 lg:w-[400px]">
+          <TabsTrigger value="profiles">All Profiles</TabsTrigger>
+          <TabsTrigger value="exchange-rates">Exchange Rates</TabsTrigger>
+        </TabsList>
 
-                  return (
-                    <div
-                      key={currency}
-                      className="flex items-end gap-2 rounded-md border p-3"
-                    >
-                      <div className="flex-1 space-y-1.5">
-                        <Label className="text-xs font-medium">
-                          1 {currency} = ? PHP
-                        </Label>
-                        <Input
-                          type="number"
-                          min="0"
-                          step="0.01"
-                          placeholder="e.g. 56.50"
-                          value={inputValue}
-                          onChange={(e) =>
-                            setRateForm((prev) => ({
-                              ...prev,
-                              [currency]: e.target.value,
-                            }))
-                          }
-                          disabled={upsertRateMutation.isPending}
-                        />
-                        {currentRate != null && !hasChanged && (
-                          <p className="text-xs text-muted-foreground">
-                            Current: ₱{currentRate.toLocaleString()}
-                          </p>
-                        )}
-                      </div>
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="h-9 w-9 shrink-0"
-                        disabled={!hasChanged || upsertRateMutation.isPending}
-                        onClick={() => handleSaveRate(currency)}
-                      >
-                        {upsertRateMutation.isPending ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <Save className="h-4 w-4" />
-                        )}
-                      </Button>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
-
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base">Profiles</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              className="pl-9"
-              placeholder="Search by name, hourly rate, currency, or effective date"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-
-          {isLoading ? (
-            <div className="flex min-h-[280px] items-center justify-center">
-              <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-            </div>
-          ) : filteredProfiles.length === 0 ? (
-            <div className="flex min-h-[220px] flex-col items-center justify-center rounded-md border border-dashed text-center">
-              <Wallet className="h-8 w-8 text-muted-foreground" />
-              <p className="mt-3 text-sm font-medium">
-                No compensation profiles found
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Create a profile to get started.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {filteredProfiles.map((profile) => {
-                const currency = profile.currency || "PHP";
-                return (
-                  <div
-                    key={profile._id}
-                    className="flex flex-col gap-3 rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between"
-                  >
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium">{profile.name}</p>
-                        <Badge
-                          variant={currency !== "PHP" ? "default" : "secondary"}
-                          className="text-xs"
-                        >
-                          {currency}
-                        </Badge>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        Rate:{" "}
-                        {currency !== "PHP" && currency !== ""
-                          ? `${currency} `
-                          : "₱"}
-                        {profile.hourlyRate.toLocaleString()} / hour
-                        {currency !== "PHP" && rateMap.has(currency) && (
-                          <span className="ml-2 text-muted-foreground/70">
-                            (≈ ₱
-                            {(
-                              profile.hourlyRate * rateMap.get(currency)!
-                            ).toLocaleString(undefined, {
-                              maximumFractionDigits: 2,
-                            })}{" "}
-                            PHP)
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        Effective: {profile.effectiveFrom}
-                        {profile.effectiveTo
-                          ? ` to ${profile.effectiveTo}`
-                          : ""}
-                      </p>
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="gap-2 self-start sm:self-center"
-                      onClick={() => openEditDialog(profile)}
-                    >
-                      <Pencil className="h-3.5 w-3.5" />
-                      Edit
-                    </Button>
+        <TabsContent value="exchange-rates" className="mt-4">
+          <Card className="shadow-sm">
+            <CardHeader className="pb-3 px-6 pt-6">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <ArrowRightLeft className="h-4 w-4 text-primary" />
+                    <CardTitle className="text-base text-primary">Global Conversion Rates</CardTitle>
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                  <CardDescription className="text-sm">
+                    Configure exchange rates for non-PHP currencies used in your profiles.
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="px-6 pb-6">
+              {usedCurrencies.length === 0 ? (
+                <div className="flex flex-col items-center justify-center p-8 text-center rounded-md border border-dashed">
+                  <ArrowRightLeft className="h-6 w-6 text-muted-foreground mb-3" />
+                  <p className="text-sm font-medium">No Exchange Rates Needed</p>
+                  <p className="text-sm text-muted-foreground mt-1 max-w-sm">
+                    All your compensation profiles are currently using PHP. Exchange rates will appear here when you create profiles with other currencies (like USD or GBP).
+                  </p>
+                </div>
+              ) : isRatesLoading ? (
+                <div className="flex items-center justify-center py-4">
+                  <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+                </div>
+              ) : (
+                <div className="flex flex-wrap items-center gap-4">
+                  {usedCurrencies.map((currency) => {
+                    const currentRate = rateMap.get(currency);
+                    const inputValue =
+                      rateForm[currency] ??
+                      (currentRate != null ? String(currentRate) : "");
+                    const hasChanged = rateForm[currency] !== undefined;
+
+                    return (
+                      <div
+                        key={currency}
+                        className="flex items-center gap-2 rounded-md border bg-muted/30 px-4 py-3 shadow-sm"
+                      >
+                        <Label className="text-sm font-medium whitespace-nowrap">
+                          1 {currency} =
+                        </Label>
+                        <div className="relative w-28">
+                          <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+                            ₱
+                          </span>
+                          <Input
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="0.00"
+                            className="h-9 pl-6 pr-2 text-sm bg-background"
+                            value={inputValue}
+                            onChange={(e) =>
+                              setRateForm((prev) => ({
+                                ...prev,
+                                [currency]: e.target.value,
+                              }))
+                            }
+                            disabled={upsertRateMutation.isPending}
+                          />
+                        </div>
+                        <Button
+                          size="icon"
+                          variant={hasChanged ? "default" : "secondary"}
+                          className="h-9 w-9 shrink-0 ml-1"
+                          disabled={!hasChanged || upsertRateMutation.isPending}
+                          onClick={() => handleSaveRate(currency)}
+                        >
+                          {upsertRateMutation.isPending ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Save className="h-4 w-4" />
+                          )}
+                          <span className="sr-only">Save</span>
+                        </Button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="profiles" className="mt-4">
+          <Card className="shadow-sm">
+            <CardHeader className="border-b px-6 py-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <CardTitle className="text-base font-medium">Profile Directory</CardTitle>
+                <div className="relative w-full sm:w-80">
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    className="pl-9 h-9"
+                    placeholder="Search by name, currency, or rate..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-0 border-none">
+              {isLoading ? (
+                <div className="flex min-h-[300px] items-center justify-center">
+                  <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : filteredProfiles.length === 0 ? (
+                <div className="flex min-h-[300px] flex-col items-center justify-center p-8 text-center">
+                  <div className="rounded-full bg-muted p-3">
+                    <Wallet className="h-6 w-6 text-muted-foreground" />
+                  </div>
+                  <h3 className="mt-4 text-sm font-medium">No profiles found</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {search ? "Try adjusting your search query to find what you're looking for." : "Get started by creating a new compensation profile."}
+                  </p>
+                  {!search && (
+                    <Button variant="outline" className="mt-4 gap-2" onClick={openCreateDialog}>
+                      <Plus className="h-4 w-4" />
+                      Create Profile
+                    </Button>
+                  )}
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="hover:bg-transparent">
+                        <TableHead className="w-[30%] px-6">Profile Details</TableHead>
+                        <TableHead className="px-6">Base Rate</TableHead>
+                        <TableHead className="px-6">PHP Equivalent</TableHead>
+                        <TableHead className="px-6">Effective Period</TableHead>
+                        <TableHead className="text-right px-6">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredProfiles.map((profile) => {
+                        const currency = profile.currency || "PHP";
+                        const isPhp = currency === "PHP";
+
+                        const phpValue = !isPhp && rateMap.has(currency)
+                          ? profile.hourlyRate * rateMap.get(currency)!
+                          : profile.hourlyRate;
+
+                        return (
+                          <TableRow key={profile._id}>
+                            <TableCell className="px-6 py-4 font-medium">
+                              <div className="flex items-center gap-2">
+                                {profile.name}
+                                {!isPhp && (
+                                  <Badge variant="outline" className="text-[10px] h-5 px-1.5 ml-1 border-primary/20 bg-primary/5 text-primary">
+                                    {currency}
+                                  </Badge>
+                                )}
+                              </div>
+                            </TableCell>
+                            <TableCell className="px-6 py-4">
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-semibold">{isPhp ? "₱" : `${currency} `}{profile.hourlyRate.toLocaleString()}</span>
+                                <span className="text-xs text-muted-foreground">/ hr</span>
+                              </div>
+                            </TableCell>
+                            <TableCell className="px-6 py-4">
+                              {isPhp ? (
+                                <span className="text-muted-foreground text-sm">—</span>
+                              ) : (
+                                <span className="text-sm font-medium text-emerald-600 dark:text-emerald-500">
+                                  ₱{phpValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                </span>
+                              )}
+                            </TableCell>
+                            <TableCell className="px-6 py-4 text-sm text-muted-foreground">
+                              {profile.effectiveFrom}
+                              {profile.effectiveTo && (
+                                <span className="ml-1.5 before:content-['→'] before:mr-1.5 before:text-muted-foreground/50">
+                                  {profile.effectiveTo}
+                                </span>
+                              )}
+                            </TableCell>
+                            <TableCell className="px-6 py-4 text-right">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-8 gap-1.5 text-muted-foreground hover:text-foreground"
+                                onClick={() => openEditDialog(profile)}
+                              >
+                                <Pencil className="h-3.5 w-3.5" />
+                                <span>Edit</span>
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
 
       <CompensationProfileDialog
         open={dialogOpen}
