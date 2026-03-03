@@ -168,7 +168,7 @@ export default function InvoiceDetailPage() {
   const recalculateMutation = useRecalculateInvoice();
   const approveMutation = useApproveInvoice();
   const markPaidMutation = useMarkInvoicePaid();
-  console.log("Invoice data:", invoice); // Debug log 
+  console.log("Invoice data:", invoice); // Debug log
   const isDraftOrCalculated =
     invoice?.status === "draft" || invoice?.status === "calculated";
 
@@ -536,11 +536,14 @@ export default function InvoiceDetailPage() {
                 </span>
               </div>
               <div className="flex justify-between py-2 text-sm">
-                <span className="text-muted-foreground">Rice Allowance</span>
+                <span className="text-muted-foreground">
+                  Transportation Allowance
+                  <span className="text-xs ml-1 opacity-60">(PHP)</span>
+                </span>
                 <span>
-                  {fmt(
-                    invoice.earningsBreakdown?.riceAllowanceEarnings || 0,
-                    cur,
+                  {fmtPhp(
+                    invoice.earningsBreakdown
+                      ?.transportationAllowanceEarnings || 0,
                   )}
                 </span>
               </div>

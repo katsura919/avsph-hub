@@ -1,8 +1,21 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { AlertCircle, CalendarIcon, CheckCircle2, Clock, Loader2 } from "lucide-react";
+import {
+  AlertCircle,
+  CalendarIcon,
+  CheckCircle2,
+  Clock,
+  Loader2,
+} from "lucide-react";
 import { useResubmitEod, useSubmitEod } from "@/hooks/eod/useStaffEod";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -29,7 +42,10 @@ export const statusConfig: Record<
   },
 };
 
-export const approvalConfig: Record<string, { label: string; className: string }> = {
+export const approvalConfig: Record<
+  string,
+  { label: string; className: string }
+> = {
   true: {
     label: "Approved",
     className: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
@@ -47,6 +63,7 @@ type FormState = {
   overtimeHoursWorked: string;
   nightDifferentialHours: string;
   tasksCompleted: string;
+  onSite: boolean;
   challenges: string;
   nextDayPlan: string;
   notes: string;
@@ -76,13 +93,17 @@ function buildFormState(initialData?: EodReport): FormState {
         ? String(initialData.nightDifferentialHours)
         : "",
     tasksCompleted: initialData?.tasksCompleted || "",
+    onSite: initialData?.onSite ?? false,
     challenges: initialData?.challenges || "",
     nextDayPlan: initialData?.nextDayPlan || "",
     notes: initialData?.notes || "",
   };
 }
 
-function parseOptionalNumber(value: string, fallback?: number): number | undefined {
+function parseOptionalNumber(
+  value: string,
+  fallback?: number,
+): number | undefined {
   if (value.trim() === "") {
     return fallback;
   }
@@ -106,7 +127,9 @@ export function SubmitEodDialog({
   const submitMutation = useSubmitEod();
   const resubmitMutation = useResubmitEod();
   const isSubmitting = submitMutation.isPending || resubmitMutation.isPending;
-  const [form, setForm] = useState<FormState>(() => buildFormState(initialData));
+  const [form, setForm] = useState<FormState>(() =>
+    buildFormState(initialData),
+  );
 
   useEffect(() => {
     if (open) {
@@ -116,9 +139,18 @@ export function SubmitEodDialog({
 
   const parsed = useMemo(() => {
     const hoursWorked = parseOptionalNumber(form.hoursWorked);
-    const regularHoursWorked = parseOptionalNumber(form.regularHoursWorked, hoursWorked);
-    const overtimeHoursWorked = parseOptionalNumber(form.overtimeHoursWorked, 0);
-    const nightDifferentialHours = parseOptionalNumber(form.nightDifferentialHours, 0);
+    const regularHoursWorked = parseOptionalNumber(
+      form.regularHoursWorked,
+      hoursWorked,
+    );
+    const overtimeHoursWorked = parseOptionalNumber(
+      form.overtimeHoursWorked,
+      0,
+    );
+    const nightDifferentialHours = parseOptionalNumber(
+      form.nightDifferentialHours,
+      0,
+    );
     return {
       hoursWorked,
       regularHoursWorked,
@@ -133,8 +165,12 @@ export function SubmitEodDialog({
   ]);
 
   const hoursBreakdownError = useMemo(() => {
-    const { hoursWorked, regularHoursWorked, overtimeHoursWorked, nightDifferentialHours } =
-      parsed;
+    const {
+      hoursWorked,
+      regularHoursWorked,
+      overtimeHoursWorked,
+      nightDifferentialHours,
+    } = parsed;
 
     if (hoursWorked === undefined || hoursWorked < 0 || hoursWorked > 24) {
       return "Hours worked must be between 0 and 24.";
@@ -194,6 +230,7 @@ export function SubmitEodDialog({
         nightDifferentialHours: parsed.nightDifferentialHours,
       }),
       tasksCompleted: form.tasksCompleted.trim(),
+      onSite: form.onSite,
       ...(form.challenges.trim() && { challenges: form.challenges.trim() }),
       ...(form.nextDayPlan.trim() && { nextDayPlan: form.nextDayPlan.trim() }),
       ...(form.notes.trim() && { notes: form.notes.trim() }),
@@ -217,7 +254,9 @@ export function SubmitEodDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[640px]">
         <DialogHeader>
-          <DialogTitle>{isResubmit ? "Resubmit EOD Report" : "Submit EOD Report"}</DialogTitle>
+          <DialogTitle>
+            {isResubmit ? "Resubmit EOD Report" : "Submit EOD Report"}
+          </DialogTitle>
           <DialogDescription>
             {isResubmit
               ? "Revise and resubmit your end-of-day report."
@@ -314,9 +353,24 @@ export function SubmitEodDialog({
             <p className="text-sm text-destructive">{hoursBreakdownError}</p>
           ) : (
             <p className="text-xs text-muted-foreground">
-              If regular hours are blank, backend treats regular hours as total hours worked.
+              If regular hours are blank, backend treats regular hours as total
+              hours worked.
             </p>
           )}
+
+          <div className="flex items-center gap-2">
+            <input
+              id="onSite"
+              name="onSite"
+              type="checkbox"
+              checked={form.onSite}
+              onChange={(e) =>
+                setForm((prev) => ({ ...prev, onSite: e.target.checked }))
+              }
+              className="h-4 w-4 rounded border-input"
+            />
+            <Label htmlFor="onSite">Worked On-Site</Label>
+          </div>
 
           <div className="space-y-2">
             <Label htmlFor="tasksCompleted">Tasks Completed</Label>
@@ -368,11 +422,17 @@ export function SubmitEodDialog({
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+            >
               Cancel
             </Button>
             <Button type="submit" disabled={!isValid || isSubmitting}>
-              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isSubmitting && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
               {isResubmit ? "Resubmit" : "Submit Report"}
             </Button>
           </DialogFooter>

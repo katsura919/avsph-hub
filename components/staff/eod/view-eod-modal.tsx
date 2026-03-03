@@ -88,7 +88,22 @@ export function ViewEodDialog({
             </div>
           </div>
 
-          {/* Tasks Completed */}
+          {/* On-Site */}
+          <div>
+            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+              Work Location
+            </p>
+            <Badge
+              variant="outline"
+              className={
+                report.onSite
+                  ? "bg-blue-500/10 text-blue-500 border-blue-500/20"
+                  : "bg-zinc-500/10 text-zinc-500 border-zinc-500/20"
+              }
+            >
+              {report.onSite ? "On-Site" : "Remote"}
+            </Badge>
+          </div>
           <div>
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
               Tasks Completed

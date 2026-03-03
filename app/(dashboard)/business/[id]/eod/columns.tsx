@@ -10,6 +10,8 @@ import {
   Trash2,
   CheckCircle2,
   RotateCcw,
+  Building2,
+  Home,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -175,6 +177,36 @@ export function getColumns(
             {regular}h / {overtime}h / {night}h
           </span>
         );
+      },
+    },
+    {
+      accessorKey: "onSite",
+      header: "Location",
+      cell: ({ row }) => {
+        const onSite = row.original.onSite;
+        if (onSite === true) {
+          return (
+            <Badge
+              variant="outline"
+              className="font-normal bg-violet-500/10 text-violet-600 border-violet-500/20 gap-1"
+            >
+              <Building2 className="h-3 w-3" />
+              On-Site
+            </Badge>
+          );
+        }
+        if (onSite === false) {
+          return (
+            <Badge
+              variant="outline"
+              className="font-normal bg-sky-500/10 text-sky-600 border-sky-500/20 gap-1"
+            >
+              <Home className="h-3 w-3" />
+              Remote
+            </Badge>
+          );
+        }
+        return <span className="text-xs text-muted-foreground">—</span>;
       },
     },
     {

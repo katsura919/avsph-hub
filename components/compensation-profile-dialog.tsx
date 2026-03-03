@@ -46,8 +46,8 @@ interface FormState {
   overtimeRateMultiplier: string;
   sundayRateMultiplier: string;
   nightDifferentialRateMultiplier: string;
-  isRiceAllowanceEligible: boolean;
-  riceAllowanceFixedAmount: string;
+  isTransportationAllowanceEnabled: boolean;
+  transportationAllowanceMonthlyAmount: string;
   isSssEnabled: boolean;
   sssDeductionFixedAmount: string;
   isPagIbigEnabled: boolean;
@@ -73,8 +73,11 @@ function buildInitialForm(profile?: CompensationProfile | null): FormState {
       nightDifferentialRateMultiplier: String(
         profile.nightDifferentialRateMultiplier,
       ),
-      isRiceAllowanceEligible: profile.isRiceAllowanceEligible,
-      riceAllowanceFixedAmount: String(profile.riceAllowanceFixedAmount),
+      isTransportationAllowanceEnabled:
+        profile.isTransportationAllowanceEnabled,
+      transportationAllowanceMonthlyAmount: String(
+        profile.transportationAllowanceMonthlyAmount,
+      ),
       isSssEnabled: profile.isSssEnabled,
       sssDeductionFixedAmount: String(profile.sssDeductionFixedAmount),
       isPagIbigEnabled: profile.isPagIbigEnabled,
@@ -95,8 +98,8 @@ function buildInitialForm(profile?: CompensationProfile | null): FormState {
     overtimeRateMultiplier: "1.25",
     sundayRateMultiplier: "1.30",
     nightDifferentialRateMultiplier: "1.10",
-    isRiceAllowanceEligible: false,
-    riceAllowanceFixedAmount: "0",
+    isTransportationAllowanceEnabled: false,
+    transportationAllowanceMonthlyAmount: "0",
     isSssEnabled: false,
     sssDeductionFixedAmount: "0",
     isPagIbigEnabled: false,
@@ -139,9 +142,9 @@ export function CompensationProfileDialog({
     toNumber(form.sundayRateMultiplier) >= 1 &&
     !Number.isNaN(toNumber(form.nightDifferentialRateMultiplier)) &&
     toNumber(form.nightDifferentialRateMultiplier) >= 1 &&
-    (!form.isRiceAllowanceEligible ||
-      (!Number.isNaN(toNumber(form.riceAllowanceFixedAmount)) &&
-        toNumber(form.riceAllowanceFixedAmount) >= 0)) &&
+    (!form.isTransportationAllowanceEnabled ||
+      (!Number.isNaN(toNumber(form.transportationAllowanceMonthlyAmount)) &&
+        toNumber(form.transportationAllowanceMonthlyAmount) >= 0)) &&
     (!form.isSssEnabled ||
       (!Number.isNaN(toNumber(form.sssDeductionFixedAmount)) &&
         toNumber(form.sssDeductionFixedAmount) >= 0)) &&
@@ -162,9 +165,9 @@ export function CompensationProfileDialog({
     nightDifferentialRateMultiplier: toNumber(
       form.nightDifferentialRateMultiplier,
     ),
-    isRiceAllowanceEligible: form.isRiceAllowanceEligible,
-    riceAllowanceFixedAmount: form.isRiceAllowanceEligible
-      ? toNumber(form.riceAllowanceFixedAmount)
+    isTransportationAllowanceEnabled: form.isTransportationAllowanceEnabled,
+    transportationAllowanceMonthlyAmount: form.isTransportationAllowanceEnabled
+      ? toNumber(form.transportationAllowanceMonthlyAmount)
       : 0,
     isSssEnabled: form.isSssEnabled,
     sssDeductionFixedAmount: form.isSssEnabled
@@ -350,39 +353,41 @@ export function CompensationProfileDialog({
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex items-center justify-between rounded-md border p-3">
                 <div className="space-y-1">
-                  <p className="text-sm font-medium">Rice Allowance</p>
+                  <p className="text-sm font-medium">
+                    Transportation Allowance
+                  </p>
                   <p className="text-xs text-muted-foreground">
-                    Always included when eligible.
+                    Paid per on-site working day (PHP).
                   </p>
                 </div>
                 <Switch
-                  checked={form.isRiceAllowanceEligible}
+                  checked={form.isTransportationAllowanceEnabled}
                   onCheckedChange={(checked) =>
                     setForm((prev) => ({
                       ...prev,
-                      isRiceAllowanceEligible: checked,
+                      isTransportationAllowanceEnabled: checked,
                     }))
                   }
                   disabled={isPending}
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="riceAllowanceAmount">
-                  Rice Allowance Amount
+                <Label htmlFor="transportationAllowanceAmount">
+                  Monthly Amount (₱)
                 </Label>
                 <Input
-                  id="riceAllowanceAmount"
+                  id="transportationAllowanceAmount"
                   type="number"
                   min="0"
                   step="0.01"
-                  value={form.riceAllowanceFixedAmount}
+                  value={form.transportationAllowanceMonthlyAmount}
                   onChange={(e) =>
                     setForm((prev) => ({
                       ...prev,
-                      riceAllowanceFixedAmount: e.target.value,
+                      transportationAllowanceMonthlyAmount: e.target.value,
                     }))
                   }
-                  disabled={isPending || !form.isRiceAllowanceEligible}
+                  disabled={isPending || !form.isTransportationAllowanceEnabled}
                 />
               </div>
             </div>

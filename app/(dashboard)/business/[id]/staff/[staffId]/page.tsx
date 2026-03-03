@@ -121,7 +121,8 @@ export default function StaffDetailPage() {
 
     const profiles = compensationProfiles ?? [];
     const linked =
-      profiles.find((profile) => profile._id === staff.compensationProfileId) ?? null;
+      profiles.find((profile) => profile._id === staff.compensationProfileId) ??
+      null;
 
     setSelectedLinkProfileId(linked?._id ?? "");
   }, [staff, compensationProfiles]);
@@ -658,7 +659,9 @@ export default function StaffDetailPage() {
                     <Select
                       value={selectedLinkProfileId}
                       onValueChange={setSelectedLinkProfileId}
-                      disabled={isUpdating || allCompensationProfiles.length === 0}
+                      disabled={
+                        isUpdating || allCompensationProfiles.length === 0
+                      }
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select an existing compensation profile" />
@@ -702,70 +705,72 @@ export default function StaffDetailPage() {
                           Linked to compensation profile
                         </p>
                       </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs text-muted-foreground">
-                      Profile Name
-                    </Label>
-                    <p className="text-sm font-medium">
-                      {activeCompensationProfile.name}
-                    </p>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs text-muted-foreground">
-                      Effective From
-                    </Label>
-                    <p className="text-sm font-medium">
-                      {activeCompensationProfile.effectiveFrom}
-                    </p>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs text-muted-foreground">
-                      Hourly Rate
-                    </Label>
-                    <p className="text-sm font-medium">
-                      {activeCompensationProfile.hourlyRate.toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs text-muted-foreground">
-                      OT / Sunday / Night Diff
-                    </Label>
-                    <p className="text-sm font-medium">
-                      {activeCompensationProfile.overtimeRateMultiplier}x /{" "}
-                      {activeCompensationProfile.sundayRateMultiplier}x /{" "}
-                      {activeCompensationProfile.nightDifferentialRateMultiplier}
-                      x
-                    </p>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs text-muted-foreground">
-                      Rice Allowance
-                    </Label>
-                    <p className="text-sm font-medium">
-                      {activeCompensationProfile.isRiceAllowanceEligible
-                        ? activeCompensationProfile.riceAllowanceFixedAmount.toLocaleString()
-                        : "Not eligible"}
-                    </p>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs text-muted-foreground">
-                      Statutory Deductions
-                    </Label>
-                    <p className="text-sm font-medium">
-                      SSS:{" "}
-                      {activeCompensationProfile.isSssEnabled
-                        ? activeCompensationProfile.sssDeductionFixedAmount.toLocaleString()
-                        : "Off"}{" "}
-                      | Pag-IBIG:{" "}
-                      {activeCompensationProfile.isPagIbigEnabled
-                        ? activeCompensationProfile.pagIbigDeductionFixedAmount.toLocaleString()
-                        : "Off"}{" "}
-                      | PhilHealth:{" "}
-                      {activeCompensationProfile.isPhilHealthEnabled
-                        ? activeCompensationProfile.philHealthDeductionFixedAmount.toLocaleString()
-                        : "Off"}
-                    </p>
-                  </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs text-muted-foreground">
+                          Profile Name
+                        </Label>
+                        <p className="text-sm font-medium">
+                          {activeCompensationProfile.name}
+                        </p>
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs text-muted-foreground">
+                          Effective From
+                        </Label>
+                        <p className="text-sm font-medium">
+                          {activeCompensationProfile.effectiveFrom}
+                        </p>
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs text-muted-foreground">
+                          Hourly Rate
+                        </Label>
+                        <p className="text-sm font-medium">
+                          {activeCompensationProfile.hourlyRate.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs text-muted-foreground">
+                          OT / Sunday / Night Diff
+                        </Label>
+                        <p className="text-sm font-medium">
+                          {activeCompensationProfile.overtimeRateMultiplier}x /{" "}
+                          {activeCompensationProfile.sundayRateMultiplier}x /{" "}
+                          {
+                            activeCompensationProfile.nightDifferentialRateMultiplier
+                          }
+                          x
+                        </p>
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs text-muted-foreground">
+                          Transportation Allowance
+                        </Label>
+                        <p className="text-sm font-medium">
+                          {activeCompensationProfile.isTransportationAllowanceEnabled
+                            ? `₱${activeCompensationProfile.transportationAllowanceMonthlyAmount.toLocaleString()}/mo`
+                            : "Not enabled"}
+                        </p>
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs text-muted-foreground">
+                          Statutory Deductions
+                        </Label>
+                        <p className="text-sm font-medium">
+                          SSS:{" "}
+                          {activeCompensationProfile.isSssEnabled
+                            ? activeCompensationProfile.sssDeductionFixedAmount.toLocaleString()
+                            : "Off"}{" "}
+                          | Pag-IBIG:{" "}
+                          {activeCompensationProfile.isPagIbigEnabled
+                            ? activeCompensationProfile.pagIbigDeductionFixedAmount.toLocaleString()
+                            : "Off"}{" "}
+                          | PhilHealth:{" "}
+                          {activeCompensationProfile.isPhilHealthEnabled
+                            ? activeCompensationProfile.philHealthDeductionFixedAmount.toLocaleString()
+                            : "Off"}
+                        </p>
+                      </div>
                     </div>
                   ) : (
                     <p className="text-sm text-muted-foreground">
@@ -884,8 +889,6 @@ export default function StaffDetailPage() {
           </Card>
         </div>
       </div>
-
     </div>
   );
 }
-

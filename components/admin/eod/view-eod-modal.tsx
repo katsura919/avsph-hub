@@ -2,7 +2,14 @@ import { FileText, Clock, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import type { EodReport } from "@/types/eod.types";
 
 // ──── Status config ────
@@ -126,6 +133,23 @@ export function ViewEodDialog({
                 {report.nightDifferentialHours ?? 0}h
               </p>
             </div>
+          </div>
+
+          {/* On-Site */}
+          <div>
+            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+              Work Location
+            </p>
+            <Badge
+              variant="outline"
+              className={
+                report.onSite
+                  ? "bg-blue-500/10 text-blue-500 border-blue-500/20"
+                  : "bg-zinc-500/10 text-zinc-500 border-zinc-500/20"
+              }
+            >
+              {report.onSite ? "On-Site" : "Remote"}
+            </Badge>
           </div>
 
           {/* Tasks Completed */}

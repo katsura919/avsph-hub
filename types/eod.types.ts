@@ -12,6 +12,7 @@ export interface EodReport {
   overtimeHoursWorked?: number;
   nightDifferentialHours?: number;
   tasksCompleted: string;
+  onSite?: boolean;
   challenges?: string;
   nextDayPlan?: string;
   notes?: string;
@@ -36,6 +37,7 @@ export interface SubmitEodRequest {
   overtimeHoursWorked?: number;
   nightDifferentialHours?: number;
   tasksCompleted: string;
+  onSite?: boolean;
   challenges?: string;
   nextDayPlan?: string;
   notes?: string;
@@ -47,6 +49,7 @@ export interface EditOwnEodRequest {
   overtimeHoursWorked?: number;
   nightDifferentialHours?: number;
   tasksCompleted?: string;
+  onSite?: boolean;
   challenges?: string;
   nextDayPlan?: string;
   notes?: string;
@@ -65,6 +68,7 @@ export interface AdminEditEodRequest {
   overtimeHoursWorked?: number;
   nightDifferentialHours?: number;
   tasksCompleted?: string;
+  onSite?: boolean;
   date?: string;
   adminNotes?: string;
   status?: EodStatus;

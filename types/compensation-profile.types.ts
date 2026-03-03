@@ -7,8 +7,8 @@ export interface CompensationProfile {
   overtimeRateMultiplier: number;
   sundayRateMultiplier: number;
   nightDifferentialRateMultiplier: number;
-  isRiceAllowanceEligible: boolean;
-  riceAllowanceFixedAmount: number;
+  isTransportationAllowanceEnabled: boolean;
+  transportationAllowanceMonthlyAmount: number;
   isSssEnabled: boolean;
   isPagIbigEnabled: boolean;
   isPhilHealthEnabled: boolean;
@@ -30,8 +30,8 @@ export interface CreateCompensationProfileRequest {
   overtimeRateMultiplier: number;
   sundayRateMultiplier: number;
   nightDifferentialRateMultiplier: number;
-  isRiceAllowanceEligible: boolean;
-  riceAllowanceFixedAmount: number;
+  isTransportationAllowanceEnabled: boolean;
+  transportationAllowanceMonthlyAmount: number;
   isSssEnabled: boolean;
   isPagIbigEnabled: boolean;
   isPhilHealthEnabled: boolean;
