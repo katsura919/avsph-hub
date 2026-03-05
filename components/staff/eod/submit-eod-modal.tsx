@@ -58,7 +58,6 @@ export const approvalConfig: Record<
 
 type FormState = {
   date: string;
-  hoursWorked: string;
   regularHoursWorked: string;
   overtimeHoursWorked: string;
   nightDifferentialHours: string;
@@ -76,18 +75,16 @@ function getTodayDate(): string {
 function buildFormState(initialData?: EodReport): FormState {
   return {
     date: initialData?.date?.split("T")[0] || getTodayDate(),
-    hoursWorked:
-      typeof initialData?.hoursWorked === "number"
-        ? String(initialData.hoursWorked)
-        : "",
     regularHoursWorked:
       typeof initialData?.regularHoursWorked === "number"
         ? String(initialData.regularHoursWorked)
-        : "",
+        : typeof initialData?.hoursWorked === "number"
+          ? String(initialData.hoursWorked)
+          : "",
     overtimeHoursWorked:
       typeof initialData?.overtimeHoursWorked === "number"
         ? String(initialData.overtimeHoursWorked)
-        : "",
+        : "0",
     nightDifferentialHours:
       typeof initialData?.nightDifferentialHours === "number"
         ? String(initialData.nightDifferentialHours)
@@ -138,11 +135,7 @@ export function SubmitEodDialog({
   }, [open, initialData]);
 
   const parsed = useMemo(() => {
-    const hoursWorked = parseOptionalNumber(form.hoursWorked);
-    const regularHoursWorked = parseOptionalNumber(
-      form.regularHoursWorked,
-      hoursWorked,
-    );
+    const regularHoursWorked = parseOptionalNumber(form.regularHoursWorked);
     const overtimeHoursWorked = parseOptionalNumber(
       form.overtimeHoursWorked,
       0,
@@ -151,6 +144,10 @@ export function SubmitEodDialog({
       form.nightDifferentialHours,
       0,
     );
+    const hoursWorked =
+      regularHoursWorked !== undefined && overtimeHoursWorked !== undefined
+        ? regularHoursWorked + overtimeHoursWorked
+        : undefined;
     return {
       hoursWorked,
       regularHoursWorked,
@@ -158,7 +155,6 @@ export function SubmitEodDialog({
       nightDifferentialHours,
     };
   }, [
-    form.hoursWorked,
     form.regularHoursWorked,
     form.overtimeHoursWorked,
     form.nightDifferentialHours,
@@ -172,29 +168,31 @@ export function SubmitEodDialog({
       nightDifferentialHours,
     } = parsed;
 
-    if (hoursWorked === undefined || hoursWorked < 0 || hoursWorked > 24) {
-      return "Hours worked must be between 0 and 24.";
-    }
     if (
       regularHoursWorked === undefined ||
-      overtimeHoursWorked === undefined ||
-      nightDifferentialHours === undefined
+      regularHoursWorked < 0 ||
+      regularHoursWorked > 24
     ) {
-      return "Hours fields must be valid numbers.";
-    }
-    if (regularHoursWorked < 0 || regularHoursWorked > 24) {
       return "Regular hours must be between 0 and 24.";
     }
-    if (overtimeHoursWorked < 0 || overtimeHoursWorked > 24) {
+    if (
+      overtimeHoursWorked === undefined ||
+      overtimeHoursWorked < 0 ||
+      overtimeHoursWorked > 24
+    ) {
       return "Overtime hours must be between 0 and 24.";
     }
-    if (nightDifferentialHours < 0 || nightDifferentialHours > 24) {
+    if (
+      nightDifferentialHours === undefined ||
+      nightDifferentialHours < 0 ||
+      nightDifferentialHours > 24
+    ) {
       return "Night differential hours must be between 0 and 24.";
     }
-    if (regularHoursWorked + overtimeHoursWorked > hoursWorked) {
-      return "Regular + overtime hours cannot exceed total hours worked.";
+    if (hoursWorked !== undefined && hoursWorked > 24) {
+      return "Total hours (regular + overtime) cannot exceed 24.";
     }
-    if (nightDifferentialHours > hoursWorked) {
+    if (nightDifferentialHours > (hoursWorked ?? 0)) {
       return "Night differential hours cannot exceed total hours worked.";
     }
 
@@ -219,13 +217,9 @@ export function SubmitEodDialog({
 
     const payload = {
       date: form.date,
-      hoursWorked: parsed.hoursWorked,
-      ...(form.regularHoursWorked.trim() !== "" && {
-        regularHoursWorked: parsed.regularHoursWorked,
-      }),
-      ...(form.overtimeHoursWorked.trim() !== "" && {
-        overtimeHoursWorked: parsed.overtimeHoursWorked,
-      }),
+      hoursWorked: parsed.hoursWorked!,
+      regularHoursWorked: parsed.regularHoursWorked,
+      overtimeHoursWorked: parsed.overtimeHoursWorked,
       ...(form.nightDifferentialHours.trim() !== "" && {
         nightDifferentialHours: parsed.nightDifferentialHours,
       }),
@@ -265,42 +259,20 @@ export function SubmitEodDialog({
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="date">Date</Label>
-              <div className="relative">
-                <CalendarIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="date"
-                  name="date"
-                  type="date"
-                  value={form.date}
-                  onChange={handleChange}
-                  disabled={isResubmit}
-                  className="pl-9"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="hoursWorked">Total Hours Worked</Label>
-              <div className="relative">
-                <Clock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="hoursWorked"
-                  name="hoursWorked"
-                  type="number"
-                  step="0.25"
-                  min="0"
-                  max="24"
-                  placeholder="8"
-                  value={form.hoursWorked}
-                  onChange={handleChange}
-                  className="pl-9"
-                  required
-                />
-              </div>
+          <div className="space-y-2">
+            <Label htmlFor="date">Date</Label>
+            <div className="relative">
+              <CalendarIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                id="date"
+                name="date"
+                type="date"
+                value={form.date}
+                onChange={handleChange}
+                disabled={isResubmit}
+                className="pl-9"
+                required
+              />
             </div>
           </div>
 
@@ -314,9 +286,10 @@ export function SubmitEodDialog({
                 step="0.25"
                 min="0"
                 max="24"
-                placeholder="Auto = total hours"
+                placeholder="8"
                 value={form.regularHoursWorked}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="space-y-2">
@@ -349,13 +322,21 @@ export function SubmitEodDialog({
             </div>
           </div>
 
-          {hoursBreakdownError ? (
+          {/* Auto-computed total */}
+          <div className="flex items-center gap-2 rounded-md bg-muted/50 px-3 py-2">
+            <Clock className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">
+              Total Hours Worked:
+            </span>
+            <span className="text-sm font-semibold">
+              {parsed.hoursWorked !== undefined
+                ? `${parsed.hoursWorked}h`
+                : "—"}
+            </span>
+          </div>
+
+          {hoursBreakdownError && (
             <p className="text-sm text-destructive">{hoursBreakdownError}</p>
-          ) : (
-            <p className="text-xs text-muted-foreground">
-              If regular hours are blank, backend treats regular hours as total
-              hours worked.
-            </p>
           )}
 
           <div className="flex items-center gap-2">

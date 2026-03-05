@@ -14,6 +14,7 @@ import {
   useEodByBusiness,
   useReviewEod,
   useDeleteEod,
+  useAdminEditEod,
 } from "@/hooks/eod/useAdminEod";
 import { useBusinessById } from "@/hooks/useBusiness";
 import { getColumns } from "./columns";
@@ -32,8 +33,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ViewEodDialog } from "@/components/admin/eod/view-eod-modal";
-
-
+import type { AdminEditEodRequest } from "@/types/eod.types";
 
 export default function EodPage() {
   const params = useParams();
@@ -47,7 +47,7 @@ export default function EodPage() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
   const limit = 20;
 
-  // View modal state
+  // View/Edit modal state (combined into one dialog)
   const [viewReport, setViewReport] = useState<EodReport | null>(null);
   const [viewOpen, setViewOpen] = useState(false);
 
@@ -78,6 +78,7 @@ export default function EodPage() {
   // Mutations
   const reviewMutation = useReviewEod();
   const deleteMutation = useDeleteEod();
+  const editMutation = useAdminEditEod();
 
   // Handlers
   const handleSearch = useCallback((value: string) => {
@@ -130,8 +131,24 @@ export default function EodPage() {
   }, []);
 
   const handleEdit = useCallback((report: EodReport) => {
-    toast.info("Edit coming soon");
+    setViewReport(report);
+    setViewOpen(true);
   }, []);
+
+  const handleEditSave = useCallback(
+    (id: string, data: AdminEditEodRequest) => {
+      editMutation.mutate(
+        { id, data },
+        {
+          onSuccess: () => {
+            setViewOpen(false);
+            setViewReport(null);
+          },
+        },
+      );
+    },
+    [editMutation],
+  );
 
   const handleDelete = useCallback(
     (report: EodReport) => {
@@ -222,7 +239,7 @@ export default function EodPage() {
         onRowClick={handleView}
       />
 
-      {/* View EOD Dialog */}
+      {/* View / Edit EOD Dialog (combined) */}
       <ViewEodDialog
         report={viewReport}
         open={viewOpen}
@@ -232,6 +249,8 @@ export default function EodPage() {
         }}
         onApprove={handleApprove}
         onRevise={handleRevise}
+        onEdit={handleEditSave}
+        isEditPending={editMutation.isPending}
       />
     </div>
   );
