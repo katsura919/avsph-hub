@@ -47,36 +47,45 @@ export function DocsSearch({ onSelectResult }: DocsSearchProps) {
 
     const searchTerm = query.toLowerCase();
     const newResults: SearchResult[] = [];
+    const MAX_RESULTS = 10;
 
     // Search through all modules
-    Object.keys(docsData).forEach((moduleId) => {
+    for (const moduleId of Object.keys(docsData)) {
+      if (newResults.length >= MAX_RESULTS) break;
+
       const moduleInfo = TOP_LINKS.find(link => link.id === moduleId);
       const moduleName = moduleInfo?.title || moduleId;
       const moduleData = docsData[moduleId as keyof typeof docsData];
 
-      if (!moduleData) return;
+      if (!moduleData) continue;
 
-      moduleData.forEach((section: any) => {
-        section.items.forEach((category: any) => {
-          category.sections.forEach((content: any) => {
+      for (const group of moduleData) {
+        if (newResults.length >= MAX_RESULTS) break;
+
+        for (const category of group.items) {
+          if (newResults.length >= MAX_RESULTS) break;
+
+          for (const content of category.sections) {
+            if (newResults.length >= MAX_RESULTS) break;
+
             if (
               content.title.toLowerCase().includes(searchTerm) ||
               category.label.toLowerCase().includes(searchTerm) ||
-              section.title.toLowerCase().includes(searchTerm)
+              group.title.toLowerCase().includes(searchTerm)
             ) {
               newResults.push({
                 moduleId,
                 moduleName,
-                sectionTitle: section.title,
+                sectionTitle: group.title,
                 categoryId: category.id,
                 categoryLabel: category.label,
                 contentTitle: content.title,
               });
             }
-          });
-        });
-      });
-    });
+          }
+        }
+      }
+    }
 
     setResults(newResults);
   }, [query]);

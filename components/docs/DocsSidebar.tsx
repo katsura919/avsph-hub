@@ -40,7 +40,7 @@ export function DocsSidebar({
             {/* Module Switcher Header */}
             <div className="p-4 border-b border-border/40">
                 <DropdownMenu>
-                    <DropdownMenuTrigger className="w-full outline-none pt-0 sm:pt-7">
+                    <DropdownMenuTrigger className="w-full outline-none pt-7 sm:pt-0">
                         <div className="flex w-full items-center justify-between bg-transparent border border-transparent hover:bg-muted/50 shadow-none px-3 py-2 rounded-lg cursor-pointer group transition-colors">
                             <div className="flex items-center gap-3">
 
