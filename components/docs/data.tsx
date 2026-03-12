@@ -8394,7 +8394,7 @@ export const docsData: Record<string, DocGroup[]> = {
   garageDoor: garageDoorSections,
 };
 
-export const TOP_LINKS = [
+export const MAIN_DOCS = [
   {
     id: "onboarding",
     label: "VA Onboarding Portal",
@@ -8423,6 +8423,9 @@ export const TOP_LINKS = [
     title: "Prompt Engineering",
     desc: "Google Cloud Prompt Guide",
   },
+];
+
+export const BUSINESS_GUIDES = [
   {
     id: "homeRemodeling",
     label: "Home Remodeling Business",
@@ -8501,3 +8504,5 @@ export const TOP_LINKS = [
     desc: "Training Resource",
   },
 ];
+
+export const TOP_LINKS = [...MAIN_DOCS, ...BUSINESS_GUIDES];
