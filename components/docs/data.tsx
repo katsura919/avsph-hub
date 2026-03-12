@@ -1,4 +1,4 @@
-import { BookOpen, CreditCard, ShieldCheck, FileText, CheckCircle, Clock, Key, LucideIcon, List, Users, Calendar, Mic, Plane, Mail, MessageSquare, ShoppingBag, Target, Shield, Heart, Zap, Coffee, Phone, PlaneTakeoff, Globe, Home, Pencil, Send, AlertTriangle, CreditCard as CardIcon, Thermometer, Wind, Wrench, AlertCircle, Info, Sparkles, Droplets, Star } from "lucide-react";
+import { BookOpen, CreditCard, ShieldCheck, FileText, CheckCircle, Clock, Key, LucideIcon, List, Users, Calendar, Mic, Plane, Mail, MessageSquare, ShoppingBag, Target, Shield, Heart, Zap, Coffee, Phone, PlaneTakeoff, Globe, Home, Pencil, Send, AlertTriangle, CreditCard as CardIcon, Thermometer, Wind, Wrench, AlertCircle, Info, Sparkles, Droplets, Star, Bug, Waves, Plug } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ReactNode } from "react";
 
@@ -3836,6 +3836,1813 @@ export const cleaningBusinessSections: DocGroup[] = [
   }
 ];
 
+export const pestControlSections: DocGroup[] = [
+  {
+    title: "PEST CONTROL BASICS",
+    items: [
+      {
+        id: "pest-introduction",
+        label: "Introduction to Pest Control",
+        icon: Bug,
+        sections: [
+          {
+            title: "What Is Pest Control?",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>Pest control is the professional management, suppression, and elimination of unwanted organisms — commonly referred to as pests — that negatively affect human health, property, agriculture, or the natural environment. These pests include insects such as ants, cockroaches, termites, and bed bugs; arthropods such as spiders, fleas, and ticks; and vertebrates such as rats and mice.</p>
+                <p>Professional pest control involves a structured process of <strong className="text-foreground">inspection, accurate pest identification, targeted treatment</strong>, and ongoing monitoring to prevent reinfestation. Pest control technicians are trained scientists and problem-solvers who understand pest biology, behavior, and the safest and most effective ways to manage each species.</p>
+                <div className="p-4 bg-muted/50 border rounded-lg">
+                  <p className="font-semibold text-foreground mb-1">Key Industry Fact</p>
+                  <p className="text-sm">Pest control is considered an essential service. Even during public health emergencies, pest control operations continue because the risks associated with pest infestations — disease transmission, structural damage, and food contamination — are too serious to pause.</p>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Why Pest Control Services Are Important",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The presence of pests in homes and businesses is far more than an inconvenience. Pests pose serious threats to human health, structural integrity, food safety, and mental well-being.</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li><strong className="text-foreground">Public health protection:</strong> Many pests are vectors for serious diseases. Mosquitoes transmit West Nile Virus, malaria, and dengue fever. Rodents carry hantavirus and salmonella. Cockroaches spread E. coli. Ticks transmit Lyme disease and Rocky Mountain Spotted Fever.</li>
+                  <li><strong className="text-foreground">Property protection:</strong> Termites cause an estimated $5 billion in structural damage annually in the U.S. alone. Rodents gnaw through electrical wiring, creating fire hazards, and cause significant damage to insulation, drywall, and stored goods.</li>
+                  <li><strong className="text-foreground">Food safety:</strong> In commercial food preparation and storage environments, pest infestations can contaminate food supplies, result in failed health inspections, regulatory fines, and temporary or permanent closure.</li>
+                  <li><strong className="text-foreground">Mental health and quality of life:</strong> Living or working in a pest-infested environment causes significant psychological distress, sleep disruption, and anxiety.</li>
+                  <li><strong className="text-foreground">Regulatory compliance:</strong> Many commercial industries — including food service, healthcare, hospitality, and childcare — are legally required to maintain pest-free environments as a condition of their operating licenses.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Overview of the Pest Control Industry",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The pest control industry is a large, growing, and essential segment of the broader home and commercial services market.</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Services are in demand year-round, with seasonal peaks driven by pest activity cycles. Mosquito, ant, and bee activity peaks in spring and summer; rodent pressure intensifies in fall and winter.</li>
+                  <li>The industry serves both residential clients (homeowners and renters) and commercial clients (restaurants, hotels, hospitals, warehouses, schools, and property managers).</li>
+                  <li>Recurring service agreements — monthly, bimonthly, or quarterly — provide stable, predictable revenue.</li>
+                  <li>Pest control is a heavily regulated industry. Technicians must be licensed by their state and certified to handle restricted-use pesticides.</li>
+                  <li>The industry is evolving toward more sustainable, science-based approaches through Integrated Pest Management (IPM), which emphasizes using the least toxic, most targeted solutions available.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pest-types",
+        label: "Common Types of Pests",
+        icon: List,
+        sections: [
+          {
+            title: "Ants",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>One of the most frequently reported pest problems in both residential and commercial settings. While most ant species are nuisance pests, certain species present more serious concerns:</p>
+                <ul className="list-disc pl-5 space-y-1 text-sm">
+                  <li><strong className="text-foreground">Carpenter ants</strong> excavate wood to build their nests, causing structural damage similar to termites.</li>
+                  <li><strong className="text-foreground">Fire ants</strong> deliver painful stings that can trigger severe allergic reactions.</li>
+                </ul>
+                <p className="text-sm">Ant colonies can number in the hundreds of thousands — the visible ants inside a structure represent only a small fraction of the total colony, making professional treatment far more effective than household sprays.</p>
+              </div>
+            )
+          },
+          {
+            title: "Termites",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Among the most destructive pests on Earth. <strong className="text-foreground">Subterranean termites</strong> live in underground colonies and travel through mud tubes to feed on cellulose in wood, paper, and insulation. <strong className="text-foreground">Drywood termites</strong> infest wood directly without soil contact.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  Termite infestations can go undetected for years while causing catastrophic structural damage. Termite damage is typically <strong>not covered by homeowners insurance</strong>.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Cockroaches",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Among the most resilient and difficult pests to eliminate without professional intervention. Common species include the <strong className="text-foreground">German cockroach</strong> (most common indoors), American cockroach, and Oriental cockroach. Cockroaches spread bacteria, trigger asthma attacks, and contaminate food preparation surfaces. Over-the-counter sprays push cockroaches deeper into walls rather than eliminating the problem — professional baiting programs are far more effective.</p>
+              </div>
+            )
+          },
+          {
+            title: "Rodents (Rats and Mice)",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Significant pest threats in urban, suburban, and rural environments alike. Rodents contaminate food and surfaces with their urine, droppings, and hair. They gnaw continuously, damaging structures, electrical wiring (a serious fire hazard), plumbing, and insulation. A pair of mice can produce up to 200 offspring in a single year. Professional exclusion (sealing entry points) combined with baiting and trapping programs is required for effective long-term control.</p>
+              </div>
+            )
+          },
+          {
+            title: "Bed Bugs",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Small, blood-feeding insects that hide in mattresses, furniture, wall cracks, and electrical outlets during the day and emerge at night to feed. Their bites cause itchy welts and significant sleep disruption. Bed bugs are exceptional hitchhikers — they spread easily through luggage, second-hand furniture, and clothing. They are highly resistant to most over-the-counter pesticides and can survive for months without feeding.</p>
+                <p className="text-sm italic">Professional treatment — typically heat treatment or a combination of methods — is required to eliminate an infestation completely.</p>
+              </div>
+            )
+          },
+          {
+            title: "Mosquitoes",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The deadliest animals on Earth, responsible for more human deaths annually than any other organism through the diseases they transmit — malaria, dengue fever, Zika virus, West Nile Virus, and chikungunya. Even in regions where these diseases are less prevalent, mosquitoes make outdoor spaces uncomfortable. Professional programs target both adult populations and larval stages in standing water.</p>
+              </div>
+            )
+          },
+          {
+            title: "Spiders",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>While most spider species are harmless and ecologically beneficial, certain species pose genuine medical threats. The <strong className="text-foreground">black widow</strong> and <strong className="text-foreground">brown recluse</strong> are the most medically significant species in the U.S. — their bites can cause severe pain, tissue necrosis, and serious systemic reactions. Spider control typically involves treating the interior and exterior perimeter to eliminate both spiders and the insects they feed on.</p>
+              </div>
+            )
+          },
+          {
+            title: "Fleas and Ticks",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Parasitic pests that feed on the blood of animals and humans. <strong className="text-foreground">Fleas</strong> infest homes primarily through pets — a single adult flea can lay up to 50 eggs per day. <strong className="text-foreground">Ticks</strong> attach to their hosts outdoors and can transmit serious diseases including Lyme disease, babesiosis, and anaplasmosis. Professional treatment for fleas involves both indoor and outdoor treatments as well as guidance on treating affected pets. Tick control focuses on treating yard perimeters and habitat modification.</p>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "SERVICES & OPERATIONS",
+    items: [
+      {
+        id: "pest-services",
+        label: "Core Services",
+        icon: CheckCircle,
+        sections: [
+          {
+            title: "Pest Inspection",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>A thorough examination of a property to identify signs of current or potential pest activity. Technicians examine the interior and exterior of the structure, including the foundation, crawl spaces, attic, plumbing areas, landscaping, and other entry-point risk zones. Inspections are the essential first step before any treatment can be recommended.</p>
+                <p className="text-sm italic">Many real estate transactions require a formal Wood Destroying Organism (WDO) inspection report conducted by a licensed pest control professional.</p>
+              </div>
+            )
+          },
+          {
+            title: "Pest Identification",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Accurate pest identification is critical because treatment methods vary significantly between species. A misidentification can result in ineffective treatment, wasted money, and continued infestation. Professional technicians are trained to identify pests from live specimens, droppings, damage patterns, nesting materials, and other evidence.</p>
+              </div>
+            )
+          },
+          {
+            title: "Pest Treatment and Extermination",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Targeted application of pesticides, baits, traps, or other control methods to eliminate an active infestation. Treatment plans are customized based on the pest species, severity of infestation, size of the property, presence of children and pets, and customer preferences. Responsible pest control companies always explain the treatment plan, products to be used, and safety precautions before beginning any treatment.</p>
+              </div>
+            )
+          },
+          {
+            title: "Preventive Pest Control Programs",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Regularly scheduled treatments designed to create a protective barrier around a property before pest problems develop. Most programs include quarterly, bimonthly, or monthly service visits that treat the exterior perimeter, address conducive conditions, and provide interior treatment as needed. Preventive programs are the most cost-effective way for homeowners and businesses to maintain year-round pest protection.</p>
+              </div>
+            )
+          },
+          {
+            title: "Termite Control and Treatment",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>One of the most specialized and highest-value services in the industry. Includes termite inspections, installation of liquid soil treatment barriers (termiticides), installation and ongoing monitoring of termite baiting station systems, spot treatments, and fumigation for drywood termite infestations.</p>
+                <div className="p-3 bg-primary/5 border rounded-lg text-sm">
+                  Many companies offer annual termite warranty programs that guarantee re-treatment at no additional cost if termite activity is found within the treatment area.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Rodent Control",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Rodent control programs address both the immediate infestation (through trapping and baiting) and long-term prevention through <strong className="text-foreground">exclusion</strong> — identifying and sealing all potential entry points. A comprehensive program includes thorough inspection, a customized treatment plan, installation of bait stations or traps, follow-up monitoring visits, and detailed exclusion work.</p>
+              </div>
+            )
+          },
+          {
+            title: "Bed Bug Treatment",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>A multi-step process requiring significant expertise and specialized equipment. Options include thermal heat treatments (raising the room to temperatures lethal to bed bugs at all life stages), chemical treatment programs using a rotation of products to prevent resistance, and combination approaches. Multiple follow-up inspections are typically required to confirm complete elimination.</p>
+                <p className="text-sm italic">CSRs should be prepared to guide customers through preparation steps required before treatment.</p>
+              </div>
+            )
+          },
+          {
+            title: "Mosquito Control",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Includes perimeter barrier spray treatments applied to foliage and shrubs where adult mosquitoes rest during the day, and larviciding treatments applied to standing water sources (ponds, birdbaths, gutters) to prevent larvae from developing into adults. Many companies offer recurring monthly or bimonthly programs during the active season, as well as one-time treatments for events and special occasions.</p>
+              </div>
+            )
+          },
+          {
+            title: "Commercial Pest Management",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Requires a higher level of expertise, documentation, and regulatory compliance than residential service. Commercial clients — restaurants, hotels, food processing facilities, hospitals, schools, and warehouses — have stringent pest-free standards. Services include regular scheduled inspections and treatments, detailed service documentation and reports (required for health inspections and audits), employee education, and IPM programs tailored to each facility type.</p>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pest-methods",
+        label: "Pest Control Methods",
+        icon: Droplets,
+        sections: [
+          {
+            title: "Chemical Treatments",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Application of pesticides in liquid, granular, dust, or aerosol form to control or eliminate pests. When applied by a licensed professional, modern pesticides are effective while posing minimal risk when label instructions are followed.</p>
+                <ul className="list-disc pl-5 space-y-1 text-sm">
+                  <li><strong className="text-foreground">Liquid residual sprays</strong> — applied to exterior perimeters and interior crack-and-crevice areas.</li>
+                  <li><strong className="text-foreground">Dust formulations</strong> — used in wall voids, attics, and electrical outlets.</li>
+                  <li><strong className="text-foreground">Granular treatments</strong> — applied to lawns and soil.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Baiting Systems",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Baiting systems attract pests to a targeted food or pheromone lure containing a slow-acting pesticide. After consuming the bait, the pest returns to the colony and transfers the active ingredient to other individuals, resulting in colony-wide elimination. Particularly effective for cockroaches, ants, and rodents.</p>
+                <div className="p-3 bg-muted/50 border rounded-lg text-sm">
+                  Because baits are slow-acting by design, customers should be advised that results may take days to weeks to fully manifest. Bait stations are tamper-resistant, making them safe for use in homes with children and pets.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Trapping",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>A non-chemical method used primarily for rodent control and some wildlife management applications. Live traps capture rodents without harm for relocation; snap traps provide immediate kill; glue boards are used in sensitive environments where rodenticides cannot be used. Trapping programs require regular monitoring and servicing — typically every one to three days — to be effective and humane.</p>
+              </div>
+            )
+          },
+          {
+            title: "Heat Treatments",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The most effective non-chemical method for eliminating bed bugs, also used for drywood termites. Specialized heating equipment raises the temperature of the treated space to approximately <strong className="text-foreground">120–135°F</strong> — lethal to all life stages including eggs. Heat penetrates into furniture, mattresses, and wall cavities that chemicals cannot easily reach. Can achieve complete elimination in a single treatment session with no chemical residue.</p>
+              </div>
+            )
+          },
+          {
+            title: "Fumigation",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The most intensive pest control treatment available, used primarily for whole-structure drywood termite infestations. The entire structure is enclosed under a tent and a gaseous fumigant (typically sulfuryl fluoride) is introduced at a lethal concentration. All occupants, including pets and plants, must vacate the property for two to three days.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  Fumigation requires a separate fumigation license and is tightly regulated. It eliminates all stages of the target pest throughout the entire structure, including inaccessible areas.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Integrated Pest Management (IPM)",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The modern, science-based philosophy of pest control that prioritizes long-term prevention through a combination of biological, cultural, physical, and chemical strategies. IPM uses the <strong className="text-foreground">least-risk methods first</strong> — such as habitat modification, exclusion, and mechanical traps — before resorting to chemical treatments. IPM is the gold standard approach and is required by many commercial clients and government contracts.</p>
+                <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">IPM in Practice</p>
+                  <p>An IPM approach to a cockroach problem in a restaurant does not start with spraying. It starts with a thorough inspection to identify harborage areas and food/water sources, followed by sanitation recommendations, placement of gel baits, and monitoring with sticky monitors to track population reduction.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pest-operations",
+        label: "How the Business Operates",
+        icon: Info,
+        sections: [
+          {
+            title: "The Typical Service Workflow",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ol className="space-y-4">
+                  {[
+                    { step: "1. Customer Inquiry or Booking", desc: "A potential customer contacts the company by phone, email, website form, live chat, or online booking platform. They describe the pest problem, property type and size, location, and any urgent concerns. CSRs and VAs play a critical role by gathering all relevant information, demonstrating empathy and professionalism, and beginning to qualify the type and complexity of service required." },
+                    { step: "2. Pest Problem Assessment", desc: "Based on the customer's description, the CSR conducts an initial assessment. Key questions: How long have they been seeing pests? Where are they being seen? How many? Have they noticed any damage or droppings? Has any previous treatment been performed? This determines whether a standard service quote can be provided or whether an on-site inspection is required first." },
+                    { step: "3. Scheduling an Inspection", desc: "An appointment is scheduled for an inspection or initial service visit. A confirmation message is sent with appointment details, preparation instructions (if applicable), and what to expect. A reminder is sent the day prior. For urgent situations such as active bed bug or rodent infestations, same-day or next-day scheduling may be appropriate." },
+                    { step: "4. On-Site Inspection by Technician", desc: "A licensed pest control technician conducts a thorough interior and exterior inspection. The technician examines all areas of concern, identifies conducive conditions, checks for entry points, and documents all findings. A professional inspection typically takes 30 to 90 minutes depending on the size and complexity of the property." },
+                    { step: "5. Identifying the Pest and Severity", desc: "Based on the inspection findings, the technician makes a definitive identification of the pest species and assesses the severity of the infestation (light, moderate, or severe). This assessment directly determines the treatment method, the products required, the number of service visits needed, and the cost." },
+                    { step: "6. Treatment Recommendation and Quotation", desc: "The technician or sales representative presents the customer with a clear treatment recommendation and a written quotation explaining the proposed treatment method, products to be used, expected results and timeline, preparation requirements, and the cost. For larger jobs (termite treatment, fumigation, major rodent exclusion), this may be a separate consultation before any work begins." },
+                    { step: "7. Performing the Treatment", desc: "With the customer's written or verbal authorization, the technician performs the treatment according to the plan. All pesticide applications are made in strict accordance with the product label, which is federal law. The technician documents all products used, application rates, and areas treated on the service ticket. Customers are advised of re-entry intervals, ventilation requirements, and post-treatment precautions." },
+                    { step: "8. Follow-Up Visits and Monitoring", desc: "Pest control is rarely a one-and-done service. Most treatments require follow-up visits to monitor efficacy, address any remaining pest activity, service bait stations, and check traps. Follow-up visits are especially critical for termite programs, rodent control programs, bed bug treatments, and commercial accounts." },
+                    { step: "9. Payment and Documentation", desc: "Payment is collected at the time of service or invoiced after completion, depending on the account type. Residential clients typically pay at service; commercial accounts may receive net-30 invoices. Service records, treatment reports, and warranty documentation are provided to the customer. Commercial clients receive formal service reports for their regulatory compliance files." },
+                  ].map(({ step, desc }) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="font-semibold text-foreground min-w-fit">{step}:</span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ol>
+                <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">CSR & VA Tip</p>
+                  <p>Always ask these key questions when a customer calls: What pest are they seeing? Where exactly are they seeing it (inside, outside, specific rooms)? How long has this been happening? Do they have children or pets at home? This information allows the dispatcher to assign the right technician and ensures the technician arrives prepared with the correct equipment and products.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "REFERENCE & COMPLIANCE",
+    items: [
+      {
+        id: "pest-terminology",
+        label: "Pest Control Terminology",
+        icon: BookOpen,
+        sections: [
+          {
+            title: "Common Pest Control Terms Glossary",
+            content: (
+              <div className="text-muted-foreground">
+                <p className="mb-4 text-sm">Familiarity with these terms is essential for communicating confidently with customers, technicians, and colleagues.</p>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-44">Term</TableHead>
+                      <TableHead className="font-bold">Definition</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { term: "Infestation", def: "The presence of a pest in numbers large enough to be harmful, threatening, or cause economic damage. A few ants in the kitchen may be a nuisance; thousands of ants with an active nest inside the structure constitute an infestation." },
+                      { term: "Extermination", def: "The complete elimination of a pest population from a defined area. While commonly used by customers, pest control professionals prefer terms like 'treatment' or 'control' because complete eradication is not always achievable — prevention of reinfestation is equally important." },
+                      { term: "Bait Stations", def: "Protective containers that hold a pesticide bait matrix. Bait stations are placed in pest activity areas and are designed to be accessible to the target pest but tamper-resistant to children, pets, and non-target wildlife." },
+                      { term: "Residual Treatment", def: "A pesticide application that remains active (continues to kill pests on contact) for a period of days to weeks after application. Applied to surfaces where pests travel, providing ongoing control after the initial visit." },
+                      { term: "Fumigation", def: "A pest control method using toxic gases introduced into a sealed structure to eliminate all stages of the target pest throughout the entire structure. Requires complete evacuation and is most commonly used for drywood termite infestations." },
+                      { term: "Integrated Pest Management (IPM)", def: "A science-based approach to pest management that uses a combination of biological, cultural, physical, and chemical methods with an emphasis on prevention and the use of least-risk treatments. The industry gold standard." },
+                      { term: "Pest Entry Points", def: "Gaps, cracks, holes, or other openings in a structure through which pests can gain access. Common entry points include gaps around pipes and utilities, cracks in the foundation, damaged door seals, and unscreened vents." },
+                      { term: "Exclusion", def: "The process of physically preventing pests from entering a structure by sealing all potential entry points. The most durable, long-term solution to rodent and wildlife pest problems." },
+                      { term: "Conducive Conditions", def: "Environmental factors that attract pests or allow them to establish and thrive. Examples include moisture (leaking pipes, poor drainage), food availability (improperly stored food), clutter, and wood-to-soil contact (termite risk)." },
+                      { term: "Re-Entry Interval (REI)", def: "The minimum amount of time that must elapse after a pesticide application before people and pets can safely re-enter the treated area. REIs are specified on the pesticide label and must be communicated clearly to customers." },
+                      { term: "Colony", def: "A social group of insects that lives together and functions cooperatively. Ants, termites, bees, wasps, and cockroaches live in colonies. Effective treatment must reach the colony — not just the visible individuals — to achieve lasting control." },
+                      { term: "Pheromone", def: "A chemical signal produced by insects to communicate with others of their species. Pest control uses synthetic pheromones in traps and monitoring devices to attract target pests." },
+                      { term: "Larvicide", def: "A pesticide specifically formulated to kill insect larvae. Used in mosquito control programs to treat standing water and prevent larvae from developing into adult mosquitoes." },
+                      { term: "Wood Destroying Organisms (WDO)", def: "Organisms that damage wood in structures, including termites, carpenter ants, carpenter bees, and wood-decay fungi. WDO inspections are commonly required during real estate transactions." },
+                      { term: "Pesticide Label", def: "The legal document printed on or attached to a pesticide container that describes how the product must be used. Following the label is required by federal law under FIFRA. It specifies application rates, target pests, approved use sites, safety precautions, and re-entry intervals." },
+                    ].map(({ term, def }) => (
+                      <TableRow key={term}>
+                        <TableCell className="font-semibold text-foreground align-top">{term}</TableCell>
+                        <TableCell className="text-sm">{def}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pest-roles",
+        label: "Roles in a Pest Control Business",
+        icon: Users,
+        sections: [
+          {
+            title: "Team Roles & Responsibilities",
+            content: (
+              <div className="text-muted-foreground">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-52">Role</TableHead>
+                      <TableHead className="font-bold">Responsibilities</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { role: "Pest Control Technician", resp: "Licensed field professional who performs all pest inspections, treatments, and follow-up monitoring. Must hold a valid state pest control license and applicable certifications (including EPA 7A certification for fumigation). They are the technical experts and the primary face of the company to customers." },
+                      { role: "Inspector", resp: "In larger companies, dedicated inspectors conduct all property inspections and prepare detailed written reports and treatment proposals. Especially common in the termite control and real estate inspection segments. May also handle commercial account assessments." },
+                      { role: "Customer Service Representative (CSR)", resp: "Manages all incoming customer inquiries, provides general information and pricing, schedules appointments, sends confirmations and reminders, handles complaints, and manages customer relationships. The critical link between the customer and the service team." },
+                      { role: "Dispatcher / Scheduler", resp: "Manages the daily schedule for all technicians, assigns jobs based on location, expertise, and availability, monitors real-time job progress, and adjusts the schedule to accommodate urgent calls, cancellations, and delays." },
+                      { role: "Sales Representative", resp: "Focuses on acquiring new residential and commercial accounts, conducting property assessments, preparing and presenting service proposals, and closing service agreements. Especially important for growing the commercial pest management side of the business." },
+                      { role: "Operations Manager", resp: "Oversees all field and office operations including technician scheduling, quality control, customer satisfaction, regulatory compliance, supply inventory, vehicle management, and staff performance." },
+                      { role: "Business Owner", resp: "Sets strategic direction, manages company finances, oversees hiring and culture, makes decisions on service offerings and pricing, and drives business growth. In smaller companies, the owner often also performs technical services and customer-facing roles." },
+                      { role: "Virtual Assistant (VA)", resp: "Provides remote support for customer service, scheduling, follow-up communications, review management, data entry, and administrative tasks. VAs must be thoroughly familiar with the company's services, pricing, preparation requirements, and key pest control terminology." },
+                    ].map(({ role, resp }) => (
+                      <TableRow key={role}>
+                        <TableCell className="font-semibold text-foreground align-top">{role}</TableCell>
+                        <TableCell className="text-sm">{resp}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pest-tools",
+        label: "Tools & Equipment",
+        icon: Wrench,
+        sections: [
+          {
+            title: "Common Pest Control Equipment",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { name: "Sprayers", desc: "The most fundamental tool in a technician's arsenal. Types include hand-pump compressed-air sprayers (for interior crack-and-crevice and spot treatments), backpack motorized sprayers (for large outdoor areas and mosquito barrier treatments), and power sprayers mounted on service vehicles (for high-volume exterior perimeter treatments and termite soil applications)." },
+                    { name: "Foggers and Misters", desc: "Break liquid pesticide or disinfectant into extremely fine droplets that remain suspended in the air, contacting surfaces and pests throughout a space. ULV mosquito misters are used for large-scale outdoor mosquito control. Thermal foggers use heat to create a visible fog." },
+                    { name: "Bait Stations", desc: "Durable, tamper-resistant plastic enclosures that hold rodenticide bait blocks or insect bait matrices. Rodent bait stations are placed along walls, in crawl spaces, and near entry points. Termite monitoring and baiting stations are installed in the soil around the perimeter of a structure." },
+                    { name: "Traps", desc: "Snap traps for immediate rodent control; live-catch traps for wildlife management; glue boards for sensitive environments; pheromone traps for monitoring moth and stored-product pest populations; fly light traps (UV light) for capturing flying insects in commercial food facilities." },
+                    { name: "Protective Equipment (PPE)", desc: "Required when handling pesticides and performing treatments. Standard PPE includes nitrile or chemical-resistant gloves, safety glasses or goggles, closed-toe footwear, and long-sleeved clothing. Respirators or N95 masks are required when applying pesticide dusts, working in confined spaces, or performing fumigation." },
+                    { name: "Inspection Tools", desc: "Flashlights and headlamps for dark crawl spaces and attics; telescoping mirrors for behind appliances; moisture meters to detect elevated moisture in wood; borescope cameras for inaccessible wall areas; termite detection tools including microwave sensors and acoustic emission devices; magnifying glasses and specimen containers for pest identification." },
+                  ].map(({ name, desc }) => (
+                    <div key={name} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{name}</p>
+                      <p className="text-sm">{desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-3 bg-muted/50 border rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Equipment Safety Note</p>
+                  <p>All pesticide application equipment must be inspected before each use for leaks, blockages, and damage. Technicians should never use damaged equipment or improvised repairs in the field. Equipment maintenance is both a safety and a regulatory compliance requirement.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pest-safety",
+        label: "Safety & Regulations",
+        icon: ShieldCheck,
+        sections: [
+          {
+            title: "Safe Chemical Handling",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>All pesticide applications must be performed strictly according to the product label, which is a legally binding document under the <strong className="text-foreground">Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA)</strong>.</li>
+                  <li>Technicians must read the Safety Data Sheet (SDS) for every product they use and understand the health hazards, first-aid measures, and spill response procedures.</li>
+                  <li>Pesticides must never be transferred into unlabeled containers.</li>
+                  <li>Technicians must always wear the PPE specified on the product label for the application being performed.</li>
+                  <li>Skin or eye contact with pesticides must be treated immediately per the SDS first-aid instructions.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Environmental Protection",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Pesticides must never be applied near water sources, drainage ditches, or in ways that could cause runoff into storm drains or natural water bodies.</li>
+                  <li>Pollinators such as bees must be protected. Treatments should not be applied to flowering plants while pollinators are active. Outdoor treatments should ideally be performed in early morning or evening.</li>
+                  <li>Non-target animals, including birds and beneficial insects, must be considered when selecting treatment methods and application sites.</li>
+                  <li>Proper disposal of empty pesticide containers must comply with label instructions and local regulations — never in regular household trash or recycling.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Proper Storage of Pesticides",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>All pesticides must be stored in their original, labeled containers in a locked, ventilated storage area away from food, water, and other chemicals.</li>
+                  <li>Pesticides must be stored away from heat sources and out of direct sunlight to maintain efficacy and prevent container degradation.</li>
+                  <li>Technicians' service vehicles are considered pesticide storage locations and are subject to inspection by state regulatory agencies.</li>
+                  <li>An up-to-date inventory of all pesticides stored in vehicles and at the company facility must be maintained.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Licensing and Certification Requirements",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>In every U.S. state, pest control technicians must hold a valid state-issued pesticide applicator license. Requirements typically include passing a written examination, completing minimum training hours, and maintaining continuing education for license renewal.</li>
+                  <li>Certain services require additional certifications. Fumigation requires a separate fumigation license. WDO inspections may require a separate certification for real estate reporting.</li>
+                  <li>Companies must maintain liability insurance and, in most states, a company-level pesticide business license in addition to individual technician licenses.</li>
+                  <li>Pesticide use records must be maintained for all commercial applications for a minimum of two years and must be available for inspection by state regulatory authorities.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Protecting Customers, Pets, and Property",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Customers must be clearly informed of re-entry intervals, ventilation requirements, and any items that should be removed or covered before treatment.</li>
+                  <li>Pets must be removed from treatment areas for the duration specified on the product label. Fish tanks must be covered and their filtration systems turned off during any aerosol or fumigant applications.</li>
+                  <li>Technicians must take care to protect customers' personal belongings, plants, and surfaces from pesticide contact where not intended.</li>
+                  <li>A written record of all products applied, application areas, rates, and the customer's acknowledgment of safety instructions must be maintained for every service visit.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pest-concerns",
+        label: "Common Customer Concerns",
+        icon: AlertCircle,
+        sections: [
+          {
+            title: "Seeing Insects or Rodents Inside the Home",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The most immediate trigger for a customer call is the visual sighting of a pest inside the home. Customers often describe the pest in general terms ('a big brown bug,' 'a tiny ant,' 'something ran across the kitchen floor').</p>
+                <p className="text-sm italic">CSRs should ask: size, color, number of legs, where it was seen, and time of day. This helps determine whether an inspection is needed before treatment or whether a standard service can be booked directly.</p>
+              </div>
+            )
+          },
+          {
+            title: "Pest Droppings or Nests",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Customers may discover pest droppings, nesting materials, chewed food packaging, or structural damage without seeing a live pest. Rodent droppings are among the most alarming discoveries.</p>
+                <p className="text-sm italic">CSRs should ask customers to describe the size and shape of the droppings (which helps narrow down the species) and where they were found. Wasp or hornet nests on the property exterior are a common urgent request, especially in late summer and fall.</p>
+              </div>
+            )
+          },
+          {
+            title: "Damage Caused by Termites or Rodents",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Termite damage discovered during a renovation is a frequent urgent call trigger. Customers may describe soft, hollow-sounding wood, mud tubes along the foundation, or discarded wings from termite swarmers. Rodent damage — gnawed wires, shredded insulation, holes in walls — is typically discovered during cleaning or organization efforts.</p>
+                <p className="text-sm italic">Both situations require a prompt inspection response.</p>
+              </div>
+            )
+          },
+          {
+            title: "Bites from Bed Bugs or Fleas",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Waking up with unexplained bite marks is an extremely distressing experience. Customers experiencing possible bed bug or flea bites should be treated with particular empathy and urgency.</p>
+                <p className="text-sm italic">CSRs should ask: the bite pattern (bed bug bites often appear in a line or cluster), whether pets are present (suggests fleas), whether any travel or second-hand furniture was involved recently (suggests bed bugs), and which rooms are most affected. These calls should be prioritized for rapid scheduling.</p>
+              </div>
+            )
+          },
+          {
+            title: "Mosquito Infestations Around Properties",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Customers may call about excessive mosquito pressure in their yard, particularly in spring and summer.</p>
+                <p className="text-sm italic">Ask about standing water sources on the property (birdbaths, clogged gutters, flower pot trays, kiddie pools) that may be serving as mosquito breeding sites. Customers with upcoming outdoor events frequently seek one-time mosquito treatments.</p>
+              </div>
+            )
+          },
+          {
+            title: "Stinging Insects (Wasps, Hornets, Bees)",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Stinging insect calls are often urgent because the nests are discovered when someone is stung. Accurate identification matters: <strong className="text-foreground">honeybee swarms or established hives are typically referred to a beekeeper</strong> rather than exterminated, whereas yellow jacket, paper wasp, and hornet nests are treated by the pest control company.</p>
+                <p className="text-sm italic">CSRs should ask about the location of the nest, its approximate size, and whether anyone has been stung to assess urgency.</p>
+              </div>
+            )
+          },
+          {
+            title: "Cockroach Sightings in Kitchen or Bathroom",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Cockroach sightings are extremely common, especially in apartment buildings and restaurant environments.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  A single cockroach seen during the daytime is often an indicator of a significant infestation — cockroaches are nocturnal and only emerge in daylight when the population is large enough to compete for resources.
+                </div>
+                <p className="text-sm">Customers should be informed that a thorough inspection is required before treatment and that preparation steps will be required for effective treatment.</p>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pest-importance",
+        label: "Why Pest Control Matters",
+        icon: Heart,
+        sections: [
+          {
+            title: "The Importance of Professional Pest Control",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>Professional pest control services are a fundamental investment in health, safety, property, and quality of life.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { title: "Protecting Health and Safety", body: "Rodents contaminate food with urine and droppings harboring salmonella, listeria, and hantavirus. Cockroaches spread more than 33 types of bacteria and trigger asthma attacks in children. Mosquitoes are responsible for more human deaths than any other animal on the planet. For families with young children, elderly residents, or immunocompromised individuals, professional pest management is not optional — it is essential preventive healthcare." },
+                    { title: "Preventing Property Damage", body: "Termites cause approximately $5 billion in property damage annually in the U.S. Rodents are responsible for an estimated 20 to 25 percent of all undetermined house and structure fires through their habit of gnawing on electrical wiring. Carpenter ants excavate wood for nesting, causing structural weakening that results in very costly repairs. Professional pest control provides a financial safeguard that no amount of DIY treatment can replicate." },
+                    { title: "Maintaining Sanitation Standards", body: "For commercial clients, maintaining a pest-free environment is a regulatory and legal requirement. Food service establishments, healthcare facilities, schools, and childcare centers are subject to regular health inspections that can result in fines, temporary closure, or loss of operating licenses if pest activity is detected. A proactive professional pest management program with detailed service documentation is the most effective way to maintain sanitation compliance." },
+                    { title: "Long-Term Pest Prevention", body: "The most significant advantage of professional pest control over DIY approaches is the long-term, systemic nature of professional programs. A homeowner using a store-bought spray may kill the visible pests but will leave the colony, the entry points, and the conducive conditions intact — guaranteeing a rapid return. A professional program addresses all three elements: eliminating the current population, correcting the conditions that attracted pests, and creating ongoing barriers that prevent future colonization." },
+                  ].map(({ title, body }) => (
+                    <div key={title} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{title}</p>
+                      <p className="text-sm">{body}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-muted/50 border rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Final Note for New Team Members</p>
+                  <p>Every role in this company — from the technician in the field to the virtual assistant on the phone — plays a critical part in protecting our customers' health, homes, and businesses. Pest control is not just a service industry; it is a public health profession. Take pride in the expertise behind every service call, communicate with care and confidence, and know that the work this team does makes a genuine difference in people's lives every single day. Welcome to the team!</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  }
+];
+
+export const poolCleaningSections: DocGroup[] = [
+  {
+    title: "POOL CLEANING BASICS",
+    items: [
+      {
+        id: "pool-introduction",
+        label: "Introduction to Pool Cleaning",
+        icon: Waves,
+        sections: [
+          {
+            title: "What Is a Pool Cleaning Business?",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>A pool cleaning business is a professional service company that provides scheduled maintenance, chemical balancing, equipment care, and repair services for residential and commercial swimming pools, spas, and hot tubs. Pool service technicians are trained in water chemistry, filtration systems, pool equipment, and the physical cleaning tasks required to keep pools safe, sanitary, and visually appealing.</p>
+                <p>Pool cleaning companies range from solo owner-operators servicing a neighborhood route to large regional companies with dozens of technicians and fleet vehicles. All share the same core mission: to ensure that every pool in their care is clean, chemically balanced, safe to swim in, and mechanically sound — so their clients can simply enjoy the water without worry.</p>
+                <div className="p-4 bg-muted/50 border rounded-lg">
+                  <p className="font-semibold text-foreground mb-1">Industry Insight</p>
+                  <p className="text-sm">The pool service industry is largely recession-resistant. Pool owners who have invested significantly in their outdoor living space continue to maintain their pools regardless of economic conditions. This makes pool service one of the more stable home service businesses available.</p>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Why Regular Pool Maintenance Is Important",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Without consistent, knowledgeable maintenance, pools deteriorate rapidly — both as sanitary environments and as mechanical systems.</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li><strong className="text-foreground">Health hazards:</strong> Improperly balanced water allows bacteria, viruses, and parasites to thrive. Recreational Water Illnesses (RWIs) — including E. coli, Giardia, and Cryptosporidium — are directly linked to poorly maintained pool water.</li>
+                  <li><strong className="text-foreground">Equipment damage:</strong> Corrosive or scaling water attacks metal fittings, pump seals, heater elements, and pool surfaces. Neglected filters and pumps fail prematurely.</li>
+                  <li><strong className="text-foreground">Structural deterioration:</strong> Low pH etches plaster, fiberglass, and grout, requiring costly resurfacing. High pH causes unsightly calcium scaling on tiles and surfaces.</li>
+                  <li><strong className="text-foreground">Algae growth:</strong> Without adequate sanitizer levels and circulation, algae can establish in as little as 24 to 48 hours, turning a clear pool green or black.</li>
+                  <li><strong className="text-foreground">Safety risks:</strong> Cloudy or green pool water reduces visibility, creating a drowning risk. Malfunctioning electrical equipment poses electrocution hazards.</li>
+                  <li><strong className="text-foreground">Regulatory compliance:</strong> Commercial pools are subject to regular health department inspections. Failure to maintain compliant standards can result in mandatory pool closure.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Overview of the Pool Service Industry",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The pool service industry is a strong and growing segment of the outdoor living and home services market.</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Demand is concentrated in warmer climates (Florida, Texas, Arizona, California) where outdoor pools are used year-round. In cooler climates, there is a strong seasonal demand pattern with winter pool closing and opening services.</li>
+                  <li>Recurring weekly service routes are the backbone of most pool service businesses, providing predictable, stable revenue and strong customer relationships.</li>
+                  <li>The industry serves both residential clients (private homeowners) and commercial clients (hotels, resorts, HOA community pools, fitness centers, and apartment complexes).</li>
+                  <li>Growing consumer interest in outdoor living spaces and backyard renovations is driving consistent growth in pool installations and demand for professional pool service.</li>
+                  <li>Pool service businesses frequently expand into adjacent services including equipment repair, pool remodeling, water feature maintenance, and retail chemical sales.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pool-types",
+        label: "Types of Pools Serviced",
+        icon: List,
+        sections: [
+          {
+            title: "Residential Swimming Pools",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Privately owned pools located on single-family home properties. They are the most common type of pool serviced. Residential pools range from small above-ground units to large custom in-ground pools with waterfalls, heating systems, and advanced automation. Weekly or biweekly service visits are standard. The homeowner relationship is highly personal — trust and reliability are the most valued qualities in a pool service provider.</p>
+              </div>
+            )
+          },
+          {
+            title: "Commercial Pools",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Commercial pools serve multiple users simultaneously and are subject to far higher bather loads than residential pools. Chemical demand is higher, filtration requirements are more stringent, and the consequences of water quality failures are more serious. Commercial pools are inspected by local health departments and must maintain detailed chemical log books. Service visits are typically more frequent (sometimes daily) and require thorough documentation. Commercial accounts are high-value contracts that often require specialized certification in commercial pool operations.</p>
+              </div>
+            )
+          },
+          {
+            title: "In-Ground Pools",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Permanent structures built into the ground, constructed of gunite/shotcrete (concrete), fiberglass, or vinyl liner. The most common type of permanent residential and commercial pool. Maintenance requires regular brushing of walls and floors, chemical balancing, filter care, and equipment monitoring. The surface material significantly affects the chemical balance required — plaster pools need particularly careful pH management to prevent etching or scaling.</p>
+              </div>
+            )
+          },
+          {
+            title: "Above-Ground Pools",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Less expensive, easier to install, and typically smaller than in-ground pools. They use cartridge or sand filter systems and are generally serviced less frequently. Because above-ground pools hold less water volume, chemical changes happen more rapidly and require careful monitoring. Technicians must take care not to damage the vinyl liner during cleaning and vacuuming.</p>
+              </div>
+            )
+          },
+          {
+            title: "Saltwater Pools",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Saltwater pools use a <strong className="text-foreground">salt chlorine generator (SWG)</strong> to convert dissolved salt in the water into chlorine through electrolysis. They do not use chlorine tablets or liquid chlorine as the primary sanitizer. The water has a softer feel and is gentler on the eyes and skin. Maintenance involves monitoring and adjusting salt levels, inspecting and cleaning the salt cell (which can scale with calcium deposits), and balancing standard chemistry parameters.</p>
+              </div>
+            )
+          },
+          {
+            title: "Chlorine Pools",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Traditional chlorine pools use chlorine tablets (trichlor or dichlor), liquid chlorine (sodium hypochlorite), or granular chlorine as the primary sanitizer. The most common pool type. Maintaining proper free chlorine levels (typically <strong className="text-foreground">1 to 3 ppm</strong> for residential pools) is the most critical chemistry task. Stabilizer (cyanuric acid) levels must also be managed — too low allows UV to rapidly degrade chlorine; too high (over-stabilization) prevents chlorine from effectively sanitizing.</p>
+              </div>
+            )
+          },
+          {
+            title: "Spas and Hot Tubs",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Spas and hot tubs operate at significantly higher water temperatures (typically <strong className="text-foreground">100 to 104°F</strong>), which dramatically accelerates chemical consumption and bacterial growth. Chemistry must be checked and adjusted much more frequently. Spas require regular draining and refilling (typically every 3 to 4 months) because high temperatures cause rapid buildup of total dissolved solids (TDS). Spa service is a premium-priced add-on that pairs naturally with pool maintenance accounts.</p>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "SERVICES & OPERATIONS",
+    items: [
+      {
+        id: "pool-services",
+        label: "Core Services",
+        icon: CheckCircle,
+        sections: [
+          {
+            title: "Regular Pool Cleaning and Maintenance",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The foundation service of any pool business. A standard weekly service visit includes all routine tasks: skimming the surface, emptying baskets, vacuuming, brushing surfaces, testing and adjusting chemicals, and inspecting equipment. This recurring service is offered on a weekly, biweekly, or monthly schedule and typically represents the core of a pool company's revenue. Consistent service builds strong customer relationships and creates opportunities to identify and address problems before they become costly repairs.</p>
+              </div>
+            )
+          },
+          {
+            title: "Pool Vacuuming",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Removes debris, dirt, and sediment that has settled on the pool floor. Performed using a manual vacuum head connected to a telescopic pole and the pool's circulation system, or with an automatic pool cleaner. Manual vacuuming provides more thorough results, particularly in pools with heavy debris or algae. For pools with severe contamination, the technician may <strong className="text-foreground">vacuum to waste</strong> — bypassing the filter entirely to prevent it from becoming overwhelmed.</p>
+              </div>
+            )
+          },
+          {
+            title: "Skimming Debris from the Water Surface",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Surface skimming removes floating debris including leaves, insects, pollen, and organic matter before it sinks and consumes chlorine as it decomposes. Performed at the beginning of every service visit using a flat leaf skimmer net on a telescopic pole. Skimmer baskets are also emptied at every visit. Heavy leaf debris can rapidly deplete sanitizer levels and cloud the water, making timely skimming a critical first step.</p>
+              </div>
+            )
+          },
+          {
+            title: "Brushing Pool Walls and Tiles",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Brushing dislodges algae, biofilm, and calcium deposits from pool walls, steps, benches, and the waterline tile before they become visible problems. Plaster and concrete pools benefit from regular brushing because their porous surfaces are susceptible to algae colonization. Tile lines at the waterline accumulate calcium scaling and sunscreen residue. Regular brushing prevents the development of black algae, which is the most difficult algae species to eliminate.</p>
+              </div>
+            )
+          },
+          {
+            title: "Chemical Testing and Balancing",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The most technically demanding and critical task in pool service. Technicians test for multiple parameters at every service visit: <strong className="text-foreground">free chlorine, pH, total alkalinity, calcium hardness, cyanuric acid,</strong> and salt (for saltwater pools). Chemical adjustments must be made in the correct sequence to avoid inadvertently correcting one parameter while worsening another.</p>
+                <p className="text-sm italic">Imbalanced water is either corrosive (at low pH) or scaling (at high pH), both of which damage pool surfaces and equipment.</p>
+              </div>
+            )
+          },
+          {
+            title: "Filter Cleaning and Maintenance",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The pool's filtration system continuously removes suspended particles from the water to maintain clarity. Sand filters are backwashed to flush trapped debris out of the filter media. Cartridge filters are removed, rinsed, and periodically soaked in a chemical cleaner. Diatomaceous earth (DE) filters are backwashed and recharged with fresh DE powder. Filter cartridges have a finite lifespan and must be replaced periodically.</p>
+              </div>
+            )
+          },
+          {
+            title: "Pool Equipment Inspection",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Every service visit should include a visual inspection of all pool equipment: the pump motor, pump basket, filter pressure gauge, heater, automated chemical systems, salt cell, automation controllers, lights, and any water features. Early identification of abnormal pump noise, elevated filter pressure, equipment leaks, or unusual readings allows the technician to alert the customer and recommend repairs before a minor issue becomes a major equipment failure.</p>
+              </div>
+            )
+          },
+          {
+            title: "Algae Treatment",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>A reactive service performed when algae colonizes a pool. Green algae (most common) can typically be resolved with a shock treatment and algaecide application. Yellow/mustard algae is more resistant. Black algae (technically a cyanobacterium) is the most difficult — it roots into plaster surfaces and has a protective outer layer requiring repeated brushing and concentrated chlorine treatment.</p>
+                <div className="p-3 bg-primary/5 border rounded-lg text-sm">Algae treatment services command a premium price above the standard service fee.</div>
+              </div>
+            )
+          },
+          {
+            title: "Pool Opening and Closing Services",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>In climates with freezing winters, seasonal pool opening (spring) and closing (winterization/fall) services are essential and highly profitable.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                  <div className="p-3 border rounded-lg bg-muted/30">
+                    <p className="font-semibold text-foreground mb-1">Pool Opening</p>
+                    <p>Remove/store winter cover, inspect equipment after winter storage, reassemble plumbing, fill pool to proper level, start circulation, perform initial chemical startup.</p>
+                  </div>
+                  <div className="p-3 border rounded-lg bg-muted/30">
+                    <p className="font-semibold text-foreground mb-1">Pool Closing</p>
+                    <p>Clean pool, balance chemistry to winter specifications, lower water level, blow out plumbing lines with compressed air, add antifreeze where appropriate, install winter cover.</p>
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pool-maintenance-tasks",
+        label: "Routine Maintenance Tasks",
+        icon: Wrench,
+        sections: [
+          {
+            title: "Water Testing and Chemical Balancing",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Performed at every service visit using test strips, drop test kits (DPD), or digital photometric testers. Once readings are obtained, the technician calculates the required chemical additions and adds the correct amounts directly to the pool. Chemical adjustments must be made in the correct sequence — alkalinity before pH, for example — to avoid inadvertently worsening another parameter.</p>
+              </div>
+            )
+          },
+          {
+            title: "Removing Debris and Leaves",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Includes skimming the water surface with a leaf net, emptying the built-in skimmer basket(s), emptying the pump basket, and vacuuming or netting any debris that has settled on the pool floor. In wooded or high-debris environments, this can be the most time-consuming part of the visit. Failing to remove organic debris promptly leads to accelerated chlorine consumption, water discoloration, and algae growth.</p>
+              </div>
+            )
+          },
+          {
+            title: "Cleaning Skimmer Baskets",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The skimmer basket is a removable collection basket located in the skimmer housing built into the pool wall at the waterline. Its purpose is to trap large debris before it enters the pump and filter system. A clogged skimmer basket restricts water flow, reducing the efficiency of the entire circulation system and placing additional strain on the pump motor. Technicians remove, empty, and inspect the skimmer basket at every visit.</p>
+              </div>
+            )
+          },
+          {
+            title: "Vacuuming Pool Floors",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Even with a functional automatic pool cleaner, manual vacuuming is recommended at each service visit to address areas the automatic cleaner misses — corners, steps, benches, and areas near return jets. Technique matters: moving too quickly stirs up sediment rather than vacuuming it. For pools with DE or cartridge filters, pre-cleaning the filter before vacuuming helps maintain suction.</p>
+              </div>
+            )
+          },
+          {
+            title: "Brushing Pool Surfaces",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Performed using a curved pool brush suited to the surface type — nylon bristles for fiberglass and vinyl, and steel-bristle or combination brushes for plaster and concrete. The technician brushes all walls, steps, benches, and the floor perimeter in overlapping, downward strokes toward the main drain. Regular brushing (at minimum every two weeks) is critical for plaster pools, which are the most susceptible to algae attachment.</p>
+              </div>
+            )
+          },
+          {
+            title: "Backwashing Filters",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The process of reversing the flow of water through a sand or DE filter to flush captured debris out through the waste line. A filter should be backwashed when the filter pressure gauge reads <strong className="text-foreground">8 to 10 psi above the clean operating pressure</strong>. After backwashing, the rinse setting is run briefly to re-settle the filter media before returning to normal filtration.</p>
+              </div>
+            )
+          },
+          {
+            title: "Monitoring Water Levels",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Pool water levels naturally drop due to evaporation, splashing, and backwashing. The correct water level is the middle of the skimmer opening — too low and the skimmer draws air, potentially running the pump dry and causing catastrophic pump motor failure; too high and the skimmer cannot function effectively. Technicians check and adjust water levels at each visit. Unusually rapid water level drops should prompt an inspection for leaks.</p>
+              </div>
+            )
+          },
+          {
+            title: "Service Visit Sequence (Quick Reference)",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p className="text-sm">A properly structured service visit follows this order:</p>
+                <ol className="list-decimal pl-5 space-y-1 text-sm">
+                  <li>Arrive and assess pool condition</li>
+                  <li>Empty skimmer and pump baskets</li>
+                  <li>Skim water surface and remove debris</li>
+                  <li>Brush walls, tiles, and steps</li>
+                  <li>Vacuum pool floor</li>
+                  <li>Test water chemistry</li>
+                  <li>Add chemicals and balance water</li>
+                  <li>Check and adjust water level</li>
+                  <li>Inspect equipment</li>
+                  <li>Document service and notify customer of any issues</li>
+                </ol>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pool-operations",
+        label: "How the Business Operates",
+        icon: Info,
+        sections: [
+          {
+            title: "The Typical Service Workflow",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ol className="space-y-4">
+                  {[
+                    { step: "1. Customer Inquiry or Booking", desc: "A potential customer contacts the company by phone, email, website form, or online booking platform. They describe their pool type, size, location, current condition, and the service they are looking for. The CSR or VA collects all relevant information, including pool type, sanitizer type, approximate gallonage, and any specific concerns." },
+                    { step: "2. Service Consultation and Pricing", desc: "Based on the information gathered, the CSR provides a service quote. Pool service pricing is typically based on pool size, service frequency (weekly vs. biweekly), the type of service (maintenance only vs. full service including chemicals), and geographic location. For new customers, a one-time initial clean-up fee is often charged if the pool has not been professionally maintained recently." },
+                    { step: "3. Scheduling Routine Maintenance Visits", desc: "A recurring service schedule is established. Weekly service days are assigned based on the technician's route in the customer's neighborhood. The customer receives a welcome communication including their assigned service day, technician contact information, and what to expect from the service." },
+                    { step: "4. Technician Arrival and Inspection", desc: "The technician arrives during the scheduled service window and conducts a brief initial assessment before beginning work. They check the overall pool appearance, confirm equipment is running properly, and note anything unusual compared to the previous visit. For new customers, the first visit includes a full assessment of pool condition, equipment age and function, and chemical baseline readings." },
+                    { step: "5. Performing Cleaning and Maintenance Tasks", desc: "The technician performs all required cleaning tasks in the correct sequence: emptying baskets, skimming, brushing, and vacuuming. All areas of the pool are addressed — walls, floor, steps, benches, waterline tiles, and all equipment baskets." },
+                    { step: "6. Testing and Adjusting Chemicals", desc: "After physical cleaning is complete, the technician tests the water, records results, and calculates required chemical adjustments. Chemicals are added in the correct order and in the correct amounts — never guessed. For customers on a full-service program (chemicals included), the technician adds all required chemicals from their service vehicle." },
+                    { step: "7. Reporting Pool Condition to the Customer", desc: "Many pool companies use field service software to automatically generate a service report at the end of each visit. The report includes chemistry readings before and after treatment, chemicals added, observations about equipment or pool condition, photos if applicable, and any recommended repairs. This report is automatically emailed or pushed to the customer through a client portal." },
+                    { step: "8. Payment and Service Documentation", desc: "For recurring service accounts, payment is typically handled automatically through credit card on file, ACH transfer, or monthly invoicing. One-time services (pool openings, closings, algae treatments, repairs) are invoiced separately. All service records, chemical logs, and invoices are stored in the company's service management system." },
+                  ].map(({ step, desc }) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="font-semibold text-foreground min-w-fit">{step}:</span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ol>
+                <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">CSR & VA Pro Tip</p>
+                  <p>When a new customer calls, always ask: What type of pool (in-ground/above-ground, plaster/fiberglass/vinyl, chlorine/saltwater)? Approximate size? Is it currently running? When was it last professionally serviced? Are there any visible problems right now? This allows for accurate quoting and ensures the technician arrives prepared for the first visit.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "REFERENCE & BEST PRACTICES",
+    items: [
+      {
+        id: "pool-terminology",
+        label: "Pool Maintenance Terminology",
+        icon: BookOpen,
+        sections: [
+          {
+            title: "Common Pool Service Terms Glossary",
+            content: (
+              <div className="text-muted-foreground">
+                <p className="mb-4 text-sm">Familiarity with these terms is essential for confident communication with customers, technicians, and colleagues.</p>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-44">Term</TableHead>
+                      <TableHead className="font-bold">Definition</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { term: "pH Balance", def: "A measure of the acidity or alkalinity of pool water on a scale of 0 to 14. The ideal range for pool water is 7.4 to 7.6. Low pH (acidic) corrodes equipment and irritates swimmers; high pH (alkaline) reduces chlorine effectiveness and causes scaling." },
+                      { term: "Free Chlorine", def: "The active, available chlorine in pool water that provides sanitization. Ideal range is 1 to 3 ppm for residential pools, 2 to 4 ppm for commercial pools. Free chlorine is consumed by sunlight, organic matter, and bather load and must be replenished regularly." },
+                      { term: "Total Alkalinity", def: "A measure of the water's ability to resist changes in pH. Ideal range is 80 to 120 ppm. Proper alkalinity acts as a buffer that stabilizes pH and prevents it from fluctuating rapidly." },
+                      { term: "Calcium Hardness", def: "The measure of dissolved calcium in pool water. Ideal range is 200 to 400 ppm. Low calcium hardness causes water to leach calcium from pool surfaces (etching); high levels cause cloudy water and calcium scaling on surfaces and equipment." },
+                      { term: "Cyanuric Acid (Stabilizer)", def: "A chemical that protects chlorine from rapid degradation by UV sunlight. Ideal range is 30 to 50 ppm for outdoor pools. Over-stabilization (above 80 to 100 ppm) significantly reduces chlorine effectiveness and requires dilution by draining and refilling." },
+                      { term: "Pool Circulation", def: "The continuous movement of water through the pump, filter, and return jets. Proper circulation ensures even chemical distribution, prevents dead spots where algae can establish, and moves debris toward the skimmer and main drain." },
+                      { term: "Skimmer", def: "A collection basin built into the pool wall at the waterline that draws surface water and floating debris into the filtration system. The skimmer contains a weir door that regulates water flow and a removable basket that captures debris before it enters the pump." },
+                      { term: "Pool Pump", def: "The mechanical heart of the pool's circulation system. Creates suction that draws water from the pool through the skimmer and main drain, pushes it through the filter, and returns it to the pool through the return jets. Pump failure is the most common and consequential pool equipment failure." },
+                      { term: "Filter System", def: "The component responsible for removing suspended particles from the water. The three types are sand filters (most common and lowest maintenance), cartridge filters (high flow, easy to clean), and diatomaceous earth (DE) filters (finest filtration, most thorough)." },
+                      { term: "Backwashing", def: "The process of reversing water flow through a sand or DE filter to flush captured debris out through the waste line. Should be performed when filter pressure rises 8 to 10 psi above normal operating pressure." },
+                      { term: "Algae Bloom", def: "A rapid proliferation of algae in pool water caused by inadequate sanitizer levels, poor circulation, or warm temperatures. Algae blooms can turn pool water green, yellow, or black depending on the species and require shock treatment and algaecide to resolve." },
+                      { term: "Shocking", def: "The process of adding a high dose of chlorine (or non-chlorine shock) to break down combined chlorine (chloramines), kill algae, and restore water clarity. Should be performed at dusk or night to maximize effectiveness, as sunlight rapidly degrades chlorine." },
+                      { term: "Chloramines (Combined Chlorine)", def: "Chemical compounds formed when chlorine reacts with nitrogen-containing compounds (sweat, urine, body oils) from swimmers. Responsible for the strong 'chlorine smell' often associated with poorly maintained pools and cause eye and skin irritation. Eliminated by shocking." },
+                      { term: "Total Dissolved Solids (TDS)", def: "The cumulative amount of all substances dissolved in pool water. As TDS rises above 1,500 to 2,000 ppm, water becomes increasingly resistant to chemical adjustment and cloudier in appearance. Remediated by partially draining and refilling the pool." },
+                      { term: "Salt Chlorine Generator (SCG)", def: "A device that converts dissolved salt in pool water into chlorine through electrolysis. The cell must be inspected and cleaned regularly to remove calcium scale buildup that reduces efficiency." },
+                      { term: "Parts Per Million (ppm)", def: "The unit of measurement used for pool chemical concentrations. Most chemical targets are expressed in ppm. For reference, 1 ppm equals 1 milligram per liter of water." },
+                    ].map(({ term, def }) => (
+                      <TableRow key={term}>
+                        <TableCell className="font-semibold text-foreground align-top">{term}</TableCell>
+                        <TableCell className="text-sm">{def}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pool-roles",
+        label: "Roles in a Pool Cleaning Business",
+        icon: Users,
+        sections: [
+          {
+            title: "Team Roles & Responsibilities",
+            content: (
+              <div className="text-muted-foreground">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-52">Role</TableHead>
+                      <TableHead className="font-bold">Responsibilities</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { role: "Pool Service Technician", resp: "The primary field professional who performs all weekly service visits. Handles all physical cleaning tasks, water testing, chemical addition, and routine equipment inspection. They are the face of the company to residential customers and must combine technical knowledge with excellent interpersonal skills." },
+                      { role: "Pool Maintenance Specialist", resp: "A more experienced technician who handles complex service situations, algae treatments, equipment troubleshooting, seasonal openings and closings, and customer consultations. Specialists may also mentor junior technicians and handle the most valuable commercial accounts." },
+                      { role: "Customer Service Representative (CSR)", resp: "Manages all incoming customer inquiries, provides pricing information, schedules new and existing accounts, handles service change requests, addresses customer concerns, and processes payments. CSRs are the primary contact for customers between service visits." },
+                      { role: "Dispatcher / Scheduler", resp: "Manages the daily and weekly technician schedules, organizing routes for maximum efficiency. Assigns new accounts to the appropriate route, handles last-minute schedule changes, monitors technician progress throughout the day, and communicates urgent issues between the field and the office." },
+                      { role: "Sales Representative", resp: "Focuses on acquiring new residential and commercial accounts, conducting on-site assessments and demonstrations, preparing service proposals, and closing service agreements. Particularly important for growing the commercial account base." },
+                      { role: "Operations Manager", resp: "Oversees all field and office operations including route efficiency, service quality, technician training and performance, chemical inventory, vehicle maintenance, and customer satisfaction. Responsible for ensuring that service standards are consistently met across all accounts." },
+                      { role: "Business Owner", resp: "Sets the strategic direction of the company, manages finances, drives business growth, oversees hiring and company culture, and makes key decisions about pricing, services, and expansion. In smaller operations, the owner typically also performs service technician work." },
+                      { role: "Virtual Assistant (VA)", resp: "Provides remote administrative and customer service support including managing online booking requests, sending service confirmations and reminders, following up after service visits, managing online reviews, data entry, and customer communication. Must be familiar with pool service terminology, service types, and pricing." },
+                    ].map(({ role, resp }) => (
+                      <TableRow key={role}>
+                        <TableCell className="font-semibold text-foreground align-top">{role}</TableCell>
+                        <TableCell className="text-sm">{resp}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pool-tools",
+        label: "Tools & Equipment",
+        icon: Wrench,
+        sections: [
+          {
+            title: "Common Pool Cleaning Equipment",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { name: "Pool Skimmers and Leaf Nets", desc: "A flat or deep-bag net mounted on a telescopic pole. Flat skimmer nets for light surface debris; deep-bag leaf rakes for heavy leaves. The first tool used at every service visit — essential for removing organic material from the surface before it sinks and consumes sanitizer." },
+                    { name: "Pool Vacuum Systems", desc: "Manual vacuums consist of a vacuum head, a vacuum hose, and a telescopic pole. Automatic pool cleaners include suction-side cleaners, pressure-side cleaners, and robotic cleaners (self-powered, independent units). Robotic cleaners are the most effective automatic option and increasingly common on premium residential accounts." },
+                    { name: "Pool Brushes", desc: "Nylon bristle brushes for fiberglass and vinyl liner pools (prevent surface damage); stainless steel or combination brushes for plaster and concrete pools. A curved brush designed to fit pool walls and corners provides more efficient coverage." },
+                    { name: "Water Testing Kits", desc: "Options include test strips (fast but less accurate), DPD drop test kits (highly accurate colorimetric tests for chlorine and pH), and electronic/digital photometric testers (the most accurate and consistent, recommended for professional use). Professional technicians record all test results for documentation." },
+                    { name: "Chemical Feeders and Dispensers", desc: "Chlorine tablet feeders (inline or offline devices that slowly dissolve trichlor tablets), salt chlorine generators (electrolytic chlorine production), and liquid chemical dosing pumps (for commercial pools that precisely dispense liquid chlorine and acid in response to automated water chemistry monitoring)." },
+                    { name: "Pool Pumps and Filters", desc: "Variable-speed pumps must be programmed for correct run times and speeds. Filter pressure gauges are checked at every visit to determine if backwashing or cleaning is needed. Technicians carry replacement O-rings, gaskets, and pump baskets on their service vehicles to address minor equipment issues on the spot." },
+                    { name: "Telescopic Poles", desc: "The universal handle for all pool cleaning tools — attaches to skimmer nets, brushes, vacuum heads, and algae brushes. Quality poles are made from fiberglass or aluminum, extend to lengths of 8 to 16 feet, and have secure cam-lock or flip-lock systems that prevent the pole from collapsing during use." },
+                  ].map(({ name, desc }) => (
+                    <div key={name} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{name}</p>
+                      <p className="text-sm">{desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-3 bg-muted/50 border rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Equipment Maintenance Note</p>
+                  <p>Technicians should rinse all pool tools with fresh water after each use to prevent chemical deposits from degrading nets, brushes, and hoses. Vacuum hoses and brushes should be inspected regularly for cracks and wear. Well-maintained equipment performs better and lasts significantly longer.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pool-safety",
+        label: "Safety & Best Practices",
+        icon: ShieldCheck,
+        sections: [
+          {
+            title: "Proper Handling of Pool Chemicals",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Always read the product label and Safety Data Sheet (SDS) before using any pool chemical.</li>
+                  <li>Never mix pool chemicals together, either in their containers or when adding to the pool. Adding chlorine and acid together produces toxic chlorine gas. Always add one chemical at a time and wait between additions.</li>
+                  <li><strong className="text-foreground">Always add chemicals to water</strong> — never add water to chemicals. Adding water to concentrated pool chemicals can cause violent splashing or spattering reactions.</li>
+                  <li>Use dedicated measuring tools for each chemical to prevent cross-contamination.</li>
+                  <li>Wear nitrile or chemical-resistant gloves and safety glasses when handling concentrated pool chemicals, particularly acids (pH decreaser) and liquid chlorine.</li>
+                  <li>When adding chemicals to the pool, stand upwind to avoid inhaling fumes or vapors.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Preventing Chemical Imbalances",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Never over-dose chemicals. More is not better in pool chemistry — adding excess chemicals causes the opposite imbalance and wastes money.</li>
+                  <li>Add chemicals to the pool with the circulation system running to ensure rapid dispersion throughout the water.</li>
+                  <li>Shock treatments (high-dose chlorine) should be added at dusk or at night to prevent rapid degradation by UV sunlight.</li>
+                  <li>Advise customers not to swim for a minimum of 4 hours after shock treatment, or until free chlorine levels return to the safe swimming range of 1 to 4 ppm.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Protecting Pool Equipment",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Never allow pool chemicals to contact equipment directly — always pre-dissolve granular chemicals in a bucket of pool water before adding near equipment intakes.</li>
+                  <li>Do not run the pool pump dry (without water flowing). A pump run dry will overheat and fail within minutes.</li>
+                  <li>Monitor filter pressure regularly. A filter that is significantly over-pressure can rupture the filter tank or damage the pump.</li>
+                  <li>Inspect pump motor capacitors and seals regularly — catching a failing capacitor or worn seal early prevents a complete motor failure.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Ensuring Safe Swimming Conditions",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Confirm that chlorine levels are within the safe swimming range (1 to 4 ppm free chlorine) and pH is between 7.2 and 7.8 before leaving a service visit.</li>
+                  <li>Advise customers of any elevated chemical levels that require a delay before swimming and document this recommendation in the service report.</li>
+                  <li>Report any damaged or malfunctioning pool safety equipment — including drain covers, diving boards, handrails, and lighting — to the customer immediately. Faulty drain covers are a drowning risk.</li>
+                  <li>Pool fencing, gate latches, and alarms should be in good working order. While not within the technician's scope to repair, they should be flagged to the customer if deficiencies are observed.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Proper Storage of Chemicals",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Pool chemicals must be stored in their original, labeled containers in a cool, dry, ventilated area away from direct sunlight, heat sources, and moisture.</li>
+                  <li><strong className="text-foreground">Oxidizers (chlorine) and acids (pH decreasers) must always be stored separately</strong> — they react violently if combined and can cause a fire or release toxic gases.</li>
+                  <li>Service vehicle chemical storage must comply with DOT regulations for transporting hazardous materials. Chemicals should be secured in properly ventilated, spill-containment bins.</li>
+                  <li>Maintain an up-to-date chemical inventory and SDS file for all products carried in service vehicles, accessible in case of emergency.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pool-issues",
+        label: "Common Customer Issues",
+        icon: AlertCircle,
+        sections: [
+          {
+            title: "Cloudy or Hazy Pool Water",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The most common pool complaint. Most frequent causes include: low free chlorine, high pH, high calcium hardness, a dirty or undersized filter, or elevated total dissolved solids.</p>
+                <p className="text-sm italic">CSRs should ask: How long has the water been cloudy? Is the filter running? When were chemicals last added? Never downplay cloudy water — it reduces visibility in the pool and is a safety concern.</p>
+              </div>
+            )
+          },
+          {
+            title: "Algae Growth",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Green algae turns the entire pool a shade of green (most common and easiest to treat). Yellow (mustard) algae appears as brushable patches on shaded wall areas and is more resistant. Black algae appears as dark spots on plaster surfaces and is the most difficult to eliminate.</p>
+                <p className="text-sm italic">CSRs should schedule algae treatment visits as priority calls and advise customers to keep the circulation system running continuously until the technician arrives.</p>
+              </div>
+            )
+          },
+          {
+            title: "Strong Chlorine Smell",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Contrary to popular belief, a strong chlorine odor does not mean there is too much chlorine — it typically means there is not enough. The smell is caused by <strong className="text-foreground">chloramines (combined chlorine)</strong>, which form when chlorine reacts with organic matter introduced by swimmers.</p>
+                <div className="p-3 bg-primary/5 border rounded-lg text-sm">This is an excellent opportunity to educate customers on proper pool chemistry. The solution is a shock treatment to break down chloramines and restore the free chlorine reserve.</div>
+              </div>
+            )
+          },
+          {
+            title: "Clogged or Dirty Filters",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Clogged filters restrict water flow, reduce filtration effectiveness, and put extra strain on the pump motor. Customers may notice this as reduced return jet flow, cloudy water despite adequate chemical levels, or a tripped pump circuit breaker.</p>
+                <p className="text-sm italic">CSRs should ask when the filter was last cleaned and what type of filter the customer has. Sand filters need backwashing; cartridge filters need to be removed and cleaned; DE filters need backwashing and recharging. Severely fouled cartridges may need replacement.</p>
+              </div>
+            )
+          },
+          {
+            title: "Debris Accumulation",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Excessive leaves, twigs, pollen, and organic matter in the pool between service visits is a common complaint, especially in the fall or in yards with large trees. This rapidly depletes sanitizer, can clog the pump basket and skimmer, and leads to water chemistry problems. Customers can be advised to run their automatic pool cleaner more frequently and to skim the pool manually between visits. In extreme cases, more frequent service visits may be recommended.</p>
+              </div>
+            )
+          },
+          {
+            title: "Poor Water Circulation",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Poor circulation manifests as dead spots where algae grows, uneven chemical distribution, and reduced filtration. Causes include: a partially blocked skimmer or pump basket, incorrect pump run time, a failing pump motor, or improper return jet positioning.</p>
+                <p className="text-sm italic">CSRs should ask whether the pump appears to be running normally and whether the return jets are producing strong flow. Weak or absent flow from return jets indicates a pump, filter, or plumbing issue requiring a technician visit for diagnosis.</p>
+              </div>
+            )
+          },
+          {
+            title: "Equipment Malfunction",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Common malfunction reports include: the pump not turning on or making unusual noise, the heater failing to heat, pool lights not functioning, and the automatic cleaner not operating. Equipment repair is a separate service from routine maintenance and is typically quoted separately.</p>
+                <p className="text-sm italic">CSRs should collect as much information as possible about the symptom and age of the equipment before scheduling a repair visit, as some issues can be diagnosed and resolved on the initial visit while others require follow-up parts ordering.</p>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pool-importance",
+        label: "Why Pool Maintenance Matters",
+        icon: Heart,
+        sections: [
+          {
+            title: "The Importance of Professional Pool Maintenance",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>Professional pool maintenance delivers value that extends far beyond a clean-looking pool.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { title: "Water Safety and Sanitation", body: "Pool water is a shared environment that can harbor dangerous pathogens including Pseudomonas aeruginosa (hot tub rash), Cryptosporidium, Giardia, E. coli, and numerous viruses. These organisms thrive in water with inadequate sanitizer levels, poor pH balance, or insufficient circulation. The CDC tracks Recreational Water Illness (RWI) outbreaks directly linked to poorly maintained pools. For commercial pools where dozens or hundreds of people may swim daily, professional oversight is a legal and regulatory requirement." },
+                    { title: "Extending Equipment Lifespan", body: "Pool equipment — pumps, motors, heaters, filters, and automated systems — represents a significant capital investment, often totaling tens of thousands of dollars. Corrosive water etches and pits metal pump components, destroys heater heat exchangers, and corrodes electrical connections. Scaling water deposits calcium throughout the filtration and heating system. A professional service technician who maintains tight chemical balance extends equipment life by years — easily saving a pool owner multiple times the annual cost of service in avoided equipment replacements and repairs." },
+                    { title: "Preventing Costly Repairs", body: "Pool pump replacements typically cost $400 to $1,200 or more. Pool resurfacing runs $5,000 to $15,000 or more. Salt cell replacement costs $600 to $1,000. Heater replacement caused by improperly balanced water costs $1,500 to $3,000 or more. All of these failures are preventable with consistent, professional maintenance. The annual cost of a weekly pool service program is typically a fraction of any one of these repair scenarios." },
+                    { title: "Ensuring a Safe and Enjoyable Environment", body: "Beyond chemistry and equipment, professional pool service delivers the peace of mind that comes from knowing that the pool is always ready to swim in — safe, clean, and inviting. For families with children, this means a reliably safe play environment. For commercial clients, it means consistently passing health inspections, protecting guests, and maintaining the premium experience their brand promises. A well-maintained pool enhances the quality of outdoor living and supports property values." },
+                  ].map(({ title, body }) => (
+                    <div key={title} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{title}</p>
+                      <p className="text-sm">{body}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-muted/50 border rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Final Note for New Team Members</p>
+                  <p>Pool service is a technical profession that combines chemistry, mechanical knowledge, customer service, and physical work — all performed outdoors, on a regular schedule, with high standards of quality and reliability. Whether you are answering customer calls, scheduling routes, or servicing pools in the field, you are part of a team that helps people enjoy one of the most valued features of their home. Welcome to the team!</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  }
+];
+
+export const electricalServicesSections: DocGroup[] = [
+  {
+    title: "ELECTRICAL SERVICES BASICS",
+    items: [
+      {
+        id: "electrical-introduction",
+        label: "Introduction to Electrical Services",
+        icon: Plug,
+        sections: [
+          {
+            title: "What Is an Electrical Services Business?",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>An electrical services business is a licensed, professional contracting company that installs, repairs, maintains, upgrades, and inspects electrical systems in residential homes, commercial buildings, and industrial facilities. Electricians are among the most highly regulated trades professionals, requiring years of apprenticeship, rigorous examinations, and ongoing licensure to legally perform electrical work.</p>
+                <p>Electrical service companies range from solo master electricians operating independently to large electrical contracting firms employing dozens of licensed journeymen, project managers, and support staff. All share the fundamental mission of ensuring that their clients' electrical systems are <strong className="text-foreground">safe, functional, code-compliant, and reliably powered</strong> for years to come.</p>
+                <div className="p-4 bg-muted/50 border rounded-lg">
+                  <p className="font-semibold text-foreground mb-1">Industry Fact</p>
+                  <p className="text-sm">The electrical contracting industry employs over 700,000 electricians and related workers in the United States. The Bureau of Labor Statistics projects continued strong demand for licensed electricians due to construction growth, infrastructure upgrades, and the rapid expansion of renewable energy systems.</p>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "The Importance of Electrical Systems",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Electricity is the single most essential utility in modern buildings — powering lighting, heating and cooling, communication infrastructure, appliances, medical equipment, and virtually every other system that makes a building functional. The consequences of electrical system failures range from inconvenience to catastrophe:</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    { label: "Residential", desc: "A failed electrical panel can leave a family without heat, lighting, or refrigeration. Faulty wiring is one of the leading causes of residential house fires in the United States." },
+                    { label: "Commercial", desc: "Electrical failures in retail, hospitality, or office environments result in direct revenue loss, safety hazards for customers and employees, and potential regulatory consequences." },
+                    { label: "Industrial", desc: "In manufacturing, processing, and data center environments, electrical failures can halt production, cause significant financial losses, and create serious safety hazards through arc flash, electrocution, or fire." },
+                    { label: "Safety", desc: "The NFPA reports that electrical failures and malfunctions are a leading cause of home fires. Proper installation and maintenance of electrical systems is a primary fire prevention measure." },
+                  ].map(({ label, desc }) => (
+                    <div key={label} className="p-3 border rounded-lg bg-primary/5 text-sm">
+                      <p className="font-semibold text-foreground mb-1">{label}</p>
+                      <p>{desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Overview of the Electrical Services Industry",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The electrical services industry is one of the largest segments of the construction and building services market, and one of the most essential skilled trades.</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Electricians are among the most in-demand skilled tradespeople in the country, driven by construction activity, aging infrastructure replacement, EV charging installation, solar energy adoption, and smart home technology.</li>
+                  <li>The industry is heavily regulated. All electrical work above a minimal threshold must be performed by licensed electricians and must comply with the National Electrical Code (NEC), local amendments, and building permit requirements.</li>
+                  <li>Electrical contractors serve three primary markets: <strong className="text-foreground">residential</strong> (homes and apartments), <strong className="text-foreground">commercial</strong> (offices, retail, and institutions), and <strong className="text-foreground">industrial</strong> (factories, utilities, and data centers).</li>
+                  <li>Emergency electrical service is a significant and high-value segment, as electrical failures can pose immediate safety risks that cannot wait for standard scheduling.</li>
+                  <li>Emerging opportunities in EV charging infrastructure, solar photovoltaic installations, battery storage systems, and smart home automation are creating strong growth in residential electrical services.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "electrical-service-types",
+        label: "Types of Electrical Services",
+        icon: List,
+        sections: [
+          {
+            title: "Residential Electrical Services",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Covers all electrical work performed in private homes, apartments, condominiums, and townhomes — from routine repairs (replacing a faulty outlet) to major projects (complete home rewiring, panel upgrades, or EV charger installation). Requires understanding of the NEC and local residential codes, strong customer communication skills, and the ability to work cleanly inside occupied living spaces. Electricians working in residential settings interact directly with homeowners and must project professionalism and trustworthiness at every visit.</p>
+              </div>
+            )
+          },
+          {
+            title: "Commercial Electrical Services",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Performed in business environments including retail stores, office buildings, restaurants, medical clinics, schools, and places of worship. Commercial electrical systems are significantly more complex than residential — they operate at higher voltages, serve more diverse loads, and must meet stricter code requirements. Commercial projects often involve coordination with other trades, building owners, general contractors, and local inspectors. Lighting design, three-phase power, emergency and exit lighting systems, and fire alarm integration are common commercial service areas.</p>
+              </div>
+            )
+          },
+          {
+            title: "Industrial Electrical Services",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Performed in manufacturing plants, warehouses, food processing facilities, data centers, utilities, and other industrial environments. Involves high-voltage systems, complex motor control systems, programmable logic controllers (PLCs), power distribution equipment, and specialized safety systems. Industrial electricians typically hold additional certifications in arc flash safety, high-voltage work, and industrial controls. This sector requires significant specialized expertise and carries the highest technical complexity of any electrical market.</p>
+              </div>
+            )
+          },
+          {
+            title: "Emergency Electrical Services",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Available 24/7 to address electrical problems that pose an immediate safety risk or cause a significant disruption. Common emergency calls include complete loss of power, burning smells from electrical panels or outlets, sparking wiring, flooding that has compromised electrical systems, and tripped breakers that cannot be reset. Emergency calls command a premium service rate.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  CSRs and dispatchers must be trained to recognize true electrical emergencies and respond with urgency, advising customers on immediate safety steps (such as turning off the main breaker) while an electrician is dispatched.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Electrical Inspections",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Comprehensive assessment of an existing electrical system to evaluate its condition, safety, and code compliance. Commonly requested during real estate transactions, after purchasing an older home, following a flood or fire, for insurance purposes, or as part of a planned renovation. A licensed electrician examines the electrical panel, wiring, outlets, switches, grounding, and visible wiring methods and produces a written report documenting findings and recommendations.</p>
+              </div>
+            )
+          },
+          {
+            title: "Electrical Upgrades and Rewiring",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Improvements to bring an aging or inadequate electrical system up to modern standards. Panel upgrades (replacing an outdated panel with a higher-capacity modern panel) are among the most common upgrade projects. Full or partial rewiring is performed when original wiring has degraded or uses outdated materials (such as aluminum wiring or knob-and-tube wiring). Smart home system integration, EV charger installation, solar system integration, and whole-home surge protection are growing categories of residential electrical upgrades.</p>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "SERVICES & OPERATIONS",
+    items: [
+      {
+        id: "electrical-core-services",
+        label: "Core Services",
+        icon: CheckCircle,
+        sections: [
+          {
+            title: "Electrical Installations",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>All new electrical work — installing wiring, panels, outlets, switches, lighting, and equipment in new construction or in existing buildings where new circuits or systems are being added. Installations must comply with the NEC and local code requirements, be performed under the appropriate permits, and be inspected by the local authority having jurisdiction (AHJ). Installation work is typically the highest-revenue category for electrical contractors.</p>
+              </div>
+            )
+          },
+          {
+            title: "Electrical Repairs",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Addresses malfunctions, failures, and damage in existing electrical systems. Common repair calls include diagnosing and fixing non-working outlets or switches, repairing damaged wiring, replacing failed circuit breakers, troubleshooting intermittent power problems, and repairing damage caused by pests, water intrusion, or physical damage. Diagnostic accuracy is critical — the ability to quickly and correctly identify the root cause of an electrical problem is one of the most valuable skills an electrician possesses.</p>
+              </div>
+            )
+          },
+          {
+            title: "Lighting Installation",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>One of the most requested electrical services in both residential and commercial settings. Services include installing recessed (can) lighting, pendant lights, chandeliers, under-cabinet lighting, outdoor security lighting, motion-sensor lighting, LED retrofit systems, commercial lighting fixtures, and emergency/exit lighting. Proper lighting installation requires knowledge of wiring methods, box ratings, dimmer compatibility, and in commercial settings, lighting control systems and energy code compliance.</p>
+              </div>
+            )
+          },
+          {
+            title: "Circuit Breaker Repair and Replacement",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Circuit breakers can wear out, fail to trip when they should, or trip too easily. Replacing a failed or nuisance-tripping breaker is a common service call. Electricians also install <strong className="text-foreground">AFCI (Arc Fault Circuit Interrupter)</strong> and <strong className="text-foreground">GFCI (Ground Fault Circuit Interrupter)</strong> breakers required by modern code in specific locations including bedrooms, kitchens, and bathrooms, which provide enhanced protection against electrical fires and electrocution.</p>
+              </div>
+            )
+          },
+          {
+            title: "Panel Upgrades",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Performed when the existing panel is undersized for current electrical demand, is an outdated or recalled panel brand (such as Federal Pacific or Zinsco), has insufficient circuits for planned renovations, or lacks modern safety features. A panel upgrade typically increases the service from 100 amps to 200 amps (or higher for large homes and commercial properties) and involves coordination with the utility company for a service disconnect.</p>
+                <p className="text-sm italic">Panel upgrades are high-revenue, technically demanding projects that require a licensed master electrician and a permit.</p>
+              </div>
+            )
+          },
+          {
+            title: "Wiring and Rewiring",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Wiring services include running new circuits for appliances, adding outlets to existing rooms, wiring detached garages or outbuildings, and complete home rewiring where all original wiring is replaced with modern copper wiring in code-compliant conduit or cable methods. Partial rewiring may be recommended when specific circuits have degraded or when a home renovation exposes old wiring that does not meet current standards. Rewiring is invasive work that may require opening walls and ceilings.</p>
+              </div>
+            )
+          },
+          {
+            title: "Outlet and Switch Installation",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>One of the most common residential electrical requests. Services include adding standard outlets, installing GFCI outlets in required locations (kitchens, bathrooms, outdoors, garages), adding USB charging outlets, installing smart switches and dimmers, and replacing outdated two-prong ungrounded outlets with modern three-prong grounded outlets.</p>
+              </div>
+            )
+          },
+          {
+            title: "Generator Installation",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>A growing service category driven by increasingly frequent power outages caused by extreme weather events. Generator installation involves installing the generator unit, connecting it to the home's or building's electrical system via a <strong className="text-foreground">transfer switch</strong> (which prevents dangerous back-feed to the utility grid), and running the necessary fuel supply connections. Standby generators require automatic transfer switches that sense utility power loss and start the generator automatically.</p>
+              </div>
+            )
+          },
+          {
+            title: "Electrical Safety Inspections",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Performed to evaluate an existing electrical system's safety and compliance. Particularly valuable for homes more than 25 years old, recently purchased properties, properties that have experienced fire or flood damage, and commercial properties undergoing ownership changes. The inspection covers the panel, all visible wiring, outlets, switches, grounding, bonding, GFCI and AFCI protection, and any visible code violations. A comprehensive written report is provided with prioritized recommendations.</p>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "electrical-operations",
+        label: "How the Business Operates",
+        icon: Info,
+        sections: [
+          {
+            title: "The Typical Service Workflow",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ol className="space-y-4">
+                  {[
+                    { step: "1. Customer Inquiry or Service Request", desc: "A customer contacts the company by phone, email, website form, or online booking. CSRs should gather: the customer's name, address, and best contact number; a description of the issue or project; whether it is an emergency or routine service; and whether the customer is a homeowner, tenant, or property manager. For emergency situations, the CSR should quickly assess the severity and dispatch accordingly, providing basic safety instructions while an electrician is en route." },
+                    { step: "2. Job Assessment or Consultation", desc: "For projects beyond simple repairs, a job assessment may be scheduled before the service appointment. This allows the electrician to evaluate the scope of work, identify any materials or special equipment needed, assess code requirements and permit needs, and provide an accurate written estimate. For straightforward repairs (outlet replacement, breaker swap), a same-day service call with an on-site quote at the time of service is more appropriate." },
+                    { step: "3. Scheduling the Service Appointment", desc: "Once the customer agrees to proceed, a service appointment is scheduled. The scheduler assigns the appointment to the appropriate electrician based on the type of work, the electrician's license level (apprentice, journeyman, or master), their current workload, and their geographic proximity to the job site. A confirmation is sent to the customer with the appointment window and technician information." },
+                    { step: "4. Dispatching an Electrician", desc: "The dispatcher assigns the job and communicates all relevant job details: customer name and address, description of the issue, any prior customer notes, permit status if applicable, and materials to bring. For emergency calls, dispatch is immediate. For scheduled calls, the dispatcher manages the electrician's daily route for maximum efficiency." },
+                    { step: "5. On-Site Inspection and Diagnosis", desc: "Upon arrival, the electrician performs a thorough on-site inspection and diagnosis: listening to the customer's description, visually inspecting the affected areas, testing outlets and circuits with meters, examining the electrical panel, and identifying the root cause. A thorough diagnosis is the most important step — the best repair is worthless if the underlying cause has not been correctly identified." },
+                    { step: "6. Providing a Quote", desc: "After completing the diagnosis, the electrician presents the customer with a written or verbal quote clearly explaining what was found, what work is recommended (with priority levels for safety-critical items), the materials required, the estimated time to complete, the total cost, and any permits that will be required. The customer must authorize the work in writing before the electrician proceeds." },
+                    { step: "7. Performing the Electrical Work", desc: "With the customer's signed authorization, the electrician performs the work following all applicable NEC code requirements, local code amendments, and company quality standards. All work is performed with the circuit de-energized and locked out/tagged out where required. The work area is kept clean and protected to avoid damage to the customer's property." },
+                    { step: "8. Testing and Safety Verification", desc: "After completing the work, the electrician tests all affected circuits and devices, restores power, and verifies that the repair or installation is functioning correctly and safely. Where permits were obtained, the work must be inspected by the local building department before walls are closed or the installation is considered complete." },
+                    { step: "9. Payment and Job Documentation", desc: "Payment is collected at job completion or invoiced depending on account type. A detailed invoice documenting all work performed, materials used, permit numbers, and warranty information is provided to the customer. All job records are entered into the company's service management system. For permitted projects, a copy of the inspection approval is provided to the customer." },
+                  ].map(({ step, desc }) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="font-semibold text-foreground min-w-fit">{step}:</span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ol>
+                <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">CSR & VA Key Questions</p>
+                  <p>When taking an electrical service inquiry, always capture: (1) Is this an emergency or a safety concern? (2) What specifically is the problem — lights, outlets, panel, etc.? (3) Residential or commercial property? (4) Home or building age (helps anticipate wiring type)? (5) Has there been any recent work on the electrical system? This information ensures the right electrician is dispatched with the right equipment and expectations.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "REFERENCE & COMPLIANCE",
+    items: [
+      {
+        id: "electrical-problems",
+        label: "Common Electrical Problems",
+        icon: AlertCircle,
+        sections: [
+          {
+            title: "Power Outages",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>A complete loss of power to all or part of a home or building. Before dispatching an electrician, CSRs should guide the customer through basic checks: Has the utility company confirmed a neighborhood outage? Has the main breaker tripped? Are specific circuits affected or is the entire property dark?</p>
+                <p className="text-sm italic">Partial power loss often indicates a tripped main breaker, a failed utility service connection, or a blown service fuse. Complete power loss with no utility outage requires immediate electrician dispatch.</p>
+              </div>
+            )
+          },
+          {
+            title: "Flickering Lights",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Isolated flickering in a single fixture usually indicates a loose bulb or failing fixture. Flickering throughout an entire circuit or the whole house can indicate loose connections at the panel, failing wire splices inside walls, or corroded service connections. Whole-house flickering synchronized with large appliance activation may indicate a voltage problem that requires utility investigation.</p>
+                <p className="text-sm italic">Persistent flickering should always be evaluated by a licensed electrician.</p>
+              </div>
+            )
+          },
+          {
+            title: "Tripping Circuit Breakers",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>A circuit breaker that trips repeatedly is communicating that something is wrong — either the circuit is genuinely overloaded, a specific appliance is drawing excessive current, there is a short circuit or ground fault, or the breaker itself has worn out.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  <strong>Warning:</strong> Customers should be advised never to bypass a tripping breaker or replace it with a higher-amperage breaker without professional evaluation — these are dangerous workarounds that eliminate the circuit's protection.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Faulty Wiring",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Encompasses a broad range of wiring defects including loose connections at outlets and switches, deteriorated insulation on older wiring (aluminum wiring from the 1960s–70s is particularly problematic at connection points), improperly spliced wiring inside walls, and code-violating wiring methods. Faulty wiring is a leading cause of electrical fires.</p>
+                <p className="text-sm italic">Signs include outlets or switches that feel warm to the touch, discolored outlet covers, burning smells, and lights that dim when appliances are turned on.</p>
+              </div>
+            )
+          },
+          {
+            title: "Overloaded Circuits",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Occurs when the connected electrical loads draw more current than the circuit wiring and breaker are designed to handle. This causes the breaker to trip and, if the overload persists or the protection is inadequate, can cause wiring to overheat and potentially ignite surrounding combustible materials. Particularly common in older homes where the electrical system was designed for the appliance demands of decades past. The solution is adding additional circuits or upgrading the panel, not simply replacing a tripped breaker with a higher-rated one.</p>
+              </div>
+            )
+          },
+          {
+            title: "Burning Smells from Outlets or Panels",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>A burning smell from an electrical outlet, switch, or panel is a serious warning sign — it can indicate arcing, overheating wiring insulation, or an active electrical fire beginning inside a wall or the panel.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  <strong>Emergency Protocol:</strong> Customers reporting a burning electrical smell should avoid using the affected outlet or circuit. If the smell is coming from the main panel, turn off the main breaker if it is safe to do so and vacate the building. An electrician should be dispatched immediately. Do not advise customers to investigate the source themselves.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Non-Working Outlets or Switches",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Dead outlets and non-functioning switches are among the most common residential service calls. Common causes include a tripped GFCI outlet on the same circuit, a tripped circuit breaker, a loose wire at the outlet or switch, a failed outlet or switch device, or an open neutral or ground connection.</p>
+                <div className="p-3 bg-primary/5 border rounded-lg text-sm">
+                  <strong className="text-foreground">CSR Tip:</strong> Walk customers through the GFCI reset check before scheduling a service call — pressing the reset button on a GFCI outlet in the kitchen, bathroom, or garage often restores power to outlets that appear unrelated. This resolves the majority of these cases without a technician visit.
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "electrical-terminology",
+        label: "Electrical Terminology",
+        icon: BookOpen,
+        sections: [
+          {
+            title: "Common Electrical Terms Glossary",
+            content: (
+              <div className="text-muted-foreground">
+                <p className="mb-4 text-sm">Familiarity with these terms enables confident communication with customers, electricians, and colleagues.</p>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-44">Term</TableHead>
+                      <TableHead className="font-bold">Definition</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { term: "Voltage (V)", def: "The electrical pressure that drives current through a circuit. Residential circuits in the United States operate at 120V (standard outlets) or 240V (large appliances like dryers and ranges). Voltage is analogous to water pressure in a pipe." },
+                      { term: "Current (Amps / A)", def: "The flow rate of electrical charge through a conductor. The amperage rating of a circuit determines how much electrical load it can safely carry. Exceeding the rated amperage causes the breaker to trip." },
+                      { term: "Wattage (W)", def: "A measure of electrical power — the rate at which electrical energy is consumed. Calculated as Voltage x Amperage (W = V x A). A 100-watt light bulb on a 120V circuit draws approximately 0.83 amps." },
+                      { term: "Circuit Breaker", def: "A resettable protective device in the electrical panel that automatically interrupts current flow when a circuit is overloaded or short-circuited. Circuit breakers are rated in amperes (typically 15A or 20A for residential branch circuits)." },
+                      { term: "Electrical Panel", def: "The main distribution board (also called the breaker box or load center) that receives power from the utility company and distributes it through individual circuit breakers to all circuits throughout the building." },
+                      { term: "Grounding", def: "A safety system that provides a low-resistance path for fault current to return to the electrical panel and trip the breaker in the event of a wiring fault. Protects people from electrical shock by ensuring that metal enclosures are maintained at earth potential." },
+                      { term: "Load", def: "The total electrical demand placed on a circuit or electrical system by all connected devices and appliances. Proper load calculations are required when sizing circuits, panels, and service entrances." },
+                      { term: "Short Circuit", def: "A fault condition in which current bypasses its intended path and flows through a much lower-resistance path, resulting in a large, potentially dangerous surge of current. Causes circuit breakers to trip immediately and can cause arcing, fire, and equipment damage." },
+                      { term: "Ground Fault", def: "An unintended path for electrical current to flow to ground, often through a person. Ground faults are the leading cause of electrocution. GFCI devices detect ground faults and interrupt power within milliseconds to prevent electrocution." },
+                      { term: "Arc Fault", def: "An unintended electrical discharge between conductors, often caused by damaged or deteriorated wiring insulation. Arc faults produce intense heat and are a leading cause of electrical fires. AFCI breakers detect arc fault signatures and interrupt the circuit to prevent fires." },
+                      { term: "GFCI", def: "Ground Fault Circuit Interrupter. A safety device that monitors the current balance between the hot and neutral conductors and trips within 4 to 6 milliseconds when a ground fault is detected. Required by code in kitchens, bathrooms, garages, outdoors, and near water sources." },
+                      { term: "AFCI", def: "Arc Fault Circuit Interrupter. A circuit breaker that detects the electrical signature of arcing faults and interrupts the circuit to prevent electrical fires. Required by the NEC in bedroom circuits and increasingly in all living areas of new construction." },
+                      { term: "National Electrical Code (NEC)", def: "The NFPA 70 standard — the foundational document for electrical safety in the United States. Updated every three years and adopted by most states and municipalities as the minimum standard for electrical installations." },
+                      { term: "Service Entrance", def: "The point where the utility company's service conductors connect to the customer's wiring and enter the building to supply the main electrical panel. Includes the service conductors, service entrance equipment, meter, and main panel." },
+                      { term: "Conduit", def: "A protective raceway — typically metal (EMT, rigid) or plastic (PVC) tubing — through which electrical wiring is routed. Conduit provides physical protection for wiring, makes wiring replaceable without opening walls, and is required in many commercial and industrial applications." },
+                    ].map(({ term, def }) => (
+                      <TableRow key={term}>
+                        <TableCell className="font-semibold text-foreground align-top">{term}</TableCell>
+                        <TableCell className="text-sm">{def}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "electrical-roles",
+        label: "Roles in an Electrical Business",
+        icon: Users,
+        sections: [
+          {
+            title: "Team Roles & Responsibilities",
+            content: (
+              <div className="text-muted-foreground">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-52">Role</TableHead>
+                      <TableHead className="font-bold">Responsibilities</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { role: "Master Electrician", resp: "The highest level of electrical license. Master electricians have passed rigorous examinations demonstrating comprehensive knowledge of the NEC, electrical theory, and business practices. They are legally authorized to pull electrical permits, supervise all electrical work, and sign off on completed installations. Many states require a master electrician to be the responsible party for an electrical contracting business." },
+                      { role: "Journeyman Electrician", resp: "A licensed electrician who has completed an apprenticeship program and passed a journeyman examination. Journeymen can perform all electrical work independently but must work under the supervision of a master electrician for permit-required work in many jurisdictions. Journeymen are the core field workforce of most electrical contractors." },
+                      { role: "Apprentice Electrician", resp: "A trainee electrician enrolled in a formal apprenticeship program (typically 4 to 5 years) that combines on-the-job training with classroom instruction. Apprentices must always work under the direct supervision of a journeyman or master electrician." },
+                      { role: "Electrical Technician", resp: "In some companies, electrical technicians perform lower-voltage service work including data cabling, fire alarm system maintenance, lighting controls, and similar tasks. Technicians may not hold a full electrician's license but are trained in specific technical areas." },
+                      { role: "Customer Service Representative (CSR)", resp: "Manages all incoming customer contacts, qualifies service requests, provides pricing information, schedules appointments, handles billing inquiries, and manages customer relationships. CSRs must be able to communicate clearly about electrical services and recognize genuine electrical emergencies." },
+                      { role: "Dispatcher", resp: "Manages the daily schedule for all field electricians, assigns and dispatches service calls, monitors job progress, adjusts schedules for emergency calls and delays, and serves as the real-time communication hub between the office and the field." },
+                      { role: "Project Manager", resp: "Oversees larger electrical projects from inception to completion. Project managers coordinate material procurement, scheduling, subcontractor management, permit tracking, inspection scheduling, and customer communication for commercial and industrial projects." },
+                      { role: "Business Owner / Electrical Contractor", resp: "Holds the master electrician license and contractor's license that authorize the business to perform electrical work and pull permits. Sets company strategy, manages finances, oversees hiring, maintains contractor relationships, and is ultimately responsible for the quality and safety of all work performed under the company's license." },
+                    ].map(({ role, resp }) => (
+                      <TableRow key={role}>
+                        <TableCell className="font-semibold text-foreground align-top">{role}</TableCell>
+                        <TableCell className="text-sm">{resp}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "electrical-tools",
+        label: "Tools & Equipment",
+        icon: Wrench,
+        sections: [
+          {
+            title: "Common Electrician Tools & Equipment",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { name: "Multimeters", desc: "The most essential diagnostic tool in an electrician's kit. Measures voltage (AC and DC), current (amperage), and resistance (ohms). Used to verify voltage at outlets and panels, test continuity in circuits, diagnose wiring faults, test component resistance, and verify that a circuit is de-energized before working on it. A quality multimeter is a fundamental safety tool." },
+                    { name: "Wire Strippers", desc: "Precision tools used to remove the insulation from electrical conductors without nicking or damaging the copper wire underneath. Nicked conductors are weaker and can overheat at the damage point. Electricians use wire strippers calibrated for specific wire gauges (14 AWG, 12 AWG, 10 AWG, etc.) to ensure clean, consistent stripping." },
+                    { name: "Voltage Testers (Non-Contact)", desc: "Detect the presence of AC voltage without requiring physical contact with a conductor. The tester is held near an outlet, wire, or panel terminal and indicates the presence of live voltage through a beep or light. Invaluable as a first-check safety tool — they do not replace multimeters for precise measurements but provide a quick and safe initial check." },
+                    { name: "Insulated Screwdrivers and Hand Tools", desc: "All hand tools used by electricians must be properly insulated to prevent electrical shock when working near energized conductors. Electricians use VDE-rated insulated tools that are rated for use on circuits up to 1,000 volts AC. Using non-insulated tools near live electrical components is an OSHA violation and a serious safety hazard." },
+                    { name: "Cable and Conduit Tools", desc: "Installing wiring requires: cable cutters for cleanly cutting heavy wire without deforming conductors, conduit benders for accurately bending metal conduit to precise angles, fish tapes and push rods for pulling wire through conduit and wall cavities, and cable staples and clamps for securing wiring runs." },
+                    { name: "Electrical Drills and Hole-Making Tools", desc: "Heavy-duty right-angle drills, corded and cordless hammer drills, and hole saw kits to drill through studs, joists, and masonry to run wiring through structures. Self-feed spade bits and auger bits for drilling large-diameter holes through wood framing for cable runs." },
+                    { name: "Safety Equipment and PPE", desc: "Insulated rubber gloves rated for the voltage being worked with (Class 00 through Class 4), safety glasses or face shields when working near energized panels, flame-resistant (FR) clothing when working on or near energized equipment, hard hats on construction sites, and arc flash suits (full body protection) for high-voltage work." },
+                  ].map(({ name, desc }) => (
+                    <div key={name} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{name}</p>
+                      <p className="text-sm">{desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  <strong>Tool Safety Note:</strong> Before beginning any electrical work, the circuit must be verified de-energized using a calibrated voltage tester or multimeter, and locked out/tagged out per OSHA 29 CFR 1910.147. Never rely solely on a flipped breaker to assume a circuit is dead — always verify with a meter.
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "electrical-safety",
+        label: "Safety & Compliance",
+        icon: ShieldCheck,
+        sections: [
+          {
+            title: "Electrical Safety Procedures",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>All electrical work must begin with de-energizing the relevant circuit at the breaker, verifying de-energization with a calibrated tester, and applying <strong className="text-foreground">lockout/tagout (LOTO)</strong> procedures before any work is performed on or near potentially energized conductors.</li>
+                  <li>The <strong className="text-foreground">'one-hand rule'</strong> is practiced when working near energized equipment — keeping one hand away from conductive surfaces at all times reduces the risk of current passing through the chest and heart.</li>
+                  <li>Only trained and licensed personnel should perform electrical work. Even seemingly simple tasks like replacing a circuit breaker in a panel involve exposure to bus bars that remain energized even when all breakers are off.</li>
+                  <li>Arc flash assessments should be performed on commercial and industrial electrical equipment before any work, and appropriate arc flash PPE selected based on the incident energy analysis.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Proper Use of Personal Protective Equipment",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Insulated rubber gloves must be inspected for holes, cuts, and deterioration before every use. Gloves that fail the air inflation test must be removed from service immediately.</li>
+                  <li>Eye protection (safety glasses or face shields) must be worn when working near energized conductors, drilling, cutting, or performing any operation that could result in debris entering the eyes.</li>
+                  <li>Arc-rated FR clothing must be worn when working on or near energized electrical equipment where an arc flash hazard exists.</li>
+                  <li>Hard hats, high-visibility vests, and steel-toed boots are required PPE on construction sites.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Compliance with Electrical Codes and Regulations",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>All electrical installations must comply with the current edition of the <strong className="text-foreground">National Electrical Code (NEC, NFPA 70)</strong> as adopted and amended by the local authority having jurisdiction (AHJ).</li>
+                  <li>Permits must be obtained from the local building department before beginning permit-required work. Unpermitted electrical work is a liability for both the contractor and the property owner and can void insurance coverage.</li>
+                  <li>All permitted work must be inspected and approved by the local building inspector before being concealed in walls, closed up, or energized for permanent use.</li>
+                  <li>Electricians must maintain their state license and required continuing education credits. Allowing a license to lapse or performing work outside the license scope is a legal violation.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Preventing Electrical Hazards",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Never use extension cords as permanent wiring. Extension cords are temporary by design and are not rated for continuous load or concealment inside walls.</li>
+                  <li>Inspect all tools and equipment before each use for damaged cords, cracked insulation, and compromised grounding. Damaged tools must be removed from service.</li>
+                  <li>Keep the work area clean and organized, particularly when working in panels and junction boxes — stray wire strands or loose conductors can cause shorts, ground faults, or connection failures.</li>
+                  <li>Report any discovered code violations or hazardous conditions to the customer in writing. Electricians have a professional and ethical obligation to disclose identified safety hazards, even if the customer did not request that system be addressed.</li>
+                  <li>Never rush electrical work. Speed increases error rates, and errors in electrical work have potentially fatal consequences.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "electrical-importance",
+        label: "Why Professional Electrical Services Matter",
+        icon: Heart,
+        sections: [
+          {
+            title: "The Importance of Professional Electrical Services",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>Professional electricians provide a value that extends far beyond fixing what is broken.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { title: "Safety", body: "Electricity is fundamentally dangerous. In the United States, electrical failures cause approximately 51,000 home fires, roughly 500 deaths, more than 1,400 injuries, and $1.3 billion in property damage every year (ESFI). The vast majority of these incidents involve improperly installed, maintained, or repaired electrical systems. Licensed electricians have completed thousands of hours of training specifically to work with electricity safely and install systems that are safe for occupants for decades." },
+                    { title: "Reliable Electrical Systems", body: "A home or business depends on its electrical system functioning reliably every day, around the clock. Professional installation by licensed electricians, using code-compliant materials and methods, produces electrical systems that perform consistently and predictably. Proper wire sizing ensures conductors never overheat. Proper connection methods ensure joints remain secure. Correct panel sizing ensures the system has headroom for future loads." },
+                    { title: "Code Compliance", body: "Electrical code compliance is not bureaucratic red tape — it is the crystallized result of decades of engineering research, incident investigations, and professional experience. Code-compliant electrical work is required for permit approval, homeowner insurance coverage, mortgage qualification, and property sale. Unpermitted or non-compliant electrical work can prevent a home from being sold, require expensive correction, or result in insurance claims being denied." },
+                    { title: "Preventing Electrical Fires", body: "The most common fire causes include arc faults in deteriorated wiring, overloaded circuits, improperly installed connections that create resistance heating, and improper use of extension cords. Professional electricians address all of these risk factors: they install AFCI breakers that detect arcing before it starts a fire, size circuits properly to prevent overloading, make connections correctly using appropriate materials, and advise customers against unsafe practices." },
+                    { title: "Long-Term System Maintenance", body: "Like all building systems, electrical systems require periodic professional attention. Connections loosen with thermal cycling. Panel components age and can fail. Code requirements evolve, and older systems may lack protections now considered standard (GFCI and AFCI protection, for example). Professional electricians who establish ongoing service relationships provide the ongoing inspection and maintenance that keeps electrical systems safe for the life of the building." },
+                  ].map(({ title, body }) => (
+                    <div key={title} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{title}</p>
+                      <p className="text-sm">{body}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-muted/50 border rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Final Note for New Team Members</p>
+                  <p>The electrical services industry is built on trust, technical excellence, and an unwavering commitment to safety. Every team member — from the apprentice electrician to the virtual assistant scheduling appointments — plays a role in delivering the professional, reliable, and safe service that our customers depend on. Take pride in being part of a team that protects people's homes, businesses, and lives. Welcome aboard.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  }
+];
+
 export const docsData: Record<string, DocGroup[]> = {
   home: homeSections,
   onboarding: onboardingSections,
@@ -3844,6 +5651,9 @@ export const docsData: Record<string, DocGroup[]> = {
   hvac: hvacSections,
   carpetCleaning: carpetCleaningSections,
   cleaningBusiness: cleaningBusinessSections,
+  pestControl: pestControlSections,
+  poolCleaning: poolCleaningSections,
+  electricalServices: electricalServicesSections,
 };
 
 export const TOP_LINKS = [
@@ -3894,6 +5704,27 @@ export const TOP_LINKS = [
     label: "Cleaning Business",
     icon: Star,
     title: "Cleaning Business Guide",
+    desc: "Training Resource",
+  },
+  {
+    id: "pestControl",
+    label: "Pest Control Business",
+    icon: Bug,
+    title: "Pest Control Guide",
+    desc: "Training Resource",
+  },
+  {
+    id: "poolCleaning",
+    label: "Pool Cleaning Business",
+    icon: Waves,
+    title: "Pool Cleaning Guide",
+    desc: "Training Resource",
+  },
+  {
+    id: "electricalServices",
+    label: "Electrical Services Business",
+    icon: Plug,
+    title: "Electrical Services Guide",
     desc: "Training Resource",
   },
 ];
