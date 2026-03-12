@@ -1,4 +1,4 @@
-import { BookOpen, CreditCard, ShieldCheck, FileText, CheckCircle, Clock, Key, LucideIcon, List, Users, Calendar, Mic, Plane, Mail, MessageSquare, ShoppingBag, Target, Shield, Heart, Zap, Coffee, Phone, PlaneTakeoff, Globe, Home, CreditCard as CardIcon } from "lucide-react";
+import { BookOpen, CreditCard, ShieldCheck, FileText, CheckCircle, Clock, Key, LucideIcon, List, Users, Calendar, Mic, Plane, Mail, MessageSquare, ShoppingBag, Target, Shield, Heart, Zap, Coffee, Phone, PlaneTakeoff, Globe, Home, Pencil, Send, AlertTriangle, CreditCard as CardIcon, Thermometer, Wind, Wrench, AlertCircle, Info, Sparkles, Droplets } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ReactNode } from "react";
 
@@ -24,6 +24,34 @@ export const onboardingSections: DocGroup[] = [
     title: "ONBOARDING",
     items: [
       {
+        id: "onboarding-vision",
+        label: "Vision & Mission",
+        icon: Globe,
+        sections: [
+          {
+            title: "Our Vision",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p className="text-lg italic font-serif leading-relaxed text-foreground/80">
+                  "We imagine a world where running a business feels easier, so owners can focus on what they love and grow with confidence."
+                </p>
+                <p>What drives us every single day at TalentMucho is the commitment to simplify operations for business owners.</p>
+              </div>
+            )
+          },
+          {
+            title: "Our Mission",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p className="text-lg italic font-serif leading-relaxed text-foreground/80">
+                  "Our mission is to make business owners' lives easier by providing support that simplifies operations and supports growth."
+                </p>
+              </div>
+            )
+          }
+        ]
+      },
+      {
         id: "onboarding-setup",
         label: "Onboarding Setup",
         icon: BookOpen,
@@ -33,10 +61,10 @@ export const onboardingSections: DocGroup[] = [
             content: (
               <div className="space-y-2 text-muted-foreground">
                 <p>
-                  Create your company email, format is <code className="bg-muted px-1.5 py-0.5 rounded text-foreground">yourname.avs@gmail.com</code> (example: <code className="bg-muted px-1.5 py-0.5 rounded text-foreground">juandelacruz.avs@gmail.com</code>).
+                  Create your company email, format is <code className="bg-muted px-1.5 py-0.5 rounded text-foreground">yourname.tm@gmail.com</code> (example: <code className="bg-muted px-1.5 py-0.5 rounded text-foreground">juandelacruz.tm@gmail.com</code>).
                 </p>
                 <div className="p-4 bg-destructive/10 text-destructive border border-destructive/20 rounded-lg">
-                  <p className="font-medium">This new email will be utilized for client and AVSPH communications. You are not allowed to use personal email.</p>
+                  <p className="font-medium">This new email will be utilized for client and TalentMucho communications. You are not allowed to use personal email.</p>
                 </div>
               </div>
             )
@@ -45,7 +73,7 @@ export const onboardingSections: DocGroup[] = [
             title: "2. Fill out Database",
             content: (
               <div className="space-y-4 text-muted-foreground">
-                <p>Please fill out the AVSPH VA Database, the information gathered is solely for agency purposes.</p>
+                <p>Please fill out the TalentMucho VA Database, the information gathered is solely for agency purposes.</p>
                 <a
                   href="https://docs.google.com/forms/d/e/1FAIpQLSch8623fnUZMxeU3l1TU47Amxg70qnNbz_SmBYhc3jKssks-g/viewform"
                   target="_blank"
@@ -61,7 +89,7 @@ export const onboardingSections: DocGroup[] = [
             title: "3. Inform HR",
             content: (
               <div className="space-y-4 text-muted-foreground">
-                <p>Inform HR of your new email by sending an email to <a href="mailto:admin@advancedvirtualstaff.com" className="text-primary hover:underline">admin@advancedvirtualstaff.com</a></p>
+                <p>Inform HR of your new email by sending an email to <a href="mailto:admin@talentmucho.com" className="text-primary hover:underline">admin@talentmucho.com</a></p>
 
                 <div className="bg-muted/50 p-4 rounded-lg border font-mono text-sm space-y-4 text-foreground relative">
                   <div>
@@ -84,11 +112,10 @@ export const onboardingSections: DocGroup[] = [
             title: "4. Client Kick-off & Hand-off",
             content: (
               <div className="space-y-4 text-muted-foreground mt-4 p-4 border border-dashed rounded-lg bg-muted/20">
-                <p className="italic">Note: Placeholders for client introduction process.</p>
-                <ul className="list-disc pl-5 space-y-2">
-                  <li><strong className="text-foreground">Introduction:</strong> How to initiate the first communication with your client.</li>
-                  <li><strong className="text-foreground">Scheduling:</strong> Arranging the initial kick-off call.</li>
-                  <li><strong className="text-foreground">First Week Expectations:</strong> What to prepare for in your first 5 days.</li>
+                <ul className="list-disc pl-5 space-y-2 text-foreground/80">
+                  <li><strong>Introduction:</strong> How to initiate the first communication with your client.</li>
+                  <li><strong>Scheduling:</strong> Arranging the initial kick-off call.</li>
+                  <li><strong>First Week Expectations:</strong> What to prepare for in your first 5 days.</li>
                 </ul>
               </div>
             )
@@ -108,24 +135,45 @@ export const onboardingSections: DocGroup[] = [
           {
             title: "Tools & Work Setup",
             content: (
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <p className="font-semibold text-primary">MUST HAVE:</p>
-                  <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
-                    <li>Desktop/laptop with reliable specs</li>
-                    <li>20 Mbps stable internet & backup connection</li>
-                    <li>USB noise-cancelling headset with mic</li>
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 border rounded-lg bg-primary/5">
+                    <p className="font-semibold text-primary mb-2 flex items-center gap-2">
+                       <Home className="w-4 h-4" /> Hardware
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                      <li>Desktop or laptop with reliable specifications</li>
+                      <li>USB noise-cancelling headset with microphone</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 border rounded-lg bg-primary/5">
+                    <p className="font-semibold text-primary mb-2 flex items-center gap-2">
+                       <Zap className="w-4 h-4" /> Internet
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                      <li>Minimum 20 Mbps stable connection</li>
+                      <li>Always have a backup internet ready</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="p-4 border rounded-lg bg-primary/5">
+                  <p className="font-semibold text-primary mb-2 flex items-center gap-2">
+                     <Coffee className="w-4 h-4" /> Workspace
+                  </p>
+                  <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
                     <li>Quiet, professional work environment</li>
+                    <li>Free from background noise and distractions</li>
                   </ul>
                 </div>
 
                 <div className="mt-4 p-4 border border-dashed rounded-lg bg-muted/20 text-muted-foreground">
-                  <h4 className="font-semibold text-foreground mb-2">Team Logger Setup</h4>
-                  <p className="italic mb-2">Note: Placeholder for Team Logger setup instructions.</p>
+                  <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <Clock className="w-4 h-4" /> Team Logger Setup
+                  </h4>
                   <ul className="list-disc pl-5 space-y-1">
-                    <li>Where to download the application</li>
-                    <li>How to log in using your AVS credentials</li>
-                    <li>Configuring idle time and screenshot settings</li>
+                    <li>Download application as instructed by HR</li>
+                    <li>Log in using TalentMucho credentials</li>
+                    <li>Configure idle time and screenshot settings</li>
                   </ul>
                 </div>
               </div>
@@ -134,28 +182,26 @@ export const onboardingSections: DocGroup[] = [
           {
             title: "Work Hours & Schedule",
             content: (
-              <div className="space-y-2 text-muted-foreground">
-                <p>Shifts typically run from 11 PM to 9 AM PH time, but can vary per client.</p>
-                <p>Changes require mutual agreement and AVS approval.</p>
-                <p>You may be assigned new clients - each change comes with a separate contract.</p>
-              </div>
-            ),
-          },
-          {
-            title: "Attendance & Downtime",
-            content: (
-              <div className="space-y-2 text-muted-foreground">
-                <p>Notify HR via WhatsApp (direct) for absences, lateness, or emergencies.</p>
-                <p>All planned leaves must be requested at least 1 month in advance.</p>
-                <p>Sick/personal leaves: Max of 2 consecutive days, up to 5 paid leaves per year (after 1 year).</p>
-
-                <div className="mt-4 p-4 border border-dashed rounded-lg bg-muted/20">
-                  <h4 className="font-semibold text-foreground mb-2">How to Request Leave</h4>
-                  <p className="italic mb-2">Note: Placeholder for direct leave filing instructions.</p>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="p-4 text-center border rounded-lg bg-muted/30">
+                    <div className="text-2xl font-bold text-primary italic">11PM-9AM</div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Typical Shift (PH)</div>
+                  </div>
+                  <div className="p-4 text-center border rounded-lg bg-muted/30">
+                    <div className="text-2xl font-bold text-primary italic">8 hrs</div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Full-Time Daily</div>
+                  </div>
+                  <div className="p-4 text-center border rounded-lg bg-muted/30">
+                    <div className="text-2xl font-bold text-primary italic">5 days</div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Per Week</div>
+                  </div>
+                </div>
+                <div className="space-y-2 text-muted-foreground">
                   <ul className="list-disc pl-5 space-y-1 text-sm">
-                    <li>Where to find the Leave Request Form / Email template</li>
-                    <li>Who needs to approve the request (HR and Client)</li>
-                    <li>Guidelines for emergency versus scheduled leaves</li>
+                    <li>Shift hours vary per client — confirm exact schedule.</li>
+                    <li>Changes require mutual agreement and management approval.</li>
+                    <li>New client = new updated contract.</li>
                   </ul>
                 </div>
               </div>
@@ -164,14 +210,84 @@ export const onboardingSections: DocGroup[] = [
           {
             title: "Daily Operations & Reporting",
             content: (
-              <div className="space-y-2 text-muted-foreground">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Login/Logout daily in the AVS WhatsApp group.</li>
-                  <li>Submit daily EODs (End of Day reports) with completed tasks and work hours.</li>
-                  <li>Use Team Logger unless the client opts out.</li>
-                </ul>
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 border rounded-lg">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                       <Phone className="w-4 h-4 text-primary" /> Login / Logout
+                    </h4>
+                    <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                      <li>Log IN in the WhatsApp group</li>
+                      <li>Log OUT at end of shift</li>
+                      <li>Use Team Logger for time tracking</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 border rounded-lg">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                       <Mail className="w-4 h-4 text-primary" /> EOD Submission
+                    </h4>
+                    <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                      <li>Send to: <code className="text-foreground">eod@talentmucho.com</code></li>
+                      <li>Subject: [Date] in client timezone</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="bg-muted/50 p-6 rounded-xl border border-border">
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">EOD Report Template</h4>
+                  <div className="space-y-4 font-mono text-xs text-foreground leading-relaxed">
+                    <div className="text-primary/60 font-sans italic border-b pb-2 mb-2">// Subject Line</div>
+                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Subject:</span> [Date] — [Client TZ]</div>
+                    <br />
+                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Logout:</span> [Date]</div>
+                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Name:</span> [Your Name]</div>
+                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Break:</span> [Duration]</div>
+                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Appt:</span> [Yes/No]</div>
+                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Hours:</span> [Rendered]</div>
+                    <br />
+                    <div>
+                      <div className="text-muted-foreground underline mb-1">Tasks Completed:</div>
+                      <div className="text-primary italic pl-4">- [Task 1]</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ),
+            )
+          },
+          {
+            title: "Emergency Contact Flow",
+            content: (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 font-semibold">
+                      <MessageSquare className="w-4 h-4 text-primary" /> WhatsApp
+                    </div>
+                    <div className="space-y-4 border-l-2 border-primary/20 pl-4 py-1">
+                      <div>
+                        <div className="text-sm font-medium">Step 1 — DM HR</div>
+                        <p className="text-xs text-muted-foreground">Direct message HR (not in group).</p>
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium">Step 2 — "Emergency" tag</div>
+                        <p className="text-xs text-muted-foreground">Start with "Emergency" for urgent items.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 font-semibold">
+                      <Target className="w-4 h-4 text-primary" /> Escalation
+                    </div>
+                    <div className="space-y-2 border-l-2 border-primary/20 pl-4 py-1 text-sm text-muted-foreground">
+                      <p>1. Immediate Supervisor</p>
+                      <p>2. HR via WhatsApp</p>
+                      <p>3. Operations Manager</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
           },
           {
             title: "Meetings & Check-ins",
@@ -216,39 +332,97 @@ export const onboardingSections: DocGroup[] = [
         icon: ShieldCheck,
         sections: [
           {
-            title: "Confidentiality",
+            title: "Confidentiality & NDA",
             content: (
-              <div className="space-y-2 text-muted-foreground">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>All client and company information is strictly confidential.</li>
-                  <li>Do not disclose or use confidential info without written consent from AVS.</li>
-                  <li>All files, documents, and records must be returned upon contract termination.</li>
-                  <li><span className="font-medium text-destructive">Breaches can result in liquidated damages up to P500,000</span></li>
+              <div className="space-y-4 text-muted-foreground">
+                <p className="text-sm">Protecting client and company information is a core legal obligation. This includes client data, business strategies, and internal documents.</p>
+                <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive flex items-start gap-3">
+                  <Shield className="w-5 h-5 mt-0.5 shrink-0" />
+                  <div className="text-sm">
+                    <strong>Legal Penalty:</strong> Breach of confidentiality can result in liquidated damages of up to <strong>₱500,000</strong>.
+                  </div>
+                </div>
+                <ul className="list-disc pl-5 space-y-1 text-sm">
+                  <li>Return all files/documents upon contract termination.</li>
+                  <li>Do not use info for personal gain or for a third party.</li>
+                  <li>Exception: Info that becomes public through no fault of yours.</li>
                 </ul>
               </div>
             ),
           },
           {
-            title: "Restrictions & Compliance",
+            title: "Non-Compete & Non-Solicitation",
             content: (
-              <div className="space-y-2 text-muted-foreground">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Do NOT work for AVS clients outside the company.</li>
-                  <li>Do NOT engage with AVS competitors during your contract.</li>
-                  <li>Do NOT solicit or accept side jobs from clients or co-VAS.</li>
-                  <li>Do NOT receive direct payments from clients.</li>
-                </ul>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 border rounded-lg">
+                    <h4 className="font-semibold text-foreground mb-1 flex items-center gap-2">
+                       <Target className="w-4 h-4" /> Non-Compete
+                    </h4>
+                    <p className="text-xs italic mb-2">During contract + 2 years after</p>
+                    <ul className="list-disc pl-4 space-y-1 text-xs">
+                      <li>No similar businesses to TalentMucho</li>
+                      <li>Applies to current/former client businesses</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 border rounded-lg">
+                    <h4 className="font-semibold text-foreground mb-1 flex items-center gap-2">
+                       <Users className="w-4 h-4" /> Non-Solicitation
+                    </h4>
+                    <p className="text-xs italic mb-2">2 years after contract ends</p>
+                    <ul className="list-disc pl-4 space-y-1 text-xs">
+                      <li>Do not recruit any TalentMucho staff/agents</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="p-4 bg-muted/40 text-xs rounded-lg border border-dashed">
+                  <strong>Financial Penalties:</strong> TalentMucho staff hired through you → ₱500,000 damages. Client solicited away → reimburse 2 years of lost profits.
+                </div>
+              </div>
+            ),
+          },
+          {
+            title: "Restrictions (The Four Absolutes)",
+            content: (
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    "Do NOT work for clients outside TalentMucho",
+                    "Do NOT engage with competitors",
+                    "Do NOT solicit or accept side jobs",
+                    "Do NOT receive direct client payments"
+                  ].map((text, i) => (
+                    <div key={i} className="p-3 border rounded-lg bg-destructive/[0.03] text-destructive flex items-center gap-2 text-xs font-medium">
+                      <CheckCircle className="w-4 h-4 shrink-0 opacity-50" />
+                      {text}
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-primary/5 rounded-lg border-l-4 border-primary">
+                  <p className="text-xs text-muted-foreground italic">"When you follow these guidelines, you protect yourself, your clients, and the entire team."</p>
+                </div>
               </div>
             ),
           },
           {
             title: "Termination Guidelines",
             content: (
-              <div className="space-y-2 text-muted-foreground">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li><strong className="text-foreground">Voluntary:</strong> Requires 14-day notice and fulfillment of duties - or payout will be forfeited.</li>
-                  <li><strong className="text-foreground">Involuntary:</strong> Breach of contract or unethical behavior may lead to immediate termination.</li>
-                </ul>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center p-3 border rounded-lg bg-background shadow-sm">
+                    <div className="text-sm font-semibold text-foreground">Voluntary Notice</div>
+                    <div className="text-sm font-bold text-primary italic">14 Days Required</div>
+                  </div>
+                  <p className="text-xs pl-1">Failure to complete notice = final payout forfeited. AWOL is grounds for immediate termination without pay.</p>
+                </div>
+                <div className="p-4 border border-dashed rounded-lg bg-muted/20">
+                  <h4 className="font-semibold text-foreground mb-2 text-xs uppercase tracking-tighter italic">Involuntary (Immediate)</h4>
+                  <ul className="list-disc pl-5 space-y-1 text-xs">
+                    <li>Inducing employees or clients to leave</li>
+                    <li>Acts of disloyalty or fraud</li>
+                    <li>Disclosing confidential information</li>
+                  </ul>
+                </div>
               </div>
             ),
           },
@@ -274,7 +448,7 @@ export const onboardingSections: DocGroup[] = [
                   <h4 className="font-semibold text-foreground mb-2">Invoice Submission Instructions</h4>
                   <p className="italic mb-2 text-sm">Note: Placeholder for invoicing procedure.</p>
                   <ul className="list-disc pl-5 space-y-2 text-sm">
-                    <li><strong className="text-foreground">Where to send:</strong> billing@advancedvirtualstaff.com</li>
+                    <li><strong className="text-foreground">Where to send:</strong> billing@talentmucho.com</li>
                     <li><strong className="text-foreground">Subject Line Format:</strong> Invoice - [Your Name] - [Cut-off Date]</li>
                     <li><strong className="text-foreground">Cut-off Dates:</strong> 15th and 30th of the month.</li>
                     <li><strong className="text-foreground">Template:</strong> Link to approved invoice template.</li>
@@ -306,18 +480,41 @@ export const onboardingSections: DocGroup[] = [
           {
             title: "Leave Entitlement",
             content: (
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1 p-4 border rounded-lg bg-primary/5 border-primary/20">
-                  <h4 className="font-semibold text-primary mb-2">Annual Allowance</h4>
-                  <p className="text-3xl font-bold">5 Days</p>
-                  <p className="text-sm text-muted-foreground mt-1">Paid sick/personal leaves</p>
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {[
+                    { val: "5", unit: "days", lbl: "Paid Leaves/Year" },
+                    { val: "2", unit: "days", lbl: "Max Consecutive" },
+                    { val: "1", unit: "mo", lbl: "Notice Required" },
+                    { val: "1", unit: "yr", lbl: "Service Required" },
+                  ].map((s, i) => (
+                    <div key={i} className="p-3 text-center border rounded-lg bg-muted/30">
+                      <div className="text-2xl font-bold text-primary">{s.val}<span className="text-sm font-normal ml-1 text-muted-foreground">{s.unit}</span></div>
+                      <div className="text-[10px] uppercase tracking-wide text-muted-foreground mt-1">{s.lbl}</div>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex-1 p-4 border rounded-lg">
-                  <h4 className="font-semibold mb-2">Rules</h4>
-                  <ul className="text-sm space-y-2 text-muted-foreground list-disc pl-4">
-                    <li>Max 2 days consecutively</li>
-                    <li>Must be filed 1 month in advance</li>
-                  </ul>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 border rounded-lg">
+                    <h4 className="font-semibold mb-2">Eligibility</h4>
+                    <ul className="text-sm space-y-1 text-muted-foreground list-disc pl-4">
+                      <li>Full-time contractor: 8 hrs/day, 5 days/week</li>
+                      <li>Completed 1 full year of continuous active service</li>
+                      <li>File request at least 1 month in advance (except emergencies)</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 border rounded-lg">
+                    <h4 className="font-semibold mb-2">How to File</h4>
+                    <ul className="text-sm space-y-1 text-muted-foreground list-disc pl-4">
+                      <li>Direct WhatsApp to HR (not the group chat)</li>
+                      <li>Format: <strong className="text-foreground">[Your Name] – Leave Request</strong> with dates and reason</li>
+                      <li>Attach proof if sick or emergency (supporting docs help approval)</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg text-amber-700 dark:text-amber-400 text-sm flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
+                  <div><strong>Year of Stay Reset:</strong> Periods where you were "On Pause" do NOT count toward your Year of Stay and cause your count to reset upon return.</div>
                 </div>
               </div>
             ),
@@ -325,29 +522,67 @@ export const onboardingSections: DocGroup[] = [
           {
             title: "Conversion Rate Policy",
             content: (
-              <div className="rounded-md border overflow-hidden">
-                <Table>
-                  <TableHeader className="bg-muted/50">
-                    <TableRow>
-                      <TableHead className="font-semibold">If Foreign Exchange Rate is</TableHead>
-                      <TableHead className="font-semibold">Conversion Rate Used</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium">Below Php 56</TableCell>
-                      <TableCell>Php 53</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">Exactly Php 56</TableCell>
-                      <TableCell>Php 54</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">Exactly Php 57</TableCell>
-                      <TableCell>Php 55</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
+              <div className="space-y-4">
+                <div className="rounded-md border overflow-hidden">
+                  <Table>
+                    <TableHeader className="bg-muted/50">
+                      <TableRow>
+                        <TableHead className="font-semibold">If Foreign Exchange Rate is</TableHead>
+                        <TableHead className="font-semibold text-right">Conversion Rate Used</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>Lower than ₱56</TableCell>
+                        <TableCell className="text-right font-bold text-primary">₱53</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>₱56</TableCell>
+                        <TableCell className="text-right font-bold text-primary">₱54</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>₱57</TableCell>
+                        <TableCell className="text-right font-bold text-primary">₱55</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+                <div className="p-3 bg-muted/40 rounded-lg text-xs flex items-center gap-2">
+                  <Clock className="w-4 h-4 opacity-50" />
+                  Rates are reviewed periodically based on market stability.
+                </div>
+              </div>
+            ),
+          },
+          {
+            title: "Cash Advance Policy",
+            content: (
+              <div className="space-y-6 text-muted-foreground">
+                <div className="p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-xl text-amber-700 dark:text-amber-400">
+                  <div className="flex gap-2">
+                    <Zap className="w-5 h-5 shrink-0" />
+                    <div className="text-sm"><strong>Emergency only:</strong> Requests without proof will NOT be processed.</div>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold text-foreground">Eligibility</h4>
+                    <ul className="list-disc pl-5 text-xs space-y-1">
+                      <li>Min. 6 months tenure</li>
+                      <li>Max. 50% of upcoming payment</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold text-foreground">Regulations</h4>
+                    <ul className="list-disc pl-5 text-xs space-y-1">
+                      <li>Genuine emergencies only</li>
+                      <li>Supporting documents required</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <p className="text-[10px] uppercase font-bold text-destructive">Misuse may result in termination.</p>
               </div>
             )
           }
@@ -371,7 +606,7 @@ export const onboardingSections: DocGroup[] = [
                 <div className="bg-muted/30 p-4 rounded-lg border">
                   <h4 className="font-semibold text-foreground mb-2">How to Login:</h4>
                   <ol className="list-decimal pl-5 space-y-2">
-                    <li>Navigate to the AVS Dashboard Login Page.</li>
+                    <li>Navigate to the TalentMucho Dashboard Login Page.</li>
                     <li>Ensure the <strong className="text-foreground">Staff</strong> tab is selected at the top of the login form.</li>
                     <li>Enter the Email Address and temporary Password from the HR email.</li>
                     <li>Click <strong className="text-foreground">Sign In</strong>.</li>
@@ -445,13 +680,13 @@ export const homeSections: DocGroup[] = [
         icon: Home,
         sections: [
           {
-            title: "Welcome to AVS Documentation",
+            title: "Welcome to TalentMucho Documentation",
             content: (
               <div className="space-y-8 py-4">
                 <div className="space-y-4 text-center">
-                  <h2 className="text-4xl font-extrabold tracking-tight text-primary">AVS Command Center</h2>
+                  <h2 className="text-4xl font-extrabold tracking-tight text-primary">TalentMucho Command Center</h2>
                   <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                    Your complete guide to roles, responsibilities, and operating procedures within the AVS ecosystem.
+                    Your complete guide to roles, responsibilities, and operating procedures within the TalentMucho ecosystem.
                   </p>
                 </div>
 
@@ -480,6 +715,530 @@ export const homeSections: DocGroup[] = [
 
                 <div className="bg-muted/30 p-8 rounded-2xl border border-dashed text-center">
                    <p className="text-muted-foreground italic">"Simplicity is the ultimate sophistication. Use these docs to master your craft."</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "SOP PLAYBOOK",
+    items: [
+      {
+        id: "sop-intro",
+        label: "What is an SOP?",
+        icon: FileText,
+        sections: [
+          {
+            title: "Definition & Purpose",
+            content: (
+              <div className="space-y-6 text-muted-foreground">
+                <p className="text-lg italic font-serif leading-relaxed text-foreground/80">
+                  &quot;An SOP is a documented, step-by-step guide that explains exactly how to perform a specific task or process — consistently, correctly, and without needing to ask questions.&quot;
+                </p>
+                <p className="text-sm">Think of it as a manual for your role. If you were suddenly unavailable, a new VA should be able to pick up your SOP and do your job without missing a beat.</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="p-4 border rounded-xl bg-card">
+                    <h4 className="font-bold text-foreground mb-2">🎯 Purpose</h4>
+                    <ul className="text-xs space-y-1 list-disc pl-4">
+                      <li>Tasks done the same way every time</li>
+                      <li>Reduce errors and miscommunication</li>
+                      <li>Faster new VA training</li>
+                      <li>Protect client business processes</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 border rounded-xl bg-card">
+                    <h4 className="font-bold text-foreground mb-2">🏆 Benefits to You</h4>
+                    <ul className="text-xs space-y-1 list-disc pl-4">
+                      <li>Shows professionalism & ownership</li>
+                      <li>Protects you (&quot;I followed the SOP&quot;)</li>
+                      <li>Builds credibility with the client</li>
+                      <li>Demonstrates initiative & growth</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 border rounded-xl bg-card">
+                    <h4 className="font-bold text-foreground mb-2">⚡ When to Write One</h4>
+                    <ul className="text-xs space-y-1 list-disc pl-4">
+                      <li>When you start a recurring task</li>
+                      <li>When client requests documentation</li>
+                      <li>When a process has multiple steps</li>
+                      <li>When onboarding a new team member</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="p-4 bg-primary/5 rounded-lg border-l-4 border-primary text-sm">
+                  <strong className="text-foreground">Your SOP = Your Work Standard.</strong> A well-written SOP protects you, helps your replacement understand your work, and shows your client you are organized and professional.
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "sop-writing",
+        label: "How to Write an SOP",
+        icon: Pencil,
+        sections: [
+          {
+            title: "The 5-Phase Writing Process",
+            content: (
+              <div className="space-y-6">
+                <div className="flex flex-wrap gap-0 mb-4 overflow-x-auto pb-2">
+                  {[
+                    { n: "1", label: "Identify the Process", desc: "Pick one task to document" },
+                    { n: "2", label: "Do It First", desc: "Perform the task & take notes" },
+                    { n: "3", label: "Write the Steps", desc: "Use the Master Template" },
+                    { n: "4", label: "Test It", desc: "Follow your own SOP cold" },
+                    { n: "5", label: "Submit", desc: "Fill form & send for review" },
+                  ].map((step, i, arr) => (
+                    <div key={i} className="flex items-center">
+                      <div className="text-center min-w-[100px] px-2">
+                        <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center mx-auto mb-2">{step.n}</div>
+                        <div className="text-xs font-semibold text-foreground">{step.label}</div>
+                        <div className="text-[10px] text-muted-foreground mt-0.5">{step.desc}</div>
+                      </div>
+                      {i < arr.length - 1 && <div className="text-primary font-bold text-lg mx-1">→</div>}
+                    </div>
+                  ))}
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { n: 1, title: "Identify the Process to Document", sub: "Scope your SOP before writing", body: [
+                      "Choose one specific process — not a broad job description. (Good: 'How to upload leads to Mojo Dialer' — Bad: 'How I do my job')",
+                      "Make sure you fully understand the process before documenting it.",
+                      "Clarify the start and end point of the process.",
+                      "Identify all tools needed before writing."
+                    ], tip: "One SOP = One Process. If it gets too long, split it into two separate SOPs." },
+                    { n: 2, title: "Perform the Task & Capture Notes", sub: "Document as you work, not after", body: [
+                      "Do the task while writing down every action you take, no matter how small.",
+                      "Take screenshots at every major step — these go in Section 9 (Attachments).",
+                      "Note any common errors or issues you encounter — they go in Section 7.",
+                      "Record the time it takes. This helps define your KPI in Section 5."
+                    ] },
+                    { n: 3, title: "Write the SOP Using the Master Template", sub: "Open Google Docs, copy the Master Template", body: [
+                      "Fill in the header: SOP Title, Client Name, VA Name, Role, Date Created.",
+                      "Write the Purpose (Section 1) in 2–3 sentences. Answer: what and why.",
+                      "List all Tools Required (Section 2) — be specific (e.g., 'Mojo Dialer v3', not just 'dialer').",
+                      "Write numbered steps in Section 3. Each step = one action. Detailed enough that a new VA can follow without guidance.",
+                      "Include Scripts or Templates (Section 4) if any messages or emails are part of the process.",
+                      "Define your KPIs (Section 5) — e.g., '100 leads uploaded per shift'.",
+                      "Set Quality Standards (Section 6) — what does 'done correctly' look like?",
+                      "Fill out Common Issues & Solutions (Section 7) as a table.",
+                      "Add Improvement Notes (Section 8) — ideas to make the process better.",
+                      "Attach Screenshots and files (Section 9)."
+                    ] },
+                    { n: 4, title: "Test Your SOP", sub: "Follow your own instructions as if you've never done the task", body: [
+                      "Close your SOP, then reopen it fresh. Follow only what's written.",
+                      "If you find yourself guessing or needing to fill in gaps — go back and rewrite.",
+                      "Ideally, have a teammate test it too (peer review).",
+                      "Verify all screenshots match the current state of the tools."
+                    ], warn: "The Test is Required. Your Submission Form has a checkbox — 'I have tested this process.' Do not check it unless you actually have." },
+                    { n: 5, title: "Submit via the SOP Submission Form", sub: "Complete the form and send the Google Docs link", body: [
+                      "Fill out all 5 Sections of the SOP Submission Form completely.",
+                      "Paste your Google Docs link — make sure sharing is set to 'Anyone with the link can view.'",
+                      "Complete the confirmation checklist (all 5 boxes).",
+                      "Submit to HR or your designated AVS email address."
+                    ], success: "Once submitted, your SOP will be reviewed by management. You may be asked to revise — this is normal and expected." }
+                  ].map((step, i) => (
+                    <div key={i} className="border rounded-xl overflow-hidden">
+                      <div className="flex items-center gap-4 p-4 bg-muted/20">
+                        <div className="w-9 h-9 rounded-lg bg-primary text-primary-foreground font-bold flex items-center justify-center flex-shrink-0">{step.n}</div>
+                        <div>
+                          <div className="font-semibold text-foreground">{step.title}</div>
+                          <div className="text-xs text-muted-foreground">{step.sub}</div>
+                        </div>
+                      </div>
+                      <div className="p-4 space-y-2">
+                        <ul className="text-sm text-muted-foreground space-y-1 list-disc pl-5">
+                          {step.body.map((b, bi) => <li key={bi}>{b}</li>)}
+                        </ul>
+                        {'tip' in step && step.tip && (
+                          <div className="mt-3 p-3 bg-primary/5 border border-primary/20 rounded-lg text-xs text-primary">💡 {step.tip}</div>
+                        )}
+                        {'warn' in step && step.warn && (
+                          <div className="mt-3 p-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg text-xs text-amber-700 dark:text-amber-400">⚠️ {step.warn}</div>
+                        )}
+                        {'success' in step && step.success && (
+                          <div className="mt-3 p-3 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900 rounded-lg text-xs text-green-700 dark:text-green-400">✅ {step.success}</div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "sop-template",
+        label: "Template Walkthrough",
+        icon: BookOpen,
+        sections: [
+          {
+            title: "Document Header Fields",
+            content: (
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">Fill these fields at the very top of your SOP Google Doc.</p>
+                <div className="divide-y border rounded-lg overflow-hidden">
+                  {[
+                    { label: "SOP Title", desc: "The name of the specific process. Be specific. (e.g., 'Lead Extraction & Upload to Mojo Dialer')" },
+                    { label: "Client Name", desc: "The full name of your assigned client." },
+                    { label: "VA Name", desc: "Your full name as it appears in your contract." },
+                    { label: "Role", desc: "Your job title (e.g., Data Entry Specialist, Appointment Setter)." },
+                    { label: "Date Created", desc: "The date you first wrote this SOP." },
+                    { label: "Last Updated", desc: "Update this every time you revise the SOP." },
+                  ].map((f, i) => (
+                    <div key={i} className="flex gap-4 px-4 py-3 bg-background hover:bg-muted/20 transition-colors">
+                      <div className="w-32 shrink-0 text-sm font-semibold text-foreground">{f.label}</div>
+                      <div className="text-sm text-muted-foreground">{f.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "The 9 Template Sections at a Glance",
+            content: (
+              <div className="rounded-md border overflow-hidden">
+                <Table>
+                  <TableHeader className="bg-foreground text-background">
+                    <TableRow>
+                      <TableHead className="text-background font-bold w-8">#</TableHead>
+                      <TableHead className="text-background font-bold">Section Name</TableHead>
+                      <TableHead className="text-background font-bold">What Goes Here</TableHead>
+                      <TableHead className="text-background font-bold text-right">Required?</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { n: 1, name: "Purpose", what: "What the process is and why it matters", req: "Required", reqColor: "text-green-600 dark:text-green-400" },
+                      { n: 2, name: "Tools Required", what: "All software, platforms, and accounts used", req: "Required", reqColor: "text-green-600 dark:text-green-400" },
+                      { n: 3, name: "Step-by-Step Process", what: "Numbered actions from start to finish", req: "Required", reqColor: "text-green-600 dark:text-green-400" },
+                      { n: 4, name: "Scripts / Templates Used", what: "Full message scripts, email templates", req: "If applicable", reqColor: "text-amber-600 dark:text-amber-400" },
+                      { n: 5, name: "KPIs Connected", what: "Measurable performance indicators", req: "Required", reqColor: "text-green-600 dark:text-green-400" },
+                      { n: 6, name: "Quality Standards", what: "What 'done right' looks like", req: "Required", reqColor: "text-green-600 dark:text-green-400" },
+                      { n: 7, name: "Common Issues & Solutions", what: "Issue-solution table", req: "Required", reqColor: "text-green-600 dark:text-green-400" },
+                      { n: 8, name: "Improvement Notes", what: "Ideas to make the process better", req: "Recommended", reqColor: "text-amber-600 dark:text-amber-400" },
+                      { n: 9, name: "Attachments", what: "Screenshots, screen recordings, files", req: "Required", reqColor: "text-green-600 dark:text-green-400" },
+                    ].map((row) => (
+                      <TableRow key={row.n}>
+                        <TableCell><span className="px-2 py-0.5 bg-primary/10 text-primary rounded text-xs font-bold">{row.n}</span></TableCell>
+                        <TableCell className="font-semibold">{row.name}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{row.what}</TableCell>
+                        <TableCell className={`text-right text-xs font-bold ${row.reqColor}`}>{row.req}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "sop-sections",
+        label: "All 9 Sections Explained",
+        icon: List,
+        sections: [
+          {
+            title: "Deep Dive — Each Section Explained",
+            content: (
+              <div className="space-y-3">
+                {[
+                  { emoji: "📌", n: 1, title: "Purpose", color: "border-l-primary bg-primary/5", body: "Write 2–4 sentences explaining (1) what process this SOP covers and (2) why it is important to the client's business. Avoid vague language. Be specific: 'This ensures leads are entered without duplicates, allowing the client to make calls efficiently.'" },
+                  { emoji: "🔧", n: 2, title: "Tools Required", color: "border-l-primary bg-primary/5", body: "List every tool, platform, account, or software used. Be specific — don't write 'spreadsheet', write 'Microsoft Excel / Google Sheets'. Consider: CRM, Email Platform, Dialer, Cloud Storage, and client-specific tools." },
+                  { emoji: "⚡", n: 3, title: "Step-by-Step Process (Most Important)", color: "border-l-amber-400 bg-amber-50 dark:bg-amber-950/20", body: "Use numbered steps. Each step = ONE action. Start each step with a verb. Be detailed enough that a brand-new VA who has never done this job can follow it without asking anything. Good: '1. Open Mojo Dialer and log in. 2. Click Lists in the top nav. 3. Select Import New List.' Bad: '1. Log in and upload the leads.'" },
+                  { emoji: "📝", n: 4, title: "Scripts / Templates Used", color: "border-l-primary bg-primary/5", body: "If your process involves sending emails, messages, or call scripts — paste the full script or template here. This makes the SOP self-contained. If no scripts are used, write 'N/A'." },
+                  { emoji: "📊", n: 5, title: "KPIs Connected", color: "border-l-green-500 bg-green-50 dark:bg-green-950/20", body: "Define measurable outcomes. Examples: Calls per day: 100 minimum. Lead upload accuracy: 100% (no duplicates). Response time: within 2 hours. Booking rate: 5 appointments per 100 calls." },
+                  { emoji: "🏅", n: 6, title: "Quality Standards", color: "border-l-primary bg-primary/5", body: "Define what 'done correctly' means. Examples: No grammar or spelling errors in client-facing messages. CRM updated within 5 minutes of each call. All leads formatted in correct column order before upload." },
+                  { emoji: "⚠️", n: 7, title: "Common Issues & Solutions", color: "border-l-destructive bg-destructive/5", body: "Fill out a table with at least 2–3 rows. Format — Issue: 'Mojo Dialer shows upload failed.' Solution: 'Check that the CSV file has no empty rows in column A. Re-save as .csv UTF-8 format and retry.' This section separates a good SOP from a great one." },
+                  { emoji: "💡", n: 8, title: "Improvement Notes", color: "border-l-primary bg-primary/5", body: "Document ideas for making the process faster, more accurate, or more automated. Examples: 'Could automate duplicate checking using Excel COUNTIF function.' 'Mojo has an API — consider bulk import integration in the future.' This shows initiative to the client." },
+                  { emoji: "📎", n: 9, title: "Attachments", color: "border-l-primary bg-primary/5", body: "Include screenshots of every key step, screen recordings if helpful, and any supporting files. Insert screenshots directly into the Google Doc below the relevant step. Naming convention: [SOPTitle]_Step[#]_Screenshot.png" },
+                ].map((s) => (
+                  <div key={s.n} className={`border-l-4 ${s.color} rounded-r-lg p-4`}>
+                    <div className="font-semibold text-foreground mb-1">{s.emoji} Section {s.n} — {s.title}</div>
+                    <div className="text-sm text-muted-foreground leading-relaxed">{s.body}</div>
+                  </div>
+                ))}
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "sop-submission",
+        label: "Submission Form Guide",
+        icon: Send,
+        sections: [
+          {
+            title: "Section 1 — VA Information",
+            content: (
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground">Identifying details — fill accurately.</p>
+                <div className="divide-y border rounded-lg overflow-hidden">
+                  {[
+                    { n: 1, label: "VA Name", desc: "Your full name as in your contract." },
+                    { n: 2, label: "Client Name", desc: "The name of your assigned client." },
+                    { n: 3, label: "Role", desc: "Your job title under this client." },
+                    { n: 4, label: "SOP Title", desc: "Match this exactly to the title at the top of your Google Doc SOP." },
+                    { n: 5, label: "Date Completed", desc: "The date you finished writing and testing the SOP (MM/DD/YYYY)." },
+                  ].map((f) => (
+                    <div key={f.n} className="flex gap-3 p-3 bg-background hover:bg-muted/20 transition-colors">
+                      <div className="w-6 h-6 rounded bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{f.n}</div>
+                      <div>
+                        <div className="text-sm font-semibold text-foreground">{f.label}</div>
+                        <div className="text-xs text-muted-foreground">{f.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Section 2 — Process Summary",
+            content: (
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground">Give reviewers context before they open the doc.</p>
+                <div className="divide-y border rounded-lg overflow-hidden">
+                  {[
+                    { n: 6, label: "What process does this SOP cover?", desc: "Write 2–3 sentences describing the process from start to finish. Be specific." },
+                    { n: 7, label: "Why is this process important?", desc: "Explain the business value — what breaks if this isn't done correctly?" },
+                    { n: 8, label: "What tools are used?", desc: "List each tool on its own bullet point. Same as Section 2 of your SOP Template." },
+                  ].map((f) => (
+                    <div key={f.n} className="flex gap-3 p-3 bg-background hover:bg-muted/20 transition-colors">
+                      <div className="w-6 h-6 rounded bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{f.n}</div>
+                      <div>
+                        <div className="text-sm font-semibold text-foreground">{f.label}</div>
+                        <div className="text-xs text-muted-foreground">{f.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Section 3 — Confirmation Checklist",
+            content: (
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground font-medium">Do NOT submit until all 5 are true.</p>
+                <div className="space-y-2">
+                  {[
+                    { label: "I have tested this process", desc: "You followed your own SOP from step 1 to the end and confirmed it works." },
+                    { label: "Screenshots are included", desc: "Each major step has a screenshot embedded or attached." },
+                    { label: "Scripts are attached", desc: "If the process involves any messages, emails, or call scripts, they are included in Section 4." },
+                    { label: "KPI is clearly defined", desc: "Section 5 of your SOP has specific, measurable performance indicators." },
+                    { label: "This SOP is ready for review", desc: "You are confident the SOP is complete, accurate, and professional." },
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-3 p-3 bg-muted/20 border rounded-lg">
+                      <div className="w-4 h-4 rounded border-2 border-primary mt-0.5 flex-shrink-0" />
+                      <div>
+                        <div className="text-sm font-semibold text-foreground">{item.label}</div>
+                        <div className="text-xs text-muted-foreground">{item.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Section 4 — SOP Link Sharing",
+            content: (
+              <div className="space-y-4">
+                <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-5">
+                  <li>Open your SOP Google Doc.</li>
+                  <li>Click <strong className="text-foreground">Share</strong> (top right) → Change access to <strong className="text-foreground">&quot;Anyone with the link&quot;</strong> → Set to <strong className="text-foreground">Viewer</strong>.</li>
+                  <li>Copy the link and paste it in Field 9 of the Submission Form.</li>
+                </ul>
+                <div className="p-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg text-amber-700 dark:text-amber-400 text-sm flex items-start gap-2">
+                  <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span><strong>Broken links will be rejected.</strong> Always test your link in an incognito browser before submitting.</span>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Section 5 — Additional Notes",
+            content: (
+              <div className="p-4 border rounded-lg bg-muted/20 text-sm text-muted-foreground">
+                Use this field to share anything the reviewer should know — limitations of the current process, areas where you need guidance, or suggestions for improvement. This is your voice. Use it.
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "sop-sample",
+        label: "Sample Submission",
+        icon: FileText,
+        sections: [
+          {
+            title: "Real Completed Submission Example",
+            content: (
+              <div className="space-y-6">
+                <div className="p-3 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900 rounded-lg text-green-700 dark:text-green-400 text-sm flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span><strong>This is a real completed submission example.</strong> Use it as your benchmark for what a good SOP submission looks like.</span>
+                </div>
+                <div className="bg-foreground text-background rounded-xl p-6 font-mono text-xs leading-loose space-y-1">
+                  <div className="text-primary/60 font-sans italic border-b border-background/10 pb-2 mb-3 text-[10px] uppercase tracking-widest">Section 1 — VA Information</div>
+                  <div><span className="text-muted-foreground">VA Name:</span> <span className="text-blue-300">Honey Faith</span></div>
+                  <div><span className="text-muted-foreground">Client Name:</span> <span className="text-blue-300">Sadek</span></div>
+                  <div><span className="text-muted-foreground">Role:</span> <span className="text-blue-300">Data Entry Specialist</span></div>
+                  <div><span className="text-muted-foreground">SOP Title:</span> <span className="text-blue-300">Lead Extraction & Upload to Mojo Dialer</span></div>
+                  <div><span className="text-muted-foreground">Date Completed:</span> <span className="text-blue-300">02/25/2026</span></div>
+
+                  <div className="text-primary/60 font-sans italic border-b border-background/10 pb-2 mb-3 mt-5 text-[10px] uppercase tracking-widest">Section 2 — Process Summary</div>
+                  <div className="text-muted-foreground">What does this cover?</div>
+                  <div className="pl-4 text-blue-300">Extracting leads from the client&apos;s Excel sheet, uploading them into Mojo Dialer, and updating the client&apos;s feedback sheet for follow-up.</div>
+                  <div className="text-muted-foreground mt-2">Why is it important?</div>
+                  <div className="pl-4 text-blue-300">Ensures all leads are entered accurately and organized so the client can call them efficiently. Prevents errors, duplicates, and miscommunication.</div>
+                  <div className="text-muted-foreground mt-2">Tools used:</div>
+                  <div className="pl-4 text-blue-300">Microsoft Excel / Google Sheets · Mojo Dialer · Google Drive · Gmail</div>
+
+                  <div className="text-primary/60 font-sans italic border-b border-background/10 pb-2 mb-3 mt-5 text-[10px] uppercase tracking-widest">Section 3 — Checklist</div>
+                  <div className="text-blue-300">✓ I have tested this process</div>
+                  <div className="text-blue-300">✓ Screenshots are included</div>
+                  <div className="text-blue-300">✓ Scripts are attached (email template)</div>
+                  <div className="text-blue-300">✓ KPI is clearly defined</div>
+                  <div className="text-blue-300">✓ This SOP is ready for review</div>
+
+                  <div className="text-primary/60 font-sans italic border-b border-background/10 pb-2 mb-3 mt-5 text-[10px] uppercase tracking-widest">Section 5 — Additional Notes</div>
+                  <div className="text-blue-300 italic">The process is fully tested and ready. Possible improvement: automate duplicate checking or consider Mojo API integration for faster uploads.</div>
+                </div>
+
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-foreground">🔍 What Makes This a Good Submission</h4>
+                  <ul className="text-sm text-muted-foreground space-y-2 list-disc pl-5">
+                    <li><strong className="text-foreground">Specific SOP Title</strong> — &quot;Lead Extraction & Upload to Mojo Dialer&quot; tells you exactly what the process is.</li>
+                    <li><strong className="text-foreground">Clear process summary</strong> — Explains what happens and in what order without being vague.</li>
+                    <li><strong className="text-foreground">Strong importance statement</strong> — Connects accuracy to a business outcome (efficient calls, no duplicates).</li>
+                    <li><strong className="text-foreground">All tools listed</strong> — Even optional tools like Gmail are noted.</li>
+                    <li><strong className="text-foreground">All 5 checkboxes confirmed</strong> — No shortcuts taken.</li>
+                    <li><strong className="text-foreground">Value-adding improvement note</strong> — Proposes automation as a future enhancement. This shows initiative.</li>
+                  </ul>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "sop-checklist",
+        label: "Pre-Submit Checklist",
+        icon: CheckCircle,
+        sections: [
+          {
+            title: "SOP Document Checklist",
+            content: (
+              <div className="space-y-2">
+                <p className="text-xs text-muted-foreground mb-3">Inside your Google Doc — every box must be true.</p>
+                {[
+                  "Header is complete — SOP Title, Client, VA Name, Role, Date Created, Last Updated all filled in.",
+                  "Section 1 (Purpose) is written in at least 2 clear sentences covering WHAT and WHY.",
+                  "Section 2 (Tools) lists every tool with full names — no vague entries like 'spreadsheet'.",
+                  "Section 3 (Steps) uses numbered, verb-first steps. Detailed enough for a new VA to follow alone.",
+                  "Section 4 (Scripts) contains full scripts, or 'N/A' if none apply.",
+                  "Section 5 (KPIs) has at least 2 measurable performance indicators with numbers.",
+                  "Section 6 (Quality Standards) defines what 'done correctly' looks like — not vague.",
+                  "Section 7 (Issues & Solutions) table has at least 2 rows filled in.",
+                  "Section 8 (Improvement Notes) has at least one idea documented.",
+                  "Section 9 (Attachments) has screenshots or a note explaining where they are.",
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-3 p-3 bg-muted/20 border rounded-lg text-sm">
+                    <div className="w-4 h-4 rounded border-2 border-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+            )
+          },
+          {
+            title: "Submission Form Checklist",
+            content: (
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  {[
+                    "All 5 VA Information fields are filled in accurately.",
+                    "Process Summary (Fields 6–8) is complete with specific, detailed answers.",
+                    "All 5 confirmation checkboxes are genuinely true — not just ticked to pass.",
+                    "Google Docs link is pasted and tested in incognito mode — it works without login.",
+                    "Additional Notes field has been used to share any relevant context or suggestions.",
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-3 p-3 bg-muted/20 border rounded-lg text-sm">
+                      <div className="w-4 h-4 rounded border-2 border-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900 rounded-lg text-green-700 dark:text-green-400 text-sm flex items-start gap-2">
+                  <Zap className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span><strong>Ready to submit?</strong> If every box above is true, your SOP is ready. Submit to your designated HR or AVS email address with the subject: <strong>[Your Name] — SOP Submission — [SOP Title]</strong></span>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "sop-tips",
+        label: "Tips & Common Mistakes",
+        icon: Zap,
+        sections: [
+          {
+            title: "Best Practices",
+            content: (
+              <div className="space-y-2">
+                {[
+                  { tip: "Write as you work, not after.", desc: "Capture steps live to avoid forgetting details." },
+                  { tip: "One process, one SOP.", desc: "Don't combine multiple processes into one document." },
+                  { tip: "Use simple language.", desc: "Write for someone who has never done this job before." },
+                  { tip: "Start every step with a verb.", desc: "'Click', 'Open', 'Select', 'Type', 'Verify'." },
+                  { tip: "Number every step.", desc: "Makes it easy to reference ('See Step 4')." },
+                  { tip: "Take screenshots as you go.", desc: "Don't rely on memory or recreating them later." },
+                  { tip: "Update your SOP when the process changes.", desc: "An outdated SOP is worse than none." },
+                ].map((item, i) => (
+                  <div key={i} className="p-3 border rounded-lg bg-primary/5 text-sm">
+                    <span className="font-semibold text-foreground">{item.tip}</span>{" "}
+                    <span className="text-muted-foreground">{item.desc}</span>
+                  </div>
+                ))}
+              </div>
+            )
+          },
+          {
+            title: "Common Mistakes to Avoid",
+            content: (
+              <div className="space-y-3">
+                <div className="space-y-2">
+                  {[
+                    { mistake: "Too vague.", desc: "'Log in and do the task' is not a step. Be specific." },
+                    { mistake: "No screenshots.", desc: "Every SOP that involves a software tool needs visual proof." },
+                    { mistake: "Missing KPIs.", desc: "Vague quality expectations like 'do it well' are not acceptable." },
+                    { mistake: "Not tested.", desc: "Submitting an SOP you haven't followed yourself." },
+                    { mistake: "Wrong sharing settings.", desc: "Google Doc is restricted — reviewers can't open it." },
+                    { mistake: "Incomplete submission form.", desc: "Skipping fields or leaving answers blank." },
+                    { mistake: "Combining multiple processes.", desc: "Keep each SOP focused on exactly one process." },
+                  ].map((item, i) => (
+                    <div key={i} className="p-3 border border-destructive/20 rounded-lg bg-destructive/5 text-sm flex gap-2">
+                      <span className="text-destructive">✗</span>
+                      <span><strong className="text-destructive">{item.mistake}</strong>{" "}<span className="text-muted-foreground">{item.desc}</span></span>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-6 border rounded-xl bg-muted/20 text-center">
+                  <p className="text-lg font-serif italic text-foreground/80 leading-relaxed">&quot;If I handed this SOP to a brand-new VA who has never heard of this process, could they complete the task without asking me a single question?&quot;</p>
+                  <p className="text-sm text-muted-foreground mt-3">If the answer is yes — your SOP is ready. If the answer is no — go back and fill in the gaps.</p>
+                </div>
+                <div className="p-4 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900 rounded-lg text-green-700 dark:text-green-400 text-sm flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span><strong>Your SOP is your professional signature.</strong> It shows you take ownership of your role, you care about quality, and you are invested in the client's success. Do it right — every time.</span>
                 </div>
               </div>
             )
@@ -1035,8 +1794,1548 @@ export const assistanceSections: DocGroup[] = [
   }
 ];
 
+export const promptEngineeringSections: DocGroup[] = [
+  {
+    title: "PROMPT ENGINEERING",
+    items: [
+      {
+        id: "pe-intro",
+        label: "What is Prompt Engineering?",
+        icon: Globe,
+        sections: [
+          {
+            title: "Overview",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>Prompt engineering is the practice of designing and optimizing prompts to efficiently interact with large language models (LLMs). It involves much more than simply asking a question—it's about providing the right context, instructions, and structure.</p>
+                <div className="p-4 bg-muted/30 border border-primary/20 rounded-lg">
+                  <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-primary" /> Why it matters
+                  </h4>
+                  <ul className="text-sm space-y-2 list-disc pl-4">
+                    <li>Maximizes the quality and relevance of AI-generated responses.</li>
+                    <li>Reduces hallucinations and factual errors.</li>
+                    <li>Saves time by minimizing back-and-forth prompt iterations.</li>
+                  </ul>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pe-best-practices",
+        label: "Best Practices",
+        icon: Target,
+        sections: [
+          {
+            title: "Core Framework",
+            content: (
+              <div className="space-y-6 text-muted-foreground">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 border rounded-xl">
+                    <h4 className="font-bold text-foreground mb-2">1. Be Specific & Clear</h4>
+                    <p className="text-sm">Avoid vague instructions. Clearly define the task, format, and tone expected in the output.</p>
+                  </div>
+                  <div className="p-4 border rounded-xl">
+                    <h4 className="font-bold text-foreground mb-2">2. Provide Context</h4>
+                    <p className="text-sm">Give the model the necessary background info. The more context, the more accurate the response.</p>
+                  </div>
+                  <div className="p-4 border rounded-xl">
+                    <h4 className="font-bold text-foreground mb-2">3. Define the Persona</h4>
+                    <p className="text-sm">Ask the model to act as an expert (e.g., "Act as a senior copywriter...").</p>
+                  </div>
+                  <div className="p-4 border rounded-xl">
+                    <h4 className="font-bold text-foreground mb-2">4. Use Examples</h4>
+                    <p className="text-sm">Show, don't just tell. Providing clear formatting examples sets a strong pattern for the model to follow.</p>
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pe-techniques",
+        label: "Prompting Techniques",
+        icon: Zap,
+        sections: [
+          {
+            title: "Common Strategies",
+            content: (
+              <div className="space-y-6 text-muted-foreground">
+                <div className="space-y-4">
+                  <h4 className="text-lg font-bold text-foreground border-l-4 border-primary pl-4">Zero-Shot Prompting</h4>
+                  <p className="text-sm">Asking a model to perform a task without providing any examples. Best for simple, straightforward tasks.</p>
+                  <p className="p-4 bg-muted/40 font-mono text-xs rounded-lg border text-foreground">Extract the dates from this text: "The meeting is on June 12th and the launch is July 1st."</p>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-lg font-bold text-foreground border-l-4 border-primary pl-4">Few-Shot Prompting</h4>
+                  <p className="text-sm">Providing a few examples within the prompt to guide the model's output formatting and logic.</p>
+                  <div className="p-4 bg-muted/40 font-mono text-xs rounded-lg border space-y-2 text-foreground">
+                    <p>Great product ={">"} Positive</p>
+                    <p>Terrible support ={">"} Negative</p>
+                    <p>Okay experience ={">"} Neutral</p>
+                    <p>I loved the app ={">"} [Model evaluates this]</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-lg font-bold text-foreground border-l-4 border-primary pl-4">Chain of Thought</h4>
+                  <p className="text-sm">Prompting the model to explain its reasoning step-by-step before outputting the final answer. E.g., adding "Let's think step by step".</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pe-strategies",
+        label: "Prompt Strategies",
+        icon: List,
+        sections: [
+          {
+            title: "1. Set Clear Goals and Objectives",
+            content: (
+              <div className="space-y-4">
+                <div className="rounded-md border overflow-hidden">
+                  <Table>
+                    <TableHeader className="bg-muted/50">
+                      <TableRow>
+                        <TableHead className="font-semibold text-foreground">Tactic</TableHead>
+                        <TableHead className="font-semibold text-foreground">Prompt Example</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Use action verbs to specify the desired action</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"Write a bulleted list that summarizes the key findings of the attached research paper"</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Define the desired length and format of the output</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"Compose a 500-word essay discussing the impact of climate change on coastal communities."</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Specify the target audience</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"Write a product description for a new line of organic skincare products, targeting young adults concerned with sustainability."</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "2. Provide Context and Background",
+            content: (
+              <div className="space-y-4">
+                <div className="rounded-md border overflow-hidden">
+                  <Table>
+                    <TableHeader className="bg-muted/50">
+                      <TableRow>
+                        <TableHead className="font-semibold text-foreground">Tactic</TableHead>
+                        <TableHead className="font-semibold text-foreground">Prompt Example</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Include relevant facts and data</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"Given that global temperatures have risen by 1 degree Celsius since the pre-industrial era, discuss the potential consequences for sea level rise."</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Reference specific sources or documents</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"Based on the attached financial report, analyze the company's profitability over the past five years."</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Define key terms and concepts</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"Explain the concept of quantum computing in simple terms, suitable for a non-technical audience."</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "3. Use Few-Shot Prompting",
+            content: (
+              <div className="space-y-4">
+                <div className="rounded-md border overflow-hidden">
+                  <Table>
+                    <TableHeader className="bg-muted/50">
+                      <TableRow>
+                        <TableHead className="font-semibold text-foreground">Tactic</TableHead>
+                        <TableHead className="font-semibold text-foreground">Prompt Example</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Provide a few examples of desired input-output pairs</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">Input: "Cat" Output: "A small furry mammal with whiskers." Input: "Dog" Output: "A domesticated canine known for its loyalty." Prompt: "Elephant"</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Demonstrate the desired style or tone</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">Example 1 (humorous): "The politician's speech was so dull, it could cure insomnia." Example 2 (formal): "The dignitary delivered an address..." Prompt: "Write a sentence describing the comedian's stand-up routine."</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Show the desired level of detail</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">Example 1 (brief): "The movie was about a young boy..." Example 2 (detailed): "The science fiction film follows the story of Elliot..." Prompt: "Summarize the plot of the novel you just finished reading."</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "4. Be Specific",
+            content: (
+              <div className="space-y-4">
+                <div className="rounded-md border overflow-hidden">
+                  <Table>
+                    <TableHeader className="bg-muted/50">
+                      <TableRow>
+                        <TableHead className="font-semibold text-foreground">Tactic</TableHead>
+                        <TableHead className="font-semibold text-foreground">Prompt Example</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Use precise language and avoid ambiguity</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">Instead of: "Write something about climate change," use: "Write a persuasive essay arguing for the implementation of stricter carbon emission regulations."</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Quantify your requests whenever possible</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">Instead of: "Write a long poem," use: "Write a sonnet with 14 lines that explores themes of love and loss."</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Break down complex tasks into smaller steps</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">Instead of: "Create a marketing plan," use: "1. Identify target audience. 2. Develop key messages. 3. Choose channels."</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "5. Iterate and Experiment",
+            content: (
+              <div className="space-y-4">
+                <div className="rounded-md border overflow-hidden">
+                  <Table>
+                    <TableHeader className="bg-muted/50">
+                      <TableRow>
+                        <TableHead className="font-semibold text-foreground">Tactic</TableHead>
+                        <TableHead className="font-semibold text-foreground">Action</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Try different phrasings and keywords</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">Rephrase your prompt using synonyms or alternative sentence structures.</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Adjust the level of detail and specificity</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">Add or remove information to fine-tune the output.</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Test different prompt lengths</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">Experiment with both shorter and longer prompts to find the optimal balance.</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "6. Leverage Chain of Thought",
+            content: (
+              <div className="space-y-4">
+                <div className="rounded-md border overflow-hidden">
+                  <Table>
+                    <TableHeader className="bg-muted/50">
+                      <TableRow>
+                        <TableHead className="font-semibold text-foreground">Tactic</TableHead>
+                        <TableHead className="font-semibold text-foreground">Prompt Example</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Encourage step-by-step reasoning</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"Solve this problem step-by-step: John has 5 apples, he eats 2... Step 1: John starts with 5 apples. Step 2: eats 2..."</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Ask the model to explain its reasoning</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"Explain your thought process in determining the sentiment of this movie review: 'The acting was superb...'"</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium text-foreground">Guide through a logical sequence</TableCell>
+                        <TableCell className="text-muted-foreground italic text-sm">"To classify this email as spam... consider: 1. Is sender known? 2. Subject keywords? 3. Offer too good to be true?"</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+                <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg text-sm text-primary">
+                  <p><strong>Google Cloud Tip:</strong> For further guidance, explore the <a href="https://cloud.google.com/blog/products/ai-machine-learning/five-best-practices-for-prompt-engineering" target="_blank" rel="noopener noreferrer" className="underline font-bold">Five Best Practices for Prompt Engineering</a> on Google Cloud.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "pe-use-cases",
+        label: "Use Cases & Examples",
+        icon: FileText,
+        sections: [
+          {
+            title: "Language & Text Generation",
+            content: (
+              <div className="space-y-6 text-muted-foreground">
+                <p>Prompt engineering helps produce customized and relevant output. Here are specific examples:</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 border rounded-xl bg-muted/10 space-y-2">
+                    <h4 className="font-bold text-foreground">Creative Writing</h4>
+                    <p className="text-xs">Specify genre, tone, style, and plot points to guide the narrative.</p>
+                    <div className="p-3 bg-background border rounded-lg font-mono text-xs text-primary/80">"Write a short story about a young woman who discovers a magical portal in her attic."</div>
+                  </div>
+                  <div className="p-4 border rounded-xl bg-muted/10 space-y-2">
+                    <h4 className="font-bold text-foreground">Summarization</h4>
+                    <p className="text-xs">Provide text and instruct the AI to generate concise summaries.</p>
+                    <div className="p-3 bg-background border rounded-lg font-mono text-xs text-primary/80">"Summarize the main points of the following news article on climate change."</div>
+                  </div>
+                  <div className="p-4 border rounded-xl bg-muted/10 space-y-2">
+                    <h4 className="font-bold text-foreground">Translation</h4>
+                    <p className="text-xs">Specify source and target languages to preserve meaning.</p>
+                    <div className="p-3 bg-background border rounded-lg font-mono text-xs text-primary/80">"Translate the following text from English to Spanish: 'The quick brown fox...'"</div>
+                  </div>
+                  <div className="p-4 border rounded-xl bg-muted/10 space-y-2">
+                    <h4 className="font-bold text-foreground">Dialogue</h4>
+                    <p className="text-xs">Simulate conversations for chatbots or roleplay.</p>
+                    <div className="p-3 bg-background border rounded-lg font-mono text-xs text-primary/80">"You are a friendly chatbot helping users troubleshoot... Respond to: 'My computer won't turn on.'"</div>
+                  </div>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Question Answering",
+            content: (
+               <div className="space-y-4 text-muted-foreground">
+                  <div className="space-y-3">
+                    <div className="p-4 border-l-4 border-primary bg-muted/10 rounded-r-xl">
+                      <h4 className="font-bold text-foreground">Open-Ended & Specific Questions</h4>
+                      <p className="text-sm mt-1 mb-2">Target comprehensive answers or precise information retrieval.</p>
+                      <ul className="space-y-2 font-mono text-xs">
+                        <li className="p-2 bg-background border rounded text-primary/80">"Explain the concept of quantum computing and its impact..."</li>
+                        <li className="p-2 bg-background border rounded text-primary/80">"According to the provided text, what are the main causes..."</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="p-4 border-l-4 border-primary bg-muted/10 rounded-r-xl">
+                      <h4 className="font-bold text-foreground">Hypothetical & Opinion-Based</h4>
+                      <p className="text-sm mt-1 mb-2">Explore situations requiring reasoning and justification.</p>
+                      <ul className="space-y-2 font-mono text-xs">
+                        <li className="p-2 bg-background border rounded text-primary/80">"What would happen if humans could travel at the speed of light?"</li>
+                        <li className="p-2 bg-background border rounded text-primary/80">"Do you believe AI will surpass human intelligence? Why?"</li>
+                      </ul>
+                    </div>
+                  </div>
+               </div>
+            )
+          },
+          {
+            title: "Code Generation",
+            content: (
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-muted-foreground">
+                  <div className="p-4 border rounded-xl flex flex-col gap-2 relative overflow-hidden group">
+                     <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                     <h4 className="font-bold text-foreground">Code Completion</h4>
+                     <p className="text-xs">"Write a Python function to calculate the factorial of a given number."</p>
+                  </div>
+                  <div className="p-4 border rounded-xl flex flex-col gap-2 relative overflow-hidden group">
+                     <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
+                     <h4 className="font-bold text-foreground">Code Translation</h4>
+                     <p className="text-xs">"Translate the following Python code to JavaScript: def greet(name)..."</p>
+                  </div>
+                  <div className="p-4 border rounded-xl flex flex-col gap-2 relative overflow-hidden group">
+                     <div className="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+                     <h4 className="font-bold text-foreground">Code Optimization</h4>
+                     <p className="text-xs">"Optimize the following Python code to reduce its execution time."</p>
+                  </div>
+                  <div className="p-4 border rounded-xl flex flex-col gap-2 relative overflow-hidden group">
+                     <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
+                     <h4 className="font-bold text-foreground">Code Debugging</h4>
+                     <p className="text-xs">"Debug the following Java code and explain why it is throwing a NullPointerException."</p>
+                  </div>
+               </div>
+            )
+          },
+          {
+             title: "Image Generation",
+             content: (
+                <div className="space-y-4 text-muted-foreground">
+                   <dl className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div className="space-y-2">
+                       <dt className="font-bold text-foreground flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-primary/80"></div>Photorealistic</dt>
+                       <dd className="text-xs">Images describing lighting, scenery, and subjects: <br/><code className="text-primary mt-1 block bg-primary/5 p-2 rounded">"A photorealistic image of a sunset over the ocean with palm trees silhouetted..."</code></dd>
+                     </div>
+                     <div className="space-y-2">
+                       <dt className="font-bold text-foreground flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-primary/80"></div>Artistic & Abstract</dt>
+                       <dd className="text-xs">Specify techniques or emotional concepts: <br/><code className="text-primary mt-1 block bg-primary/5 p-2 rounded">"An impressionist painting of a bustling city street..."</code></dd>
+                     </div>
+                     <div className="space-y-2 md:col-span-2">
+                       <dt className="font-bold text-foreground flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-primary/80"></div>Image Editing</dt>
+                       <dd className="text-xs">Provide an image and specify modification instructions: <br/><code className="text-primary mt-1 block bg-primary/5 p-2 rounded">"Change the background of this photo to a starry night sky and add a full moon."</code></dd>
+                     </div>
+                   </dl>
+                </div>
+             )
+          }
+        ]
+      }
+    ]
+  }
+];
+
+
+export const hvacSections: DocGroup[] = [
+  {
+    title: "HVAC FUNDAMENTALS",
+    items: [
+      {
+        id: "hvac-introduction",
+        label: "Introduction to HVAC",
+        icon: Thermometer,
+        sections: [
+          {
+            title: "What Does HVAC Stand For?",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>HVAC stands for <strong className="text-foreground">Heating, Ventilation, and Air Conditioning</strong>. It is the technology and systems used to control the temperature, humidity, and air quality of indoor environments.</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="p-4 border rounded-lg bg-primary/5">
+                    <p className="font-semibold text-primary mb-1">H – Heating</p>
+                    <p className="text-sm">Systems that generate and distribute warmth during cold months, such as furnaces, boilers, and heat pumps.</p>
+                  </div>
+                  <div className="p-4 border rounded-lg bg-primary/5">
+                    <p className="font-semibold text-primary mb-1">V – Ventilation</p>
+                    <p className="text-sm">Processes that bring fresh air in and push stale air out, improving indoor air quality and removing pollutants.</p>
+                  </div>
+                  <div className="p-4 border rounded-lg bg-primary/5">
+                    <p className="font-semibold text-primary mb-1">A – Air Conditioning</p>
+                    <p className="text-sm">Equipment that cools and dehumidifies indoor air during hot months, using refrigerant and compressor-based systems.</p>
+                  </div>
+                </div>
+                <div className="p-4 bg-muted/50 border rounded-lg">
+                  <p className="font-semibold text-foreground mb-1">Key Takeaway</p>
+                  <p>HVAC is not just about keeping a space comfortable — it is a critical system that supports health, safety, and building functionality every day of the year.</p>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Purpose of HVAC Systems",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>HVAC systems serve multiple essential roles in residential and commercial buildings:</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Maintain comfortable indoor temperatures year-round.</li>
+                  <li>Control humidity to prevent mold growth and protect building materials.</li>
+                  <li>Filter out dust, allergens, bacteria, and airborne pollutants.</li>
+                  <li>Ensure proper ventilation so occupants receive adequate fresh air.</li>
+                  <li>Comply with building codes and health regulations.</li>
+                  <li>Improve energy efficiency, reducing utility costs for homeowners and businesses.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Overview of the HVAC Industry",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The HVAC industry is one of the largest segments of the construction and home services market. Key industry facts include:</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>HVAC technicians are among the most in-demand skilled trades workers in the United States.</li>
+                  <li>The industry services both <strong className="text-foreground">residential</strong> (homes, apartments) and <strong className="text-foreground">commercial</strong> (offices, retail, hospitals, schools) clients.</li>
+                  <li>HVAC businesses typically operate year-round, with demand peaking in summer (air conditioning) and winter (heating).</li>
+                  <li>Licensing, certifications, and compliance with environmental regulations are required to operate legally.</li>
+                  <li>Modern HVAC now incorporates smart technology, energy-efficient equipment, and environmentally friendly refrigerants.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "hvac-systems",
+        label: "Common HVAC Systems",
+        icon: Wind,
+        sections: [
+          {
+            title: "Central Air Conditioning",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The most common cooling system in larger homes and commercial buildings. It uses a central unit (typically located outside or in a mechanical room) to cool air and distribute it throughout the building via a duct system. A blower pushes the cooled air through supply ducts and returns warm air through return ducts.</p>
+              </div>
+            )
+          },
+          {
+            title: "Split Systems",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>A split system is the traditional pairing of an <strong className="text-foreground">outdoor unit</strong> (the condenser/compressor) with an <strong className="text-foreground">indoor unit</strong> (the air handler or furnace/coil). The two units are connected by refrigerant lines. Split systems handle both heating (via a furnace) and cooling (via an air conditioner) and are the most popular HVAC configuration for residential use.</p>
+              </div>
+            )
+          },
+          {
+            title: "Ductless Mini-Split Systems",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Ductless mini-split systems work like traditional split systems but <strong className="text-foreground">without ductwork</strong>. They are ideal for homes without ducts, room additions, or spaces requiring individual temperature control. Each room or zone has its own indoor air handler connected to an outdoor unit. Mini-splits are energy-efficient and easy to install.</p>
+              </div>
+            )
+          },
+          {
+            title: "Heat Pumps",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Heat pumps are versatile systems that can provide both heating and cooling by <strong className="text-foreground">transferring heat</strong> rather than generating it. In summer, they function like an air conditioner, moving heat out of the building. In winter, they extract heat from the outdoor air (even in cold temperatures) and bring it inside. Heat pumps are highly energy-efficient and are increasingly popular in moderate climates.</p>
+              </div>
+            )
+          },
+          {
+            title: "Furnaces",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Furnaces are heating-only systems that burn fuel (natural gas, propane, or oil) or use electricity to generate heat. The heat is then distributed through ducts using a blower. Gas furnaces are the most common heating system in colder regions of the United States due to their reliability and cost-effectiveness.</p>
+              </div>
+            )
+          },
+          {
+            title: "Boilers",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Boilers heat water and distribute steam or hot water through pipes to radiators, baseboard heaters, or radiant floor systems. Unlike forced-air systems, boilers do not use ductwork and are often praised for providing even, comfortable heat. They are common in older homes and commercial buildings.</p>
+              </div>
+            )
+          },
+          {
+            title: "Ventilation Systems",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Ventilation systems control the exchange of indoor and outdoor air. They include exhaust fans, energy recovery ventilators (ERVs), and heat recovery ventilators (HRVs). Proper ventilation removes pollutants, controls moisture, and ensures a healthy indoor environment. Ventilation is especially important in tightly sealed, energy-efficient buildings.</p>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "SERVICES & OPERATIONS",
+    items: [
+      {
+        id: "hvac-services",
+        label: "Core Services",
+        icon: Wrench,
+        sections: [
+          {
+            title: "Installation",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Installation services involve setting up new HVAC equipment in a building. This includes installing new systems in newly constructed homes, replacing old equipment with modern units, and adding new zones or ductwork.</p>
+                <div className="p-3 bg-destructive/10 text-destructive border border-destructive/20 rounded-lg text-sm">
+                  <strong>Important:</strong> Installation projects require proper <strong>load calculations</strong> to ensure the equipment is the right capacity for the space. An undersized or oversized system will perform poorly and break down faster.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Maintenance",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Preventive maintenance is a scheduled service performed to keep HVAC systems running efficiently and prevent breakdowns. Typical maintenance tasks include:</p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>Cleaning or replacing air filters.</li>
+                  <li>Inspecting and cleaning coils (evaporator and condenser).</li>
+                  <li>Checking refrigerant levels.</li>
+                  <li>Lubricating moving parts.</li>
+                  <li>Inspecting electrical connections and controls.</li>
+                  <li>Testing thermostat calibration.</li>
+                  <li>Inspecting and cleaning the condensate drain.</li>
+                </ul>
+                <p className="text-sm">Many HVAC companies offer <strong className="text-foreground">maintenance agreements or service plans</strong>, where customers pay an annual fee for one or two scheduled tune-ups per year.</p>
+              </div>
+            )
+          },
+          {
+            title: "Repairs",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Repair services address specific problems with existing HVAC systems. Common repairs include fixing refrigerant leaks, replacing compressors, repairing ductwork, fixing electrical issues, and replacing worn components. Repairs may be scheduled in advance or requested as emergency calls.</p>
+              </div>
+            )
+          },
+          {
+            title: "System Replacement",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>When an HVAC system is too old, too inefficient, or too costly to repair, the company will recommend a full system replacement. This involves removing the old equipment and installing a new system. Sales representatives often assist with this process, presenting equipment options and financing plans.</p>
+              </div>
+            )
+          },
+          {
+            title: "Inspections",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>HVAC inspections are detailed evaluations of a system's condition, performance, and safety. They are commonly requested during real estate transactions, after extreme weather events, or as part of energy audits. Inspections produce a written report documenting findings and recommendations.</p>
+              </div>
+            )
+          },
+          {
+            title: "Emergency HVAC Services",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Many HVAC companies offer <strong className="text-foreground">24/7 emergency service</strong> for situations that cannot wait for a scheduled appointment — such as a furnace failing in winter or an air conditioner breaking down during a heat wave.</p>
+                <div className="p-3 bg-muted/50 border rounded-lg text-sm">
+                  Emergency calls typically carry a higher service fee. Fast response time and clear communication are critical for customer satisfaction during emergencies.
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "hvac-operations",
+        label: "How the Business Operates",
+        icon: Info,
+        sections: [
+          {
+            title: "The Typical Service Workflow",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ol className="space-y-4">
+                  {[
+                    { step: "1. Customer Inquiry", desc: "A customer contacts the company by phone, website form, or email with a question, complaint, or service request." },
+                    { step: "2. Scheduling Appointments", desc: "The CSR or dispatcher collects: name, address, phone number, system type, and description of the issue. They then schedule an appointment that works for the customer and available technicians." },
+                    { step: "3. Technician Dispatch", desc: "The dispatcher assigns the job to the most appropriate available technician based on skill level, location, and availability. The technician receives job details via a mobile app, work order, or phone call." },
+                    { step: "4. Diagnosis and Quotation", desc: "The technician arrives on-site, inspects the system, identifies the problem, and explains the findings to the customer. A quote is provided before any work begins. Customers must approve the quote before the technician proceeds." },
+                    { step: "5. Service or Repair", desc: "With the customer's approval, the technician performs the repair, maintenance, or installation. Parts used and work performed are documented in real time." },
+                    { step: "6. Payment and Documentation", desc: "Upon completion, the technician collects payment (cash, check, card, or financing). A digital or paper invoice is generated and provided to the customer. All documentation is saved in the company's service management software." },
+                    { step: "7. Follow-Up or Maintenance Scheduling", desc: "A follow-up call or email may be sent to confirm satisfaction. Customers are offered maintenance plans or a reminder for their next service. Reviews are often requested to help the company's online reputation." },
+                  ].map(({ step, desc }) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="font-semibold text-foreground min-w-fit">{step}:</span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ol>
+                <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Pro Tip for CSRs & VAs</p>
+                  <p>Always confirm the customer's full address, best contact number, and a clear description of the problem during the intake call. This allows the dispatcher to assign the right technician and reduces delays on the day of service.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "REFERENCE & COMPLIANCE",
+    items: [
+      {
+        id: "hvac-terminology",
+        label: "HVAC Terminology",
+        icon: BookOpen,
+        sections: [
+          {
+            title: "Common HVAC Terms Glossary",
+            content: (
+              <div className="text-muted-foreground">
+                <p className="mb-4 text-sm">Familiarity with these terms will help you communicate confidently with customers, technicians, and colleagues.</p>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-40">Term</TableHead>
+                      <TableHead className="font-bold">Definition</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { term: "BTU", def: "British Thermal Unit. A measurement of heat energy. HVAC equipment capacity is rated in BTUs per hour. Higher BTUs = more heating or cooling power." },
+                      { term: "Thermostat", def: "A device that monitors and controls the temperature of a space. Modern thermostats can be programmable or smart (Wi-Fi enabled)." },
+                      { term: "Refrigerant", def: "A chemical compound that absorbs and releases heat as it circulates through the HVAC system. Common types include R-22 (now phased out) and R-410A. Refrigerant handling requires EPA certification." },
+                      { term: "Ductwork", def: "A network of metal, fiberglass, or flexible tubes that distribute conditioned air throughout a building. Leaky or poorly designed ducts waste energy and reduce system efficiency." },
+                      { term: "Compressor", def: "The heart of an air conditioning or heat pump system. It compresses refrigerant gas, increasing its pressure and temperature to enable the heat transfer process." },
+                      { term: "Air Handler", def: "The indoor component of a split system that circulates air across the coil and through the ductwork. It typically houses the blower motor and filter." },
+                      { term: "Condenser", def: "The outdoor unit of an air conditioner or heat pump that releases heat from the refrigerant to the outside air. Contains the compressor and condenser coil." },
+                      { term: "Evaporator Coil", def: "Located indoors, this coil absorbs heat from indoor air as refrigerant evaporates inside it, cooling the air before it is circulated back into the space." },
+                      { term: "SEER Rating", def: "Seasonal Energy Efficiency Ratio. Measures the cooling efficiency of an air conditioner over an entire season. Higher SEER = more efficient = lower energy bills." },
+                      { term: "AFUE", def: "Annual Fuel Utilization Efficiency. Measures heating efficiency for furnaces and boilers. An AFUE of 95% means 95 cents of every dollar spent on fuel becomes heat." },
+                      { term: "Load Calculation", def: "An engineering calculation (often using Manual J software) that determines the correct equipment size needed for a specific building based on square footage, insulation, windows, and climate." },
+                      { term: "Refrigerant Charge", def: "The correct amount of refrigerant in a system. An improperly charged system runs inefficiently and can cause component failure." },
+                      { term: "Blower Motor", def: "The motor inside the air handler or furnace that drives the fan to circulate air through the duct system." },
+                      { term: "Condensate Drain", def: "A drain line that removes the moisture (condensate) that collects on the evaporator coil during the cooling process. Clogs can cause water damage." },
+                      { term: "Zoning System", def: "A setup using multiple thermostats and dampers to control temperature independently in different areas (zones) of a building." },
+                    ].map(({ term, def }) => (
+                      <TableRow key={term}>
+                        <TableCell className="font-semibold text-foreground align-top">{term}</TableCell>
+                        <TableCell className="text-sm">{def}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "hvac-roles",
+        label: "Roles in an HVAC Company",
+        icon: Users,
+        sections: [
+          {
+            title: "Team Roles & Responsibilities",
+            content: (
+              <div className="text-muted-foreground">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-52">Role</TableHead>
+                      <TableHead className="font-bold">Responsibilities</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { role: "HVAC Technician", resp: "Licensed professionals who diagnose, repair, and maintain HVAC systems. They are the primary field workers and must hold appropriate state licenses and EPA 608 certification for refrigerant handling." },
+                      { role: "Installer", resp: "Technicians or helpers who specialize in installing new HVAC equipment. Installers work on new construction and replacement projects, often under the supervision of a lead technician or foreman." },
+                      { role: "Customer Service Representative (CSR)", resp: "The first point of contact for customers. CSRs answer incoming calls and messages, gather job information, schedule appointments, handle complaints, and communicate with dispatchers." },
+                      { role: "Dispatcher", resp: "Responsible for coordinating technician schedules and routing. Dispatchers match service calls with the right technician, monitor job progress throughout the day, and handle urgent schedule changes." },
+                      { role: "Sales Representative", resp: "Focuses on selling new HVAC systems, replacement equipment, and maintenance agreements. Sales reps visit customers' homes or businesses, perform assessments, and present quotes." },
+                      { role: "Operations Manager", resp: "Oversees day-to-day business operations, including scheduling, staffing, quality control, and company policies. Ensures technicians have the tools and parts they need, and monitors key performance indicators." },
+                      { role: "Office Manager / Admin", resp: "Manages administrative tasks such as invoicing, accounts receivable, payroll support, and office organization. Often uses field service management software daily." },
+                      { role: "Virtual Assistant (VA)", resp: "Remotely supports customer service, scheduling, follow-up calls, review management, and administrative tasks. Must be well-versed in HVAC terminology and company processes." },
+                    ].map(({ role, resp }) => (
+                      <TableRow key={role}>
+                        <TableCell className="font-semibold text-foreground align-top">{role}</TableCell>
+                        <TableCell className="text-sm">{resp}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "hvac-tools",
+        label: "Tools & Equipment",
+        icon: Wrench,
+        sections: [
+          {
+            title: "Common HVAC Tools",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p className="text-sm">HVAC technicians rely on specialized tools to diagnose, repair, and maintain systems safely and accurately.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { name: "Manifold Gauge Set", desc: "Used to measure refrigerant pressure on both the high (discharge) and low (suction) sides of the system. Helps diagnose compressor and expansion valve issues." },
+                    { name: "Refrigerant Recovery Machine", desc: "EPA regulations require that refrigerant be recovered from the system into a certified recovery cylinder rather than released into the atmosphere before any refrigerant work is performed." },
+                    { name: "Vacuum Pump", desc: "Used to remove moisture and air from the refrigerant lines after repairs or when installing a new system. This process — called evacuation — is critical to prevent damage and maintain efficiency." },
+                    { name: "Leak Detectors", desc: "Electronic leak detectors or UV dye kits used to locate refrigerant leaks. An undetected leak leads to poor system performance, higher energy bills, and environmental harm." },
+                    { name: "Multimeter", desc: "An essential electrical diagnostic tool. Technicians use it to measure voltage, current, and resistance in components such as capacitors, contactors, motors, and control boards." },
+                    { name: "Thermometer / Temperature Probes", desc: "Measure supply and return air temperatures, allowing technicians to calculate the temperature differential to confirm whether the system is performing correctly." },
+                    { name: "Torch and Brazing Equipment", desc: "Used to solder or braze copper refrigerant lines and fittings during installation or repair. Requires skill and proper safety precautions, including the use of nitrogen to prevent oxidation." },
+                    { name: "Nitrogen Tank", desc: "Nitrogen is used to pressurize refrigerant lines for leak testing and to protect the interior of lines from oxidation during brazing." },
+                  ].map(({ name, desc }) => (
+                    <div key={name} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{name}</p>
+                      <p className="text-sm">{desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "hvac-safety",
+        label: "Safety & Compliance",
+        icon: ShieldCheck,
+        sections: [
+          {
+            title: "EPA Section 608 Certification",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Any technician who works with refrigerants is <strong className="text-foreground">required by federal law</strong> to hold an EPA Section 608 certification. This certification covers safe refrigerant handling, recovery, and disposal. There are four certification types (Type I, II, III, and Universal), based on the type of equipment serviced.</p>
+              </div>
+            )
+          },
+          {
+            title: "State Licensing",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Most states require HVAC contractors and technicians to hold a state license to perform HVAC work. License requirements vary by state but typically include passing an exam, meeting experience requirements, and maintaining continuing education. Operating without a license can result in fines, legal liability, and loss of business.</p>
+              </div>
+            )
+          },
+          {
+            title: "OSHA Safety Standards",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>OSHA sets workplace safety standards that HVAC companies must follow, including:</p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>Proper use of personal protective equipment (PPE) such as gloves, safety glasses, and respirators.</li>
+                  <li>Safe ladder and fall protection practices.</li>
+                  <li>Electrical safety when working with live panels or equipment.</li>
+                  <li>Safe handling of refrigerants and other chemicals.</li>
+                  <li>Confined space entry procedures for work in attics, crawl spaces, and mechanical rooms.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Building Codes and Permits",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Installation and replacement work typically requires a permit from the local municipality. Permitted work is inspected by a building official to ensure compliance with local building codes and safety standards. Unpermitted HVAC work can void equipment warranties and create liability issues.</p>
+              </div>
+            )
+          },
+          {
+            title: "Refrigerant Regulations",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The EPA regulates the types of refrigerants that can be used and how they must be handled.</p>
+                <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  <strong>Important Reminder:</strong> Always verify that technicians dispatched for refrigerant work hold current EPA 608 certification. This is a legal requirement, not just a best practice.
+                </div>
+                <ul className="list-disc pl-5 space-y-1 text-sm">
+                  <li><strong className="text-foreground">R-22 (Freon)</strong> — Phased out due to environmental impact; no longer manufactured in the US.</li>
+                  <li><strong className="text-foreground">R-410A</strong> — The current standard refrigerant.</li>
+                  <li><strong className="text-foreground">R-32 and R-454B</strong> — Newer, lower-global-warming-potential refrigerants entering the market.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "hvac-issues",
+        label: "Common Customer Issues",
+        icon: AlertCircle,
+        sections: [
+          {
+            title: "AC Not Cooling",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>One of the most common summer complaints. Possible causes include low refrigerant (due to a leak), a dirty condenser coil, a malfunctioning compressor, a tripped circuit breaker, or a clogged air filter.</p>
+                <p className="text-sm italic">CSRs should ask: How long has the problem existed? Is the unit running at all?</p>
+              </div>
+            )
+          },
+          {
+            title: "Weak Airflow",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Common causes include a clogged air filter, a failing blower motor, leaky or disconnected ductwork, closed or blocked vents, or ice buildup on the evaporator coil.</p>
+                <p className="text-sm italic">CSRs should ask: When did you last change your filter?</p>
+              </div>
+            )
+          },
+          {
+            title: "Strange Noises",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Unusual sounds are often the first sign of a developing problem. Common sounds and their likely causes:</p>
+                <ul className="list-disc pl-5 space-y-1 text-sm">
+                  <li><strong className="text-foreground">Banging or clanking</strong> — Loose or broken component inside the unit (e.g., blower fan blade).</li>
+                  <li><strong className="text-foreground">Squealing</strong> — Worn belt or motor bearing.</li>
+                  <li><strong className="text-foreground">Clicking</strong> — Relay or control board issue, or a failing capacitor.</li>
+                  <li><strong className="text-foreground">Hissing</strong> — Refrigerant leak or air escaping from ductwork.</li>
+                  <li><strong className="text-foreground">Rumbling</strong> — Dirty burners on a furnace or debris in the outdoor unit.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Thermostat Issues",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>A malfunctioning thermostat can cause the system to short cycle (turn on and off frequently), fail to reach the set temperature, or not turn on at all. Common causes include dead batteries, incorrect settings, wiring issues, or a faulty thermostat that needs replacement.</p>
+              </div>
+            )
+          },
+          {
+            title: "Refrigerant Leaks",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>A refrigerant leak causes gradual loss of cooling capacity, ice buildup on the coil, and higher energy bills.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  Refrigerant cannot simply be "topped off" — the leak must be found, repaired, and the system recharged. This requires a certified technician.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Water Leaks or Pooling",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Water around an indoor unit is usually caused by a clogged condensate drain line or a cracked condensate pan. If left unaddressed, this can lead to water damage, mold growth, and system shutdowns (many systems have a safety float switch that shuts off the unit when water is detected).</p>
+              </div>
+            )
+          },
+          {
+            title: "Uneven Heating or Cooling",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Some rooms are too hot while others are too cold. This can result from improperly designed ductwork, unbalanced airflow, blocked vents, duct leaks, or the need for a zoning system. This is a common complaint in larger homes or multi-story buildings.</p>
+              </div>
+            )
+          },
+          {
+            title: "System Won't Turn On",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Common causes include a tripped circuit breaker, blown fuse, disconnected power switch, dead thermostat batteries, a safety switch that has triggered, or a failed control board.</p>
+                <p className="text-sm italic">CSRs should walk customers through basic troubleshooting (check breaker, replace thermostat batteries) before dispatching a technician.</p>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "hvac-importance",
+        label: "Why HVAC Services Matter",
+        icon: Heart,
+        sections: [
+          {
+            title: "Why HVAC Services Are Important",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { title: "Comfort and Quality of Life", body: "At the most fundamental level, HVAC systems keep people comfortable. Extreme temperatures are not just uncomfortable but can be dangerous, particularly for children, the elderly, and individuals with health conditions." },
+                    { title: "Indoor Air Quality (IAQ)", body: "The EPA estimates that indoor air can be 2–5× more polluted than outdoor air. HVAC systems filter out dust, pollen, pet dander, mold spores, and bacteria. Poor IAQ is linked to allergies, asthma, headaches, and reduced cognitive performance." },
+                    { title: "Energy Efficiency & Cost Savings", body: "HVAC systems account for approximately 40–50% of total energy consumption in a typical building. A well-maintained, properly sized, high-efficiency system can dramatically reduce utility bills." },
+                    { title: "Health and Safety", body: "Poorly maintained furnaces can develop cracks that allow carbon monoxide — a colorless, odorless, and deadly gas — to enter living spaces. Mold thrives in humid, poorly ventilated environments and can cause serious respiratory issues." },
+                    { title: "Property Protection", body: "Extreme temperatures and humidity can damage building materials, electronics, wooden furniture, and stored items. HVAC systems regulate moisture levels, preventing warping, cracking, rust, and mold damage." },
+                    { title: "Business Continuity", body: "For commercial clients — restaurants, medical offices, retail stores, data centers — HVAC failure is a business emergency. Fast, reliable HVAC service keeps businesses operational and helps them serve their own customers without interruption." },
+                  ].map(({ title, body }) => (
+                    <div key={title} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{title}</p>
+                      <p className="text-sm">{body}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-muted/50 border rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Final Note for New Team Members</p>
+                  <p>HVAC may seem like a technical field, but great customer service, clear communication, and attention to detail are just as important as technical knowledge. When in doubt, ask questions, use this guide as a reference, and always prioritize the customer's safety and comfort. Welcome to the team!</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  }
+];
+
+export const carpetCleaningSections: DocGroup[] = [
+  {
+    title: "CARPET CLEANING BASICS",
+    items: [
+      {
+        id: "carpet-introduction",
+        label: "Introduction to Carpet Cleaning",
+        icon: Sparkles,
+        sections: [
+          {
+            title: "What Is Carpet Cleaning?",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>Carpet cleaning is the professional process of removing dirt, stains, allergens, bacteria, and odors from carpet fibers using specialized equipment and cleaning solutions. Unlike regular vacuuming, professional carpet cleaning reaches deep into the carpet pile to extract embedded debris that household tools simply cannot remove.</p>
+                <p>Carpet cleaning services are provided for both <strong className="text-foreground">residential clients</strong> (homeowners, renters, and property managers) and <strong className="text-foreground">commercial clients</strong> (offices, hotels, restaurants, schools, and healthcare facilities). The methods and equipment used vary depending on the type of carpet, the level of soiling, and the specific needs of the customer.</p>
+              </div>
+            )
+          },
+          {
+            title: "Why Carpet Cleaning Services Are Important",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Carpets act like a giant filter, trapping dust, dirt, pet dander, bacteria, mold spores, and other pollutants. Professional carpet cleaning addresses all of these issues:</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li><strong className="text-foreground">Health and hygiene:</strong> Deep cleaning removes bacteria, allergens, and dust mites that can trigger respiratory issues and allergies.</li>
+                  <li><strong className="text-foreground">Appearance:</strong> Clean carpets look fresh, smell good, and improve the overall appearance of a home or business.</li>
+                  <li><strong className="text-foreground">Longevity:</strong> Regular professional cleaning extends the life of carpet by removing abrasive particles that break down fibers over time.</li>
+                  <li><strong className="text-foreground">Odor control:</strong> Pets, spills, and general use create persistent odors that only professional treatment can fully eliminate.</li>
+                  <li><strong className="text-foreground">Compliance:</strong> Commercial properties in food service and healthcare often have cleanliness standards that require regular professional cleaning.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Overview of the Carpet Cleaning Industry",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>The carpet cleaning industry is a well-established segment of the broader cleaning services market. Key facts about the industry:</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Carpet cleaning is in demand year-round, with busy periods in spring (spring cleaning) and fall (pre-holiday preparation).</li>
+                  <li>The industry serves both residential and commercial markets, with commercial accounts often providing higher and more consistent revenue.</li>
+                  <li>Technicians must be knowledgeable about fiber types, cleaning chemistry, and equipment to deliver safe, effective results.</li>
+                  <li>Many companies expand their offerings to include upholstery, tile and grout, area rugs, and water damage restoration.</li>
+                  <li>Customer trust and referrals are the lifeblood of carpet cleaning businesses; a reputation for quality and reliability drives long-term growth.</li>
+                </ul>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "carpet-methods",
+        label: "Cleaning Methods",
+        icon: Droplets,
+        sections: [
+          {
+            title: "Hot Water Extraction (Steam Cleaning)",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Hot water extraction (HWE) is the most widely used and recommended professional carpet cleaning method. Hot water mixed with a cleaning solution is injected deep into the carpet pile under high pressure, then immediately extracted along with dissolved dirt and debris using a powerful vacuum system.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm">
+                    <p className="font-semibold text-foreground mb-1">Best For</p>
+                    <p>Heavily soiled carpets, deep cleaning, residential use</p>
+                  </div>
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm">
+                    <p className="font-semibold text-foreground mb-1">Drying Time</p>
+                    <p>4 to 12 hours depending on airflow, humidity, and carpet thickness</p>
+                  </div>
+                  <div className="p-3 border rounded-lg bg-primary/5 text-sm">
+                    <p className="font-semibold text-primary mb-1">Industry Tip</p>
+                    <p>The IICRC recommends hot water extraction as the preferred method for most residential carpet cleaning.</p>
+                  </div>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Dry Carpet Cleaning",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Dry carpet cleaning uses a very low-moisture compound or powder that is worked into the carpet fibers. The compound absorbs dirt and debris, and is then vacuumed out, leaving it clean and dry almost immediately.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm"><p className="font-semibold text-foreground mb-1">Best For</p><p>Commercial settings that cannot afford long dry times, maintenance cleaning between deep cleans</p></div>
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm"><p className="font-semibold text-foreground mb-1">Drying Time</p><p>Near-instant — carpets are dry and ready to use right away</p></div>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Shampoo Cleaning",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>An older method involving a foamy cleaning solution applied to the carpet and scrubbed in with a rotary brush machine. The foam encapsulates dirt, and once dry, it is vacuumed up. Can leave residue that attracts dirt more quickly if not rinsed properly.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm"><p className="font-semibold text-foreground mb-1">Best For</p><p>Heavy-traffic commercial areas as a maintenance cleaning method</p></div>
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm"><p className="font-semibold text-foreground mb-1">Drying Time</p><p>Several hours; residue must be thoroughly vacuumed once dry</p></div>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Bonnet Cleaning",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>A surface-level cleaning method popular in hotels and commercial facilities for quick results. A rotary machine with an absorbent pad (bonnet) buffs the carpet surface, pulling up dirt from the top layer of fibers. It does not clean deep into the pile.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm"><p className="font-semibold text-foreground mb-1">Best For</p><p>Interim or maintenance cleaning in commercial environments where speed is prioritized</p></div>
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm"><p className="font-semibold text-foreground mb-1">Drying Time</p><p>1 to 2 hours</p></div>
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Encapsulation Cleaning",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>A modern, low-moisture method that uses synthetic detergents that crystallize into a powder as they dry. Dirt particles are encapsulated in this crystal structure and vacuumed away. Leaves minimal residue, dries quickly, and is more environmentally friendly than traditional shampooing.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm"><p className="font-semibold text-foreground mb-1">Best For</p><p>Commercial maintenance cleaning, low-moisture requirements, carpets in good overall condition</p></div>
+                  <div className="p-3 border rounded-lg bg-muted/30 text-sm"><p className="font-semibold text-foreground mb-1">Drying Time</p><p>20 minutes to 1 hour</p></div>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "SERVICES & OPERATIONS",
+    items: [
+      {
+        id: "carpet-services",
+        label: "Core Services",
+        icon: Wrench,
+        sections: [
+          {
+            title: "Residential Carpet Cleaning",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>The foundation service for most carpet cleaning businesses. Residential clients include homeowners, renters, and property managers preparing units for new tenants. Services are typically priced by room, by square footage, or as a whole-home package. The technician cleans carpets in living areas, bedrooms, hallways, and stairs.</p>
+              </div>
+            )
+          },
+          {
+            title: "Commercial Carpet Cleaning",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Commercial clients include offices, retail stores, restaurants, hotels, schools, medical facilities, and apartment complexes. Commercial jobs are often larger in scale, performed during off-hours (evenings or weekends), and may be recurring contracts. Commercial cleaning requires more durable equipment and a faster turnaround to minimize business disruption.</p>
+              </div>
+            )
+          },
+          {
+            title: "Upholstery Cleaning",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Upholstery cleaning involves cleaning fabric-covered furniture such as sofas, armchairs, dining chairs, and ottomans. Smaller, specialized tools and gentler cleaning agents are used. This is a high-value add-on service that pairs well with carpet cleaning visits.</p>
+              </div>
+            )
+          },
+          {
+            title: "Area Rug Cleaning",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Area rugs — especially fine wool, silk, or handwoven rugs — often require special care. Some are cleaned on-site while others are taken to a facility for a more thorough wash, rinse, and controlled drying process. Technicians must identify fiber type and construction before selecting a cleaning method to avoid damage.</p>
+              </div>
+            )
+          },
+          {
+            title: "Stain Removal",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Professional stain removal targets specific spots such as wine, coffee, ink, paint, and grease. Technicians use targeted spotting agents, heat tools, and specialized techniques. Not all stains are removable, and technicians must set realistic expectations with customers.</p>
+              </div>
+            )
+          },
+          {
+            title: "Pet Odor and Stain Treatment",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Pet accidents are one of the most common reasons customers call for professional cleaning. Urine penetrates deep into the carpet backing and even the subfloor beneath it.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  <strong>Important:</strong> Effective pet treatment requires enzyme-based deodorizers that break down the organic waste at the molecular level, not just mask the odor. In severe cases, the padding and subfloor may need treatment as well.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Tile and Grout Cleaning",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Many carpet cleaning companies also offer tile and grout cleaning using high-pressure hot water extraction tools designed for hard surfaces. Grout lines are porous and trap dirt, bacteria, and mold that mops cannot effectively remove. Popular for kitchens, bathrooms, entryways, and commercial floors.</p>
+              </div>
+            )
+          },
+          {
+            title: "Mattress Cleaning",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Mattress cleaning uses upholstery extraction tools to remove dust mites, skin cells, sweat residue, and allergens from mattress surfaces. Growing in popularity as awareness of mattress hygiene increases, particularly among families with young children or allergy sufferers.</p>
+              </div>
+            )
+          },
+          {
+            title: "Carpet Protection Treatments",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>After cleaning, technicians may offer the application of a carpet protector such as Scotchgard or a similar product. These treatments coat carpet fibers with a protective barrier that repels liquid spills, making them easier to clean before they set into stains. A popular upsell that extends the time between professional cleanings.</p>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "carpet-operations",
+        label: "How the Business Operates",
+        icon: Info,
+        sections: [
+          {
+            title: "The Typical Service Workflow",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ol className="space-y-4">
+                  {[
+                    { step: "1. Customer Inquiry or Booking", desc: "A customer contacts the company by phone, email, website chat, or online booking form. They describe the areas they need cleaned, mention any special concerns (pet stains, heavy traffic, upcoming event), and ask about pricing. The first impression made during this step is critical for converting the inquiry into a booked job." },
+                    { step: "2. Quoting and Pricing", desc: "The CSR or VA provides a price estimate based on the number of rooms, square footage, or specific services requested. Many companies use standard pricing charts. For larger or more complex jobs, a technician may be sent to give an on-site quote. It is important to be transparent about pricing to avoid surprises at the time of service." },
+                    { step: "3. Appointment Scheduling", desc: "Once the customer agrees to the quote, an appointment is scheduled at a mutually convenient time. Customers are given a service window and receive a confirmation via text, email, or phone call. Reminder messages are typically sent the day before the appointment." },
+                    { step: "4. Technician Dispatch", desc: "The dispatcher assigns the job to the appropriate technician based on their schedule, location, and skill set. The technician receives the job details, customer address, and any notes about special requirements. Equipment is loaded, and the technician heads to the job site." },
+                    { step: "5. Inspection of Carpet Condition", desc: "Upon arrival, the technician walks through the areas to be cleaned. They identify fiber type, assess the level of soiling, note stains, and check for any areas of concern such as water damage, delicate materials, or furniture that needs moving." },
+                    { step: "6. Pre-Treatment of Stains", desc: "Before beginning the main cleaning process, the technician applies a pre-treatment solution to heavily soiled areas or stubborn stains. This solution is allowed to dwell for a few minutes to break down and loosen embedded soils, making the main cleaning step more effective." },
+                    { step: "7. Cleaning Process", desc: "The technician performs the main cleaning using the selected method (typically hot water extraction for residential jobs). They work systematically through each area, making overlapping passes to ensure complete coverage." },
+                    { step: "8. Drying Process", desc: "After cleaning, the technician uses air movers (fans) to accelerate drying. Furniture is placed on protective blocks or tabs to prevent rust or dye transfer onto the damp carpet. Customers are advised to keep foot traffic to a minimum during drying." },
+                    { step: "9. Final Inspection", desc: "The technician does a final walkthrough with the customer to review the results, point out any areas where stains could not be fully removed, and answer any questions. Upsell services (such as carpet protection) may be offered at this stage." },
+                    { step: "10. Payment and Follow-Up", desc: "Payment is collected on-site via cash, check, or card. An invoice or receipt is provided. After the job, a follow-up message may be sent to thank the customer, request a review, and remind them about future maintenance cleaning schedules or upcoming promotions." },
+                  ].map(({ step, desc }) => (
+                    <li key={step} className="flex gap-3">
+                      <span className="font-semibold text-foreground min-w-fit">{step}:</span>
+                      <span>{desc}</span>
+                    </li>
+                  ))}
+                </ol>
+                <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">CSR & VA Reminder</p>
+                  <p>Always ask the customer during booking whether they have pets, any sensitive areas, or upcoming events. This information helps the technician prepare the right solutions and sets accurate expectations for results and drying time.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "REFERENCE & BEST PRACTICES",
+    items: [
+      {
+        id: "carpet-terminology",
+        label: "Carpet Cleaning Terminology",
+        icon: BookOpen,
+        sections: [
+          {
+            title: "Common Carpet Cleaning Terms Glossary",
+            content: (
+              <div className="text-muted-foreground">
+                <p className="mb-4 text-sm">Familiarity with these terms is essential for everyone on the team to communicate confidently with customers, technicians, and colleagues.</p>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-44">Term</TableHead>
+                      <TableHead className="font-bold">Definition</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { term: "Pre-Treatment", def: "A cleaning solution applied to carpet before the main cleaning process to loosen and break down soils, stains, and grease. Pre-treatment significantly improves cleaning results." },
+                      { term: "Extraction", def: "The process of removing water, cleaning solution, and dissolved dirt from carpet fibers using suction. Hot water extraction is the most common extraction method." },
+                      { term: "Agitation", def: "The physical action of scrubbing or brushing the carpet to work cleaning solution deeper into the fibers and loosen embedded dirt. Can be done manually or with a machine." },
+                      { term: "Deodorizing", def: "The application of a product designed to neutralize or eliminate unpleasant odors from carpet. Enzyme-based deodorizers work by breaking down odor-causing organic matter." },
+                      { term: "Fiber Types", def: "The material from which carpet is made. Common types include nylon (most durable), polyester, olefin/polypropylene, and wool (most delicate). Fiber type determines which cleaning method and chemicals are safe to use." },
+                      { term: "pH Balance", def: "A measure of the acidity or alkalinity of a cleaning solution. Different soils and fibers require different pH levels. Most carpet cleaning solutions are slightly alkaline (pH 8–10) to cut through dirt and grease." },
+                      { term: "Soil Suspension", def: "The process by which cleaning agents surround and lift soil particles, suspending them in the cleaning solution so they can be extracted from the carpet." },
+                      { term: "Encapsulation", def: "A cleaning technique where a crystallizing polymer surrounds dirt particles and encapsulates them as it dries. The crystals can then be vacuumed away, leaving no sticky residue." },
+                      { term: "Dwell Time", def: "The amount of time a cleaning solution is left on the carpet before extraction. Sufficient dwell time allows the solution to break down soils effectively." },
+                      { term: "Wicking", def: "A phenomenon where stains or soil buried deep in the carpet pad or backing are drawn back up to the surface as the carpet dries after cleaning. Wicking can cause stains to reappear even after successful cleaning." },
+                      { term: "Pile", def: "The upright fibers that form the surface of a carpet. Pile direction, density, and height affect how the carpet feels and how it should be cleaned." },
+                      { term: "Carpet Protector", def: "A chemical treatment applied after cleaning to create a protective barrier on carpet fibers that repels spills and soil, making future cleaning easier." },
+                      { term: "Outgassing", def: "The release of volatile organic compounds (VOCs) from cleaning chemicals, new carpets, or adhesives. Proper ventilation during and after cleaning minimizes exposure." },
+                      { term: "IICRC", def: "Institute of Inspection, Cleaning and Restoration Certification. The leading certification body for carpet cleaning and restoration professionals. IICRC-certified technicians follow industry-standard best practices." },
+                      { term: "CRI", def: "Carpet and Rug Institute. An industry organization that tests and certifies carpet cleaning equipment and solutions as safe and effective for use on carpets." },
+                    ].map(({ term, def }) => (
+                      <TableRow key={term}>
+                        <TableCell className="font-semibold text-foreground align-top">{term}</TableCell>
+                        <TableCell className="text-sm">{def}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "carpet-roles",
+        label: "Roles in a Carpet Cleaning Business",
+        icon: Users,
+        sections: [
+          {
+            title: "Team Roles & Responsibilities",
+            content: (
+              <div className="text-muted-foreground">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="font-bold w-52">Role</TableHead>
+                      <TableHead className="font-bold">Responsibilities</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      { role: "Carpet Cleaning Technician", resp: "The core field worker who performs all cleaning services. Technicians operate equipment, apply chemicals, treat stains, interact with customers on-site, and are responsible for delivering quality results. Ideally IICRC-certified." },
+                      { role: "Lead Technician / Crew Leader", resp: "An experienced technician who manages a two-person crew, handles complex jobs, performs quality checks, and mentors junior technicians. Often responsible for upselling additional services on-site." },
+                      { role: "Customer Service Representative (CSR)", resp: "Handles incoming customer calls, texts, and emails. Collects job information, provides quotes, schedules appointments, and answers questions. The CSR is the voice of the company and plays a major role in customer satisfaction." },
+                      { role: "Dispatcher", resp: "Coordinates the daily schedule for technicians, assigns jobs based on location and skill level, monitors job progress throughout the day, and adjusts the schedule as needed for delays or emergency calls." },
+                      { role: "Sales Representative", resp: "Focuses on acquiring commercial accounts, maintenance contracts, and large residential clients. May conduct walk-throughs of facilities to assess scope and present customized proposals." },
+                      { role: "Operations Manager", resp: "Oversees daily business operations, including scheduling, equipment maintenance, inventory of cleaning supplies, technician performance, and customer satisfaction metrics." },
+                      { role: "Business Owner", resp: "Sets company strategy, manages finances, oversees hiring, and makes decisions about pricing, services, and growth. In small businesses, the owner often also works in the field." },
+                    ].map(({ role, resp }) => (
+                      <TableRow key={role}>
+                        <TableCell className="font-semibold text-foreground align-top">{role}</TableCell>
+                        <TableCell className="text-sm">{resp}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "carpet-tools",
+        label: "Tools & Equipment",
+        icon: Wrench,
+        sections: [
+          {
+            title: "Common Carpet Cleaning Equipment",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p className="text-sm">Professional carpet cleaning requires a range of specialized tools. Familiarity with this equipment helps support staff understand the scope of work involved in each job.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { name: "Carpet Extractors", desc: "The primary piece of equipment for hot water extraction. Truck-mounted extractors offer the most powerful suction and highest water temperatures. Portable extractors are ideal for high-rise apartments or areas where a truck cannot reach." },
+                    { name: "Steam Cleaning Machines", desc: "True steam machines generate steam using a boiler and apply it to carpet or upholstery surfaces. Effective for sanitizing and treating allergens and bacteria." },
+                    { name: "Rotary Machines", desc: "Use a spinning brush or pad to agitate carpet fibers or hard surfaces. Used for shampoo cleaning, bonnet cleaning, and working pre-treatment solutions into heavily soiled carpets before extraction." },
+                    { name: "Air Movers and Dryers", desc: "Placed on the carpet after cleaning to accelerate evaporation and reduce drying times. Using air movers prevents mold and mildew growth and minimizes inconvenience for the customer." },
+                    { name: "Vacuum Cleaners", desc: "Professional-grade vacuums used before and after cleaning to remove loose surface debris. A thorough pre-vacuum is an important first step, as it removes dry soil before it can turn to mud when wet." },
+                    { name: "Spot Cleaning Tools", desc: "Hand-held extraction wands, spotting syringes, and soft-bristle brushes used to treat and extract specific stain areas. Spotting kits contain a variety of targeted chemical solutions for different stain types." },
+                    { name: "Cleaning Chemicals & Detergents", desc: "Professional solutions formulated for specific carpet types and soil conditions: pre-sprays, enzyme-based pet treatments, deodorizers, carpet protectors, acid rinses, and pH-neutral upholstery cleaners." },
+                  ].map(({ name, desc }) => (
+                    <div key={name} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{name}</p>
+                      <p className="text-sm">{desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "carpet-safety",
+        label: "Safety & Best Practices",
+        icon: ShieldCheck,
+        sections: [
+          {
+            title: "Proper Chemical Handling",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Always read product labels and Safety Data Sheets (SDS) before using any chemical.</li>
+                  <li>Use appropriate PPE such as gloves and eye protection when mixing or applying concentrated chemicals.</li>
+                  <li>Never mix chemicals unless directed by the product manufacturer, as some combinations can produce toxic fumes.</li>
+                  <li>Store chemicals in labeled containers in a well-ventilated area away from heat sources and out of reach of children.</li>
+                  <li>Follow dilution ratios precisely — more concentrated does not always mean better results and can damage carpet fibers.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Protecting Furniture and Flooring",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Place furniture tabs, foam blocks, or plastic guards under furniture legs before cleaning to prevent rust or dye transfer onto damp carpet.</li>
+                  <li>Protect hardwood floors, tile, and baseboards from overspray and moisture during cleaning.</li>
+                  <li>Inform customers before moving heavy furniture and use sliders to avoid scratching hard floors.</li>
+                  <li>Document any pre-existing damage (stains, tears, furniture scratches) with photos before beginning work.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Preventing Mold and Over-Wetting",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Do not over-saturate carpet — this is one of the most common causes of mold, mildew, and wicking.</li>
+                  <li>Always use air movers after hot water extraction to speed drying and keep drying time under 12 hours.</li>
+                  <li>Advise customers to keep windows open (weather permitting) and to run their HVAC system to aid drying.</li>
+                  <li>In humid conditions or on thick carpets, use additional air movers and allow extra drying time.</li>
+                </ul>
+              </div>
+            )
+          },
+          {
+            title: "Safe Equipment Usage",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Inspect all equipment before each use for damaged cords, hoses, or fittings.</li>
+                  <li>Keep hoses and cords organized and secured to prevent trip hazards for customers and technicians.</li>
+                  <li>Lift heavy equipment using proper technique — bend at the knees, not the waist — to prevent back injuries.</li>
+                  <li>Never leave running equipment unattended, especially around children or pets.</li>
+                </ul>
+                <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Safety Reminder</p>
+                  <p>Technicians should complete a brief walkthrough with the customer before any work begins to confirm expectations, document existing damage, and identify any hazards in the work area. A signed pre-inspection form protects both the technician and the company.</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "carpet-problems",
+        label: "Common Customer Problems",
+        icon: AlertCircle,
+        sections: [
+          {
+            title: "Stains from Food or Drinks",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Coffee, red wine, juice, sauces, and cooking grease are among the most common stain complaints. The older a stain, the more difficult it is to remove — heat from regular cleaning can permanently set some stains if not pre-treated properly.</p>
+                <p className="text-sm italic">Advise customers: never rub a fresh spill — blot it and call a professional promptly.</p>
+              </div>
+            )
+          },
+          {
+            title: "Pet Accidents",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Dog and cat urine are particularly damaging to carpets. Urine soaks through the carpet, backing, and pad, and into the subfloor. As it dries, it leaves uric acid crystals and bacteria that create persistent, strong odors. Enzyme-based treatments are necessary to break down these compounds. In severe cases, full carpet removal and subfloor treatment may be the only effective solution.</p>
+              </div>
+            )
+          },
+          {
+            title: "Dirt Buildup",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>High-traffic areas — hallways, entryways, stairs, and living rooms — accumulate dirt rapidly. When dirt becomes embedded in carpet fibers, it acts like sandpaper, cutting and degrading the fibers with every footstep. Regular professional cleaning removes this embedded grit and significantly extends carpet life.</p>
+              </div>
+            )
+          },
+          {
+            title: "Odors",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Musty, pet, smoke, and food odors penetrate carpet fibers and padding and are very difficult to eliminate with surface-only treatments. Professional deodorizers and enzyme treatments reach deeper into the carpet structure to neutralize odor at the source rather than simply masking it.</p>
+              </div>
+            )
+          },
+          {
+            title: "Allergens and Dust",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Carpets trap dust mites, pollen, pet dander, mold spores, and other allergens that are stirred back into the air with foot traffic. This is a significant concern for households with allergy sufferers or asthma patients. Regular professional extraction removes these trapped particles, contributing to better indoor air quality.</p>
+              </div>
+            )
+          },
+          {
+            title: "Water Damage",
+            content: (
+              <div className="space-y-3 text-muted-foreground">
+                <p>Flooding, plumbing leaks, and roof leaks can saturate carpet and padding, creating an ideal environment for mold growth within 24 to 48 hours.</p>
+                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+                  Water damage jobs require rapid extraction of moisture using powerful equipment and industrial air movers and dehumidifiers. This is often a separate specialty service and may involve restoration certifications.
+                </div>
+              </div>
+            )
+          },
+          {
+            title: "Discoloration and Fading",
+            content: (
+              <div className="space-y-2 text-muted-foreground">
+                <p>Some discoloration is caused by improper cleaning products used by the homeowner, bleach splatter, or sun fading. Technicians can sometimes correct uneven discoloration using specialized color repair products, but customers should be advised upfront if a full correction is not possible.</p>
+              </div>
+            )
+          }
+        ]
+      },
+      {
+        id: "carpet-importance",
+        label: "Why Carpet Cleaning Matters",
+        icon: Heart,
+        sections: [
+          {
+            title: "The Importance of Professional Carpet Cleaning",
+            content: (
+              <div className="space-y-4 text-muted-foreground">
+                <p>Professional carpet cleaning is not a luxury — it is a practical investment in health, property value, and quality of life.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    { title: "Hygiene and Sanitation", body: "Carpets harbor thousands of bacteria per square inch — far more than most hard surfaces. Professional hot water extraction using heated water and professional-grade detergents kills and removes harmful microorganisms at a level that household cleaning cannot achieve. For commercial clients in food service, healthcare, and hospitality, clean floors are often required for licensing, insurance, and regulatory compliance." },
+                    { title: "Indoor Air Quality", body: "The EPA identifies indoor air pollution as one of the top environmental health risks. Carpets loaded with trapped pollutants release those particles back into the breathing zone every time someone walks on them. Professional cleaning dramatically reduces the concentration of allergens, bacteria, mold spores, and VOCs. For families with young children who spend time on the floor, this is especially important." },
+                    { title: "Extending Carpet Lifespan", body: "Replacing carpet is expensive. A professional cleaning regimen can more than double the usable life of a carpet. Abrasive soil particles act like tiny blades, cutting and fraying fibers with every footstep. Most carpet manufacturers recommend professional cleaning every 12 to 18 months to maintain the validity of carpet warranties." },
+                    { title: "Appearance and Maintenance", body: "In a business setting, dirty or dingy carpet projects a negative image. In a home, clean carpets contribute to a sense of order and pride. Professional cleaning restores the color, texture, and fresh appearance of carpet fibers in a way that consumer-grade rental equipment simply cannot match." },
+                  ].map(({ title, body }) => (
+                    <div key={title} className="p-4 border rounded-lg bg-primary/5">
+                      <p className="font-semibold text-foreground mb-1">{title}</p>
+                      <p className="text-sm">{body}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="p-4 bg-muted/50 border rounded-lg text-sm">
+                  <p className="font-semibold text-foreground mb-1">Final Note for New Team Members</p>
+                  <p>Understanding why carpet cleaning matters helps every member of the team — from CSRs to technicians to virtual assistants — speak with genuine enthusiasm and confidence when talking to customers. When customers understand the real value of the service, they are more likely to book, to accept additional services, and to become loyal, recurring clients. Welcome to the team!</p>
+                </div>
+              </div>
+            )
+          }
+        ]
+      }
+    ]
+  }
+];
+
 export const docsData: Record<string, DocGroup[]> = {
   home: homeSections,
   onboarding: onboardingSections,
   assistance: assistanceSections,
+  promptEngine: promptEngineeringSections,
+  hvac: hvacSections,
+  carpetCleaning: carpetCleaningSections,
 };
+
+export const TOP_LINKS = [
+  {
+    id: "onboarding",
+    label: "VA Onboarding Portal",
+    icon: Home,
+    title: "Onboarding Guide",
+    desc: "VA Expectation & Responsibility",
+  },
+  {
+    id: "home",
+    label: "SOP Playbook",
+    icon: BookOpen,
+    title: "SOP Playbook",
+    desc: "Standard Operating Procedures",
+  },
+  {
+    id: "assistance",
+    label: "Executive Assistance",
+    icon: Users,
+    title: "Executive Assistance",
+    desc: "EA Patterns & Guidelines",
+  },
+  {
+    id: "promptEngine",
+    label: "Prompt Engineering",
+    icon: Zap,
+    title: "Prompt Engineering",
+    desc: "Google Cloud Prompt Guide",
+  },
+  {
+    id: "hvac",
+    label: "HVAC Business",
+    icon: Thermometer,
+    title: "HVAC Knowledge Guide",
+    desc: "Training Resource",
+  },
+  {
+    id: "carpetCleaning",
+    label: "Carpet Cleaning Business",
+    icon: Sparkles,
+    title: "Carpet Cleaning Guide",
+    desc: "Training Resource",
+  },
+];
