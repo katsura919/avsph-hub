@@ -33,23 +33,29 @@ export const onboardingSections: DocGroup[] = [
             content: (
               <div className="space-y-4 text-muted-foreground">
                 <p className="text-lg italic font-serif leading-relaxed text-foreground/80">
-                  "We imagine a world where running a business feels easier, so owners can focus on what they love and grow with confidence."
+                  "We imagine a world where running a business feels easier, so
+                  owners can focus on what they love and grow with confidence."
                 </p>
-                <p>What drives us every single day at AVSPH is the commitment to simplify operations for business owners.</p>
+                <p>
+                  What drives us every single day at AVSPH is the commitment to
+                  simplify operations for business owners.
+                </p>
               </div>
-            )
+            ),
           },
           {
             title: "Our Mission",
             content: (
               <div className="space-y-4 text-muted-foreground">
                 <p className="text-lg italic font-serif leading-relaxed text-foreground/80">
-                  "Our mission is to make business owners' lives easier by providing support that simplifies operations and supports growth."
+                  "Our mission is to make business owners' lives easier by
+                  providing support that simplifies operations and supports
+                  growth."
                 </p>
               </div>
-            )
-          }
-        ]
+            ),
+          },
+        ],
       },
       {
         id: "onboarding-setup",
@@ -61,19 +67,33 @@ export const onboardingSections: DocGroup[] = [
             content: (
               <div className="space-y-2 text-muted-foreground">
                 <p>
-                  Create your company email, format is <code className="bg-muted px-1.5 py-0.5 rounded text-foreground">yourname.avs@gmail.com</code> (example: <code className="bg-muted px-1.5 py-0.5 rounded text-foreground">juandelacruz.avs@gmail.com</code>).
+                  Create your company email, format is{" "}
+                  <code className="bg-muted px-1.5 py-0.5 rounded text-foreground">
+                    yourname.avs@gmail.com
+                  </code>{" "}
+                  (example:{" "}
+                  <code className="bg-muted px-1.5 py-0.5 rounded text-foreground">
+                    juandelacruz.avs@gmail.com
+                  </code>
+                  ).
                 </p>
                 <div className="p-4 bg-destructive/10 text-destructive border border-destructive/20 rounded-lg">
-                  <p className="font-medium">This new email will be utilized for client and AVSPH communications. You are not allowed to use personal email.</p>
+                  <p className="font-medium">
+                    This new email will be utilized for client and AVSPH
+                    communications. You are not allowed to use personal email.
+                  </p>
                 </div>
               </div>
-            )
+            ),
           },
           {
             title: "2. Fill out Database",
             content: (
               <div className="space-y-4 text-muted-foreground">
-                <p>Please fill out the AVSPH VA Database, the information gathered is solely for agency purposes.</p>
+                <p>
+                  Please fill out the AVSPH VA Database, the information
+                  gathered is solely for agency purposes.
+                </p>
                 <a
                   href="https://docs.google.com/forms/d/e/1FAIpQLSch8623fnUZMxeU3l1TU47Amxg70qnNbz_SmBYhc3jKssks-g/viewform"
                   target="_blank"
@@ -83,48 +103,75 @@ export const onboardingSections: DocGroup[] = [
                   Fill out Form
                 </a>
               </div>
-            )
+            ),
           },
           {
             title: "3. Inform HR",
             content: (
               <div className="space-y-4 text-muted-foreground">
-                <p>Inform HR of your new email by sending an email to <a href="mailto:admin@av sph.com" className="text-primary hover:underline">admin@advancedvirtualstaff.com</a></p>
+                <p>
+                  Inform HR of your new email by sending an email to{" "}
+                  <a
+                    href="mailto:admin@av sph.com"
+                    className="text-primary hover:underline"
+                  >
+                    admin@advancedvirtualstaff.com
+                  </a>
+                </p>
 
                 <div className="bg-muted/50 p-4 rounded-lg border font-mono text-sm space-y-4 text-foreground relative">
                   <div>
-                    <span className="font-semibold text-muted-foreground">Subject:</span> New VA Email
+                    <span className="font-semibold text-muted-foreground">
+                      Subject:
+                    </span>{" "}
+                    New VA Email
                   </div>
                   <div>
-                    <span className="font-semibold text-muted-foreground">Body:</span>
-                    <br /><br />
+                    <span className="font-semibold text-muted-foreground">
+                      Body:
+                    </span>
+                    <br />
+                    <br />
                     Good day,
-                    <br /><br />
-                    This is (yourname) and I am now using this email for company use. I was hired as (position). My client is (name of client) and I am working (# of hours).
-                    <br /><br />
+                    <br />
+                    <br />
+                    This is (yourname) and I am now using this email for company
+                    use. I was hired as (position). My client is (name of
+                    client) and I am working (# of hours).
+                    <br />
+                    <br />
                     Thank you!
                   </div>
                 </div>
               </div>
-            )
+            ),
           },
           {
             title: "4. Client Kick-off & Hand-off",
             content: (
               <div className="space-y-4 text-muted-foreground mt-4 p-4 border border-dashed rounded-lg bg-muted/20">
                 <ul className="list-disc pl-5 space-y-2 text-foreground/80">
-                  <li><strong>Introduction:</strong> How to initiate the first communication with your client.</li>
-                  <li><strong>Scheduling:</strong> Arranging the initial kick-off call.</li>
-                  <li><strong>First Week Expectations:</strong> What to prepare for in your first 5 days.</li>
+                  <li>
+                    <strong>Introduction:</strong> How to initiate the first
+                    communication with your client.
+                  </li>
+                  <li>
+                    <strong>Scheduling:</strong> Arranging the initial kick-off
+                    call.
+                  </li>
+                  <li>
+                    <strong>First Week Expectations:</strong> What to prepare
+                    for in your first 5 days.
+                  </li>
                 </ul>
               </div>
-            )
-          }
-        ]
-      }
-    ]
+            ),
+          },
+        ],
+      },
+    ],
   },
-    {
+  {
     title: "GETTING STARTED",
     items: [
       {
@@ -139,7 +186,7 @@ export const onboardingSections: DocGroup[] = [
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 border rounded-lg bg-primary/5">
                     <p className="font-semibold text-primary mb-2 flex items-center gap-2">
-                       <Home className="w-4 h-4" /> Hardware
+                      <Home className="w-4 h-4" /> Hardware
                     </p>
                     <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
                       <li>Desktop or laptop with reliable specifications</li>
@@ -148,7 +195,7 @@ export const onboardingSections: DocGroup[] = [
                   </div>
                   <div className="p-4 border rounded-lg bg-primary/5">
                     <p className="font-semibold text-primary mb-2 flex items-center gap-2">
-                       <Zap className="w-4 h-4" /> Internet
+                      <Zap className="w-4 h-4" /> Internet
                     </p>
                     <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
                       <li>Minimum 20 Mbps stable connection</li>
@@ -158,7 +205,7 @@ export const onboardingSections: DocGroup[] = [
                 </div>
                 <div className="p-4 border rounded-lg bg-primary/5">
                   <p className="font-semibold text-primary mb-2 flex items-center gap-2">
-                     <Coffee className="w-4 h-4" /> Workspace
+                    <Coffee className="w-4 h-4" /> Workspace
                   </p>
                   <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
                     <li>Quiet, professional work environment</li>
@@ -185,22 +232,38 @@ export const onboardingSections: DocGroup[] = [
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="p-4 text-center border rounded-lg bg-muted/30">
-                    <div className="text-2xl font-bold text-primary italic">11PM-9AM</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Typical Shift (PH)</div>
+                    <div className="text-2xl font-bold text-primary italic">
+                      11PM-9AM
+                    </div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                      Typical Shift (PH)
+                    </div>
                   </div>
                   <div className="p-4 text-center border rounded-lg bg-muted/30">
-                    <div className="text-2xl font-bold text-primary italic">8 hrs</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Full-Time Daily</div>
+                    <div className="text-2xl font-bold text-primary italic">
+                      8 hrs
+                    </div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                      Full-Time Daily
+                    </div>
                   </div>
                   <div className="p-4 text-center border rounded-lg bg-muted/30">
-                    <div className="text-2xl font-bold text-primary italic">5 days</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Per Week</div>
+                    <div className="text-2xl font-bold text-primary italic">
+                      5 days
+                    </div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                      Per Week
+                    </div>
                   </div>
                 </div>
                 <div className="space-y-2 text-muted-foreground">
                   <ul className="list-disc pl-5 space-y-1 text-sm">
-                    <li>Shift hours vary per client — confirm exact schedule.</li>
-                    <li>Changes require mutual agreement and management approval.</li>
+                    <li>
+                      Shift hours vary per client — confirm exact schedule.
+                    </li>
+                    <li>
+                      Changes require mutual agreement and management approval.
+                    </li>
                     <li>New client = new updated contract.</li>
                   </ul>
                 </div>
@@ -214,7 +277,7 @@ export const onboardingSections: DocGroup[] = [
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 border rounded-lg">
                     <h4 className="font-semibold mb-2 flex items-center gap-2">
-                       <Phone className="w-4 h-4 text-primary" /> Login / Logout
+                      <Phone className="w-4 h-4 text-primary" /> Login / Logout
                     </h4>
                     <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
                       <li>Log IN in the WhatsApp group</li>
@@ -224,35 +287,76 @@ export const onboardingSections: DocGroup[] = [
                   </div>
                   <div className="p-4 border rounded-lg">
                     <h4 className="font-semibold mb-2 flex items-center gap-2">
-                       <Mail className="w-4 h-4 text-primary" /> EOD Submission
+                      <Mail className="w-4 h-4 text-primary" /> EOD Submission
                     </h4>
                     <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-                      <li>Send to: <code className="text-foreground">eod@advancedvirtualstaff.com</code></li>
+                      <li>
+                        Send to:{" "}
+                        <code className="text-foreground">
+                          avsph.eod@gmail.com
+                        </code>
+                      </li>
                       <li>Subject: [Date] in client timezone</li>
                     </ul>
                   </div>
                 </div>
 
                 <div className="bg-muted/50 p-6 rounded-xl border border-border">
-                  <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">EOD Report Template</h4>
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+                    EOD Report Template
+                  </h4>
                   <div className="space-y-4 font-mono text-xs text-foreground leading-relaxed">
-                    <div className="text-primary/60 font-sans italic border-b pb-2 mb-2">// Subject Line</div>
-                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Subject:</span> [Date] — [Client TZ]</div>
+                    <div className="text-primary/60 font-sans italic border-b pb-2 mb-2">
+                      // Subject Line
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">
+                        Subject:
+                      </span>{" "}
+                      [Date] — [Client TZ]
+                    </div>
                     <br />
-                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Logout:</span> [Date]</div>
-                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Name:</span> [Your Name]</div>
-                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Break:</span> [Duration]</div>
-                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Appt:</span> [Yes/No]</div>
-                    <div className="flex gap-2"><span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">Hours:</span> [Rendered]</div>
+                    <div className="flex gap-2">
+                      <span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">
+                        Logout:
+                      </span>{" "}
+                      [Date]
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">
+                        Name:
+                      </span>{" "}
+                      [Your Name]
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">
+                        Break:
+                      </span>{" "}
+                      [Duration]
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">
+                        Appt:
+                      </span>{" "}
+                      [Yes/No]
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-muted-foreground w-16 shrink-0 underline decoration-muted/40">
+                        Hours:
+                      </span>{" "}
+                      [Rendered]
+                    </div>
                     <br />
                     <div>
-                      <div className="text-muted-foreground underline mb-1">Tasks Completed:</div>
+                      <div className="text-muted-foreground underline mb-1">
+                        Tasks Completed:
+                      </div>
                       <div className="text-primary italic pl-4">- [Task 1]</div>
                     </div>
                   </div>
                 </div>
               </div>
-            )
+            ),
           },
           {
             title: "Emergency Contact Flow",
@@ -261,16 +365,25 @@ export const onboardingSections: DocGroup[] = [
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 font-semibold">
-                      <MessageSquare className="w-4 h-4 text-primary" /> WhatsApp
+                      <MessageSquare className="w-4 h-4 text-primary" />{" "}
+                      WhatsApp
                     </div>
                     <div className="space-y-4 border-l-2 border-primary/20 pl-4 py-1">
                       <div>
-                        <div className="text-sm font-medium">Step 1 — DM HR</div>
-                        <p className="text-xs text-muted-foreground">Direct message HR (not in group).</p>
+                        <div className="text-sm font-medium">
+                          Step 1 — DM HR
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Direct message HR (not in group).
+                        </p>
                       </div>
                       <div>
-                        <div className="text-sm font-medium">Step 2 — "Emergency" tag</div>
-                        <p className="text-xs text-muted-foreground">Start with "Emergency" for urgent items.</p>
+                        <div className="text-sm font-medium">
+                          Step 2 — "Emergency" tag
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Start with "Emergency" for urgent items.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -287,7 +400,7 @@ export const onboardingSections: DocGroup[] = [
                   </div>
                 </div>
               </div>
-            )
+            ),
           },
           {
             title: "Meetings & Check-ins",
@@ -297,7 +410,10 @@ export const onboardingSections: DocGroup[] = [
                 <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
                   <li>1-2 Team Meetings per quarter</li>
                   <li>5-10 minute weekly Kumustahan with HR</li>
-                  <li>2 Kumustahan sessions must be attended before bi-monthly compensation is released</li>
+                  <li>
+                    2 Kumustahan sessions must be attended before bi-monthly
+                    compensation is released
+                  </li>
                 </ul>
               </div>
             ),
@@ -313,12 +429,31 @@ export const onboardingSections: DocGroup[] = [
                 </ul>
 
                 <div className="p-4 border border-dashed rounded-lg bg-muted/20">
-                  <h4 className="font-semibold text-foreground mb-2">Escalation & Support Contacts</h4>
-                  <p className="italic mb-2">Note: Placeholder for specific contact information.</p>
+                  <h4 className="font-semibold text-foreground mb-2">
+                    Escalation & Support Contacts
+                  </h4>
+                  <p className="italic mb-2">
+                    Note: Placeholder for specific contact information.
+                  </p>
                   <ul className="list-disc pl-5 space-y-1 text-sm">
-                    <li><strong className="text-foreground">Payroll Issues:</strong> [Payroll Email/Contact]</li>
-                    <li><strong className="text-foreground">Client Disputes/Issues:</strong> [Account Manager Contact]</li>
-                    <li><strong className="text-foreground">Technical Support:</strong> [IT Contact]</li>
+                    <li>
+                      <strong className="text-foreground">
+                        Payroll Issues:
+                      </strong>{" "}
+                      [Payroll Email/Contact]
+                    </li>
+                    <li>
+                      <strong className="text-foreground">
+                        Client Disputes/Issues:
+                      </strong>{" "}
+                      [Account Manager Contact]
+                    </li>
+                    <li>
+                      <strong className="text-foreground">
+                        Technical Support:
+                      </strong>{" "}
+                      [IT Contact]
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -335,17 +470,28 @@ export const onboardingSections: DocGroup[] = [
             title: "Confidentiality & NDA",
             content: (
               <div className="space-y-4 text-muted-foreground">
-                <p className="text-sm">Protecting client and company information is a core legal obligation. This includes client data, business strategies, and internal documents.</p>
+                <p className="text-sm">
+                  Protecting client and company information is a core legal
+                  obligation. This includes client data, business strategies,
+                  and internal documents.
+                </p>
                 <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive flex items-start gap-3">
                   <Shield className="w-5 h-5 mt-0.5 shrink-0" />
                   <div className="text-sm">
-                    <strong>Legal Penalty:</strong> Breach of confidentiality can result in liquidated damages of up to <strong>₱500,000</strong>.
+                    <strong>Legal Penalty:</strong> Breach of confidentiality
+                    can result in liquidated damages of up to{" "}
+                    <strong>₱500,000</strong>.
                   </div>
                 </div>
                 <ul className="list-disc pl-5 space-y-1 text-sm">
                   <li>Return all files/documents upon contract termination.</li>
-                  <li>Do not use info for personal gain or for a third party.</li>
-                  <li>Exception: Info that becomes public through no fault of yours.</li>
+                  <li>
+                    Do not use info for personal gain or for a third party.
+                  </li>
+                  <li>
+                    Exception: Info that becomes public through no fault of
+                    yours.
+                  </li>
                 </ul>
               </div>
             ),
@@ -357,9 +503,11 @@ export const onboardingSections: DocGroup[] = [
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 border rounded-lg">
                     <h4 className="font-semibold text-foreground mb-1 flex items-center gap-2">
-                       <Target className="w-4 h-4" /> Non-Compete
+                      <Target className="w-4 h-4" /> Non-Compete
                     </h4>
-                    <p className="text-xs italic mb-2">During contract + 2 years after</p>
+                    <p className="text-xs italic mb-2">
+                      During contract + 2 years after
+                    </p>
                     <ul className="list-disc pl-4 space-y-1 text-xs">
                       <li>No similar businesses to AVSPH</li>
                       <li>Applies to current/former client businesses</li>
@@ -367,16 +515,20 @@ export const onboardingSections: DocGroup[] = [
                   </div>
                   <div className="p-4 border rounded-lg">
                     <h4 className="font-semibold text-foreground mb-1 flex items-center gap-2">
-                       <Users className="w-4 h-4" /> Non-Solicitation
+                      <Users className="w-4 h-4" /> Non-Solicitation
                     </h4>
-                    <p className="text-xs italic mb-2">2 years after contract ends</p>
+                    <p className="text-xs italic mb-2">
+                      2 years after contract ends
+                    </p>
                     <ul className="list-disc pl-4 space-y-1 text-xs">
                       <li>Do not recruit any AVSPH staff/agents</li>
                     </ul>
                   </div>
                 </div>
                 <div className="p-4 bg-muted/40 text-xs rounded-lg border border-dashed">
-                  <strong>Financial Penalties:</strong> AVSPH staff hired through you → ₱500,000 damages. Client solicited away → reimburse 2 years of lost profits.
+                  <strong>Financial Penalties:</strong> AVSPH staff hired
+                  through you → ₱500,000 damages. Client solicited away →
+                  reimburse 2 years of lost profits.
                 </div>
               </div>
             ),
@@ -390,16 +542,22 @@ export const onboardingSections: DocGroup[] = [
                     "Do NOT work for clients outside AVSPH",
                     "Do NOT engage with competitors",
                     "Do NOT solicit or accept side jobs",
-                    "Do NOT receive direct client payments"
+                    "Do NOT receive direct client payments",
                   ].map((text, i) => (
-                    <div key={i} className="p-3 border rounded-lg bg-destructive/[0.03] text-destructive flex items-center gap-2 text-xs font-medium">
+                    <div
+                      key={i}
+                      className="p-3 border rounded-lg bg-destructive/[0.03] text-destructive flex items-center gap-2 text-xs font-medium"
+                    >
                       <CheckCircle className="w-4 h-4 shrink-0 opacity-50" />
                       {text}
                     </div>
                   ))}
                 </div>
                 <div className="p-4 bg-primary/5 rounded-lg border-l-4 border-primary">
-                  <p className="text-xs text-muted-foreground italic">"When you follow these guidelines, you protect yourself, your clients, and the entire team."</p>
+                  <p className="text-xs text-muted-foreground italic">
+                    "When you follow these guidelines, you protect yourself,
+                    your clients, and the entire team."
+                  </p>
                 </div>
               </div>
             ),
@@ -410,13 +568,22 @@ export const onboardingSections: DocGroup[] = [
               <div className="space-y-4 text-muted-foreground">
                 <div className="space-y-2">
                   <div className="flex justify-between items-center p-3 border rounded-lg bg-background shadow-sm">
-                    <div className="text-sm font-semibold text-foreground">Voluntary Notice</div>
-                    <div className="text-sm font-bold text-primary italic">14 Days Required</div>
+                    <div className="text-sm font-semibold text-foreground">
+                      Voluntary Notice
+                    </div>
+                    <div className="text-sm font-bold text-primary italic">
+                      14 Days Required
+                    </div>
                   </div>
-                  <p className="text-xs pl-1">Failure to complete notice = final payout forfeited. AWOL is grounds for immediate termination without pay.</p>
+                  <p className="text-xs pl-1">
+                    Failure to complete notice = final payout forfeited. AWOL is
+                    grounds for immediate termination without pay.
+                  </p>
                 </div>
                 <div className="p-4 border border-dashed rounded-lg bg-muted/20">
-                  <h4 className="font-semibold text-foreground mb-2 text-xs uppercase tracking-tighter italic">Involuntary (Immediate)</h4>
+                  <h4 className="font-semibold text-foreground mb-2 text-xs uppercase tracking-tighter italic">
+                    Involuntary (Immediate)
+                  </h4>
                   <ul className="list-disc pl-5 space-y-1 text-xs">
                     <li>Inducing employees or clients to leave</li>
                     <li>Acts of disloyalty or fraud</li>
@@ -437,21 +604,55 @@ export const onboardingSections: DocGroup[] = [
             title: "Compensation & Bonuses",
             content: (
               <div className="space-y-4 text-muted-foreground p-4 bg-muted/30 rounded-lg border">
-                <h3 className="text-lg font-medium text-foreground mb-2">General Terms</h3>
+                <h3 className="text-lg font-medium text-foreground mb-2">
+                  General Terms
+                </h3>
                 <ul className="list-disc pl-5 space-y-2">
-                  <li><strong className="text-foreground">Rate:</strong> Depends on client agreement.</li>
-                  <li><strong className="text-foreground">Schedule:</strong> Bi-monthly payouts. Any delays will be communicated 3 days prior.</li>
-                  <li><strong className="text-foreground">Requirement:</strong> Invoice submission via email is required before each payout.</li>
+                  <li>
+                    <strong className="text-foreground">Rate:</strong> Depends
+                    on client agreement.
+                  </li>
+                  <li>
+                    <strong className="text-foreground">Schedule:</strong>{" "}
+                    Bi-monthly payouts. Any delays will be communicated 3 days
+                    prior.
+                  </li>
+                  <li>
+                    <strong className="text-foreground">Requirement:</strong>{" "}
+                    Invoice submission via email is required before each payout.
+                  </li>
                 </ul>
 
                 <div className="mt-4 p-4 border border-dashed rounded-lg bg-background">
-                  <h4 className="font-semibold text-foreground mb-2">Invoice Submission Instructions</h4>
-                  <p className="italic mb-2 text-sm">Note: Placeholder for invoicing procedure.</p>
+                  <h4 className="font-semibold text-foreground mb-2">
+                    Invoice Submission Instructions
+                  </h4>
+                  <p className="italic mb-2 text-sm">
+                    Note: Placeholder for invoicing procedure.
+                  </p>
                   <ul className="list-disc pl-5 space-y-2 text-sm">
-                    <li><strong className="text-foreground">Where to send:</strong> billing@advancedvirtualstaff.com</li>
-                    <li><strong className="text-foreground">Subject Line Format:</strong> Invoice - [Your Name] - [Cut-off Date]</li>
-                    <li><strong className="text-foreground">Cut-off Dates:</strong> 15th and 30th of the month.</li>
-                    <li><strong className="text-foreground">Template:</strong> Link to approved invoice template.</li>
+                    <li>
+                      <strong className="text-foreground">
+                        Where to send:
+                      </strong>{" "}
+                      avsph.eod@gmail.com
+                    </li>
+                    <li>
+                      <strong className="text-foreground">
+                        Subject Line Format:
+                      </strong>{" "}
+                      Invoice - [Your Name] - [Cut-off Date]
+                    </li>
+                    <li>
+                      <strong className="text-foreground">
+                        Cut-off Dates:
+                      </strong>{" "}
+                      15th and 30th of the month.
+                    </li>
+                    <li>
+                      <strong className="text-foreground">Template:</strong>{" "}
+                      Link to approved invoice template.
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -462,16 +663,45 @@ export const onboardingSections: DocGroup[] = [
             content: (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[
-                  { label: "Loyalty Bonus", value: "P10,000", desc: "Annual reward" },
-                  { label: "Quarterly Bonus", value: "P2,000", desc: "Every 3 months" },
-                  { label: "WiFi Allowance", value: "P1,000", desc: "Monthly subsidy" },
-                  { label: "Medical Reimbursement", value: "P5,000", desc: "Health support" },
-                  { label: "Year-End Bonus", value: "Bonus", desc: "Every December" }
+                  {
+                    label: "Loyalty Bonus",
+                    value: "P10,000",
+                    desc: "Annual reward",
+                  },
+                  {
+                    label: "Quarterly Bonus",
+                    value: "P2,000",
+                    desc: "Every 3 months",
+                  },
+                  {
+                    label: "WiFi Allowance",
+                    value: "P1,000",
+                    desc: "Monthly subsidy",
+                  },
+                  {
+                    label: "Medical Reimbursement",
+                    value: "P5,000",
+                    desc: "Health support",
+                  },
+                  {
+                    label: "Year-End Bonus",
+                    value: "Bonus",
+                    desc: "Every December",
+                  },
                 ].map((item, i) => (
-                  <div key={i} className="flex flex-col p-4 bg-background border rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <span className="text-sm font-medium text-muted-foreground">{item.label}</span>
-                    <span className="text-2xl font-bold text-primary mt-1">{item.value}</span>
-                    <span className="text-xs text-muted-foreground mt-2">{item.desc}</span>
+                  <div
+                    key={i}
+                    className="flex flex-col p-4 bg-background border rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <span className="text-sm font-medium text-muted-foreground">
+                      {item.label}
+                    </span>
+                    <span className="text-2xl font-bold text-primary mt-1">
+                      {item.value}
+                    </span>
+                    <span className="text-xs text-muted-foreground mt-2">
+                      {item.desc}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -488,9 +718,19 @@ export const onboardingSections: DocGroup[] = [
                     { val: "1", unit: "mo", lbl: "Notice Required" },
                     { val: "1", unit: "yr", lbl: "Service Required" },
                   ].map((s, i) => (
-                    <div key={i} className="p-3 text-center border rounded-lg bg-muted/30">
-                      <div className="text-2xl font-bold text-primary">{s.val}<span className="text-sm font-normal ml-1 text-muted-foreground">{s.unit}</span></div>
-                      <div className="text-[10px] uppercase tracking-wide text-muted-foreground mt-1">{s.lbl}</div>
+                    <div
+                      key={i}
+                      className="p-3 text-center border rounded-lg bg-muted/30"
+                    >
+                      <div className="text-2xl font-bold text-primary">
+                        {s.val}
+                        <span className="text-sm font-normal ml-1 text-muted-foreground">
+                          {s.unit}
+                        </span>
+                      </div>
+                      <div className="text-[10px] uppercase tracking-wide text-muted-foreground mt-1">
+                        {s.lbl}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -499,22 +739,40 @@ export const onboardingSections: DocGroup[] = [
                     <h4 className="font-semibold mb-2">Eligibility</h4>
                     <ul className="text-sm space-y-1 text-muted-foreground list-disc pl-4">
                       <li>Full-time contractor: 8 hrs/day, 5 days/week</li>
-                      <li>Completed 1 full year of continuous active service</li>
-                      <li>File request at least 1 month in advance (except emergencies)</li>
+                      <li>
+                        Completed 1 full year of continuous active service
+                      </li>
+                      <li>
+                        File request at least 1 month in advance (except
+                        emergencies)
+                      </li>
                     </ul>
                   </div>
                   <div className="p-4 border rounded-lg">
                     <h4 className="font-semibold mb-2">How to File</h4>
                     <ul className="text-sm space-y-1 text-muted-foreground list-disc pl-4">
                       <li>Direct WhatsApp to HR (not the group chat)</li>
-                      <li>Format: <strong className="text-foreground">[Your Name] – Leave Request</strong> with dates and reason</li>
-                      <li>Attach proof if sick or emergency (supporting docs help approval)</li>
+                      <li>
+                        Format:{" "}
+                        <strong className="text-foreground">
+                          [Your Name] – Leave Request
+                        </strong>{" "}
+                        with dates and reason
+                      </li>
+                      <li>
+                        Attach proof if sick or emergency (supporting docs help
+                        approval)
+                      </li>
                     </ul>
                   </div>
                 </div>
                 <div className="p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg text-amber-700 dark:text-amber-400 text-sm flex items-start gap-3">
                   <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
-                  <div><strong>Year of Stay Reset:</strong> Periods where you were "On Pause" do NOT count toward your Year of Stay and cause your count to reset upon return.</div>
+                  <div>
+                    <strong>Year of Stay Reset:</strong> Periods where you were
+                    "On Pause" do NOT count toward your Year of Stay and cause
+                    your count to reset upon return.
+                  </div>
                 </div>
               </div>
             ),
@@ -527,22 +785,32 @@ export const onboardingSections: DocGroup[] = [
                   <Table>
                     <TableHeader className="bg-muted/50">
                       <TableRow>
-                        <TableHead className="font-semibold">If Foreign Exchange Rate is</TableHead>
-                        <TableHead className="font-semibold text-right">Conversion Rate Used</TableHead>
+                        <TableHead className="font-semibold">
+                          If Foreign Exchange Rate is
+                        </TableHead>
+                        <TableHead className="font-semibold text-right">
+                          Conversion Rate Used
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       <TableRow>
                         <TableCell>Lower than ₱56</TableCell>
-                        <TableCell className="text-right font-bold text-primary">₱53</TableCell>
+                        <TableCell className="text-right font-bold text-primary">
+                          ₱53
+                        </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell>₱56</TableCell>
-                        <TableCell className="text-right font-bold text-primary">₱54</TableCell>
+                        <TableCell className="text-right font-bold text-primary">
+                          ₱54
+                        </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell>₱57</TableCell>
-                        <TableCell className="text-right font-bold text-primary">₱55</TableCell>
+                        <TableCell className="text-right font-bold text-primary">
+                          ₱55
+                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -561,34 +829,43 @@ export const onboardingSections: DocGroup[] = [
                 <div className="p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-xl text-amber-700 dark:text-amber-400">
                   <div className="flex gap-2">
                     <Zap className="w-5 h-5 shrink-0" />
-                    <div className="text-sm"><strong>Emergency only:</strong> Requests without proof will NOT be processed.</div>
+                    <div className="text-sm">
+                      <strong>Emergency only:</strong> Requests without proof
+                      will NOT be processed.
+                    </div>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <h4 className="text-sm font-semibold text-foreground">Eligibility</h4>
+                    <h4 className="text-sm font-semibold text-foreground">
+                      Eligibility
+                    </h4>
                     <ul className="list-disc pl-5 text-xs space-y-1">
                       <li>Min. 6 months tenure</li>
                       <li>Max. 50% of upcoming payment</li>
                     </ul>
                   </div>
                   <div className="space-y-2">
-                    <h4 className="text-sm font-semibold text-foreground">Regulations</h4>
+                    <h4 className="text-sm font-semibold text-foreground">
+                      Regulations
+                    </h4>
                     <ul className="list-disc pl-5 text-xs space-y-1">
                       <li>Genuine emergencies only</li>
                       <li>Supporting documents required</li>
                     </ul>
                   </div>
                 </div>
-                
-                <p className="text-[10px] uppercase font-bold text-destructive">Misuse may result in termination.</p>
+
+                <p className="text-[10px] uppercase font-bold text-destructive">
+                  Misuse may result in termination.
+                </p>
               </div>
-            )
-          }
-        ]
-      }
-    ]
+            ),
+          },
+        ],
+      },
+    ],
   },
   {
     title: "PLATFORM GUIDE",
@@ -602,21 +879,42 @@ export const onboardingSections: DocGroup[] = [
             title: "Accessing the Platform",
             content: (
               <div className="space-y-4 text-muted-foreground">
-                <p>After your contract is confirmed, HR will send you an email containing your credentials for the Staff Dashboard. Keep an eye on your new company email for these details.</p>
+                <p>
+                  After your contract is confirmed, HR will send you an email
+                  containing your credentials for the Staff Dashboard. Keep an
+                  eye on your new company email for these details.
+                </p>
                 <div className="bg-muted/30 p-4 rounded-lg border">
-                  <h4 className="font-semibold text-foreground mb-2">How to Login:</h4>
+                  <h4 className="font-semibold text-foreground mb-2">
+                    How to Login:
+                  </h4>
                   <ol className="list-decimal pl-5 space-y-2">
                     <li>Navigate to the AVSPH Dashboard Login Page.</li>
-                    <li>Ensure the <strong className="text-foreground">Staff</strong> tab is selected at the top of the login form.</li>
-                    <li>Enter the Email Address and temporary Password from the HR email.</li>
-                    <li>Click <strong className="text-foreground">Sign In</strong>.</li>
-                    <li><em>Note: Upon your first login, or as directed by HR, you may need to update your password for security purposes.</em></li>
+                    <li>
+                      Ensure the{" "}
+                      <strong className="text-foreground">Staff</strong> tab is
+                      selected at the top of the login form.
+                    </li>
+                    <li>
+                      Enter the Email Address and temporary Password from the HR
+                      email.
+                    </li>
+                    <li>
+                      Click <strong className="text-foreground">Sign In</strong>
+                      .
+                    </li>
+                    <li>
+                      <em>
+                        Note: Upon your first login, or as directed by HR, you
+                        may need to update your password for security purposes.
+                      </em>
+                    </li>
                   </ol>
                 </div>
               </div>
-            )
-          }
-        ]
+            ),
+          },
+        ],
       },
       {
         id: "daily-eods",
@@ -627,46 +925,111 @@ export const onboardingSections: DocGroup[] = [
             title: "Submitting Your EOD (End of Day)",
             content: (
               <div className="space-y-4 text-muted-foreground">
-                <p>Once you are logged in and start working, you are required to submit an End of Day (EOD) report daily through the Staff Dashboard to track your tasks and hours.</p>
+                <p>
+                  Once you are logged in and start working, you are required to
+                  submit an End of Day (EOD) report daily through the Staff
+                  Dashboard to track your tasks and hours.
+                </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
                   <div className="p-4 border rounded-lg bg-primary/5">
-                    <h4 className="font-semibold text-primary mb-1">EOD Page Overview</h4>
-                    <p className="text-sm">On your EOD page, you can see your Estimated Pay, count of Approved/Pending EODs, and your Next Payout date at the top.</p>
+                    <h4 className="font-semibold text-primary mb-1">
+                      EOD Page Overview
+                    </h4>
+                    <p className="text-sm">
+                      On your EOD page, you can see your Estimated Pay, count of
+                      Approved/Pending EODs, and your Next Payout date at the
+                      top.
+                    </p>
                   </div>
                   <div className="p-4 border rounded-lg bg-muted/30">
                     <h4 className="font-semibold mb-1">Managing EODs</h4>
-                    <p className="text-sm">You can view your past submissions in the table, check their status, and filter them by date or status.</p>
+                    <p className="text-sm">
+                      You can view your past submissions in the table, check
+                      their status, and filter them by date or status.
+                    </p>
                   </div>
                 </div>
 
                 <div className="bg-muted/30 p-4 rounded-lg border">
-                  <h4 className="font-semibold text-foreground mb-3">EOD Submission Guide:</h4>
+                  <h4 className="font-semibold text-foreground mb-3">
+                    EOD Submission Guide:
+                  </h4>
                   <ol className="list-decimal pl-5 space-y-3 mb-4">
-                    <li>Go to the <strong className="text-foreground">Daily EODs</strong> section from your dashboard sidebar.</li>
-                    <li>Click on the <strong className="text-foreground">Submit EOD</strong> button.</li>
-                    <li>Fill out all the required fields in the submission form accurately.</li>
+                    <li>
+                      Go to the{" "}
+                      <strong className="text-foreground">Daily EODs</strong>{" "}
+                      section from your dashboard sidebar.
+                    </li>
+                    <li>
+                      Click on the{" "}
+                      <strong className="text-foreground">Submit EOD</strong>{" "}
+                      button.
+                    </li>
+                    <li>
+                      Fill out all the required fields in the submission form
+                      accurately.
+                    </li>
                   </ol>
 
                   <div className="mt-4 p-4 border border-primary/20 bg-background rounded-md space-y-2">
-                    <p className="font-semibold text-primary underline mb-2">Form Fields Overview:</p>
+                    <p className="font-semibold text-primary underline mb-2">
+                      Form Fields Overview:
+                    </p>
                     <ul className="list-disc pl-5 space-y-2 text-sm">
-                      <li><strong className="text-foreground">Date:</strong> The specific date the work was performed (defaults to today).</li>
-                      <li><strong className="text-foreground">Total Hours Worked:</strong> Your total shift hours (e.g., 8).</li>
-                      <li><strong className="text-foreground">Regular / Overtime / Night Diff Hours:</strong> Breakdown of your hours. <em>(If regular hours are left blank, the system treats your total hours as regular hours).</em></li>
-                      <li><strong className="text-foreground">Tasks Completed:</strong> A detailed description of what you accomplished today. (Required)</li>
-                      <li><strong className="text-foreground">Challenges:</strong> Any blockers or issues you encountered.</li>
-                      <li><strong className="text-foreground">Next Day Plan:</strong> What you plan to work on during your next shift.</li>
-                      <li><strong className="text-foreground">Additional Notes:</strong> Any other information you need to relay.</li>
+                      <li>
+                        <strong className="text-foreground">Date:</strong> The
+                        specific date the work was performed (defaults to
+                        today).
+                      </li>
+                      <li>
+                        <strong className="text-foreground">
+                          Total Hours Worked:
+                        </strong>{" "}
+                        Your total shift hours (e.g., 8).
+                      </li>
+                      <li>
+                        <strong className="text-foreground">
+                          Regular / Overtime / Night Diff Hours:
+                        </strong>{" "}
+                        Breakdown of your hours.{" "}
+                        <em>
+                          (If regular hours are left blank, the system treats
+                          your total hours as regular hours).
+                        </em>
+                      </li>
+                      <li>
+                        <strong className="text-foreground">
+                          Tasks Completed:
+                        </strong>{" "}
+                        A detailed description of what you accomplished today.
+                        (Required)
+                      </li>
+                      <li>
+                        <strong className="text-foreground">Challenges:</strong>{" "}
+                        Any blockers or issues you encountered.
+                      </li>
+                      <li>
+                        <strong className="text-foreground">
+                          Next Day Plan:
+                        </strong>{" "}
+                        What you plan to work on during your next shift.
+                      </li>
+                      <li>
+                        <strong className="text-foreground">
+                          Additional Notes:
+                        </strong>{" "}
+                        Any other information you need to relay.
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
-            )
-          }
-        ]
-      }
-    ]
+            ),
+          },
+        ],
+      },
+    ],
   },
 ];
 
