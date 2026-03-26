@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   Font,
+  Image,
 } from "@react-pdf/renderer";
 
 // Helper functions (duplicated for standalone PDF generation)
@@ -183,6 +184,33 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: "Helvetica-Bold",
   },
+  companyHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#0f5d8a",
+    padding: 16,
+    borderRadius: 6,
+    marginBottom: 20,
+  },
+  companyLogo: {
+    width: 40,
+    height: 40,
+    borderRadius: 4,
+    marginRight: 12,
+  },
+  companyName: {
+    fontSize: 16,
+    fontFamily: "Helvetica-Bold",
+    color: "#ffffff",
+  },
+  companyTagline: {
+    fontSize: 8,
+    color: "#ffffff",
+    opacity: 0.7,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    marginTop: 2,
+  },
 });
 
 export function InvoicePDFDocument({ invoice }: { invoice: any }) {
@@ -215,10 +243,19 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
+        {/* Company Header */}
+        <View style={styles.companyHeader}>
+          <Image style={styles.companyLogo} src="/assets/logo.jpeg" />
+          <View>
+            <Text style={styles.companyName}>Advanced Virtual Staff</Text>
+            <Text style={styles.companyTagline}>Invoice</Text>
+          </View>
+        </View>
+
         {/* Header */}
         <View style={styles.headerRow}>
           <View>
-            <Text style={styles.subtitle}>Pay Statement</Text>
+            <Text style={styles.subtitle}>Pay Period</Text>
             <Text style={styles.title}>
               {fmtPeriod(invoice.periodStart, invoice.periodEnd)}
             </Text>
@@ -234,7 +271,7 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
         {/* Grid info */}
         <View style={styles.gridRow}>
           <View style={styles.col}>
-            <Text style={styles.colTitle}>Employee Information</Text>
+            <Text style={styles.colTitle}>VA Information</Text>
             <Text style={styles.infoText}>{staffFullName}</Text>
             <Text style={styles.mutedText}>{staffPosition}</Text>
             <Text style={styles.mutedText}>{staffEmail}</Text>

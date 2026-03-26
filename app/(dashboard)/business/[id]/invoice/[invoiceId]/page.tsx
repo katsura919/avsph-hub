@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { InvoicePDFDocument } from "@/components/invoice/InvoicePDFDocument";
 import {
@@ -391,11 +392,30 @@ export default function InvoiceDetailPage() {
 
       {/* ===== PAYSLIP CARD ===== */}
       <Card className="border-border/50 shadow-sm overflow-hidden rounded-xl">
+        {/* Company Header */}
+        <div className="bg-primary px-6 py-4 sm:px-8 flex items-center gap-4">
+          <Image
+            src="/assets/logo.jpeg"
+            alt="Advanced Virtual Staff"
+            width={44}
+            height={44}
+            className="rounded-md shrink-0"
+          />
+          <div>
+            <p className="text-primary-foreground font-bold text-lg leading-tight">
+              Advanced Virtual Staff
+            </p>
+            <p className="text-primary-foreground/70 text-xs uppercase tracking-widest">
+              Invoice
+            </p>
+          </div>
+        </div>
+
         <div className="bg-muted/30 px-6 py-8 sm:px-8 border-b border-border/50">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <p className="text-sm font-bold uppercase tracking-widest text-primary/80 mb-2">
-                Pay Statement
+                Pay Period
               </p>
               <h2 className="text-3xl font-bold">
                 {fmtPeriod(invoice.periodStart, invoice.periodEnd)}
@@ -411,13 +431,13 @@ export default function InvoiceDetailPage() {
         </div>
 
         <CardContent className="p-0">
-          {/* Employee & Pay Details Grid */}
+          {/* VA & Pay Details Grid */}
           <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x border-b border-border/50 bg-card">
             <div className="p-6 sm:p-8 space-y-6">
               <div className="flex items-center gap-2 text-muted-foreground pb-2 border-b border-border/40">
                 <User className="h-4 w-4" />
                 <h3 className="text-xs font-bold uppercase tracking-widest">
-                  Employee Information
+                  Virtual Assistant Information
                 </h3>
               </div>
               <div className="space-y-3">
