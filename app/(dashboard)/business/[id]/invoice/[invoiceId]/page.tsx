@@ -763,7 +763,7 @@ export default function InvoiceDetailPage() {
                 <div>
                   <p className="text-xs text-muted-foreground mb-1">Net Pay</p>
                   <p className="font-bold text-amber-700 dark:text-amber-400">
-                    {fmtPhp(php.netPayPhp)}
+                     {fmtPhp(php.netPayPhp)}
                   </p>
                 </div>
               </div>
