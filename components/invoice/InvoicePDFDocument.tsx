@@ -9,27 +9,32 @@ import {
 } from "@react-pdf/renderer";
 
 // Helper functions (duplicated for standalone PDF generation)
-function fmt(amount: number) {
+function fmt(amount: number, currency = "USD") {
+  if (currency === "PHP") {
+    return `PHP ${new Intl.NumberFormat("en-PH", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount)}`;
+  }
+
   return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD",
+    currency,
   }).format(amount);
 }
 
 function fmtPhp(amount: number) {
-  return new Intl.NumberFormat("en-PH", {
-    style: "currency",
-    currency: "PHP",
+  return `PHP ${new Intl.NumberFormat("en-PH", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(amount);
+  }).format(amount)}`;
 }
 
 function fmtPhpPeso(amount: number) {
-  return new Intl.NumberFormat("en-PH", {
+  return `PHP ${new Intl.NumberFormat("en-PH", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(amount);
+  }).format(amount)}`;
 }
 
 function fmtDate(dateStr: string) {
@@ -442,9 +447,7 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
 
         <View style={styles.panelRow}>
           <View style={styles.panel}>
-            <Text style={styles.panelTitle}>
-              Virtual Assistant Information
-            </Text>
+            <Text style={styles.panelTitle}>Virtual Assistant Information</Text>
             <Text style={styles.prominentText}>{staffFullName}</Text>
             <View style={styles.infoRow}>
               <Text style={styles.infoKey}>Position</Text>
@@ -460,7 +463,8 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
             <View style={styles.infoRow}>
               <Text style={styles.infoKey}>Base Rate</Text>
               <Text style={styles.infoValue}>
-                {fmt(invoice.baseSalary)} / {invoice.salaryType.toLowerCase()}
+                {fmt(invoice.baseSalary, cur)} /{" "}
+                {invoice.salaryType.toLowerCase()}
               </Text>
             </View>
             <View style={styles.infoRow}>
@@ -475,7 +479,7 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
               <View style={styles.infoRow}>
                 <Text style={styles.infoKey}>Base Rate (PHP)</Text>
                 <Text style={styles.infoValue}>
-                  {fmtPhp(php.baseSalaryPhp)}
+                  {fmtPhpPeso(php.baseSalaryPhp)}
                 </Text>
               </View>
             ) : null}
@@ -523,13 +527,13 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
             >
               <Text style={styles.tableLabel}>{row.label}</Text>
               <Text style={styles.tableBasis}>{row.basis}</Text>
-              <Text style={styles.tableAmount}>{fmt(row.amount)}</Text>
+              <Text style={styles.tableAmount}>{fmt(row.amount, cur)}</Text>
             </View>
           ))}
           <View style={styles.tableTotalRow}>
             <Text style={styles.tableTotalLabel}>Calculated Pay</Text>
             <Text style={styles.tableTotalAmount}>
-              {fmt(invoice.calculatedPay || 0)}
+              {fmt(invoice.calculatedPay || 0, cur)}
             </Text>
           </View>
         </View>
@@ -558,14 +562,14 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
                 </Text>
                 <Text style={styles.tableBasis}>ADD</Text>
                 <Text style={[styles.tableAmount, styles.positiveAmount]}>
-                  +{fmt(a.amount || 0)}
+                  +{fmt(a.amount || 0, cur)}
                 </Text>
               </View>
             ))}
             <View style={styles.tableTotalRow}>
               <Text style={styles.tableTotalLabel}>Total Additions</Text>
               <Text style={[styles.tableTotalAmount, styles.positiveAmount]}>
-                +{fmt(totalAdditions)}
+                +{fmt(totalAdditions, cur)}
               </Text>
             </View>
           </View>
@@ -584,21 +588,21 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
             <Text style={styles.tableLabel}>SSS</Text>
             <Text style={styles.tableBasis}>STAT</Text>
             <Text style={[styles.tableAmount, styles.negativeAmount]}>
-              -{fmt(invoice.statutoryDeductions?.sss || 0)}
+              -{fmt(invoice.statutoryDeductions?.sss || 0, cur)}
             </Text>
           </View>
           <View style={[styles.tableRow, styles.tableRowAlt]}>
             <Text style={styles.tableLabel}>Pag-IBIG</Text>
             <Text style={styles.tableBasis}>STAT</Text>
             <Text style={[styles.tableAmount, styles.negativeAmount]}>
-              -{fmt(invoice.statutoryDeductions?.pagIbig || 0)}
+              -{fmt(invoice.statutoryDeductions?.pagIbig || 0, cur)}
             </Text>
           </View>
           <View style={styles.tableRow}>
             <Text style={styles.tableLabel}>PhilHealth</Text>
             <Text style={styles.tableBasis}>STAT</Text>
             <Text style={[styles.tableAmount, styles.negativeAmount]}>
-              -{fmt(invoice.statutoryDeductions?.philHealth || 0)}
+              -{fmt(invoice.statutoryDeductions?.philHealth || 0, cur)}
             </Text>
           </View>
           {manualDeductions.map((d: any, i: number) => (
@@ -615,14 +619,14 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
               </Text>
               <Text style={styles.tableBasis}>OTHER</Text>
               <Text style={[styles.tableAmount, styles.negativeAmount]}>
-                -{fmt(d.amount || 0)}
+                -{fmt(d.amount || 0, cur)}
               </Text>
             </View>
           ))}
           <View style={styles.tableTotalRow}>
             <Text style={styles.tableTotalLabel}>Total Deductions</Text>
             <Text style={[styles.tableTotalAmount, styles.negativeAmount]}>
-              -{fmt(totalStatutoryDeductions + totalManualDeductions)}
+              -{fmt(totalStatutoryDeductions + totalManualDeductions, cur)}
             </Text>
           </View>
         </View>
@@ -632,30 +636,30 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
           <View style={styles.summaryRow}>
             <Text style={styles.summaryKey}>Calculated Pay</Text>
             <Text style={styles.summaryValue}>
-              {fmt(invoice.calculatedPay || 0)}
+              {fmt(invoice.calculatedPay || 0, cur)}
             </Text>
           </View>
           <View style={styles.summaryRow}>
             <Text style={styles.summaryKey}>Additions</Text>
             <Text style={[styles.summaryValue, styles.positiveAmount]}>
-              +{fmt(totalAdditions)}
+              +{fmt(totalAdditions, cur)}
             </Text>
           </View>
           <View style={styles.summaryRow}>
             <Text style={styles.summaryKey}>Statutory Deductions</Text>
             <Text style={[styles.summaryValue, styles.negativeAmount]}>
-              -{fmt(totalStatutoryDeductions)}
+              -{fmt(totalStatutoryDeductions, cur)}
             </Text>
           </View>
           <View style={styles.summaryRow}>
             <Text style={styles.summaryKey}>Other Deductions</Text>
             <Text style={[styles.summaryValue, styles.negativeAmount]}>
-              -{fmt(totalManualDeductions)}
+              -{fmt(totalManualDeductions, cur)}
             </Text>
           </View>
           <View style={styles.netPayRow}>
             <Text style={styles.netPayLabel}>Net Pay</Text>
-            <Text style={styles.netPayAmount}>{fmt(netPay)}</Text>
+            <Text style={styles.netPayAmount}>{fmt(netPay, cur)}</Text>
           </View>
           {phpConversionRate > 0 ? (
             <>
