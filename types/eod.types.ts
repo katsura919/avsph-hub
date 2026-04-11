@@ -132,3 +132,40 @@ export interface EodQuery {
   page?: string;
   limit?: string;
 }
+
+export type EodSummaryPeriodType =
+  | "weekly"
+  | "monthly"
+  | "bimonthly-1"
+  | "bimonthly-2";
+
+export interface EodSummaryQuery {
+  periodType?: EodSummaryPeriodType;
+  referenceDate?: string;
+  startDate?: string;
+  endDate?: string;
+  search?: string;
+  status?: EodStatus;
+  isApproved?: string;
+  page?: string;
+  limit?: string;
+}
+
+export interface EodSummaryItem {
+  staffId: string;
+  staffName: string;
+  staffEmail?: string | null;
+  totalHoursWorked: number;
+  totalRegularHours: number;
+  totalOvertimeHours: number;
+  totalNightDifferentialHours: number;
+  eodCount: number;
+  approvedCount: number;
+  periodStart: string;
+  periodEnd: string;
+}
+
+export interface PaginatedEodSummaryResponse {
+  data: EodSummaryItem[];
+  pagination: PaginationInfo;
+}

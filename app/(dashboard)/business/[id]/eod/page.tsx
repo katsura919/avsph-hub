@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import {
   FileText,
@@ -8,6 +9,7 @@ import {
   Clock,
   CheckCircle2,
   AlertCircle,
+  BarChart3,
 } from "lucide-react";
 import { type DateRange } from "react-day-picker";
 import {
@@ -210,6 +212,12 @@ export default function EodPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Button asChild variant="outline" className="h-9">
+            <Link href={`/business/${businessId}/eod/reports`}>
+              <BarChart3 className="mr-2 h-4 w-4" />
+              Reports
+            </Link>
+          </Button>
           {pagination && (
             <div className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex">
               <span className="font-medium text-foreground">

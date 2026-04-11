@@ -2,7 +2,9 @@ import api from "@/utils/api";
 import type {
   EodReport,
   EodQuery,
+  EodSummaryQuery,
   PaginatedEodResponse,
+  PaginatedEodSummaryResponse,
   ReviewEodRequest,
   ReviewEodResponse,
   AdminEditEodRequest,
@@ -48,6 +50,31 @@ export const getEodByBusiness = async (
     : `/businesses/${businessId}/eod`;
 
   const response = await api.get<PaginatedEodResponse>(url);
+  return response.data;
+};
+
+// Get EOD summary report by business (paginated, with period filtering)
+export const getEodSummaryByBusiness = async (
+  businessId: string,
+  query?: EodSummaryQuery,
+): Promise<PaginatedEodSummaryResponse> => {
+  const params = new URLSearchParams();
+  if (query?.periodType) params.append("periodType", query.periodType);
+  if (query?.referenceDate) params.append("referenceDate", query.referenceDate);
+  if (query?.startDate) params.append("startDate", query.startDate);
+  if (query?.endDate) params.append("endDate", query.endDate);
+  if (query?.search) params.append("search", query.search);
+  if (query?.status) params.append("status", query.status);
+  if (query?.isApproved) params.append("isApproved", query.isApproved);
+  if (query?.page) params.append("page", query.page);
+  if (query?.limit) params.append("limit", query.limit);
+
+  const queryString = params.toString();
+  const url = queryString
+    ? `/businesses/${businessId}/eod/summary?${queryString}`
+    : `/businesses/${businessId}/eod/summary`;
+
+  const response = await api.get<PaginatedEodSummaryResponse>(url);
   return response.data;
 };
 

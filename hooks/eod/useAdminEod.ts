@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import {
   getAllEodReports,
   getEodByBusiness,
+  getEodSummaryByBusiness,
   getEodByStaff,
   getEodById,
   reviewEod,
@@ -13,7 +14,9 @@ import type {
   ReviewEodRequest,
   AdminEditEodRequest,
   EodQuery,
+  EodSummaryQuery,
   PaginatedEodResponse,
+  PaginatedEodSummaryResponse,
 } from "@/types/eod.types";
 import { AxiosError } from "axios";
 
@@ -36,6 +39,20 @@ export const useEodByBusiness = (businessId: string, query?: EodQuery) => {
   return useQuery<PaginatedEodResponse>({
     queryKey: ["eod", "business", businessId, query],
     queryFn: () => getEodByBusiness(businessId, query),
+    enabled: !!businessId,
+    staleTime: 30 * 1000,
+    placeholderData: (prev) => prev,
+  });
+};
+
+// Hook to get EOD summary reports by business
+export const useEodSummaryByBusiness = (
+  businessId: string,
+  query?: EodSummaryQuery,
+) => {
+  return useQuery<PaginatedEodSummaryResponse>({
+    queryKey: ["eod", "business", businessId, "summary", query],
+    queryFn: () => getEodSummaryByBusiness(businessId, query),
     enabled: !!businessId,
     staleTime: 30 * 1000,
     placeholderData: (prev) => prev,
