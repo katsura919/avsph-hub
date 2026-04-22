@@ -60,9 +60,9 @@ const STATUTORY_TYPES = new Set(["SSS", "Pag-IBIG", "PhilHealth"]);
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 36,
+    paddingTop: 30,
     paddingHorizontal: 34,
-    paddingBottom: 54,
+    paddingBottom: 50,
     fontFamily: "Helvetica",
     fontSize: 9,
     color: "#1f2937",
@@ -73,17 +73,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#0b2f4a",
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 10,
     borderRadius: 6,
-    marginBottom: 14,
+    marginBottom: 10,
   },
   brandRow: {
     flexDirection: "row",
     alignItems: "center",
   },
   companyLogo: {
-    width: 34,
-    height: 34,
+    width: 32,
+    height: 32,
     borderRadius: 4,
     marginRight: 10,
   },
@@ -120,15 +120,14 @@ const styles = StyleSheet.create({
   panelRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 14,
+    marginBottom: 10,
   },
   panel: {
     width: "48%",
     borderWidth: 1,
     borderColor: "#e2e8f0",
     borderRadius: 6,
-    padding: 10,
-    minHeight: 100,
+    padding: 9,
   },
   panelTitle: {
     fontSize: 8,
@@ -136,21 +135,21 @@ const styles = StyleSheet.create({
     color: "#64748b",
     textTransform: "uppercase",
     letterSpacing: 0.7,
-    marginBottom: 7,
+    marginBottom: 5,
     borderBottomWidth: 1,
     borderBottomColor: "#e2e8f0",
-    paddingBottom: 4,
+    paddingBottom: 3,
   },
   prominentText: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: "Helvetica-Bold",
     color: "#0f172a",
-    marginBottom: 4,
+    marginBottom: 3,
   },
   infoRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 3,
+    marginBottom: 2,
     alignItems: "center",
   },
   infoKey: {
@@ -163,7 +162,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
   },
   tableSection: {
-    marginBottom: 12,
+    marginBottom: 9,
     borderWidth: 1,
     borderColor: "#e2e8f0",
     borderRadius: 6,
@@ -174,7 +173,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#e2e8f0",
     paddingHorizontal: 10,
-    paddingVertical: 7,
+    paddingVertical: 5,
   },
   tableTitle: {
     fontSize: 8,
@@ -187,7 +186,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    paddingVertical: 6,
+    paddingVertical: 4,
     borderBottomWidth: 1,
     borderBottomColor: "#e2e8f0",
     backgroundColor: "#ffffff",
@@ -219,7 +218,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    paddingVertical: 6,
+    paddingVertical: 4,
     borderBottomWidth: 1,
     borderBottomColor: "#f1f5f9",
     backgroundColor: "#ffffff",
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    paddingVertical: 8,
+    paddingVertical: 6,
     backgroundColor: "#f8fafc",
     borderTopWidth: 1,
     borderTopColor: "#e2e8f0",
@@ -276,7 +275,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#d1d5db",
     borderRadius: 6,
-    padding: 10,
+    padding: 9,
     backgroundColor: "#ffffff",
   },
   summaryTitle: {
@@ -285,12 +284,12 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     letterSpacing: 0.7,
     color: "#334155",
-    marginBottom: 6,
+    marginBottom: 5,
   },
   summaryRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 4,
+    marginBottom: 3,
   },
   summaryKey: {
     color: "#64748b",
@@ -303,8 +302,8 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   netPayRow: {
-    marginTop: 6,
-    paddingTop: 7,
+    marginTop: 5,
+    paddingTop: 5,
     borderTopWidth: 1,
     borderTopColor: "#d1d5db",
     flexDirection: "row",
@@ -319,27 +318,53 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
   },
   netPayAmount: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "Helvetica-Bold",
     color: "#0b2f4a",
   },
   convertedNetPayAmount: {
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: "Helvetica-Bold",
     color: "#047857",
     textAlign: "right",
+  },
+  paidBySection: {
+    alignItems: "flex-start",
+    width: 160,
+  },
+  paidByLabel: {
+    fontSize: 8,
+    color: "#64748b",
+    textTransform: "uppercase",
+    letterSpacing: 0.7,
+    marginBottom: 3,
+    fontFamily: "Helvetica-Bold",
+  },
+  signatureImage: {
+    width:35,
+    height: 54,
+    objectFit: "contain",
+  },
+  paidByName: {
+    fontSize: 9,
+    fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
+  },
+  paidByTitle: {
+    fontSize: 8,
+    color: "#64748b",
   },
   fixedFooter: {
     position: "absolute",
     left: 34,
     right: 34,
-    bottom: 18,
+    bottom: 16,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderTopWidth: 1,
     borderTopColor: "#e2e8f0",
-    paddingTop: 6,
+    paddingTop: 5,
   },
   footerLeft: {
     fontSize: 8,
@@ -671,6 +696,16 @@ export function InvoicePDFDocument({ invoice }: { invoice: any }) {
               </View>
             </>
           ) : null}
+        </View>
+
+        <View style={{ flexDirection: "row", marginTop: 12 }} wrap={false}>
+          <View style={styles.paidBySection}>
+            <Text style={styles.paidByLabel}>Paid by:</Text>
+            <Image style={styles.signatureImage} src="/assets/signature.png" />
+            <Text style={styles.paidByName}>M.K Gebe</Text>
+            <Text style={styles.paidByTitle}>CEO/Co-founder</Text>
+            <Text style={styles.paidByTitle}>AVSPH VAS</Text>
+          </View>
         </View>
 
         <View style={styles.fixedFooter} fixed>
