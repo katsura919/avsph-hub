@@ -4,38 +4,48 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --primary: #044465;
-  --primary-light: #0A5C87;
-  --primary-dark: #022D42;
-  --secondary: #003f62;
-  --secondary-light: #004E7A;
-  --secondary-dark: #002B45;
-  --accent: #F97316;
+  /* Brand — deepened + slightly more saturated than before for better
+     contrast on white and a more confident, modern feel. Same hue family
+     as the AVS logo, just refined. */
+  --primary: #0B4F73;
+  --primary-light: #1578A8;
+  --primary-dark: #073349;
+  --secondary: #0E3B57;
+  --secondary-light: #145478;
+  --secondary-dark: #072436;
+  --accent: #F2660D;
   --accent-light: #FB923C;
-  --accent-dark: #C2410C;
+  --accent-dark: #B4500C;
 
-  --background: #F8FAFC;
-  --background-section: #cdd9e0;
+  --background: #F7F9FB;
+  --background-section: #E7EEF2;
   --background-alt: #EEF2F6;
   --card: #FFFFFF;
-  --card-foreground: #1E293B;
+  --card-foreground: #131B29;
   --popover: #FFFFFF;
-  --popover-foreground: #1E293B;
+  --popover-foreground: #131B29;
   --primary-foreground: #FFFFFF;
   --secondary-foreground: #FFFFFF;
-  
-  --foreground: #1E293B;
-  --foreground-light: #475569;
-  --muted: #64748B;
-  --muted-foreground: #475569;
+
+  --foreground: #131B29;
+  --foreground-light: #47566B;
+  --muted: #6B7A8F;
+  --muted-foreground: #55647A;
   --accent-foreground: #FFFFFF;
-  --destructive: #EF4444;
+  --destructive: #E5484D;
   --destructive-foreground: #FFFFFF;
 
-  --border: #E2E8F0;
-  --border-light: #F1F5F9;
-  --input: #E2E8F0;
-  --ring: #044465;
+  /* New: semantic status colors, kept out of the destructive/accent slots
+     so table/badge logic (staff status, invoice status, EOD status) has
+     dedicated tokens instead of reusing accent/destructive everywhere. */
+  --success: #12977A;
+  --warning: #D08700;
+  --info: #2F7DDD;
+
+  --border: #E1E7ED;
+  --border-light: #EEF2F6;
+  --input: #DCE3EA;
+  --ring: #1578A8;
 
   --radius: 0.5rem;
 
@@ -43,48 +53,52 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  
+
   --font-sans: Montserrat, sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Fira Code, monospace;
 }
 
-
 .dark {
-  --background: #020617;
-  --background-section: #0f172a;
-  --background-alt: #1e293b;
-  --card: #0f172a;
-  --card-foreground: #F8FAFC;
-  --popover: #0f172a;
-  --popover-foreground: #F8FAFC;
-  
-  --primary: #0A5C87;
+  --background: #0A1420;
+  --background-section: #101C2C;
+  --background-alt: #16212F;
+  --card: #101C2C;
+  --card-foreground: #F5F8FA;
+  --popover: #101C2C;
+  --popover-foreground: #F5F8FA;
+
+  --primary: #1578A8;
   --primary-foreground: #FFFFFF;
-  --primary-light: #38BDF8;
-  --primary-dark: #044465;
-  
-  --secondary: #004E7A;
+  --primary-light: #4CB8E6;
+  --primary-dark: #0B4F73;
+
+  --secondary: #145478;
   --secondary-foreground: #FFFFFF;
-  --secondary-light: #0EA5E9;
-  --secondary-dark: #003f62;
-  
+  --secondary-light: #2E90C7;
+  --secondary-dark: #0E3B57;
+
   --accent: #FB923C;
-  --accent-foreground: #020617;
+  --accent-foreground: #0A1420;
   --accent-light: #FDBA74;
-  --accent-dark: #EA580C;
+  --accent-dark: #C2670F;
 
-  --foreground: #F8FAFC;
-  --foreground-light: #CBD5E1;
-  --muted: #1e293b;
-  --muted-foreground: #94A3B8;
+  --foreground: #F5F8FA;
+  --foreground-light: #C3D0DE;
+  --muted: #16212F;
+  --muted-foreground: #93A3B8;
 
-  --border: #1E293B;
-  --border-light: #334155;
-  --input: #1E293B;
-  --ring: #0A5C87;
+  --destructive: #F0605F;
+  --destructive-foreground: #FFFFFF;
+  --success: #35B692;
+  --warning: #E5A331;
+  --info: #5B9EEA;
+
+  --border: #1E2C3D;
+  --border-light: #283A4E;
+  --input: #1E2C3D;
+  --ring: #1578A8;
 }
-
 
 @theme inline {
   --color-background: var(--background);
@@ -96,26 +110,29 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-light: var(--primary-light);
   --color-primary-dark: var(--primary-dark);
-  
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary-light: var(--secondary-light);
   --color-secondary-dark: var(--secondary-dark);
-  
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-light: var(--accent-light);
   --color-accent-dark: var(--accent-dark);
-  
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
   --color-border: var(--border);
   --color-border-light: var(--border-light);
   --input: var(--input);
@@ -135,7 +152,6 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
 }
-
 
 @layer base {
   * {
@@ -261,4 +277,3 @@
 .ProseMirror s {
   text-decoration: line-through;
 }
-
