@@ -35,13 +35,12 @@ export function StaffTopbar() {
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            {/* Top Row: Logo, Title & Actions */}
-            <div className="flex h-12 items-center justify-between px-4 md:px-6">
-                {/* Left: Logo & Title */}
-                <div className="flex items-center gap-3">
+            <div className="flex h-14 items-center justify-between gap-4 px-4 md:px-6">
+                {/* Left: Logo, Title & Nav */}
+                <div className="flex min-w-0 items-center gap-6">
                     <Link
                         href="/staff/dashboard"
-                        className="flex items-center gap-2 font-semibold"
+                        className="flex shrink-0 items-center gap-2 font-semibold"
                     >
                         <div className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background overflow-hidden">
                             <Image
@@ -53,13 +52,33 @@ export function StaffTopbar() {
                                 priority
                             />
                         </div>
+                        <span className="text-lg font-medium text-foreground">VA Portal</span>
                     </Link>
 
-                    <span className="text-lg font-medium text-foreground">VA Portal</span>
+                    <nav className="flex shrink-0 items-center gap-1 overflow-x-auto rounded-lg bg-muted/50 p-1">
+                        {navigation.map((item) => {
+                            const isActive =
+                                pathname === item.href || pathname.startsWith(item.href + "/");
+                            return (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className={cn(
+                                        "shrink-0 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                                        isActive
+                                            ? "bg-background text-foreground shadow-sm"
+                                            : "text-muted-foreground hover:text-foreground"
+                                    )}
+                                >
+                                    {item.name}
+                                </Link>
+                            );
+                        })}
+                    </nav>
                 </div>
 
                 {/* Right: Actions */}
-                <div className="flex items-center gap-2">
+                <div className="flex shrink-0 items-center gap-2">
                     <ModeToggle />
 
                     <DropdownMenu>
@@ -99,31 +118,6 @@ export function StaffTopbar() {
                     </DropdownMenu>
                 </div>
             </div>
-
-            {/* Bottom Row: Navigation Tabs */}
-            <nav className="flex items-center gap-0 px-4 md:px-6 overflow-x-auto">
-                {navigation.map((item) => {
-                    const isActive =
-                        pathname === item.href || pathname.startsWith(item.href + "/");
-                    return (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className={cn(
-                                "relative px-3 py-2 text-sm transition-colors hover:text-foreground",
-                                isActive
-                                    ? "text-foreground"
-                                    : "text-muted-foreground"
-                            )}
-                        >
-                            {item.name}
-                            {isActive && (
-                                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground" />
-                            )}
-                        </Link>
-                    );
-                })}
-            </nav>
         </header>
     );
 }
