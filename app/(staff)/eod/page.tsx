@@ -2,12 +2,19 @@
 
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { AlertCircle, CalendarClock, Clock3, Plus, Wallet } from "lucide-react";
+import { differenceInCalendarDays, format } from "date-fns";
+import {
+  AlertCircle,
+  CalendarClock,
+  CheckCircle2,
+  Plus,
+  Wallet,
+} from "lucide-react";
 import type { DateRange } from "react-day-picker";
 import { SubmitEodDialog } from "@/components/staff/eod/submit-eod-modal";
 import { ViewEodDialog } from "@/components/staff/eod/view-eod-modal";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useMyEodReports, useMyExpectedEarnings } from "@/hooks/eod/useStaffEod";
 import type { EodQuery, EodReport, EodStatus } from "@/types/eod.types";
 import { getColumns } from "./columns";
@@ -49,6 +56,24 @@ function StaffEodPageInner() {
 
   const { data: pagedData, isLoading, isError } = useMyEodReports(queryParams);
   const { data: earnings, isLoading: isEarningsLoading } = useMyExpectedEarnings();
+
+  const payPeriodLabel =
+    earnings?.periodStart && earnings?.periodEnd
+      ? `${format(new Date(earnings.periodStart), "MMM d")} – ${format(new Date(earnings.periodEnd), "MMM d")}`
+      : null;
+
+  const payoutCaption = earnings?.nextPayoutDate
+    ? (() => {
+        const days = differenceInCalendarDays(
+          new Date(earnings.nextPayoutDate),
+          new Date(),
+        );
+        if (days < 0) return "Processing";
+        if (days === 0) return "Today";
+        if (days === 1) return "Tomorrow";
+        return `In ${days} days`;
+      })()
+    : null;
 
   const handleStatusFilter = useCallback((value: string) => {
     setStatus(value);
@@ -111,43 +136,76 @@ function StaffEodPageInner() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs text-muted-foreground">Estimated Pay</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center justify-between">
-            <p className="text-lg font-semibold">
-              {isEarningsLoading ? "..." : (earnings?.estimatedPay ?? 0).toLocaleString()}
+          <CardContent className="p-3">
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <Wallet className="h-3.5 w-3.5" />
+              <span className="text-xs font-medium uppercase tracking-wide">
+                Estimated Pay
+              </span>
+            </div>
+            <p className="mt-1.5 text-2xl font-bold tabular-nums">
+              {isEarningsLoading
+                ? "..."
+                : (earnings?.estimatedPay ?? 0).toLocaleString()}
             </p>
-            <Wallet className="h-4 w-4 text-muted-foreground" />
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              {payPeriodLabel ?? "Current pay period"}
+            </p>
           </CardContent>
         </Card>
+
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs text-muted-foreground">Approved EODs</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center justify-between">
-            <p className="text-lg font-semibold">{isEarningsLoading ? "..." : earnings?.approvedEodCount ?? 0}</p>
-            <Clock3 className="h-4 w-4 text-muted-foreground" />
+          <CardContent className="p-3">
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+              <span className="text-xs font-medium uppercase tracking-wide">
+                Approved
+              </span>
+            </div>
+            <p className="mt-1.5 text-2xl font-bold tabular-nums text-emerald-500">
+              {isEarningsLoading ? "..." : (earnings?.approvedEodCount ?? 0)}
+            </p>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              Reviewed & approved
+            </p>
           </CardContent>
         </Card>
+
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs text-muted-foreground">Pending EODs</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center justify-between">
-            <p className="text-lg font-semibold">{isEarningsLoading ? "..." : earnings?.pendingEodCount ?? 0}</p>
-            <AlertCircle className="h-4 w-4 text-muted-foreground" />
+          <CardContent className="p-3">
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <AlertCircle className="h-3.5 w-3.5 text-amber-500" />
+              <span className="text-xs font-medium uppercase tracking-wide">
+                Pending
+              </span>
+            </div>
+            <p className="mt-1.5 text-2xl font-bold tabular-nums text-amber-500">
+              {isEarningsLoading ? "..." : (earnings?.pendingEodCount ?? 0)}
+            </p>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              Awaiting review
+            </p>
           </CardContent>
         </Card>
+
         <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs text-muted-foreground">Next Payout</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center justify-between">
-            <p className="text-lg font-semibold">{earnings?.nextPayoutDate ?? "-"}</p>
-            <CalendarClock className="h-4 w-4 text-muted-foreground" />
+          <CardContent className="p-3">
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <CalendarClock className="h-3.5 w-3.5" />
+              <span className="text-xs font-medium uppercase tracking-wide">
+                Next Payout
+              </span>
+            </div>
+            <p className="mt-1.5 text-2xl font-bold tabular-nums">
+              {earnings?.nextPayoutDate
+                ? format(new Date(earnings.nextPayoutDate), "MMM d")
+                : "-"}
+            </p>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              {payoutCaption ?? "—"}
+            </p>
           </CardContent>
         </Card>
       </div>
