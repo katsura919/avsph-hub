@@ -6,8 +6,16 @@ import {
   getLeadById,
   updateLead,
   deleteLead,
+  getLeadTags,
+  exportLeads,
+  bulkLeads,
 } from "@/hooks/api/leads/leads";
-import type { LeadQueryParams, UpdateLeadRequest } from "@/types/leads.types";
+import type {
+  LeadQueryParams,
+  LeadFilterParams,
+  UpdateLeadRequest,
+  BulkLeadRequest,
+} from "@/types/leads.types";
 
 interface ApiError {
   error?: string;
@@ -24,6 +32,16 @@ export const useLeadsByBusiness = (
     queryFn: () => getLeadsByBusiness(businessId, params),
     enabled: !!businessId,
     staleTime: 2 * 60 * 1000, // 2 minutes
+  });
+};
+
+// Get distinct tags for a business
+export const useLeadTags = (businessId: string) => {
+  return useQuery({
+    queryKey: ["leads", "tags", businessId],
+    queryFn: () => getLeadTags(businessId),
+    enabled: !!businessId,
+    staleTime: 2 * 60 * 1000,
   });
 };
 
@@ -49,6 +67,9 @@ export const useUpdateLead = () => {
         queryKey: ["leads", "business", updatedLead.businessId],
       });
       queryClient.invalidateQueries({ queryKey: ["leads", updatedLead._id] });
+      queryClient.invalidateQueries({
+        queryKey: ["leads", "tags", updatedLead.businessId],
+      });
       toast.success("Lead updated!", {
         description: `${updatedLead.firstName} ${updatedLead.lastName} has been updated successfully.`,
       });
@@ -88,6 +109,51 @@ export const useDeleteLead = () => {
       toast.error("Deletion failed", {
         description: message,
       });
+    },
+  });
+};
+
+// Bulk action on leads (status / tags / delete)
+export const useBulkLeads = (businessId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: BulkLeadRequest) => bulkLeads(businessId, body),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["leads", "business", businessId],
+      });
+      queryClient.invalidateQueries({ queryKey: ["leads", "tags", businessId] });
+      const labels: Record<BulkLeadRequest["action"], string> = {
+        status: "Status updated",
+        addTags: "Tags added",
+        removeTags: "Tags removed",
+        delete: "Leads deleted",
+      };
+      toast.success(labels[variables.action], {
+        description: `${data.modified} lead${data.modified === 1 ? "" : "s"} updated.`,
+      });
+    },
+    onError: (error: AxiosError<ApiError>) => {
+      const message =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Bulk action failed";
+      toast.error("Bulk action failed", { description: message });
+    },
+  });
+};
+
+// Export leads (returns full filtered set; component builds the CSV)
+export const useExportLeads = (businessId: string) => {
+  return useMutation({
+    mutationFn: (params?: LeadFilterParams) => exportLeads(businessId, params),
+    onError: (error: AxiosError<ApiError>) => {
+      const message =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Failed to export leads";
+      toast.error("Export failed", { description: message });
     },
   });
 };

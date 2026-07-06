@@ -133,7 +133,7 @@ export default function BusinessOverviewPage() {
   return (
     <div className="space-y-8 animate-in fade-in-50">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 p-6 rounded-xl border bg-card shadow-sm">
+      {/* <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 p-6 rounded-xl border bg-card shadow-sm">
         <div className="flex items-start gap-5">
           {business.logo ? (
             <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border shadow-sm">
@@ -188,7 +188,7 @@ export default function BusinessOverviewPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Quick Metrics */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun } from "lucide-react"
+import { Check, Palette } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
@@ -9,31 +9,76 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+type ThemeOption = { value: string; label: string }
+type ThemeGroup = { group: string; options: ThemeOption[] }
+
+// Flat list, grouped by palette. `value` matches the classes registered in
+// app/layout.tsx <ThemeProvider themes={...}> and the token blocks in
+// app/globals.css.
+const THEME_GROUPS: ThemeGroup[] = [
+  {
+    group: "AVS",
+    options: [
+      { value: "light", label: "Light" },
+      { value: "dark", label: "Dark" },
+    ],
+  },
+  {
+    group: "Rosé",
+    options: [
+      { value: "soft-light", label: "Light" },
+      { value: "soft-dark", label: "Dark" },
+    ],
+  },
+  {
+    group: "Steel",
+    options: [
+      { value: "bold-light", label: "Light" },
+      { value: "bold-dark", label: "Dark" },
+    ],
+  },
+]
+
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
+          <Palette className="h-[1.2rem] w-[1.2rem]" />
+          <span className="sr-only">Choose theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
+      <DropdownMenuContent align="end" className="w-44">
         <DropdownMenuItem onClick={() => setTheme("system")}>
           System
+          {theme === "system" && <Check className="ml-auto h-4 w-4" />}
         </DropdownMenuItem>
+        {THEME_GROUPS.map((group) => (
+          <React.Fragment key={group.group}>
+            <DropdownMenuSeparator />
+            <DropdownMenuLabel className="text-muted-foreground text-xs">
+              {group.group}
+            </DropdownMenuLabel>
+            {group.options.map((option) => (
+              <DropdownMenuItem
+                key={option.value}
+                onClick={() => setTheme(option.value)}
+              >
+                {option.label}
+                {theme === option.value && (
+                  <Check className="ml-auto h-4 w-4" />
+                )}
+              </DropdownMenuItem>
+            ))}
+          </React.Fragment>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   )

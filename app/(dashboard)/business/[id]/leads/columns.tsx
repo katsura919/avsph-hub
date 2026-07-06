@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Copy, Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -68,6 +69,34 @@ export const createColumns = ({
   onStatusChange,
 }: ColumnOptions): ColumnDef<Lead>[] => [
   {
+    id: "select",
+    header: ({ table }) => (
+      <div onClick={(e) => e.stopPropagation()}>
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
+          onCheckedChange={(value) =>
+            table.toggleAllPageRowsSelected(!!value)
+          }
+          aria-label="Select all"
+        />
+      </div>
+    ),
+    cell: ({ row }) => (
+      <div onClick={(e) => e.stopPropagation()}>
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      </div>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
     accessorKey: "name",
     header: ({ column }) => (
       <Button
@@ -99,6 +128,32 @@ export const createColumns = ({
       const company = row.getValue("company") as string | undefined;
       return (
         <span className="text-sm text-muted-foreground">{company || "—"}</span>
+      );
+    },
+  },
+  {
+    accessorKey: "tags",
+    header: "Tags",
+    enableSorting: false,
+    cell: ({ row }) => {
+      const tags = (row.getValue("tags") as string[] | undefined) || [];
+      if (!tags.length) {
+        return <span className="text-sm text-muted-foreground">—</span>;
+      }
+      const shown = tags.slice(0, 2);
+      return (
+        <div className="flex flex-wrap items-center gap-1">
+          {shown.map((tag) => (
+            <Badge key={tag} variant="secondary" className="font-normal">
+              {tag}
+            </Badge>
+          ))}
+          {tags.length > 2 && (
+            <Badge variant="outline" className="font-normal">
+              +{tags.length - 2}
+            </Badge>
+          )}
+        </div>
       );
     },
   },
@@ -176,6 +231,7 @@ export const createColumns = ({
   },
   {
     id: "actions",
+    enableHiding: false,
     cell: ({ row }) => {
       const lead = row.original;
 

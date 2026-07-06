@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* `dark:` utilities fire under any dark palette, not only AVS `.dark`. */
+@custom-variant dark (&:is(.dark *, .soft-dark *, .bold-dark *));
 
 :root {
   /* Brand — deepened + slightly more saturated than before for better
@@ -106,6 +107,174 @@
   --ring: #1578A8;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Rosé palette (soft) — plum + blush + gold. Elegant/feminine.
+   Fonts (Fraunces display / Inter body) set per-theme on <body> below.
+   ───────────────────────────────────────────────────────────── */
+.soft-light {
+  --primary: #A03D6E;
+  --primary-light: #C25E90;
+  --primary-dark: #7A2A52;
+  --secondary: #8A5A6E;
+  --secondary-light: #A87888;
+  --secondary-dark: #6B4354;
+  --accent: #C2942F;
+  --accent-light: #D9B155;
+  --accent-dark: #97711F;
+
+  --background: #FBF6F8;
+  --background-section: #F3E8EE;
+  --background-alt: #F7EFF3;
+  --card: #FFFFFF;
+  --card-foreground: #2E2028;
+  --popover: #FFFFFF;
+  --popover-foreground: #2E2028;
+  --primary-foreground: #FFFFFF;
+  --secondary-foreground: #FFFFFF;
+
+  --foreground: #2E2028;
+  --foreground-light: #6B5560;
+  --muted: #9A8490;
+  --muted-foreground: #6B5560;
+  --accent-foreground: #2E2028;
+  --destructive: #D6455B;
+  --destructive-foreground: #FFFFFF;
+
+  --success: #12977A;
+  --warning: #C79A2A;
+  --info: #8E6FA8;
+
+  --border: #EBDCE4;
+  --border-light: #F3E8EE;
+  --input: #E4D3DD;
+  --ring: #C25E90;
+}
+
+.soft-dark {
+  --background: #1C1218;
+  --background-section: #241820;
+  --background-alt: #2A1C24;
+  --card: #241820;
+  --card-foreground: #F6EEF2;
+  --popover: #241820;
+  --popover-foreground: #F6EEF2;
+
+  --primary: #D07AA6;
+  --primary-foreground: #1C1218;
+  --primary-light: #E0A0C2;
+  --primary-dark: #A03D6E;
+
+  --secondary: #B98CA0;
+  --secondary-foreground: #1C1218;
+  --secondary-light: #D0AEBD;
+  --secondary-dark: #8A5A6E;
+
+  --accent: #D9B155;
+  --accent-foreground: #1C1218;
+  --accent-light: #E8CB86;
+  --accent-dark: #A8842F;
+
+  --foreground: #F6EEF2;
+  --foreground-light: #D8C4CE;
+  --muted: #2A1C24;
+  --muted-foreground: #B79FAB;
+
+  --destructive: #F0607A;
+  --destructive-foreground: #1C1218;
+  --success: #35B692;
+  --warning: #E0B65A;
+  --info: #B99AD1;
+
+  --border: #33232C;
+  --border-light: #3F2C37;
+  --input: #33232C;
+  --ring: #D07AA6;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Steel palette (bold) — graphite + steel + red. Strong/masculine.
+   Fonts (Space Grotesk display / IBM Plex Sans body) set below.
+   ───────────────────────────────────────────────────────────── */
+.bold-light {
+  --primary: #2B3A4A;
+  --primary-light: #3E5165;
+  --primary-dark: #1B2733;
+  --secondary: #4A5A6B;
+  --secondary-light: #62748A;
+  --secondary-dark: #33404E;
+  --accent: #DC3B3B;
+  --accent-light: #EA5A5A;
+  --accent-dark: #B22626;
+
+  --background: #F3F5F7;
+  --background-section: #E6EAEE;
+  --background-alt: #EDF0F3;
+  --card: #FFFFFF;
+  --card-foreground: #131922;
+  --popover: #FFFFFF;
+  --popover-foreground: #131922;
+  --primary-foreground: #FFFFFF;
+  --secondary-foreground: #FFFFFF;
+
+  --foreground: #131922;
+  --foreground-light: #47535F;
+  --muted: #7A8A99;
+  --muted-foreground: #4E5B68;
+  --accent-foreground: #FFFFFF;
+  --destructive: #DC3B3B;
+  --destructive-foreground: #FFFFFF;
+
+  --success: #12977A;
+  --warning: #C77A00;
+  --info: #2F6FDD;
+
+  --border: #DBE1E7;
+  --border-light: #E6EAEE;
+  --input: #D3DAE1;
+  --ring: #3E5165;
+}
+
+.bold-dark {
+  --background: #0C1116;
+  --background-section: #121820;
+  --background-alt: #161D26;
+  --card: #121820;
+  --card-foreground: #EDF1F5;
+  --popover: #121820;
+  --popover-foreground: #EDF1F5;
+
+  --primary: #6F8CA8;
+  --primary-foreground: #0C1116;
+  --primary-light: #93ABC4;
+  --primary-dark: #2B3A4A;
+
+  --secondary: #7C8B9C;
+  --secondary-foreground: #0C1116;
+  --secondary-light: #9AA8B8;
+  --secondary-dark: #4A5A6B;
+
+  --accent: #F05252;
+  --accent-foreground: #0C1116;
+  --accent-light: #F47A7A;
+  --accent-dark: #C13333;
+
+  --foreground: #EDF1F5;
+  --foreground-light: #B8C2CD;
+  --muted: #161D26;
+  --muted-foreground: #93A1B0;
+
+  --destructive: #F26363;
+  --destructive-foreground: #0C1116;
+  --success: #35B692;
+  --warning: #E0A331;
+  --info: #5B9EEA;
+
+  --border: #212B36;
+  --border-light: #2C3947;
+  --input: #212B36;
+  --ring: #6F8CA8;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-background-section: var(--background-section);
@@ -171,9 +340,33 @@
       "Segoe UI", Roboto, sans-serif;
     --font-mono: var(--font-geist-mono), ui-monospace, "Fira Code", SFMono-Regular,
       Menlo, monospace;
+    /* Heading face. AVS default = Geist (no visual change); palettes below
+       swap this to their display font. */
+    --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
+  }
+
+  /* Headings pick up the per-theme display font. `:where()` keeps specificity
+     at 0 so any explicit font utility on a heading still wins. */
+  :where(h1, h2, h3, h4) {
+    font-family: var(--font-display);
+  }
+
+  /* Per-theme font pairing. Scoped to <body> because next/font attaches the
+     `--font-*` variables to <body> — resolving them here (not on <html>). */
+  .soft-light body,
+  .soft-dark body {
+    --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, sans-serif;
+    --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  }
+  .bold-light body,
+  .bold-dark body {
+    --font-sans: var(--font-plex), ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, sans-serif;
+    --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   }
 
   /* Text selection picks up the brand instead of the browser default. */

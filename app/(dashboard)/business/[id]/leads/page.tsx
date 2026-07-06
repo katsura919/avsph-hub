@@ -3,7 +3,16 @@
 import { useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { Inbox, Loader2 } from "lucide-react";
-import { useLeadsByBusiness, useUpdateLead, useDeleteLead } from "@/hooks/useLeads";
+import { startOfDay, endOfDay } from "date-fns";
+import { type DateRange } from "react-day-picker";
+import {
+  useLeadsByBusiness,
+  useUpdateLead,
+  useDeleteLead,
+  useLeadTags,
+  useBulkLeads,
+  useExportLeads,
+} from "@/hooks/useLeads";
 import { useBusinessById } from "@/hooks/useBusiness";
 import {
   AlertDialog,
@@ -18,7 +27,12 @@ import {
 import { LeadDetailSheet } from "@/components/lead-detail-sheet";
 import { createColumns } from "./columns";
 import { DataTable } from "./data-table";
-import type { Lead, LeadQueryParams } from "@/types/leads.types";
+import { leadsToCsv, downloadCsv, slugify } from "./export-csv";
+import type {
+  Lead,
+  LeadQueryParams,
+  LeadFilterParams,
+} from "@/types/leads.types";
 
 export default function LeadsPage() {
   const params = useParams();
@@ -27,20 +41,33 @@ export default function LeadsPage() {
   // Filter state
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<string>("all");
+  const [source, setSource] = useState<string>("all");
+  const [tags, setTags] = useState<string[]>([]);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [page, setPage] = useState(1);
-  const limit = 10;
+  const [pageSize, setPageSize] = useState(10);
 
   // Selected lead for view/delete
   const [viewLead, setViewLead] = useState<Lead | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
   const [deleteLead, setDeleteLeadTarget] = useState<Lead | null>(null);
 
-  // Build query params
-  const queryParams: LeadQueryParams = {
-    page,
-    limit,
+  // Shared filter params (list + export)
+  const filterParams: LeadFilterParams = {
     ...(search && { search }),
-    ...(status !== "all" && { status: status as LeadQueryParams["status"] }),
+    ...(status !== "all" && { status: status as LeadFilterParams["status"] }),
+    ...(source !== "all" && { source: source as LeadFilterParams["source"] }),
+    ...(tags.length > 0 && { tags }),
+    ...(dateRange?.from && {
+      dateFrom: startOfDay(dateRange.from).toISOString(),
+      dateTo: endOfDay(dateRange.to ?? dateRange.from).toISOString(),
+    }),
+  };
+
+  const queryParams: LeadQueryParams = {
+    ...filterParams,
+    page,
+    limit: pageSize,
   };
 
   // Fetch data
@@ -51,11 +78,15 @@ export default function LeadsPage() {
     isLoading: isLeadsLoading,
     isError,
   } = useLeadsByBusiness(businessId, queryParams);
+  const { data: tagOptions = [] } = useLeadTags(businessId);
 
   const { mutate: updateLead } = useUpdateLead();
   const { mutate: deleteLeadMutation, isPending: isDeleting } = useDeleteLead();
+  const { mutateAsync: bulkMutate } = useBulkLeads(businessId);
+  const { mutateAsync: exportMutate, isPending: isExporting } =
+    useExportLeads(businessId);
 
-  // Handlers
+  // Filter handlers (all reset to page 1)
   const handleSearch = useCallback((value: string) => {
     setSearch(value);
     setPage(1);
@@ -63,6 +94,26 @@ export default function LeadsPage() {
 
   const handleStatusFilter = useCallback((value: string) => {
     setStatus(value);
+    setPage(1);
+  }, []);
+
+  const handleSourceFilter = useCallback((value: string) => {
+    setSource(value);
+    setPage(1);
+  }, []);
+
+  const handleTagFilter = useCallback((value: string[]) => {
+    setTags(value);
+    setPage(1);
+  }, []);
+
+  const handleDateRange = useCallback((range: DateRange | undefined) => {
+    setDateRange(range);
+    setPage(1);
+  }, []);
+
+  const handlePageSizeChange = useCallback((size: number) => {
+    setPageSize(size);
     setPage(1);
   }, []);
 
@@ -89,6 +140,56 @@ export default function LeadsPage() {
       { onSuccess: () => setDeleteLeadTarget(null) },
     );
   }, [deleteLead, deleteLeadMutation, businessId]);
+
+  // Bulk handlers
+  const handleBulkStatus = useCallback(
+    (ids: string[], newStatus: string) =>
+      bulkMutate({
+        ids,
+        action: "status",
+        value: newStatus as Lead["status"],
+      }),
+    [bulkMutate],
+  );
+
+  const handleBulkAddTags = useCallback(
+    (ids: string[], addTags: string[]) =>
+      bulkMutate({ ids, action: "addTags", tags: addTags }),
+    [bulkMutate],
+  );
+
+  const handleBulkRemoveTags = useCallback(
+    (ids: string[], removeTags: string[]) =>
+      bulkMutate({ ids, action: "removeTags", tags: removeTags }),
+    [bulkMutate],
+  );
+
+  const handleBulkDelete = useCallback(
+    (ids: string[]) => bulkMutate({ ids, action: "delete" }),
+    [bulkMutate],
+  );
+
+  // Export handler
+  const handleExport = useCallback(async () => {
+    const result = await exportMutate(filterParams);
+    if (!result.data.length) {
+      const { toast } = await import("sonner");
+      toast.info("No leads to export for the current filters.");
+      return;
+    }
+    const csv = leadsToCsv(result.data);
+    const filename = `leads-${slugify(business?.name ?? "business")}-${
+      new Date().toISOString().split("T")[0]
+    }.csv`;
+    downloadCsv(filename, csv);
+    if (result.truncated) {
+      const { toast } = await import("sonner");
+      toast.warning(
+        `Export capped at ${result.data.length} rows. Narrow filters to export the rest.`,
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [exportMutate, filterParams, business?.name]);
 
   const columns = createColumns({
     onView: handleView,
@@ -150,11 +251,26 @@ export default function LeadsPage() {
         pagination={pagination}
         onPageChange={handlePageChange}
         onSearch={handleSearch}
-        onStatusFilter={handleStatusFilter}
         onRowClick={handleView}
         searchValue={search}
-        statusFilter={status}
         isLoading={isLeadsLoading}
+        statusFilter={status}
+        onStatusFilter={handleStatusFilter}
+        sourceFilter={source}
+        onSourceFilter={handleSourceFilter}
+        tagFilter={tags}
+        onTagFilter={handleTagFilter}
+        tagOptions={tagOptions}
+        dateRange={dateRange}
+        onDateRange={handleDateRange}
+        pageSize={pageSize}
+        onPageSizeChange={handlePageSizeChange}
+        onExport={handleExport}
+        isExporting={isExporting}
+        onBulkStatus={handleBulkStatus}
+        onBulkAddTags={handleBulkAddTags}
+        onBulkRemoveTags={handleBulkRemoveTags}
+        onBulkDelete={handleBulkDelete}
       />
 
       {/* Lead Detail Sheet */}
@@ -162,6 +278,7 @@ export default function LeadsPage() {
         lead={viewLead}
         open={detailOpen}
         onOpenChange={setDetailOpen}
+        tagOptions={tagOptions}
       />
 
       {/* Delete Confirmation Dialog */}

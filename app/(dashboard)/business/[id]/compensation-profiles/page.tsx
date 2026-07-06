@@ -10,6 +10,7 @@ import {
   Wallet,
   ArrowRightLeft,
   Save,
+  X,
 } from "lucide-react";
 import { CompensationProfileDialog } from "@/components/compensation-profile-dialog";
 import { Button } from "@/components/ui/button";
@@ -247,119 +248,170 @@ export default function CompensationProfilesPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="profiles" className="mt-4">
-          <Card className="shadow-sm">
-            <CardHeader className="border-b px-6 py-4">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <CardTitle className="text-base font-medium">Profile Directory</CardTitle>
-                <div className="relative w-full sm:w-80">
-                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    className="pl-9 h-9"
-                    placeholder="Search by name, currency, or rate..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                </div>
+        <TabsContent value="profiles" className="mt-4 space-y-4">
+          {/* Toolbar */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-1 items-center gap-2">
+              <div className="relative w-full sm:w-[300px]">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search profiles..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="h-9 pl-9 bg-background"
+                />
               </div>
-            </CardHeader>
-            <CardContent className="p-0 border-none">
-              {isLoading ? (
-                <div className="flex min-h-[300px] items-center justify-center">
-                  <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-                </div>
-              ) : filteredProfiles.length === 0 ? (
-                <div className="flex min-h-[300px] flex-col items-center justify-center p-8 text-center">
-                  <div className="rounded-full bg-muted p-3">
-                    <Wallet className="h-6 w-6 text-muted-foreground" />
-                  </div>
-                  <h3 className="mt-4 text-sm font-medium">No profiles found</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {search ? "Try adjusting your search query to find what you're looking for." : "Get started by creating a new compensation profile."}
-                  </p>
-                  {!search && (
-                    <Button variant="outline" className="mt-4 gap-2" onClick={openCreateDialog}>
-                      <Plus className="h-4 w-4" />
-                      Create Profile
-                    </Button>
-                  )}
-                </div>
-              ) : (
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="hover:bg-transparent">
-                        <TableHead className="w-[30%] px-6">Profile Details</TableHead>
-                        <TableHead className="px-6">Base Rate</TableHead>
-                        <TableHead className="px-6">PHP Equivalent</TableHead>
-                        <TableHead className="px-6">Effective Period</TableHead>
-                        <TableHead className="text-right px-6">Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredProfiles.map((profile) => {
-                        const currency = profile.currency || "PHP";
-                        const isPhp = currency === "PHP";
-
-                        const phpValue = !isPhp && rateMap.has(currency)
-                          ? profile.hourlyRate * rateMap.get(currency)!
-                          : profile.hourlyRate;
-
-                        return (
-                          <TableRow key={profile._id}>
-                            <TableCell className="px-6 py-4 font-medium">
-                              <div className="flex items-center gap-2">
-                                {profile.name}
-                                {!isPhp && (
-                                  <Badge variant="outline" className="text-[10px] h-5 px-1.5 ml-1 border-primary/20 bg-primary/5 text-primary">
-                                    {currency}
-                                  </Badge>
-                                )}
-                              </div>
-                            </TableCell>
-                            <TableCell className="px-6 py-4">
-                              <div className="flex items-center gap-1.5">
-                                <span className="font-semibold">{isPhp ? "₱" : `${currency} `}{profile.hourlyRate.toLocaleString()}</span>
-                                <span className="text-xs text-muted-foreground">/ hr</span>
-                              </div>
-                            </TableCell>
-                            <TableCell className="px-6 py-4">
-                              {isPhp ? (
-                                <span className="text-muted-foreground text-sm">—</span>
-                              ) : (
-                                <span className="text-sm font-medium text-success">
-                                  ₱{phpValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                                </span>
-                              )}
-                            </TableCell>
-                            <TableCell className="px-6 py-4 text-sm text-muted-foreground">
-                              {profile.effectiveFrom}
-                              {profile.effectiveTo && (
-                                <span className="ml-1.5 before:content-['→'] before:mr-1.5 before:text-muted-foreground/50">
-                                  {profile.effectiveTo}
-                                </span>
-                              )}
-                            </TableCell>
-                            <TableCell className="px-6 py-4 text-right">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="h-8 gap-1.5 text-muted-foreground hover:text-foreground"
-                                onClick={() => openEditDialog(profile)}
-                              >
-                                <Pencil className="h-3.5 w-3.5" />
-                                <span>Edit</span>
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
-                </div>
+              {search && (
+                <Button
+                  variant="ghost"
+                  onClick={() => setSearch("")}
+                  className="h-9 px-2 lg:px-3"
+                >
+                  Reset
+                  <X className="ml-2 h-4 w-4" />
+                </Button>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
+
+          {/* Table */}
+          <div className="overflow-hidden rounded-xl border bg-card shadow-sm">
+            <Table>
+              <TableHeader>
+                <TableRow className="hover:bg-transparent">
+                  <TableHead className="h-11 bg-muted/50 text-xs font-medium text-muted-foreground">
+                    Profile Details
+                  </TableHead>
+                  <TableHead className="h-11 bg-muted/50 text-xs font-medium text-muted-foreground">
+                    Base Rate
+                  </TableHead>
+                  <TableHead className="h-11 bg-muted/50 text-xs font-medium text-muted-foreground">
+                    PHP Equivalent
+                  </TableHead>
+                  <TableHead className="h-11 bg-muted/50 text-xs font-medium text-muted-foreground">
+                    Effective Period
+                  </TableHead>
+                  <TableHead className="h-11 bg-muted/50 text-right text-xs font-medium text-muted-foreground">
+                    Actions
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {isLoading ? (
+                  <TableRow>
+                    <TableCell colSpan={5} className="h-[400px] text-center">
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                        <span className="text-sm text-muted-foreground">
+                          Loading profiles...
+                        </span>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ) : filteredProfiles.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={5} className="h-[400px] text-center">
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
+                          <Wallet className="h-6 w-6 text-muted-foreground" />
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm font-medium">No profiles found</p>
+                          <p className="text-xs text-muted-foreground">
+                            {search
+                              ? "Try adjusting your search or filters"
+                              : "Get started by creating a compensation profile"}
+                          </p>
+                        </div>
+                        {search && (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setSearch("")}
+                            className="mt-2"
+                          >
+                            Clear filters
+                          </Button>
+                        )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  filteredProfiles.map((profile) => {
+                    const currency = profile.currency || "PHP";
+                    const isPhp = currency === "PHP";
+
+                    const phpValue =
+                      !isPhp && rateMap.has(currency)
+                        ? profile.hourlyRate * rateMap.get(currency)!
+                        : profile.hourlyRate;
+
+                    return (
+                      <TableRow key={profile._id} className="group">
+                        <TableCell className="py-3 font-medium">
+                          <div className="flex items-center gap-2">
+                            {profile.name}
+                            {!isPhp && (
+                              <Badge
+                                variant="outline"
+                                className="ml-1 h-5 border-primary/20 bg-primary/5 px-1.5 text-[10px] text-primary"
+                              >
+                                {currency}
+                              </Badge>
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-3">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-semibold">
+                              {isPhp ? "₱" : `${currency} `}
+                              {profile.hourlyRate.toLocaleString()}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              / hr
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-3">
+                          {isPhp ? (
+                            <span className="text-sm text-muted-foreground">
+                              —
+                            </span>
+                          ) : (
+                            <span className="text-sm font-medium text-success">
+                              ₱
+                              {phpValue.toLocaleString(undefined, {
+                                maximumFractionDigits: 2,
+                              })}
+                            </span>
+                          )}
+                        </TableCell>
+                        <TableCell className="py-3 text-sm text-muted-foreground">
+                          {profile.effectiveFrom}
+                          {profile.effectiveTo && (
+                            <span className="ml-1.5 before:mr-1.5 before:text-muted-foreground/50 before:content-['→']">
+                              {profile.effectiveTo}
+                            </span>
+                          )}
+                        </TableCell>
+                        <TableCell className="py-3 text-right">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 gap-1.5 text-muted-foreground hover:text-foreground"
+                            onClick={() => openEditDialog(profile)}
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                            <span>Edit</span>
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+                )}
+              </TableBody>
+            </Table>
+          </div>
         </TabsContent>
       </Tabs>
 

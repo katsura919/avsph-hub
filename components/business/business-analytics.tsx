@@ -51,6 +51,44 @@ const STATUS_COLOR = {
 
 /* ── Payroll: Paid vs Outstanding ─────────────────────────────────────────── */
 
+type PayrollStats = ReturnType<typeof computePayrollStats>;
+
+/* Aggregate one currency's invoices. Callers group by currency first — netPay
+   is never summed across currencies (mixing USD + PHP totals is meaningless). */
+function computePayrollStats(currency: string, invoices: Invoice[]) {
+  const bucket = (status: InvoiceStatus) =>
+    invoices.filter((i) => i.status === status);
+  const sum = (list: Invoice[]) =>
+    list.reduce((acc, i) => acc + (i.netPay || 0), 0);
+
+  const paid = bucket("paid");
+  const approved = bucket("approved");
+  const calculated = bucket("calculated");
+  const draft = bucket("draft");
+
+  const paidTotal = sum(paid);
+  const outstandingStages = [
+    { key: "approved", label: "Approved", list: approved, color: STATUS_COLOR.success },
+    { key: "calculated", label: "Calculated", list: calculated, color: STATUS_COLOR.info },
+    { key: "draft", label: "Draft", list: draft, color: STATUS_COLOR.muted },
+  ].map((s) => ({ ...s, amount: sum(s.list), count: s.list.length }));
+
+  const outstandingTotal = outstandingStages.reduce((a, s) => a + s.amount, 0);
+  const grandTotal = paidTotal + outstandingTotal;
+  const paidPct = grandTotal > 0 ? (paidTotal / grandTotal) * 100 : 0;
+
+  return {
+    currency,
+    paidTotal,
+    paidCount: paid.length,
+    outstandingTotal,
+    outstandingCount: approved.length + calculated.length + draft.length,
+    outstandingStages,
+    grandTotal,
+    paidPct,
+  };
+}
+
 function PayrollCard({
   invoices,
   isLoading,
@@ -58,40 +96,22 @@ function PayrollCard({
   invoices: Invoice[];
   isLoading: boolean;
 }) {
-  const stats = useMemo(() => {
-    const currency = invoices[0]?.currency ?? "USD";
-    const bucket = (status: InvoiceStatus) =>
-      invoices.filter((i) => i.status === status);
-    const sum = (list: Invoice[]) =>
-      list.reduce((acc, i) => acc + (i.netPay || 0), 0);
-
-    const paid = bucket("paid");
-    const approved = bucket("approved");
-    const calculated = bucket("calculated");
-    const draft = bucket("draft");
-
-    const paidTotal = sum(paid);
-    const outstandingStages = [
-      { key: "approved", label: "Approved", list: approved, color: STATUS_COLOR.success },
-      { key: "calculated", label: "Calculated", list: calculated, color: STATUS_COLOR.info },
-      { key: "draft", label: "Draft", list: draft, color: STATUS_COLOR.muted },
-    ].map((s) => ({ ...s, amount: sum(s.list), count: s.list.length }));
-
-    const outstandingTotal = outstandingStages.reduce((a, s) => a + s.amount, 0);
-    const grandTotal = paidTotal + outstandingTotal;
-    const paidPct = grandTotal > 0 ? (paidTotal / grandTotal) * 100 : 0;
-
-    return {
-      currency,
-      paidTotal,
-      paidCount: paid.length,
-      outstandingTotal,
-      outstandingCount: approved.length + calculated.length + draft.length,
-      outstandingStages,
-      grandTotal,
-      paidPct,
-    };
+  const groups = useMemo(() => {
+    const byCurrency = new Map<string, Invoice[]>();
+    for (const inv of invoices) {
+      const cur = inv.currency || "USD";
+      const list = byCurrency.get(cur);
+      if (list) list.push(inv);
+      else byCurrency.set(cur, [inv]);
+    }
+    return Array.from(byCurrency, ([currency, list]) =>
+      computePayrollStats(currency, list),
+    )
+      .filter((s) => s.grandTotal > 0)
+      .sort((a, b) => b.grandTotal - a.grandTotal);
   }, [invoices]);
+
+  const multiCurrency = groups.length > 1;
 
   return (
     <Card className="shadow-sm">
@@ -105,93 +125,115 @@ function PayrollCard({
       <CardContent className="space-y-5">
         {isLoading ? (
           <PayrollSkeleton />
-        ) : stats.grandTotal === 0 ? (
+        ) : groups.length === 0 ? (
           <EmptyHint>No invoices generated for this business yet.</EmptyHint>
         ) : (
-          <>
-            {/* Hero: outstanding */}
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Outstanding
+          groups.map((stats, i) => (
+            <div
+              key={stats.currency}
+              className={
+                i > 0
+                  ? "space-y-5 border-t border-border/60 pt-5"
+                  : "space-y-5"
+              }
+            >
+              {multiCurrency && (
+                <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                  {stats.currency}
                 </p>
-                <p className="mt-1 text-3xl font-bold tabular-nums text-warning">
-                  {formatCurrency(stats.outstandingTotal, stats.currency)}
-                </p>
-                <p className="mt-0.5 text-xs text-muted-foreground">
-                  {stats.outstandingCount} invoice
-                  {stats.outstandingCount === 1 ? "" : "s"} awaiting payment
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Paid
-                </p>
-                <p className="mt-1 text-lg font-semibold tabular-nums text-success">
-                  {formatCurrency(stats.paidTotal, stats.currency)}
-                </p>
-                <p className="mt-0.5 text-xs text-muted-foreground">
-                  {stats.paidCount} settled
-                </p>
-              </div>
+              )}
+              <PayrollCurrencyBlock stats={stats} />
             </div>
-
-            {/* Paid vs Outstanding bar */}
-            <div>
-              <div className="flex h-3 w-full gap-0.5 overflow-hidden rounded-full bg-muted/40">
-                <div
-                  className="h-full rounded-full transition-[width] duration-500 ease-out motion-reduce:transition-none"
-                  style={{
-                    width: `${stats.paidPct}%`,
-                    background: STATUS_COLOR.success,
-                  }}
-                  title={`Paid — ${formatCurrency(stats.paidTotal, stats.currency)}`}
-                />
-                <div
-                  className="h-full flex-1 rounded-full"
-                  style={{ background: STATUS_COLOR.warning }}
-                  title={`Outstanding — ${formatCurrency(stats.outstandingTotal, stats.currency)}`}
-                />
-              </div>
-              <div className="mt-2 flex items-center justify-between text-xs">
-                <LegendDot color={STATUS_COLOR.success} label="Paid" />
-                <span className="tabular-nums font-medium text-foreground">
-                  {Math.round(stats.paidPct)}% collected
-                </span>
-                <LegendDot color={STATUS_COLOR.warning} label="Outstanding" alignEnd />
-              </div>
-            </div>
-
-            {/* Outstanding breakdown by stage */}
-            <div className="space-y-2 border-t border-border/60 pt-4">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                Outstanding by stage
-              </p>
-              {stats.outstandingStages.map((s) => (
-                <div
-                  key={s.key}
-                  className="flex items-center justify-between gap-3 text-sm"
-                >
-                  <span className="flex items-center gap-2 text-muted-foreground">
-                    <span
-                      className="h-2 w-2 shrink-0 rounded-full"
-                      style={{ background: s.color }}
-                    />
-                    {s.label}
-                    <span className="text-xs text-muted-foreground/70">
-                      ({s.count})
-                    </span>
-                  </span>
-                  <span className="tabular-nums font-medium text-foreground">
-                    {formatCurrency(s.amount, stats.currency)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </>
+          ))
         )}
       </CardContent>
     </Card>
+  );
+}
+
+function PayrollCurrencyBlock({ stats }: { stats: PayrollStats }) {
+  return (
+    <>
+      {/* Hero: outstanding */}
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            Outstanding
+          </p>
+          <p className="mt-1 text-3xl font-bold tabular-nums text-warning">
+            {formatCurrency(stats.outstandingTotal, stats.currency)}
+          </p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {stats.outstandingCount} invoice
+            {stats.outstandingCount === 1 ? "" : "s"} awaiting payment
+          </p>
+        </div>
+        <div className="text-right">
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            Paid
+          </p>
+          <p className="mt-1 text-lg font-semibold tabular-nums text-success">
+            {formatCurrency(stats.paidTotal, stats.currency)}
+          </p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {stats.paidCount} settled
+          </p>
+        </div>
+      </div>
+
+      {/* Paid vs Outstanding bar */}
+      <div>
+        <div className="flex h-3 w-full gap-0.5 overflow-hidden rounded-full bg-muted/40">
+          <div
+            className="h-full rounded-full transition-[width] duration-500 ease-out motion-reduce:transition-none"
+            style={{
+              width: `${stats.paidPct}%`,
+              background: STATUS_COLOR.success,
+            }}
+            title={`Paid — ${formatCurrency(stats.paidTotal, stats.currency)}`}
+          />
+          <div
+            className="h-full flex-1 rounded-full"
+            style={{ background: STATUS_COLOR.warning }}
+            title={`Outstanding — ${formatCurrency(stats.outstandingTotal, stats.currency)}`}
+          />
+        </div>
+        <div className="mt-2 flex items-center justify-between text-xs">
+          <LegendDot color={STATUS_COLOR.success} label="Paid" />
+          <span className="tabular-nums font-medium text-foreground">
+            {Math.round(stats.paidPct)}% collected
+          </span>
+          <LegendDot color={STATUS_COLOR.warning} label="Outstanding" alignEnd />
+        </div>
+      </div>
+
+      {/* Outstanding breakdown by stage */}
+      <div className="space-y-2 border-t border-border/60 pt-4">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          Outstanding by stage
+        </p>
+        {stats.outstandingStages.map((s) => (
+          <div
+            key={s.key}
+            className="flex items-center justify-between gap-3 text-sm"
+          >
+            <span className="flex items-center gap-2 text-muted-foreground">
+              <span
+                className="h-2 w-2 shrink-0 rounded-full"
+                style={{ background: s.color }}
+              />
+              {s.label}
+              <span className="text-xs text-muted-foreground/70">
+                ({s.count})
+              </span>
+            </span>
+            <span className="tabular-nums font-medium text-foreground">
+              {formatCurrency(s.amount, stats.currency)}
+            </span>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 

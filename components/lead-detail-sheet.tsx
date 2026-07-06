@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Mail, Phone, Building2, Calendar, Loader2 } from "lucide-react";
+import { Mail, Phone, Building2, Calendar, Loader2, X, Plus } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -11,6 +11,7 @@ import {
   SheetFooter,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -20,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { LeadTagMultiselect } from "@/components/lead-tag-multiselect";
 import { useUpdateLead } from "@/hooks/useLeads";
 import type { Lead } from "@/types/leads.types";
 
@@ -27,6 +29,14 @@ interface LeadDetailSheetProps {
   lead: Lead | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  tagOptions?: string[];
+}
+
+// Order-insensitive equality for two tag lists
+function sameTags(a: string[], b: string[]): boolean {
+  if (a.length !== b.length) return false;
+  const setB = new Set(b);
+  return a.every((t) => setB.has(t));
 }
 
 const statusOptions = [
@@ -42,15 +52,22 @@ const sourceLabels: Record<Lead["source"], string> = {
   other: "Other",
 };
 
-export function LeadDetailSheet({ lead, open, onOpenChange }: LeadDetailSheetProps) {
+export function LeadDetailSheet({
+  lead,
+  open,
+  onOpenChange,
+  tagOptions = [],
+}: LeadDetailSheetProps) {
   const { mutate: updateLead, isPending } = useUpdateLead();
   const [status, setStatus] = useState<Lead["status"]>("new");
   const [notes, setNotes] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
     if (lead) {
       setStatus(lead.status);
       setNotes(lead.notes || "");
+      setTags(lead.tags || []);
     }
   }, [lead]);
 
@@ -58,12 +75,15 @@ export function LeadDetailSheet({ lead, open, onOpenChange }: LeadDetailSheetPro
 
   const handleSave = () => {
     updateLead(
-      { id: lead._id, data: { status, notes } },
+      { id: lead._id, data: { status, notes, tags } },
       { onSuccess: () => onOpenChange(false) },
     );
   };
 
-  const hasChanges = status !== lead.status || notes !== (lead.notes || "");
+  const hasChanges =
+    status !== lead.status ||
+    notes !== (lead.notes || "") ||
+    !sameTags(tags, lead.tags || []);
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -118,6 +138,46 @@ export function LeadDetailSheet({ lead, open, onOpenChange }: LeadDetailSheetPro
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label>Tags</Label>
+            <div className="flex flex-wrap items-center gap-1.5">
+              {tags.map((tag) => (
+                <Badge
+                  key={tag}
+                  variant="secondary"
+                  className="gap-1 pr-1 font-normal"
+                >
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => setTags(tags.filter((t) => t !== tag))}
+                    className="rounded-sm hover:bg-muted-foreground/20"
+                    aria-label={`Remove ${tag}`}
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </Badge>
+              ))}
+              <LeadTagMultiselect
+                options={tagOptions}
+                selected={tags}
+                onChange={setTags}
+                allowCreate
+                align="start"
+                trigger={
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-6 gap-1 border-dashed px-2 text-xs font-normal"
+                  >
+                    <Plus className="h-3 w-3" />
+                    Add tag
+                  </Button>
+                }
+              />
+            </div>
           </div>
 
           <div className="space-y-2">

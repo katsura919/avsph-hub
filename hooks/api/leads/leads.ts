@@ -3,9 +3,26 @@ import type {
   Lead,
   LeadListResponse,
   LeadQueryParams,
+  LeadFilterParams,
   UpdateLeadRequest,
   DeleteLeadResponse,
+  BulkLeadRequest,
+  BulkLeadResponse,
+  LeadExportResponse,
 } from "@/types/leads.types";
+
+// Serialize shared filter params (search/status/source/tags/date range)
+const appendFilterParams = (
+  qs: URLSearchParams,
+  params?: LeadFilterParams,
+): void => {
+  if (params?.search) qs.append("search", params.search);
+  if (params?.status) qs.append("status", params.status);
+  if (params?.source) qs.append("source", params.source);
+  if (params?.tags && params.tags.length) qs.append("tags", params.tags.join(","));
+  if (params?.dateFrom) qs.append("dateFrom", params.dateFrom);
+  if (params?.dateTo) qs.append("dateTo", params.dateTo);
+};
 
 // Get leads by business with search and pagination
 export const getLeadsByBusiness = async (
@@ -14,15 +31,50 @@ export const getLeadsByBusiness = async (
 ): Promise<LeadListResponse> => {
   const queryParams = new URLSearchParams();
 
-  if (params?.search) queryParams.append("search", params.search);
+  appendFilterParams(queryParams, params);
   if (params?.page) queryParams.append("page", params.page.toString());
   if (params?.limit) queryParams.append("limit", params.limit.toString());
-  if (params?.status) queryParams.append("status", params.status);
 
   const queryString = queryParams.toString();
   const url = `/businesses/${businessId}/leads${queryString ? `?${queryString}` : ""}`;
 
   const response = await api.get<LeadListResponse>(url);
+  return response.data;
+};
+
+// Get distinct tags used across a business's leads
+export const getLeadTags = async (
+  businessId: string,
+): Promise<string[]> => {
+  const response = await api.get<{ tags: string[] }>(
+    `/businesses/${businessId}/lead-tags`,
+  );
+  return response.data.tags;
+};
+
+// Export all matching leads (respects filters, capped server-side)
+export const exportLeads = async (
+  businessId: string,
+  params?: LeadFilterParams,
+): Promise<LeadExportResponse> => {
+  const queryParams = new URLSearchParams();
+  appendFilterParams(queryParams, params);
+  const queryString = queryParams.toString();
+  const url = `/businesses/${businessId}/leads/export${queryString ? `?${queryString}` : ""}`;
+
+  const response = await api.get<LeadExportResponse>(url);
+  return response.data;
+};
+
+// Bulk action on leads within a business
+export const bulkLeads = async (
+  businessId: string,
+  body: BulkLeadRequest,
+): Promise<BulkLeadResponse> => {
+  const response = await api.post<BulkLeadResponse>(
+    `/businesses/${businessId}/leads/bulk`,
+    body,
+  );
   return response.data;
 };
 
