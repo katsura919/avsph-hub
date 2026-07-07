@@ -17,6 +17,7 @@ import {
   useReviewEod,
   useDeleteEod,
   useAdminEditEod,
+  useBulkEod,
 } from "@/hooks/eod/useAdminEod";
 import { useBusinessById } from "@/hooks/useBusiness";
 import { getColumns } from "./columns";
@@ -35,6 +36,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ViewEodDialog } from "@/components/admin/eod/view-eod-modal";
+import { RefreshButton } from "@/components/ui/refresh-button";
 import type { AdminEditEodRequest } from "@/types/eod.types";
 
 export default function EodPage() {
@@ -75,12 +77,15 @@ export default function EodPage() {
     data: eodData,
     isLoading: isEodLoading,
     isError,
+    refetch: refetchEod,
+    isFetching: isFetchingEod,
   } = useEodByBusiness(businessId, queryParams);
 
   // Mutations
   const reviewMutation = useReviewEod();
   const deleteMutation = useDeleteEod();
   const editMutation = useAdminEditEod();
+  const { mutateAsync: bulkEodMutate } = useBulkEod(businessId);
 
   // Handlers
   const handleSearch = useCallback((value: string) => {
@@ -159,6 +164,22 @@ export default function EodPage() {
     [deleteMutation],
   );
 
+  // Bulk handlers
+  const handleBulkApprove = useCallback(
+    (ids: string[]) => bulkEodMutate({ ids, action: "approve" }),
+    [bulkEodMutate],
+  );
+
+  const handleBulkRevise = useCallback(
+    (ids: string[]) => bulkEodMutate({ ids, action: "revise" }),
+    [bulkEodMutate],
+  );
+
+  const handleBulkDelete = useCallback(
+    (ids: string[]) => bulkEodMutate({ ids, action: "delete" }),
+    [bulkEodMutate],
+  );
+
   // Memoized columns with action callbacks
   const columns = useMemo(
     () =>
@@ -212,6 +233,11 @@ export default function EodPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <RefreshButton
+            onRefresh={() => refetchEod()}
+            isRefreshing={isFetchingEod}
+            label="Refresh"
+          />
           <Button asChild variant="outline" className="h-9">
             <Link href={`/business/${businessId}/eod/reports`}>
               <BarChart3 className="mr-2 h-4 w-4" />
@@ -245,6 +271,9 @@ export default function EodPage() {
         dateRange={dateRange}
         onDateRangeChange={handleDateRangeChange}
         onRowClick={handleView}
+        onBulkApprove={handleBulkApprove}
+        onBulkRevise={handleBulkRevise}
+        onBulkDelete={handleBulkDelete}
       />
 
       {/* View / Edit EOD Dialog (combined) */}

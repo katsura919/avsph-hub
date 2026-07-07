@@ -214,3 +214,15 @@ export interface InvoiceQuery {
   page?: string;
   limit?: string;
 }
+
+// Bulk actions
+export type BulkInvoiceActionType = "approve" | "markPaid" | "delete";
+
+export interface BulkInvoiceRequest {
+  ids: string[];
+  action: BulkInvoiceActionType;
+}
+
+export interface BulkInvoiceResponse {
+  modified: number;
+}

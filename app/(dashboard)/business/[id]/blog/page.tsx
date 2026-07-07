@@ -7,6 +7,7 @@ import { Plus, FileText, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useBlogsByBusiness } from "@/hooks/useBlog";
 import { useBusinessById } from "@/hooks/useBusiness";
+import { RefreshButton } from "@/components/ui/refresh-button";
 import { columns } from "./columns";
 import { BlogDataTable } from "./data-table";
 import type { BlogQueryParams } from "@/types/blog.types";
@@ -28,6 +29,8 @@ export default function BusinessBlogPage() {
     data: blogResponse,
     isLoading: isBlogsLoading,
     isError,
+    refetch: refetchBlogs,
+    isFetching: isFetchingBlogs,
   } = useBlogsByBusiness(businessId, queryParams);
 
   // Handlers
@@ -92,6 +95,10 @@ export default function BusinessBlogPage() {
             </span>
             <span>total posts</span>
           </div>
+          <RefreshButton
+            onRefresh={() => refetchBlogs()}
+            isRefreshing={isFetchingBlogs}
+          />
           <Link href={`/business/${businessId}/blog/create`}>
             <Button className="gap-2">
               <Plus className="h-4 w-4" />

@@ -112,3 +112,16 @@ export interface UploadDocumentResponse {
   document: StaffDocument;
   staff: Staff;
 }
+
+// Bulk actions
+export type BulkStaffActionType = "status" | "delete";
+
+export interface BulkStaffRequest {
+  ids: string[];
+  action: BulkStaffActionType;
+  value?: "active" | "on_leave" | "terminated";
+}
+
+export interface BulkStaffResponse {
+  modified: number;
+}

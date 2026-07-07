@@ -9,6 +9,8 @@ import type {
   ReviewEodResponse,
   AdminEditEodRequest,
   DeleteEodResponse,
+  BulkEodRequest,
+  BulkEodResponse,
 } from "@/types/eod.types";
 
 // Get all EOD reports (filtered by business access)
@@ -125,5 +127,17 @@ export const adminEditEod = async (
 // Soft delete an EOD report
 export const deleteEod = async (id: string): Promise<DeleteEodResponse> => {
   const response = await api.delete<DeleteEodResponse>(`/eod/${id}`);
+  return response.data;
+};
+
+// Bulk action on EOD reports within a business (approve / revise / delete)
+export const bulkEod = async (
+  businessId: string,
+  body: BulkEodRequest,
+): Promise<BulkEodResponse> => {
+  const response = await api.post<BulkEodResponse>(
+    `/businesses/${businessId}/eod/bulk`,
+    body,
+  );
   return response.data;
 };

@@ -9,11 +9,13 @@ import {
   deleteStaff,
   uploadStaffPhoto,
   uploadStaffDocument,
+  bulkStaff,
 } from "@/hooks/api/staff/staff-management";
 import type {
   StaffQueryParams,
   CreateStaffRequest,
   UpdateStaffRequest,
+  BulkStaffRequest,
 } from "@/types/staff.types";
 import {
   updateStaffProfile,
@@ -129,6 +131,32 @@ export const useDeleteStaff = () => {
       toast.error("Deletion failed", {
         description: message,
       });
+    },
+  });
+};
+
+// Bulk actions on staff (set status / delete)
+export const useBulkStaff = (businessId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: BulkStaffRequest) => bulkStaff(businessId, body),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["staff", "business", businessId],
+      });
+      const label =
+        variables.action === "delete" ? "Staff deleted" : "Status updated";
+      toast.success(label, {
+        description: `${data.modified} staff member${data.modified === 1 ? "" : "s"} updated.`,
+      });
+    },
+    onError: (error: AxiosError<ApiError>) => {
+      const message =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Bulk action failed";
+      toast.error("Bulk action failed", { description: message });
     },
   });
 };

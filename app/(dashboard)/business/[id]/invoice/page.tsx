@@ -11,6 +11,7 @@ import {
   useApproveInvoice,
   useMarkInvoicePaid,
   useDeleteInvoice,
+  useBulkInvoices,
 } from "@/hooks/invoice/useAdminInvoice";
 import { useBusinessById } from "@/hooks/useBusiness";
 import { useStaffByBusiness } from "@/hooks/useStaff";
@@ -42,6 +43,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RefreshButton } from "@/components/ui/refresh-button";
 import { createColumns } from "./columns";
 import { DataTable } from "./data-table";
 import type { Invoice, InvoiceQuery } from "@/types/invoice.types";
@@ -132,6 +134,8 @@ export default function InvoicePage() {
     data: invoiceData,
     isLoading: isInvoiceLoading,
     isError,
+    refetch: refetchInvoices,
+    isFetching: isFetchingInvoices,
   } = useInvoicesByBusiness(businessId, queryParams);
   const { data: staffData, isLoading: isStaffLoading } = useStaffByBusiness(
     businessId,
@@ -149,6 +153,7 @@ export default function InvoicePage() {
   const approveMutation = useApproveInvoice();
   const markPaidMutation = useMarkInvoicePaid();
   const deleteMutation = useDeleteInvoice();
+  const { mutateAsync: bulkInvoiceMutate } = useBulkInvoices(businessId);
 
   // Handlers
   const handleSearch = useCallback((value: string) => {
@@ -238,6 +243,22 @@ export default function InvoicePage() {
     }
   }, [deleteMutation, deleteTarget]);
 
+  // Bulk handlers
+  const handleBulkApprove = useCallback(
+    (ids: string[]) => bulkInvoiceMutate({ ids, action: "approve" }),
+    [bulkInvoiceMutate],
+  );
+
+  const handleBulkMarkPaid = useCallback(
+    (ids: string[]) => bulkInvoiceMutate({ ids, action: "markPaid" }),
+    [bulkInvoiceMutate],
+  );
+
+  const handleBulkDelete = useCallback(
+    (ids: string[]) => bulkInvoiceMutate({ ids, action: "delete" }),
+    [bulkInvoiceMutate],
+  );
+
   // Quick period selectors
   const applyCurrentPeriod = () => {
     const p = getCurrentPeriod();
@@ -324,6 +345,10 @@ export default function InvoicePage() {
               <span>total invoices</span>
             </div>
           )}
+          <RefreshButton
+            onRefresh={() => refetchInvoices()}
+            isRefreshing={isFetchingInvoices}
+          />
           <Button
             variant="outline"
             className="gap-2"
@@ -351,6 +376,9 @@ export default function InvoicePage() {
         searchValue={search}
         statusFilter={status}
         isLoading={isInvoiceLoading}
+        onBulkApprove={handleBulkApprove}
+        onBulkMarkPaid={handleBulkMarkPaid}
+        onBulkDelete={handleBulkDelete}
       />
 
       {/* Manual Generate Invoice Dialog */}

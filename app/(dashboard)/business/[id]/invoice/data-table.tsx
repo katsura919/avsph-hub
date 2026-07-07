@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
+  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -22,6 +23,9 @@ import {
   X,
   FileText,
   Loader2,
+  CheckCircle2,
+  DollarSign,
+  Trash2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -42,6 +46,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
   Table,
   TableBody,
   TableCell,
@@ -51,7 +65,7 @@ import {
 } from "@/components/ui/table";
 import type { PaginationInfo } from "@/types/invoice.types";
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData extends { _id: string }, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   pagination?: PaginationInfo;
@@ -62,9 +76,13 @@ interface DataTableProps<TData, TValue> {
   searchValue?: string;
   statusFilter?: string;
   isLoading?: boolean;
+  // Bulk actions (operate on selected row ids)
+  onBulkApprove?: (ids: string[]) => void | Promise<unknown>;
+  onBulkMarkPaid?: (ids: string[]) => void | Promise<unknown>;
+  onBulkDelete?: (ids: string[]) => void | Promise<unknown>;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { _id: string }, TValue>({
   columns,
   data,
   pagination,
@@ -75,6 +93,9 @@ export function DataTable<TData, TValue>({
   searchValue = "",
   statusFilter = "all",
   isLoading = false,
+  onBulkApprove,
+  onBulkMarkPaid,
+  onBulkDelete,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -82,7 +103,8 @@ export function DataTable<TData, TValue>({
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = React.useState(false);
   const [localSearch, setLocalSearch] = React.useState(searchValue);
 
   // Debounced search
@@ -96,6 +118,7 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
+    getRowId: (row) => row._id,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -112,6 +135,15 @@ export function DataTable<TData, TValue>({
     manualPagination: true,
     pageCount: pagination?.totalPages ?? -1,
   });
+
+  // Clear selection whenever the visible page of data changes (server-paginated)
+  React.useEffect(() => {
+    table.resetRowSelection();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  const selectedIds = table.getSelectedRowModel().rows.map((r) => r.original._id);
+  const selectedCount = selectedIds.length;
 
   const hasFilters = localSearch || statusFilter !== "all";
 
@@ -199,6 +231,87 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      {/* Bulk action bar */}
+      {selectedCount > 0 && (
+        <div className="flex flex-wrap items-center gap-2 rounded-lg border bg-muted/40 px-3 py-2">
+          <span className="text-sm font-medium">{selectedCount} selected</span>
+          <div className="h-4 w-px bg-border" />
+
+          {onBulkApprove && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 gap-2 text-success hover:text-success"
+              onClick={() => onBulkApprove(selectedIds)}
+            >
+              <CheckCircle2 className="h-4 w-4" />
+              Approve
+            </Button>
+          )}
+
+          {onBulkMarkPaid && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 gap-2"
+              onClick={() => onBulkMarkPaid(selectedIds)}
+            >
+              <DollarSign className="h-4 w-4" />
+              Mark Paid
+            </Button>
+          )}
+
+          {onBulkDelete && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 gap-2 text-destructive hover:text-destructive"
+              onClick={() => setConfirmDeleteOpen(true)}
+            >
+              <Trash2 className="h-4 w-4" />
+              Delete
+            </Button>
+          )}
+
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8"
+            onClick={() => table.resetRowSelection()}
+          >
+            Clear
+          </Button>
+        </div>
+      )}
+
+      {/* Bulk delete confirmation */}
+      <AlertDialog open={confirmDeleteOpen} onOpenChange={setConfirmDeleteOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Delete {selectedCount} invoice(s)?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This will remove the selected invoice
+              {selectedCount === 1 ? "" : "s"}. Paid invoices are skipped. This
+              action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                onBulkDelete?.(selectedIds);
+                setConfirmDeleteOpen(false);
+              }}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* Table */}
       <div className="overflow-hidden rounded-xl border bg-card shadow-sm">

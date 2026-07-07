@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
+  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -22,6 +23,7 @@ import {
   X,
   Users,
   Loader2,
+  Trash2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -42,6 +44,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
   Table,
   TableBody,
   TableCell,
@@ -51,7 +63,7 @@ import {
 } from "@/components/ui/table";
 import type { PaginationInfo } from "@/types/staff.types";
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData extends { _id: string }, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   pagination?: PaginationInfo;
@@ -64,9 +76,12 @@ interface DataTableProps<TData, TValue> {
   statusFilter?: string;
   employmentTypeFilter?: string;
   isLoading?: boolean;
+  // Bulk actions (operate on selected row ids)
+  onBulkStatus?: (ids: string[], status: string) => void | Promise<unknown>;
+  onBulkDelete?: (ids: string[]) => void | Promise<unknown>;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { _id: string }, TValue>({
   columns,
   data,
   pagination,
@@ -79,6 +94,8 @@ export function DataTable<TData, TValue>({
   statusFilter = "all",
   employmentTypeFilter = "all",
   isLoading = false,
+  onBulkStatus,
+  onBulkDelete,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -86,7 +103,8 @@ export function DataTable<TData, TValue>({
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = React.useState(false);
   const [localSearch, setLocalSearch] = React.useState(searchValue);
 
   // Debounced search
@@ -100,6 +118,7 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
+    getRowId: (row) => row._id,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -116,6 +135,15 @@ export function DataTable<TData, TValue>({
     manualPagination: true,
     pageCount: pagination?.totalPages ?? -1,
   });
+
+  // Clear selection whenever the visible page of data changes (server-paginated)
+  React.useEffect(() => {
+    table.resetRowSelection();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  const selectedIds = table.getSelectedRowModel().rows.map((r) => r.original._id);
+  const selectedCount = selectedIds.length;
 
   const hasFilters =
     localSearch || statusFilter !== "all" || employmentTypeFilter !== "all";
@@ -220,6 +248,75 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      {/* Bulk action bar */}
+      {selectedCount > 0 && (
+        <div className="flex flex-wrap items-center gap-2 rounded-lg border bg-muted/40 px-3 py-2">
+          <span className="text-sm font-medium">{selectedCount} selected</span>
+          <div className="h-4 w-px bg-border" />
+
+          {onBulkStatus && (
+            <Select
+              onValueChange={(value) => onBulkStatus(selectedIds, value)}
+            >
+              <SelectTrigger className="h-8 w-[150px] bg-background">
+                <SelectValue placeholder="Set status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="on_leave">On Leave</SelectItem>
+                <SelectItem value="terminated">Terminated</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+
+          {onBulkDelete && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 gap-2 text-destructive hover:text-destructive"
+              onClick={() => setConfirmDeleteOpen(true)}
+            >
+              <Trash2 className="h-4 w-4" />
+              Delete
+            </Button>
+          )}
+
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8"
+            onClick={() => table.resetRowSelection()}
+          >
+            Clear
+          </Button>
+        </div>
+      )}
+
+      {/* Bulk delete confirmation */}
+      <AlertDialog open={confirmDeleteOpen} onOpenChange={setConfirmDeleteOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete {selectedCount} staff?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will remove the selected staff member
+              {selectedCount === 1 ? "" : "s"}. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                onBulkDelete?.(selectedIds);
+                setConfirmDeleteOpen(false);
+              }}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* Table */}
       <div className="overflow-hidden rounded-xl border bg-card shadow-sm">

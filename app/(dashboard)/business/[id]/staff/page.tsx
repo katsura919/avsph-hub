@@ -3,10 +3,11 @@
 import { useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Users, Plus, Loader2 } from "lucide-react";
-import { useStaffByBusiness } from "@/hooks/useStaff";
+import { useStaffByBusiness, useBulkStaff } from "@/hooks/useStaff";
 import { useBusinessById } from "@/hooks/useBusiness";
 import { Button } from "@/components/ui/button";
 import { CreateStaffDialog } from "@/components/create-staff-dialog";
+import { RefreshButton } from "@/components/ui/refresh-button";
 import { createColumns } from "./columns";
 import { DataTable } from "./data-table";
 import type { Staff, StaffQueryParams } from "@/types/staff.types";
@@ -44,7 +45,10 @@ export default function StaffPage() {
     data: staffData,
     isLoading: isStaffLoading,
     isError,
+    refetch: refetchStaff,
+    isFetching: isFetchingStaff,
   } = useStaffByBusiness(businessId, queryParams);
+  const { mutateAsync: bulkStaffMutate } = useBulkStaff(businessId);
 
   // Handlers
   const handleSearch = useCallback((value: string) => {
@@ -71,6 +75,22 @@ export default function StaffPage() {
       router.push(`/business/${businessId}/staff/${staff._id}`);
     },
     [router, businessId],
+  );
+
+  // Bulk handlers
+  const handleBulkStatus = useCallback(
+    (ids: string[], status: string) =>
+      bulkStaffMutate({
+        ids,
+        action: "status",
+        value: status as "active" | "on_leave" | "terminated",
+      }),
+    [bulkStaffMutate],
+  );
+
+  const handleBulkDelete = useCallback(
+    (ids: string[]) => bulkStaffMutate({ ids, action: "delete" }),
+    [bulkStaffMutate],
   );
 
   const columns = createColumns({
@@ -123,6 +143,10 @@ export default function StaffPage() {
               <span>total staff</span>
             </div>
           )}
+          <RefreshButton
+            onRefresh={() => refetchStaff()}
+            isRefreshing={isFetchingStaff}
+          />
           <Button className="gap-2" onClick={() => setCreateOpen(true)}>
             <Plus className="h-4 w-4" />
             Add Staff
@@ -144,6 +168,8 @@ export default function StaffPage() {
         statusFilter={status}
         employmentTypeFilter={employmentType}
         isLoading={isStaffLoading}
+        onBulkStatus={handleBulkStatus}
+        onBulkDelete={handleBulkDelete}
       />
 
       {/* Create Staff Dialog */}

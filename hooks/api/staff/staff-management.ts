@@ -8,6 +8,8 @@ import type {
   DeleteStaffResponse,
   UploadPhotoResponse,
   UploadDocumentResponse,
+  BulkStaffRequest,
+  BulkStaffResponse,
 } from "@/types/staff.types";
 
 // Get staff by business with search and pagination
@@ -94,6 +96,18 @@ export const uploadStaffDocument = async (
         "Content-Type": "multipart/form-data",
       },
     },
+  );
+  return response.data;
+};
+
+// Bulk action on staff within a business (status / delete)
+export const bulkStaff = async (
+  businessId: string,
+  body: BulkStaffRequest,
+): Promise<BulkStaffResponse> => {
+  const response = await api.post<BulkStaffResponse>(
+    `/businesses/${businessId}/staff/bulk`,
+    body,
   );
   return response.data;
 };

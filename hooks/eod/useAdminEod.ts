@@ -9,6 +9,7 @@ import {
   reviewEod,
   adminEditEod,
   deleteEod,
+  bulkEod,
 } from "@/hooks/api/eod/eod-admin";
 import type {
   ReviewEodRequest,
@@ -17,6 +18,7 @@ import type {
   EodSummaryQuery,
   PaginatedEodResponse,
   PaginatedEodSummaryResponse,
+  BulkEodRequest,
 } from "@/types/eod.types";
 import { AxiosError } from "axios";
 
@@ -151,6 +153,33 @@ export const useDeleteEod = () => {
       toast.error("Delete Failed", {
         description: message,
       });
+    },
+  });
+};
+
+// Hook for bulk actions on EOD reports (approve / revise / delete)
+export const useBulkEod = (businessId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: BulkEodRequest) => bulkEod(businessId, body),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["eod"] });
+      const labels: Record<BulkEodRequest["action"], string> = {
+        approve: "Reports approved",
+        revise: "Revision requested",
+        delete: "Reports deleted",
+      };
+      toast.success(labels[variables.action], {
+        description: `${data.modified} report${data.modified === 1 ? "" : "s"} updated.`,
+      });
+    },
+    onError: (error: AxiosError<ApiError>) => {
+      const message =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Bulk action failed";
+      toast.error("Bulk Action Failed", { description: message });
     },
   });
 };

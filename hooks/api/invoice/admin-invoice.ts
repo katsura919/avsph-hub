@@ -16,6 +16,8 @@ import type {
   RemoveAdjustmentRequest,
   AdjustmentResponse,
   DeleteInvoiceResponse,
+  BulkInvoiceRequest,
+  BulkInvoiceResponse,
 } from "@/types/invoice.types";
 
 // ==================== GENERATION ====================
@@ -171,5 +173,17 @@ export const deleteInvoice = async (
   id: string,
 ): Promise<DeleteInvoiceResponse> => {
   const response = await api.delete<DeleteInvoiceResponse>(`/invoices/${id}`);
+  return response.data;
+};
+
+// Bulk action on invoices within a business (approve / markPaid / delete)
+export const bulkInvoices = async (
+  businessId: string,
+  body: BulkInvoiceRequest,
+): Promise<BulkInvoiceResponse> => {
+  const response = await api.post<BulkInvoiceResponse>(
+    `/businesses/${businessId}/invoices/bulk`,
+    body,
+  );
   return response.data;
 };

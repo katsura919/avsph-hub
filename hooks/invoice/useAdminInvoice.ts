@@ -13,6 +13,7 @@ import {
   addInvoiceAdjustment,
   removeInvoiceAdjustment,
   deleteInvoice,
+  bulkInvoices,
 } from "@/hooks/api/invoice/admin-invoice";
 import type {
   GenerateInvoiceRequest,
@@ -22,6 +23,7 @@ import type {
   RemoveAdjustmentRequest,
   InvoiceQuery,
   PaginatedInvoiceResponse,
+  BulkInvoiceRequest,
 } from "@/types/invoice.types";
 import { AxiosError } from "axios";
 
@@ -269,6 +271,33 @@ export const useDeleteInvoice = () => {
         error.response?.data?.error ||
         "Failed to delete invoice";
       toast.error("Delete Failed", { description: message });
+    },
+  });
+};
+
+// Hook for bulk actions on invoices (approve / markPaid / delete)
+export const useBulkInvoices = (businessId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: BulkInvoiceRequest) => bulkInvoices(businessId, body),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["invoices"] });
+      const labels: Record<BulkInvoiceRequest["action"], string> = {
+        approve: "Invoices approved",
+        markPaid: "Invoices marked as paid",
+        delete: "Invoices deleted",
+      };
+      toast.success(labels[variables.action], {
+        description: `${data.modified} invoice${data.modified === 1 ? "" : "s"} updated.`,
+      });
+    },
+    onError: (error: AxiosError<ApiError>) => {
+      const message =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        "Bulk action failed";
+      toast.error("Bulk Action Failed", { description: message });
     },
   });
 };

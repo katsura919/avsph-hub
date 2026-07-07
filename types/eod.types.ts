@@ -169,3 +169,15 @@ export interface PaginatedEodSummaryResponse {
   data: EodSummaryItem[];
   pagination: PaginationInfo;
 }
+
+// Bulk actions
+export type BulkEodActionType = "approve" | "revise" | "delete";
+
+export interface BulkEodRequest {
+  ids: string[];
+  action: BulkEodActionType;
+}
+
+export interface BulkEodResponse {
+  modified: number;
+}

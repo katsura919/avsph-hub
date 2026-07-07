@@ -25,6 +25,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { LeadDetailSheet } from "@/components/lead-detail-sheet";
+import { RefreshButton } from "@/components/ui/refresh-button";
 import { createColumns } from "./columns";
 import { DataTable } from "./data-table";
 import { leadsToCsv, downloadCsv, slugify } from "./export-csv";
@@ -77,6 +78,8 @@ export default function LeadsPage() {
     data: leadsData,
     isLoading: isLeadsLoading,
     isError,
+    refetch: refetchLeads,
+    isFetching: isFetchingLeads,
   } = useLeadsByBusiness(businessId, queryParams);
   const { data: tagOptions = [] } = useLeadTags(businessId);
 
@@ -234,14 +237,21 @@ export default function LeadsPage() {
             Leads captured from your website for {business.name}
           </p>
         </div>
-        {pagination && (
-          <div className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex">
-            <span className="font-medium text-foreground">
-              {pagination.total}
-            </span>
-            <span>total leads</span>
-          </div>
-        )}
+        <div className="flex items-center gap-3">
+          {pagination && (
+            <div className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex">
+              <span className="font-medium text-foreground">
+                {pagination.total}
+              </span>
+              <span>total leads</span>
+            </div>
+          )}
+          <RefreshButton
+            onRefresh={() => refetchLeads()}
+            isRefreshing={isFetchingLeads}
+            label="Refresh"
+          />
+        </div>
       </div>
 
       {/* Data Table */}

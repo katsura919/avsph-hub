@@ -38,6 +38,7 @@ import {
   useUpdateJobPostStatus,
   useDeleteJobPost,
 } from "@/hooks/useJobPost";
+import { RefreshButton } from "@/components/ui/refresh-button";
 import { CreateJobPostDialog } from "./create-job-post-dialog";
 import type { JobPost } from "@/types/jobPost.types";
 
@@ -67,7 +68,12 @@ export default function JobPostsPage() {
   const [editingJobPost, setEditingJobPost] = useState<JobPost | null>(null);
 
   const statusFilter = filter === "all" ? undefined : filter;
-  const { data: jobPosts, isLoading } = useJobPosts(businessId, statusFilter);
+  const {
+    data: jobPosts,
+    isLoading,
+    refetch: refetchJobPosts,
+    isFetching: isFetchingJobPosts,
+  } = useJobPosts(businessId, statusFilter);
   const { mutate: updateStatus } = useUpdateJobPostStatus();
   const { mutate: deleteJobPost } = useDeleteJobPost();
 
@@ -107,10 +113,16 @@ export default function JobPostsPage() {
             Manage job listings and track applicants
           </p>
         </div>
-        <Button onClick={() => setCreateOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Job Post
-        </Button>
+        <div className="flex items-center gap-2">
+          <RefreshButton
+            onRefresh={() => refetchJobPosts()}
+            isRefreshing={isFetchingJobPosts}
+          />
+          <Button onClick={() => setCreateOpen(true)}>
+            <Plus className="mr-2 h-4 w-4" />
+            Create Job Post
+          </Button>
+        </div>
       </div>
 
       {/* Filter Tabs */}

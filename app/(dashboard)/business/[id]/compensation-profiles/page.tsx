@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { CompensationProfileDialog } from "@/components/compensation-profile-dialog";
 import { Button } from "@/components/ui/button";
+import { RefreshButton } from "@/components/ui/refresh-button";
 import {
   Card,
   CardContent,
@@ -55,12 +56,20 @@ export default function CompensationProfilesPage() {
 
   const { data: business, isLoading: isBusinessLoading } =
     useBusinessById(businessId);
-  const { data: profiles, isLoading: isProfilesLoading } =
-    useCompensationProfiles({
-      businessId,
-      isActive: true,
-    });
-  const { data: exchangeRates, isLoading: isRatesLoading } = useExchangeRates();
+  const {
+    data: profiles,
+    isLoading: isProfilesLoading,
+    refetch: refetchProfiles,
+    isFetching: isFetchingProfiles,
+  } = useCompensationProfiles({
+    businessId,
+    isActive: true,
+  });
+  const {
+    data: exchangeRates,
+    isLoading: isRatesLoading,
+    refetch: refetchRates,
+  } = useExchangeRates();
   const upsertRateMutation = useUpsertExchangeRate();
 
   // Determine which non-PHP currencies are used in profiles
@@ -148,10 +157,19 @@ export default function CompensationProfilesPage() {
             {business?.name ?? "this business"}.
           </p>
         </div>
-        <Button className="gap-2" onClick={openCreateDialog}>
-          <Plus className="h-4 w-4" />
-          New Profile
-        </Button>
+        <div className="flex items-center gap-2">
+          <RefreshButton
+            onRefresh={() => {
+              refetchProfiles();
+              refetchRates();
+            }}
+            isRefreshing={isFetchingProfiles}
+          />
+          <Button className="gap-2" onClick={openCreateDialog}>
+            <Plus className="h-4 w-4" />
+            New Profile
+          </Button>
+        </div>
       </div>
 
       <Tabs defaultValue="profiles" className="w-full">
