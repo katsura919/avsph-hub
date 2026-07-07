@@ -17,7 +17,13 @@ import {
 import { useInvoicesByBusiness } from "@/hooks/invoice/useAdminInvoice";
 import { useEodByBusiness } from "@/hooks/eod/useAdminEod";
 import type { Invoice, InvoiceStatus } from "@/types/invoice.types";
-import type { EodReport, EodStatus } from "@/types/eod.types";
+import type { EodStatus } from "@/types/eod.types";
+import {
+  AttendanceCard,
+  PayrollTrendCard,
+  RecruitmentCard,
+  WorkforceCard,
+} from "@/components/business/business-insights";
 
 /* ────────────────────────────────────────────────────────────────────────────
    Operations analytics for the business overview.
@@ -89,13 +95,12 @@ function computePayrollStats(currency: string, invoices: Invoice[]) {
   };
 }
 
-function PayrollCard({
-  invoices,
-  isLoading,
-}: {
-  invoices: Invoice[];
-  isLoading: boolean;
-}) {
+function PayrollCard({ businessId }: { businessId: string }) {
+  const { data: invoicePage, isLoading } = useInvoicesByBusiness(businessId, {
+    limit: "500",
+  });
+  const invoices = invoicePage?.data ?? [];
+
   const groups = useMemo(() => {
     const byCurrency = new Map<string, Invoice[]>();
     for (const inv of invoices) {
@@ -114,7 +119,7 @@ function PayrollCard({
   const multiCurrency = groups.length > 1;
 
   return (
-    <Card className="shadow-sm">
+    <Card className="h-full shadow-sm">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <PiggyBank className="h-4 w-4" />
@@ -248,13 +253,12 @@ const EOD_STATUS_META: Record<
   needs_revision: { label: "Needs Revision", color: STATUS_COLOR.warning },
 };
 
-function EodStatusCard({
-  eods,
-  isLoading,
-}: {
-  eods: EodReport[];
-  isLoading: boolean;
-}) {
+function EodStatusCard({ businessId }: { businessId: string }) {
+  const { data: eodPage, isLoading } = useEodByBusiness(businessId, {
+    limit: "500",
+  });
+  const eods = eodPage?.data ?? [];
+
   const stats = useMemo(() => {
     const order: EodStatus[] = ["reviewed", "submitted", "needs_revision"];
     const total = eods.length;
@@ -275,7 +279,7 @@ function EodStatusCard({
 
   return (
     <Card className="shadow-sm">
-      <CardHeader>
+      <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2">
           <BarChart3 className="h-4 w-4" />
           EOD Report Status
@@ -393,24 +397,29 @@ function Donut({
   );
 }
 
-/* ── EOD activity, last 14 days ───────────────────────────────────────────── */
+/* ── EOD activity, last 7 days ────────────────────────────────────────────── */
 
 function EodActivityCard({
-  eods,
-  isLoading,
+  businessId,
+  className,
 }: {
-  eods: EodReport[];
-  isLoading: boolean;
+  businessId: string;
+  className?: string;
 }) {
+  const { data: eodPage, isLoading } = useEodByBusiness(businessId, {
+    limit: "500",
+  });
+  const eods = eodPage?.data ?? [];
+
   const stats = useMemo(() => {
     const days: { key: string; label: string; date: Date; count: number }[] = [];
-    for (let i = 13; i >= 0; i--) {
+    for (let i = 6; i >= 0; i--) {
       const d = new Date();
       d.setHours(0, 0, 0, 0);
       d.setDate(d.getDate() - i);
       days.push({
         key: `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`,
-        label: d.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+        label: d.toLocaleDateString("en-US", { weekday: "short" }),
         date: d,
         count: 0,
       });
@@ -425,11 +434,11 @@ function EodActivityCard({
     }
     const total = days.reduce((a, d) => a + d.count, 0);
     const max = Math.max(...days.map((d) => d.count), 1);
-    return { days, total, max, avg: total / 14 };
+    return { days, total, max, avg: total / 7 };
   }, [eods]);
 
   return (
-    <Card className="shadow-sm">
+    <Card className={`flex flex-col shadow-sm ${className ?? ""}`}>
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1.5">
@@ -437,7 +446,7 @@ function EodActivityCard({
               <Activity className="h-4 w-4" />
               EOD Activity
             </CardTitle>
-            <CardDescription>Reports submitted over the last 14 days.</CardDescription>
+            <CardDescription>Reports submitted this week.</CardDescription>
           </div>
           {!isLoading && (
             <div className="text-right">
@@ -451,11 +460,11 @@ function EodActivityCard({
           )}
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-1 flex-col">
         {isLoading ? (
-          <div className="h-28 w-full animate-pulse rounded-lg bg-muted/40" />
+          <div className="min-h-[7rem] w-full flex-1 animate-pulse rounded-lg bg-muted/40" />
         ) : (
-          <div className="flex h-28 items-end gap-1.5">
+          <div className="flex min-h-[7rem] flex-1 items-end gap-2">
             {stats.days.map((d, i) => {
               const isToday = i === stats.days.length - 1;
               const heightPct = d.count === 0 ? 0 : (d.count / stats.max) * 100;
@@ -463,7 +472,7 @@ function EodActivityCard({
                 <div
                   key={d.key}
                   className="group flex h-full flex-1 flex-col items-center justify-end gap-1.5"
-                  title={`${d.label} — ${d.count} report${d.count === 1 ? "" : "s"}`}
+                  title={`${d.date.toLocaleDateString("en-US", { month: "short", day: "numeric" })} — ${d.count} report${d.count === 1 ? "" : "s"}`}
                 >
                   <div className="flex w-full flex-1 items-end">
                     <div
@@ -478,8 +487,8 @@ function EodActivityCard({
                       }}
                     />
                   </div>
-                  <span className="text-[9px] tabular-nums text-muted-foreground">
-                    {d.date.getDate()}
+                  <span className="text-[9px] font-medium uppercase tabular-nums text-muted-foreground">
+                    {d.label}
                   </span>
                 </div>
               );
@@ -552,31 +561,57 @@ function DonutSkeleton() {
 
 /* ── section wrapper ──────────────────────────────────────────────────────── */
 
-export function BusinessAnalytics({ businessId }: { businessId: string }) {
-  const { data: invoicePage, isLoading: invoicesLoading } =
-    useInvoicesByBusiness(businessId, { limit: "500" });
-  const { data: eodPage, isLoading: eodLoading } = useEodByBusiness(businessId, {
-    limit: "500",
-  });
-
-  const invoices = invoicePage?.data ?? [];
-  const eods = eodPage?.data ?? [];
-
+function SectionLabel({
+  icon: Icon,
+  children,
+}: {
+  icon: typeof CalendarDays;
+  children: React.ReactNode;
+}) {
   return (
-    <section className="space-y-4">
-      <div className="flex items-center gap-2">
-        <CalendarDays className="h-4 w-4 text-muted-foreground" />
-        <h2 className="text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-          Operations Analytics
-        </h2>
-      </div>
+    <div className="flex items-center gap-2">
+      <Icon className="h-4 w-4 text-muted-foreground" />
+      <h2 className="text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+        {children}
+      </h2>
+    </div>
+  );
+}
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <PayrollCard invoices={invoices} isLoading={invoicesLoading} />
-        <EodStatusCard eods={eods} isLoading={eodLoading} />
-      </div>
+export function BusinessAnalytics({ businessId }: { businessId: string }) {
+  return (
+    <div className="space-y-8">
+      {/* Operations: dense metric cards packed into a rectangle. Cards stretch to
+          fill their cell (no items-start), so short cards match their row's height
+          instead of leaving a gap. */}
+      <section className="space-y-4">
+        <SectionLabel icon={CalendarDays}>Operations Analytics</SectionLabel>
 
-      <EodActivityCard eods={eods} isLoading={eodLoading} />
-    </section>
+        {/* Band 1 — three tall cards, equal height */}
+        <div className="grid gap-4 lg:grid-cols-3">
+          <PayrollCard businessId={businessId} />
+          <AttendanceCard businessId={businessId} />
+          <RecruitmentCard businessId={businessId} />
+        </div>
+
+        {/* Band 2 — wide Workforce (2/3) beside a stacked pair (1/3) that fills the
+            same height: compact EOD status on top, weekly activity flexing below. */}
+        <div className="grid gap-4 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <WorkforceCard businessId={businessId} />
+          </div>
+          <div className="flex flex-col gap-4">
+            <EodStatusCard businessId={businessId} />
+            <EodActivityCard businessId={businessId} className="flex-1" />
+          </div>
+        </div>
+      </section>
+
+      {/* Band 3 — full-width payroll trend (two internal columns) */}
+      <section className="space-y-4">
+        <SectionLabel icon={CalendarDays}>Payroll Trend</SectionLabel>
+        <PayrollTrendCard businessId={businessId} />
+      </section>
+    </div>
   );
 }
