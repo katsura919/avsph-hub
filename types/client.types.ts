@@ -55,12 +55,18 @@ export interface WeeklyReportStaffRow {
   staffId: string;
   name: string;
   position: string;
+  /** Compensation (what the staff receives) — hidden from client-facing views. */
   hourlyRate: number;
   totalHours: number;
   daysWorked: number;
   calculatedPay: number;
   currency: string;
   payUsd: number | null;
+  /** Billing (what the client pays the agency), always USD. */
+  billRateUsd: number;
+  hasBillRate: boolean;
+  billableUsd: number;
+  marginUsd: number | null;
 }
 
 export interface WeeklyReport {
@@ -75,10 +81,15 @@ export interface WeeklyReport {
   mixedCurrency: boolean;
   usdRate: number | null;
   usdConversionAvailable: boolean;
+  /** Names of assigned staff with no bill rate set (they bill 0). */
+  missingBillRateStaff: string[];
   totals: {
     totalHours: number;
     totalPay: number;
     totalPayUsd: number | null;
+    totalBillableUsd: number;
+    totalMarginUsd: number | null;
+    missingBillRateCount: number;
     staffCount: number;
   };
   staff: WeeklyReportStaffRow[];

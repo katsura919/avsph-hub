@@ -226,10 +226,6 @@ const styles = StyleSheet.create({
 export function ClientReportPDFDocument({ report }: { report: WeeklyReport }) {
   if (!report) return null;
 
-  const nativeCurrency = report.currency;
-  const usdReady =
-    report.usdConversionAvailable && report.totals.totalPayUsd != null;
-
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -300,19 +296,15 @@ export function ClientReportPDFDocument({ report }: { report: WeeklyReport }) {
             </Text>
           </View>
           <View style={styles.summaryTile}>
-            <Text style={styles.summaryTileLabel}>
-              Total Pay ({nativeCurrency})
-            </Text>
+            <Text style={styles.summaryTileLabel}>Total Due (USD)</Text>
             <Text style={styles.summaryTileValue}>
-              {fmtMoney(report.totals.totalPay, nativeCurrency)}
+              {fmtMoney(report.totals.totalBillableUsd, "USD")}
             </Text>
           </View>
           <View style={styles.summaryTile}>
-            <Text style={styles.summaryTileLabel}>Total Pay (USD)</Text>
+            <Text style={styles.summaryTileLabel}>Staff Count</Text>
             <Text style={styles.summaryTileValue}>
-              {usdReady
-                ? fmtMoney(report.totals.totalPayUsd as number, "USD")
-                : "N/A"}
+              {report.totals.staffCount}
             </Text>
           </View>
         </View>
@@ -327,8 +319,8 @@ export function ClientReportPDFDocument({ report }: { report: WeeklyReport }) {
             <Text style={[styles.cPos, styles.headText]}>Position</Text>
             <Text style={[styles.cHours, styles.headText]}>Hours</Text>
             <Text style={[styles.cDays, styles.headText]}>Days</Text>
-            <Text style={[styles.cRate, styles.headText]}>Rate</Text>
-            <Text style={[styles.cPay, styles.headText]}>Pay (USD)</Text>
+            <Text style={[styles.cRate, styles.headText]}>Rate/hr</Text>
+            <Text style={[styles.cPay, styles.headText]}>Amount</Text>
           </View>
           {report.staff.map((s, i) => (
             <View
@@ -342,13 +334,9 @@ export function ClientReportPDFDocument({ report }: { report: WeeklyReport }) {
               </Text>
               <Text style={styles.cDays}>{s.daysWorked}</Text>
               <Text style={styles.cRate}>
-                {fmtMoney(s.hourlyRate, s.currency)}
+                {s.hasBillRate ? fmtMoney(s.billRateUsd, "USD") : "not set"}
               </Text>
-              <Text style={styles.cPay}>
-                {s.payUsd != null
-                  ? fmtMoney(s.payUsd, "USD")
-                  : fmtMoney(s.calculatedPay, s.currency)}
-              </Text>
+              <Text style={styles.cPay}>{fmtMoney(s.billableUsd, "USD")}</Text>
             </View>
           ))}
           {report.staff.length === 0 && (
@@ -369,18 +357,15 @@ export function ClientReportPDFDocument({ report }: { report: WeeklyReport }) {
             <Text style={styles.cDays}> </Text>
             <Text style={styles.cRate}> </Text>
             <Text style={styles.cPay}>
-              {usdReady
-                ? fmtMoney(report.totals.totalPayUsd as number, "USD")
-                : fmtMoney(report.totals.totalPay, nativeCurrency)}
+              {fmtMoney(report.totals.totalBillableUsd, "USD")}
             </Text>
           </View>
         </View>
 
-        {report.mixedCurrency && (
+        {report.totals.missingBillRateCount > 0 && (
           <Text style={{ fontSize: 7, color: "#b45309" }}>
-            Note: staff use multiple currencies. USD totals use the current
-            exchange rate; native pay per staff is shown when USD is
-            unavailable.
+            Note: {report.totals.missingBillRateCount} staff have no bill rate
+            set and are billed at $0 ({report.missingBillRateStaff.join(", ")}).
           </Text>
         )}
 
